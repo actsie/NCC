@@ -31,13 +31,13 @@ const claudeFeatures = [
 
 const otherToolsLimitations = [
   {
-    name: 'Template-based builders hit walls',
+    name: 'Template-based builders have limits',
     description: 'Like Lovable work for demos but need developer cleanup for real apps',
     icon: ExclamationTriangleIcon,
   },
   {
     name: 'Limited infrastructure',
-    description: 'You hit walls when requirements get complex',
+    description: 'Simple tools break down when requirements get complex',
     icon: ExclamationTriangleIcon,
   },
   {
