@@ -342,7 +342,7 @@ const App = () => {
             <div className="mx-auto max-w-4xl lg:text-center">
               <h2 className="text-base font-semibold leading-7 text-[#EF4444]">The Setup Challenge</h2>
               <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
-                Claude Code is powerful — if you can set it up right.
+                Claude Code only works well when it's set up properly — and most people never get there.
               </p>
               <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
                 Most people never get past the configuration stage. Even experienced developers struggle to unlock its full potential.
