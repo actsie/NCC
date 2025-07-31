@@ -29,20 +29,20 @@ const claudeFeatures = [
   }
 ];
 
-const otherToolsLimitations = [
+const alternativesProblems = [
   {
-    name: 'Template-based builders have limits',
-    description: 'Like Lovable work for demos but need developer cleanup for real apps',
+    name: 'They\'re not built for Claude Code.',
+    description: 'Many tools wrap Claude with limited API access — meaning weaker results and capped capabilities.',
     icon: ExclamationTriangleIcon,
   },
   {
-    name: 'Limited infrastructure',
-    description: 'Simple tools break down when requirements get complex',
+    name: 'They skip the hard setup.',
+    description: 'Claude.md configuration, MCP servers, debugging workflows — even experienced developers get stuck here.',
     icon: ExclamationTriangleIcon,
   },
   {
-    name: 'Third-party limitations',
-    description: 'Built by companies that pay Anthropic for compressed Claude access—lower accuracy',
+    name: 'They rely on templates, not full control.',
+    description: 'You\'re locked into pre-built flows. Real apps need custom logic, not canned components.',
     icon: ExclamationTriangleIcon,
   }
 ];
@@ -262,134 +262,69 @@ const App = () => {
         </div>
       </section>
 
-      {/* Sticky Problem Slides */}
-      <div className="relative">
-        {/* First Slide - Other tools limitations */}
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
-          {/* Background gradient blob */}
-          <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-            <div 
-              style={{
-                clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-              }}
-              className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F59E0B] to-[#EAB308] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-            />
+      {/* Problem with Alternatives Section */}
+      <section className="relative isolate bg-white py-24 sm:py-32">
+        {/* Background gradient blob */}
+        <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+          <div 
+            style={{
+              clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+            }}
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F59E0B] to-[#EAB308] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+          />
+        </div>
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl lg:text-center">
+            <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">The Problem with Alternatives</h2>
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
+              Claude Code is powerful — but most tools can't handle it.
+            </p>
+            <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
+              Claude Code is capable of building real, production-level apps with minimal human input. But unlocking that power takes serious setup: expert-level config files, server orchestration, and testing infrastructure.
+            </p>
+            <p className="mt-4 text-lg leading-8 text-[#6B7280] font-medium">
+              Most alternatives fall short because:
+            </p>
           </div>
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:text-center">
-              <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">The problem with alternatives</h2>
-              <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
-                Other tools reach their limits fast
-              </p>
-              <p className="mt-6 text-lg leading-8 text-[#6B7280]">
-                While other solutions might seem attractive initially, they quickly show their limitations when you need real functionality.
-              </p>
-            </div>
-            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
-                {otherToolsLimitations.map((limitation, index) => (
-                  <motion.div 
-                    key={limitation.name} 
-                    className="relative pl-16 group cursor-pointer hover:bg-[#FEF3C7]/30 rounded-lg p-4 -m-4 transition-colors duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <dt className="text-base leading-7 font-semibold text-[#1F2937]">
-                      <motion.div 
-                        className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-[#F59E0B] shadow-sm group-hover:shadow-md"
-                        animate={{ 
-                          y: [-1, -3, -1],
-                          rotate: [-2, 2, -2],
-                          scale: [1, 1.03, 1]
-                        }}
-                        transition={{ 
-                          duration: 2.5 + (index * 0.3),
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.6
-                        }}
-                        whileHover={{ 
-                          scale: 1.1,
-                          y: -5
-                        }}
-                      >
-                        <limitation.icon aria-hidden="true" className="size-6 text-white" />
-                      </motion.div>
-                      {limitation.name}
-                    </dt>
-                    <dd className="mt-2 text-base leading-7 text-[#6B7280]">{limitation.description}</dd>
-                  </motion.div>
-                ))}
-              </dl>
-            </div>
+          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
+              {alternativesProblems.map((problem, index) => (
+                <motion.div 
+                  key={problem.name} 
+                  className="relative pl-16 group cursor-pointer hover:bg-[#FEF3C7]/30 rounded-lg p-4 -m-4 transition-colors duration-300"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+                    <motion.div 
+                      className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-[#F59E0B] shadow-sm group-hover:shadow-md"
+                      animate={{ 
+                        y: [-1, -3, -1],
+                        rotate: [-2, 2, -2],
+                        scale: [1, 1.03, 1]
+                      }}
+                      transition={{ 
+                        duration: 2.5 + (index * 0.3),
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                        delay: index * 0.6
+                      }}
+                      whileHover={{ 
+                        scale: 1.1,
+                        y: -5
+                      }}
+                    >
+                      <problem.icon aria-hidden="true" className="size-6 text-white" />
+                    </motion.div>
+                    {problem.name}
+                  </dt>
+                  <dd className="mt-2 text-base leading-7 text-[#6B7280]">{problem.description}</dd>
+                </motion.div>
+              ))}
+            </dl>
           </div>
         </div>
-
-        {/* Second Slide - Claude Code complexity */}
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
-          {/* Background gradient blob */}
-          <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-            <div 
-              style={{
-                clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
-              }}
-              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#EF4444] to-[#F97316] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            />
-          </div>
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl lg:text-center">
-              <h2 className="text-base font-semibold leading-7 text-[#EF4444]">The setup challenge</h2>
-              <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
-                But Claude Code requires expert-level setup
-              </p>
-              <p className="mt-6 text-lg leading-8 text-[#6B7280]">
-                Even experienced developers struggle with the complex configuration needed to unlock Claude Code's full potential.
-              </p>
-            </div>
-            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
-                {claudeCodeComplexity.map((complexity, index) => (
-                  <motion.div 
-                    key={complexity.name} 
-                    className="relative pl-16 group cursor-pointer hover:bg-[#FEE2E2]/30 rounded-lg p-4 -m-4 transition-colors duration-300"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <dt className="text-base leading-7 font-semibold text-[#1F2937]">
-                      <motion.div 
-                        className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-[#EF4444] shadow-sm group-hover:shadow-md"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [
-                            index === 0 ? -4 : index === 1 ? 0 : 4,
-                            index === 0 ? -8 : index === 1 ? 0 : 8,
-                            index === 0 ? -4 : index === 1 ? 0 : 4
-                          ],
-                          scale: [1, 1.04, 1]
-                        }}
-                        transition={{ 
-                          duration: 3.2 + (index * 0.4),
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.7
-                        }}
-                        whileHover={{ 
-                          scale: 1.15,
-                          y: -6
-                        }}
-                      >
-                        <complexity.icon aria-hidden="true" className="size-6 text-white" />
-                      </motion.div>
-                      {complexity.name}
-                    </dt>
-                    <dd className="mt-2 text-base leading-7 text-[#6B7280]">{complexity.description}</dd>
-                  </motion.div>
-                ))}
-              </dl>
-            </div>
-          </div>
-        </div>
-      </div>
+      </section>
 
       {/* How No Code Claude Solves This - Bento Grid */}
       <section className="bg-gray-50 py-24 sm:py-32">
