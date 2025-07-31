@@ -47,20 +47,20 @@ const alternativesProblems = [
   }
 ];
 
-const claudeCodeComplexity = [
+const setupChallenges = [
   {
     name: 'Claude.md configuration',
-    description: 'Effective Claude.md configuration that most people never get right',
+    description: 'Crucial to making Claude behave like an agent — but tricky to get right without deep experience.',
     icon: DocumentTextIcon,
   },
   {
     name: 'Complex infrastructure',
-    description: 'MCP servers, testing frameworks, debugging workflows',
+    description: 'Requires orchestration across MCP servers, custom testing frameworks, and reliable debugging workflows.',
     icon: CogIcon,
   },
   {
-    name: 'Expert-level setup',
-    description: 'Even experienced developers struggle with proper setup',
+    name: 'Not beginner-friendly',
+    description: 'It\'s not just about writing prompts — it\'s about building a system that responds like a teammate.',
     icon: XMarkSolidIcon,
   }
 ];
@@ -325,6 +325,73 @@ const App = () => {
           </div>
         </div>
       </section>
+
+      {/* Sticky Setup Challenge Section */}
+      <div className="relative">
+        <div className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
+          {/* Background gradient blob */}
+          <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
+            <div 
+              style={{
+                clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+              }}
+              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#EF4444] to-[#F97316] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            />
+          </div>
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl lg:text-center">
+              <h2 className="text-base font-semibold leading-7 text-[#EF4444]">The Setup Challenge</h2>
+              <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
+                Claude Code is powerful — if you can set it up right.
+              </p>
+              <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
+                Most people never get past the configuration stage. Even experienced developers struggle to unlock its full potential.
+              </p>
+            </div>
+            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
+              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
+                {setupChallenges.map((challenge, index) => (
+                  <motion.div 
+                    key={challenge.name} 
+                    className="relative pl-16 group cursor-pointer hover:bg-[#FEE2E2]/30 rounded-lg p-4 -m-4 transition-colors duration-300"
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+                      <motion.div 
+                        className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-[#EF4444] shadow-sm group-hover:shadow-md"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [
+                            index === 0 ? -4 : index === 1 ? 0 : 4,
+                            index === 0 ? -8 : index === 1 ? 0 : 8,
+                            index === 0 ? -4 : index === 1 ? 0 : 4
+                          ],
+                          scale: [1, 1.04, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.2 + (index * 0.4),
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: index * 0.7
+                        }}
+                        whileHover={{ 
+                          scale: 1.15,
+                          y: -6
+                        }}
+                      >
+                        <challenge.icon aria-hidden="true" className="size-6 text-white" />
+                      </motion.div>
+                      {challenge.name}
+                    </dt>
+                    <dd className="mt-2 text-base leading-7 text-[#6B7280]">{challenge.description}</dd>
+                  </motion.div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* How No Code Claude Solves This - Bento Grid */}
       <section className="bg-gray-50 py-24 sm:py-32">
