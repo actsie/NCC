@@ -394,9 +394,9 @@ const App = () => {
       {/* How No Code Claude Solves This - Bento Grid */}
       <section className="bg-gray-50 py-24 sm:py-32">
         <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-center text-base/7 font-semibold text-[#6366F1]">Deploy faster</h2>
+          <h2 className="text-center text-base/7 font-semibold text-[#6366F1]">How No Code Claude Solves This</h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-[#1F2937] sm:text-5xl">
-            Everything you need to deploy your app
+            Get Claude Code's full power, properly configured
           </p>
           <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
             <div className="relative lg:row-span-2">
@@ -404,18 +404,18 @@ const App = () => {
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] lg:rounded-l-[calc(2rem+1px)]">
                 <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
                   <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
-                    Mobile friendly
+                    Built for non-technical users who want real apps
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Built-in responsive design that works perfectly on all devices. Your apps look professional everywhere.
+                    Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. No Code Claude builds apps you can actually use.
                   </p>
                 </div>
                 <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm">
                   <div className="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
                     <div className="size-full bg-gradient-to-br from-[#6366F1] to-[#0D9488] flex items-center justify-center">
                       <div className="text-white text-center">
-                        <div className="text-4xl mb-2">📱</div>
-                        <div className="text-sm">Responsive Design</div>
+                        <div className="text-4xl mb-2">🎯</div>
+                        <div className="text-sm">Real Apps</div>
                       </div>
                     </div>
                   </div>
@@ -427,16 +427,16 @@ const App = () => {
               <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Performance</p>
+                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Professional setup, ready to use</p>
                   <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Expert-level optimization built in. Fast loading, efficient code, production-ready performance.
+                    Skip the configuration complexity that stops most people. Get the infrastructure knowledge we've refined through trial and error.
                   </p>
                 </div>
                 <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
                   <div className="w-full max-lg:max-w-xs bg-gradient-to-r from-[#0D9488] to-[#6366F1] rounded-lg p-8 text-white text-center">
-                    <div className="text-3xl mb-2">⚡</div>
-                    <div className="text-lg font-semibold">Lightning Fast</div>
-                    <div className="text-sm opacity-90">Optimized builds</div>
+                    <div className="text-3xl mb-2">⚙️</div>
+                    <div className="text-lg font-semibold">Ready to Use</div>
+                    <div className="text-sm opacity-90">Professional setup</div>
                   </div>
                 </div>
               </div>
@@ -446,15 +446,15 @@ const App = () => {
               <div className="absolute inset-px rounded-lg bg-white" />
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)]">
                 <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Security</p>
+                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Same AI, better interface</p>
                   <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Enterprise-grade security practices baked into every project. Your data stays protected.
+                    Same AI that builds production-ready apps, wrapped in an interface you can use. No architectural limitations.
                   </p>
                 </div>
                 <div className="flex flex-1 items-center max-lg:py-6 lg:pb-2">
-                  <div className="w-full bg-gradient-to-br from-[#EF4444] to-[#F97316] rounded-lg p-6 text-white text-center">
-                    <div className="text-2xl mb-2">🔒</div>
-                    <div className="text-sm font-semibold">Secure by Default</div>
+                  <div className="w-full bg-gradient-to-br from-[#6366F1] to-[#0D9488] rounded-lg p-6 text-white text-center">
+                    <div className="text-2xl mb-2">🤖</div>
+                    <div className="text-sm font-semibold">Same Powerful AI</div>
                   </div>
                 </div>
               </div>
@@ -465,10 +465,10 @@ const App = () => {
               <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
                 <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
                   <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
-                    Powerful APIs
+                    Expert-level infrastructure
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Claude Code's full system access - database integration, file handling, API connections, all professionally configured.
+                    We've built the expert-level infrastructure (Claude.md, testing, debugging) that takes others weeks to figure out.
                   </p>
                 </div>
                 <div className="relative min-h-[30rem] w-full grow">
@@ -482,11 +482,11 @@ const App = () => {
                       </div>
                     </div>
                     <div className="px-6 pt-6 pb-14 text-sm text-gray-300 font-mono">
-                      <div className="text-emerald-400"># Expert Configuration</div>
-                      <div className="mt-2 text-gray-400">- Database setup ✓</div>
-                      <div className="text-gray-400">- API integrations ✓</div>
-                      <div className="text-gray-400">- Testing framework ✓</div>
-                      <div className="text-gray-400">- Deployment ready ✓</div>
+                      <div className="text-emerald-400"># Expert Infrastructure</div>
+                      <div className="mt-2 text-gray-400">- Claude.md configuration ✓</div>
+                      <div className="text-gray-400">- MCP servers ✓</div>
+                      <div className="text-gray-400">- Testing frameworks ✓</div>
+                      <div className="text-gray-400">- Debugging workflows ✓</div>
                     </div>
                   </div>
                 </div>
