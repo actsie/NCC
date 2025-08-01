@@ -896,24 +896,24 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      {[...Array(10)].map((_, i) => (
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-full">
+                      {[...Array(8)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70"
+                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60"
                           style={{
-                            left: `${10 + (i * 8)}%`,
-                            bottom: '-2px'
+                            left: `${15 + (i * 9)}%`,
+                            bottom: '8px'
                           }}
                           animate={{
-                            y: [0, -55],
-                            opacity: [1, 0]
+                            y: [0, -40],
+                            opacity: [0.6, 0]
                           }}
                           transition={{
-                            duration: 2.35 + (i * 0.15),
+                            duration: 2.0 + (i * 0.1),
                             repeat: Infinity,
                             ease: "easeInOut",
-                            delay: 0.2 + (i * 0.1)
+                            delay: 0.3 + (i * 0.15)
                           }}
                         />
                       ))}
@@ -957,24 +957,24 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      {[...Array(10)].map((_, i) => (
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-full">
+                      {[...Array(8)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70"
+                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60"
                           style={{
-                            left: `${10 + (i * 8)}%`,
-                            bottom: '-2px'
+                            left: `${15 + (i * 9)}%`,
+                            bottom: '8px'
                           }}
                           animate={{
-                            y: [0, -55],
-                            opacity: [1, 0]
+                            y: [0, -40],
+                            opacity: [0.6, 0]
                           }}
                           transition={{
-                            duration: 2.5 + (i * 0.15),
+                            duration: 2.0 + (i * 0.1),
                             repeat: Infinity,
                             ease: "easeInOut",
-                            delay: 0.5 + (i * 0.1)
+                            delay: 0.5 + (i * 0.15)
                           }}
                         />
                       ))}
@@ -1015,24 +1015,24 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      {[...Array(10)].map((_, i) => (
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-full">
+                      {[...Array(8)].map((_, i) => (
                         <motion.div
                           key={i}
-                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70"
+                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60"
                           style={{
-                            left: `${10 + (i * 8)}%`,
-                            bottom: '-2px'
+                            left: `${15 + (i * 9)}%`,
+                            bottom: '8px'
                           }}
                           animate={{
-                            y: [0, -55],
-                            opacity: [1, 0]
+                            y: [0, -40],
+                            opacity: [0.6, 0]
                           }}
                           transition={{
-                            duration: 2.6 + (i * 0.15),
+                            duration: 2.0 + (i * 0.1),
                             repeat: Infinity,
                             ease: "easeInOut",
-                            delay: 1.0 + (i * 0.1)
+                            delay: 1.0 + (i * 0.15)
                           }}
                         />
                       ))}
