@@ -877,7 +877,7 @@ const App = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl relative overflow-hidden"
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
                     style={{
                       backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
                     }}
@@ -896,29 +896,7 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-full">
-                      {[...Array(8)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60"
-                          style={{
-                            left: `${15 + (i * 9)}%`,
-                            bottom: '8px'
-                          }}
-                          animate={{
-                            y: [0, -40],
-                            opacity: [0.6, 0]
-                          }}
-                          transition={{
-                            duration: 2.0 + (i * 0.1),
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 0.3 + (i * 0.15)
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-2xl font-bold text-white relative z-10">1</span>
+                    <span className="text-2xl font-bold text-white">1</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
                     Describe your app
@@ -938,7 +916,7 @@ const App = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl relative overflow-hidden"
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
                     style={{
                       backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
                     }}
@@ -957,29 +935,7 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-full">
-                      {[...Array(8)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60"
-                          style={{
-                            left: `${15 + (i * 9)}%`,
-                            bottom: '8px'
-                          }}
-                          animate={{
-                            y: [0, -40],
-                            opacity: [0.6, 0]
-                          }}
-                          transition={{
-                            duration: 2.0 + (i * 0.1),
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 0.5 + (i * 0.15)
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-2xl font-bold text-white relative z-10">2</span>
+                    <span className="text-2xl font-bold text-white">2</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
                     Watch Claude Code build
@@ -996,7 +952,7 @@ const App = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl relative overflow-hidden"
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
                     style={{
                       backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
                     }}
@@ -1015,29 +971,7 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-full">
-                      {[...Array(8)].map((_, i) => (
-                        <motion.div
-                          key={i}
-                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-60"
-                          style={{
-                            left: `${15 + (i * 9)}%`,
-                            bottom: '8px'
-                          }}
-                          animate={{
-                            y: [0, -40],
-                            opacity: [0.6, 0]
-                          }}
-                          transition={{
-                            duration: 2.0 + (i * 0.1),
-                            repeat: Infinity,
-                            ease: "easeInOut",
-                            delay: 1.0 + (i * 0.15)
-                          }}
-                        />
-                      ))}
-                    </div>
-                    <span className="text-2xl font-bold text-white relative z-10">3</span>
+                    <span className="text-2xl font-bold text-white">3</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
                     Get production-ready apps
