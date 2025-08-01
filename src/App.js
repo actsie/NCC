@@ -17,12 +17,12 @@ const tabStyles = `
     }
     .tab-solution-shine {
       position: relative;
-      background: white;
+      background: transparent !important;
       border: 1px solid transparent;
       background-clip: padding-box;
       overflow: hidden;
     }
-    .tab-solution-shine::before {
+    .tab-solution-shine:not(.tab-active)::before {
       content: '';
       position: absolute;
       top: -1px;
@@ -35,16 +35,37 @@ const tabStyles = `
       z-index: -1;
       animation: shimmer 3s ease-in-out infinite;
     }
+    .tab-solution-shine:not(.tab-active)::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: inherit;
+      z-index: 0;
+    }
+    .tab-solution-shine:not(.tab-active) span {
+      position: relative;
+      z-index: 1;
+    }
     .tab-solution-shine.tab-active {
       background: linear-gradient(30deg, #f12711, #f5af19) !important;
       color: white !important;
-      border-color: transparent !important;
+      border: none !important;
     }
-    .tab-solution-shine.tab-active::before {
-      background: linear-gradient(30deg, #f12711, #f5af19);
-      animation: none;
+    .tab-solution-shine.tab-active .tab-solution-particles {
+      display: block;
+    }
+    .tab-solution-shine.tab-active span {
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: white !important;
+      color: white !important;
     }
     .tab-solution-particles {
+      display: none;
       overflow: hidden;
       width: 100%;
       height: 100%;
@@ -686,7 +707,7 @@ const App = () => {
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
                     } else {
                       tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
                     }
@@ -710,7 +731,7 @@ const App = () => {
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
                     } else {
                       tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
                     }
@@ -734,7 +755,7 @@ const App = () => {
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
                     } else {
                       tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
                     }
