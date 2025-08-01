@@ -532,7 +532,7 @@ const App = () => {
       {/* Sticky Stacking Container */}
       <div className="relative">
         {/* Problem with Alternatives Section */}
-        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
+        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-start sm:justify-center relative isolate bg-white py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -593,7 +593,7 @@ const App = () => {
         </section>
 
         {/* Setup Challenge Section */}
-        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
+        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-start sm:justify-center relative isolate bg-white py-24 sm:py-32">
           {/* Background gradient blob */}
           <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
             <div 
@@ -658,7 +658,7 @@ const App = () => {
         </section>
 
         {/* How No Code Claude Solves This - Bento Grid */}
-        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-center relative isolate bg-gray-50 py-24 sm:py-32">
+        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-start sm:justify-center relative isolate bg-gray-50 py-24 sm:py-32">
         <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
           <h2 className="text-center text-base/7 font-semibold text-[#D97706]">Get Claude Code's full power, properly configured</h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-[#1F2937] sm:text-5xl">
