@@ -1,0 +1,443 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+
+const AnimatedButton = ({ children, onClick, ...props }) => {
+  const [isInputMode, setIsInputMode] = useState(false);
+  const [email, setEmail] = useState('');
+  const [isError, setIsError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  const handleButtonClick = () => {
+    setIsInputMode(true);
+    if (onClick) onClick();
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailSubmit = (e) => {
+    e.preventDefault();
+    if (email.trim() && validateEmail(email)) {
+      console.log('Email submitted:', email);
+      // Here you would typically send the email to your backend
+      setEmail('');
+      setIsInputMode(false);
+      setIsError(false);
+      setShowSuccess(true);
+      // No timeout - stays as "You're all set!" permanently
+    } else {
+      // Just shake the text, no alerts or tooltips
+      setIsError(true);
+      setTimeout(() => setIsError(false), 600); // Remove error state after animation
+    }
+  };
+
+  const handleInputBlur = () => {
+    if (!email.trim()) {
+      setIsInputMode(false);
+      setIsError(false);
+    }
+  };
+
+  // Success state with heart
+  if (showSuccess) {
+    return (
+      <StyledWrapper>
+        <button type="button" className="button success" disabled>
+          <div className="points_wrapper">
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+            <i className="point" />
+          </div>
+          <span className="inner">
+            <svg className="icon heart" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
+              <path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+            You're all set!
+          </span>
+        </button>
+      </StyledWrapper>
+    );
+  }
+
+  if (isInputMode) {
+    return (
+      <StyledWrapper>
+        <form onSubmit={handleEmailSubmit} className="email-form">
+          <div className={`input-container ${isError ? 'error' : ''}`}>
+            <input
+              type="email"
+              className={`email-input ${isError ? 'shake' : ''}`}
+              placeholder="Enter your email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              onBlur={handleInputBlur}
+              autoFocus
+              required
+            />
+            <button type="submit" className="icon-button">
+              <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
+                <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                <path d="M5 3v4" />
+                <path d="M19 17v4" />
+                <path d="M3 5h4" />
+                <path d="M17 19h4" />
+              </svg>
+            </button>
+          </div>
+        </form>
+      </StyledWrapper>
+    );
+  }
+
+  return (
+    <StyledWrapper>
+      <button type="button" className="button" onClick={handleButtonClick} {...props}>
+        <div className="points_wrapper">
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+          <i className="point" />
+        </div>
+        <span className="inner">
+          <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+            <path d="M5 3v4" />
+            <path d="M19 17v4" />
+            <path d="M3 5h4" />
+            <path d="M17 19h4" />
+          </svg>
+          {children}
+        </span>
+      </button>
+    </StyledWrapper>
+  );
+}
+
+const StyledWrapper = styled.div`
+  .button {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #f12711, #f5af19);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 0.6em 1.5em;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    outline: none;
+  }
+  
+  .button:hover {
+    background-position: right center;
+    background-size: 200% auto;
+    animation: pulse512 1.5s infinite;
+  }
+  
+  .button:active {
+    transform: scale(0.95);
+  }
+
+  /* Success state styling */
+  .button.success {
+    background-image: linear-gradient(30deg, #ee0979, #ff6a00);
+    cursor: default;
+  }
+
+  .button.success .heart {
+    fill: transparent;
+    animation: dasharray 1s linear forwards, filled 0.1s linear forwards 0.95s, heartbeat 1.5s ease-in-out infinite 1.1s;
+  }
+
+  .button.success .heart path {
+    fill: transparent;
+    animation: filled 0.1s linear forwards 0.95s;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { 
+      transform: scale(1); 
+    }
+    50% { 
+      transform: scale(1.1); 
+    }
+  }
+
+  @keyframes pulse512 {
+    0% {
+      box-shadow: 0 0 0 0 rgba(241, 39, 17, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(245, 175, 25, 0), 0 0 20px rgba(241, 39, 17, 0.2);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(245, 175, 25, 0), 0 0 0 rgba(241, 39, 17, 0);
+    }
+  }
+
+  .points_wrapper {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .points_wrapper .point {
+    bottom: -10px;
+    position: absolute;
+    animation: floating-points infinite ease-in-out;
+    pointer-events: none;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 9999px;
+  }
+  @keyframes floating-points {
+    0% {
+      transform: translateY(0);
+    }
+    85% {
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(-55px);
+      opacity: 0;
+    }
+  }
+  .points_wrapper .point:nth-child(1) {
+    left: 10%;
+    opacity: 1;
+    animation-duration: 2.35s;
+    animation-delay: 0.2s;
+  }
+  .points_wrapper .point:nth-child(2) {
+    left: 30%;
+    opacity: 0.7;
+    animation-duration: 2.5s;
+    animation-delay: 0.5s;
+  }
+  .points_wrapper .point:nth-child(3) {
+    left: 25%;
+    opacity: 0.8;
+    animation-duration: 2.2s;
+    animation-delay: 0.1s;
+  }
+  .points_wrapper .point:nth-child(4) {
+    left: 44%;
+    opacity: 0.6;
+    animation-duration: 2.05s;
+  }
+  .points_wrapper .point:nth-child(5) {
+    left: 50%;
+    opacity: 1;
+    animation-duration: 1.9s;
+  }
+  .points_wrapper .point:nth-child(6) {
+    left: 75%;
+    opacity: 0.5;
+    animation-duration: 1.5s;
+    animation-delay: 1.5s;
+  }
+  .points_wrapper .point:nth-child(7) {
+    left: 88%;
+    opacity: 0.9;
+    animation-duration: 2.2s;
+    animation-delay: 0.2s;
+  }
+  .points_wrapper .point:nth-child(8) {
+    left: 58%;
+    opacity: 0.8;
+    animation-duration: 2.25s;
+    animation-delay: 0.2s;
+  }
+  .points_wrapper .point:nth-child(9) {
+    left: 98%;
+    opacity: 0.6;
+    animation-duration: 2.6s;
+    animation-delay: 0.1s;
+  }
+  .points_wrapper .point:nth-child(10) {
+    left: 65%;
+    opacity: 1;
+    animation-duration: 2.5s;
+    animation-delay: 0.2s;
+  }
+
+  .inner {
+    z-index: 2;
+    gap: 6px;
+    position: relative;
+    width: 100%;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.5;
+    transition: color 0.2s ease-in-out;
+  }
+
+  .inner svg.icon {
+    width: 18px;
+    height: 18px;
+    transition: fill 0.1s linear;
+  }
+
+  .button:focus svg.icon {
+    fill: white;
+  }
+  .button:hover svg.icon {
+    fill: transparent;
+    animation: dasharray 1s linear forwards, filled 0.1s linear forwards 0.95s;
+  }
+
+  .button:hover svg.icon path {
+    fill: transparent;
+    animation: filled 0.1s linear forwards 0.95s;
+  }
+  @keyframes dasharray {
+    from {
+      stroke-dasharray: 0 0 0 0;
+    }
+    to {
+      stroke-dasharray: 68 68 0 0;
+    }
+  }
+  @keyframes filled {
+    to {
+      fill: white;
+    }
+  }
+
+  /* Email input form styles */
+  .email-form {
+    display: inline-block;
+  }
+
+  .input-container {
+    position: relative;
+    max-width: 48px;
+    transition: max-width 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(30deg, #f12711, #f5af19);
+    border-radius: 20px;
+    padding: 2px; /* Border thickness */
+  }
+
+  .input-container:focus-within {
+    max-width: 300px;
+  }
+
+  /* Pulsing effect for entire container when icon is hovered */
+  .input-container:hover {
+    animation: pulse512 1.5s infinite;
+  }
+
+  .email-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 18px; /* Slightly smaller to show gradient border */
+    padding: 10px 48px 10px 16px;
+    font-size: 16px;
+    background: white;
+    color: #333;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .email-input::placeholder {
+    color: rgba(51, 51, 51, 0.6);
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .email-input:focus::placeholder {
+    opacity: 1;
+    color: rgba(51, 51, 51, 0.8);
+  }
+
+  /* Character shake animation for invalid email */
+  .email-input.shake {
+    animation: textShake 0.6s ease-in-out;
+  }
+
+  @keyframes textShake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-2px); }
+    20%, 40%, 60%, 80% { transform: translateX(2px); }
+  }
+
+  .icon-button {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    transform: translateY(-50%);
+    background: linear-gradient(30deg, #f12711, #f5af19);
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .icon-button .icon {
+    width: 18px;
+    height: 18px;
+    color: white;
+    transition: fill 0.1s linear;
+  }
+
+  .icon-button:hover .icon {
+    fill: transparent;
+    animation: dasharray 1s linear forwards, filled 0.1s linear forwards 0.95s;
+  }
+
+  .icon-button:hover .icon path {
+    fill: transparent;
+    animation: filled 0.1s linear forwards 0.95s;
+  }
+
+  @keyframes quake {
+    0%, 100% { 
+      transform: translateY(-50%) rotate(-3deg); 
+    }
+    50% { 
+      transform: translateY(-50%) rotate(3deg); 
+    }
+  }
+
+  .icon-button:hover {
+    animation: quake 0.3s ease-in-out infinite;
+  }
+`;
+
+export default AnimatedButton;
