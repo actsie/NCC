@@ -172,17 +172,17 @@ const alternativesProblems = [
   {
     name: 'They\'re not built for Claude Code.',
     description: 'Many tools wrap Claude with limited API access — meaning weaker results and capped capabilities.',
-    icon: ExclamationTriangleIcon,
+    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'They skip the hard setup.',
     description: 'Claude.md configuration, MCP servers, debugging workflows — even experienced developers get stuck here.',
-    icon: ExclamationTriangleIcon,
+    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'They rely on templates, not full control.',
     description: 'You\'re locked into pre-built flows. Real apps need custom logic, not canned components.',
-    icon: ExclamationTriangleIcon,
+    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   }
 ];
 
@@ -190,17 +190,17 @@ const setupChallenges = [
   {
     name: 'Claude.md configuration',
     description: 'Crucial to making Claude behave like an agent — but tricky to get right without deep experience.',
-    icon: DocumentTextIcon,
+    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'Complex infrastructure',
     description: 'Requires orchestration across MCP servers, custom testing frameworks, and reliable debugging workflows.',
-    icon: CogIcon,
+    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'Not beginner-friendly',
     description: 'It\'s not just about writing prompts — it\'s about building a system that responds like a teammate.',
-    icon: XMarkSolidIcon,
+    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   }
 ];
 
@@ -563,7 +563,7 @@ const App = () => {
                 >
                   <dt className="text-base leading-7 font-semibold text-[#1F2937]">
                     <motion.div 
-                      className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-[#F59E0B] shadow-sm group-hover:shadow-md"
+                      className="absolute top-0 left-0 flex size-10 items-center justify-center"
                       animate={{ 
                         y: [-1, -3, -1],
                         rotate: [-2, 2, -2],
@@ -580,7 +580,7 @@ const App = () => {
                         y: -5
                       }}
                     >
-                      <problem.icon aria-hidden="true" className="size-6 text-white" />
+                      <problem.icon />
                     </motion.div>
                     {problem.name}
                   </dt>
@@ -624,7 +624,7 @@ const App = () => {
                   >
                     <dt className="text-base leading-7 font-semibold text-[#1F2937]">
                       <motion.div 
-                        className="absolute top-0 left-0 flex size-10 items-center justify-center rounded-lg bg-[#EF4444] shadow-sm group-hover:shadow-md"
+                        className="absolute top-0 left-0 flex size-10 items-center justify-center"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [
@@ -645,7 +645,7 @@ const App = () => {
                           y: -6
                         }}
                       >
-                        <challenge.icon aria-hidden="true" className="size-6 text-white" />
+                        <challenge.icon />
                       </motion.div>
                       {challenge.name}
                     </dt>
