@@ -211,6 +211,7 @@ const App = () => {
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [showShareButton, setShowShareButton] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
+  const [footerButtonBounce, setFooterButtonBounce] = useState(false);
 
   // Handle tooltip visibility when user signs up
   React.useEffect(() => {
@@ -243,14 +244,19 @@ const App = () => {
         if (isVisible && isSignedUp && !isFooterVisible) {
           setIsFooterVisible(true);
           
-          // Only show tooltip if we're already in share mode
-          if (showShareButton) {
-            setShowTooltip(true);
-            // Hide tooltip after 2.5 seconds
-            setTimeout(() => {
-              setShowTooltip(false);
-            }, 2500);
-          }
+          // Show tooltip and bounce animation for footer button if user signed up
+          setShowTooltip(true);
+          setFooterButtonBounce(true);
+          
+          // Hide tooltip after 2.5 seconds
+          setTimeout(() => {
+            setShowTooltip(false);
+          }, 2500);
+          
+          // Stop bouncing after 2 bounces (1.2 seconds)
+          setTimeout(() => {
+            setFooterButtonBounce(false);
+          }, 1200);
         } else if (!isVisible) {
           setIsFooterVisible(false);
         }
@@ -1320,7 +1326,7 @@ const App = () => {
               <div className="max-w-xl text-base/7 text-[#6B7280] lg:max-w-lg">
                 <h2 className="mt-8 text-2xl font-bold tracking-tight text-[#1F2937]">Ready for Claude Code that's properly configured?</h2>
                 <div className="mt-6 relative inline-block">
-                  {isSignedUp && showShareButton && (
+                  {isSignedUp && (showShareButton || isFooterVisible) && (
                     <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
                       <div className="flex items-center">
                         <span className="heart-icon">❤️</span>
@@ -1333,6 +1339,7 @@ const App = () => {
                     showSuccess={isSignedUp && !showShareButton}
                     onSignup={() => setIsSignedUp(true)}
                     isExpanding={isExpanding}
+                    forceBounce={footerButtonBounce}
                   >
                     {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                   </AnimatedButton>
@@ -1344,7 +1351,7 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-white">
+      <footer id="footer-section" className="bg-white">
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">

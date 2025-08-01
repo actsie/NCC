@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess: externalShowSuccess, isExpanding, ...props }) => {
+const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess: externalShowSuccess, isExpanding, forceBounce, ...props }) => {
   const [isInputMode, setIsInputMode] = useState(false);
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
@@ -167,7 +167,7 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
 
   return (
     <StyledWrapper>
-      <button type="button" className={`button ${isShareMode ? 'share-mode' : ''} ${isExpanding ? 'expanding' : ''} ${shouldBounce ? 'bounce' : ''}`} onClick={handleButtonClick} {...props}>
+      <button type="button" className={`button ${isShareMode ? 'share-mode' : ''} ${isExpanding ? 'expanding' : ''} ${shouldBounce || forceBounce ? 'bounce' : ''}`} onClick={handleButtonClick} {...props}>
         <div className="points_wrapper">
           <i className="point" />
           <i className="point" />
