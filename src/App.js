@@ -7,6 +7,59 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
 
+// Tab styles
+const tabStyles = `
+  <style>
+    .tab-active {
+      background: linear-gradient(to right, #F59E0B, #EAB308) !important;
+      color: white !important;
+      border-color: transparent !important;
+    }
+    .tab-solution-shine {
+      position: relative;
+      background: white;
+      border: 2px solid transparent;
+      background-clip: padding-box;
+    }
+    .tab-solution-shine::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #f12711, #f5af19, #f12711, #f5af19);
+      background-size: 400% 400%;
+      border-radius: inherit;
+      z-index: -1;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+    .tab-solution-shine.tab-active::before {
+      background: linear-gradient(to right, #F59E0B, #EAB308);
+      animation: none;
+    }
+    .tab-content {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+  </style>
+`;
+
+// Inject styles into document head
+if (typeof document !== 'undefined') {
+  const styleElement = document.createElement('div');
+  styleElement.innerHTML = tabStyles;
+  document.head.appendChild(styleElement.firstElementChild);
+}
+
 // Typewriter effect component
 const TypewriterText = () => {
   const [currentText, setCurrentText] = useState('');
@@ -529,10 +582,8 @@ const App = () => {
         </div>
       </section>
 
-      {/* Sticky Stacking Container */}
-      <div className="relative">
-        {/* Problem with Alternatives Section */}
-        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-start sm:justify-center relative isolate bg-white py-24 sm:py-32">
+      {/* Tab-based Problem & Solution Section */}
+      <section className="relative isolate bg-white py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -542,307 +593,387 @@ const App = () => {
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F59E0B] to-[#EAB308] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
+        
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">The Problem with Alternatives</h2>
+          {/* Tab Navigation */}
+          <div className="mx-auto max-w-4xl lg:text-center mb-16">
+            <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">Understanding the Challenge</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
-              Claude Code is powerful — but most tools can't handle it.
-            </p>
-            <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
-              Claude Code is capable of building real, production-level apps with minimal human input. But unlocking that power takes serious setup: expert-level config files, server orchestration, and testing infrastructure.
+              Why No Code Claude exists
             </p>
           </div>
-          <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
-              {alternativesProblems.map((problem, index) => (
-                <motion.div 
-                  key={problem.name} 
-                  className="relative pl-12 sm:pl-16 group"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <dt className="text-base leading-7 font-semibold text-[#1F2937]">
-                    <motion.div 
-                      className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
-                      animate={{ 
-                        y: [-1, -3, -1],
-                        rotate: [-2, 2, -2],
-                        scale: [1, 1.03, 1]
-                      }}
-                      transition={{ 
-                        duration: 2.5 + (index * 0.3),
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                        delay: index * 0.6
-                      }}
-                      whileHover={{ 
-                        scale: 1.1,
-                        y: -5
-                      }}
-                    >
-                      <problem.icon />
-                    </motion.div>
-                    {problem.name}
-                  </dt>
-                  <dd className="mt-2 text-base leading-7 text-[#6B7280]">{problem.description}</dd>
-                </motion.div>
-              ))}
-            </dl>
-          </div>
-        </div>
-        </section>
-
-        {/* Setup Challenge Section */}
-        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-start sm:justify-center relative isolate bg-white py-24 sm:py-32">
-          {/* Background gradient blob */}
-          <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
-            <div 
-              style={{
-                clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
-              }}
-              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#D97706] to-[#F59E0B] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
-            />
-          </div>
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-4xl lg:text-center">
-              <h2 className="text-base font-semibold leading-7 text-[#EF4444]">The Setup Challenge</h2>
-              <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
-                Claude Code is the real deal — when it's set up right.
-              </p>
-              <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
-                Most people never get past the configuration stage. Even experienced developers struggle to unlock its full potential.
-              </p>
+          
+          <div className="mx-auto max-w-6xl">
+            {/* Tab Buttons */}
+            <div className="flex flex-col sm:flex-row justify-center mb-12 gap-2">
+              <button 
+                id="tab-problems"
+                className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#F59E0B] to-[#EAB308] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active"
+                onClick={() => {
+                  // Remove active class from all tabs and reset styles
+                  document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                    tab.classList.remove('tab-active');
+                    if (tab.id === 'tab-solution') {
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                    } else {
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+                    }
+                  });
+                  document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
+                  
+                  // Add active class to clicked tab
+                  const activeTab = document.getElementById('tab-problems');
+                  activeTab.classList.add('tab-active');
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#F59E0B] to-[#EAB308] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
+                  document.getElementById('content-problems').classList.remove('hidden');
+                }}
+              >
+                Problems with Alternatives
+              </button>
+              <button 
+                id="tab-setup"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                onClick={() => {
+                  // Remove active class from all tabs and reset styles
+                  document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                    tab.classList.remove('tab-active');
+                    if (tab.id === 'tab-solution') {
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                    } else {
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+                    }
+                  });
+                  document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
+                  
+                  // Add active class to clicked tab
+                  const activeTab = document.getElementById('tab-setup');
+                  activeTab.classList.add('tab-active');
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#F59E0B] to-[#EAB308] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
+                  document.getElementById('content-setup').classList.remove('hidden');
+                }}
+              >
+                Setup Challenges
+              </button>
+              <button 
+                id="tab-solution"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine"
+                onClick={() => {
+                  // Remove active class from all tabs and reset styles
+                  document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+                    tab.classList.remove('tab-active');
+                    if (tab.id === 'tab-solution') {
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                    } else {
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+                    }
+                  });
+                  document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
+                  
+                  // Add active class to clicked tab
+                  const activeTab = document.getElementById('tab-solution');
+                  activeTab.classList.add('tab-active');
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#F59E0B] to-[#EAB308] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
+                  document.getElementById('content-solution').classList.remove('hidden');
+                }}
+              >
+                How We Solve This
+              </button>
             </div>
-            <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-              <dl className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
-                {setupChallenges.map((challenge, index) => (
-                  <motion.div 
-                    key={challenge.name} 
-                    className="relative pl-12 sm:pl-16 group"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+
+            {/* Tab Content */}
+            <div className="relative">
+              {/* Problems Tab Content */}
+              <div id="content-problems" className="tab-content">
+                <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12">
+                  <div className="mx-auto max-w-4xl text-center mb-12">
+                    <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
+                      Claude Code is powerful — but most tools can't handle it.
+                    </h3>
+                    <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+                      Claude Code is capable of building real, production-level apps with minimal human input. But unlocking that power takes serious setup: expert-level config files, server orchestration, and testing infrastructure.
+                    </p>
+                  </div>
+                  <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16 mx-auto">
+                    {alternativesProblems.map((problem, index) => (
                       <motion.div 
-                        className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [
-                            index === 0 ? -4 : index === 1 ? 0 : 4,
-                            index === 0 ? -8 : index === 1 ? 0 : 8,
-                            index === 0 ? -4 : index === 1 ? 0 : 4
-                          ],
-                          scale: [1, 1.04, 1]
-                        }}
-                        transition={{ 
-                          duration: 3.2 + (index * 0.4),
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: index * 0.7
-                        }}
-                        whileHover={{ 
-                          scale: 1.15,
-                          y: -6
-                        }}
+                        key={problem.name} 
+                        className="relative pl-12 sm:pl-16 group"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.2 }}
                       >
-                        <challenge.icon />
+                        <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+                          <motion.div 
+                            className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
+                            animate={{ 
+                              y: [-1, -3, -1],
+                              rotate: [-2, 2, -2],
+                              scale: [1, 1.03, 1]
+                            }}
+                            transition={{ 
+                              duration: 2.5 + (index * 0.3),
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: index * 0.6
+                            }}
+                            whileHover={{ 
+                              scale: 1.1,
+                              y: -5
+                            }}
+                          >
+                            <problem.icon />
+                          </motion.div>
+                          {problem.name}
+                        </dt>
+                        <dd className="mt-2 text-base leading-7 text-[#6B7280]">{problem.description}</dd>
                       </motion.div>
-                      {challenge.name}
-                    </dt>
-                    <dd className="mt-2 text-base leading-7 text-[#6B7280]">{challenge.description}</dd>
-                  </motion.div>
-                ))}
-              </dl>
-            </div>
-          </div>
-        </section>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-        {/* How No Code Claude Solves This - Bento Grid */}
-        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-start sm:justify-center relative isolate bg-gray-50 py-24 sm:py-32">
-        <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-center text-base/7 font-semibold text-[#D97706]">Get Claude Code's full power, properly configured</h2>
-          <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-[#1F2937] sm:text-5xl">
-            How <ShineText>No Code Claude</ShineText> Solves This
-          </p>
-          <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
-            <div className="relative lg:row-span-2">
-              <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] lg:rounded-l-[calc(2rem+1px)]">
-                <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
-                    Built for non-technical users who want real apps
-                  </p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
-                  </p>
-                </div>
-                <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm flex items-center justify-center">
-                  <motion.div 
-                    className="cursor-pointer hover:scale-105 transition-transform duration-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      // Create modal overlay
-                      const modal = document.createElement('div');
-                      modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-                      modal.onclick = () => document.body.removeChild(modal);
-                      
-                      const img = document.createElement('img');
-                      img.src = '/no-code-claude-simple-ui.png';
-                      img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
-                      img.onclick = (e) => e.stopPropagation();
-                      
-                      modal.appendChild(img);
-                      document.body.appendChild(modal);
-                    }}
-                  >
-                    <img 
-                      src="/no-code-claude-simple-ui.png" 
-                      alt="No Code Claude Simple Interface"
-                      className="w-full h-auto max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
-                    />
-                  </motion.div>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]" />
-            </div>
-            <div className="relative max-lg:row-start-1">
-              <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
-                <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Professional setup, ready to use</p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Skip the configuration complexity that stops most people. Get the infrastructure knowledge we've refined through trial and error.
-                  </p>
-                </div>
-                <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
-                  <motion.div 
-                    className="cursor-pointer hover:scale-105 transition-transform duration-200"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      // Create modal overlay
-                      const modal = document.createElement('div');
-                      modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-                      modal.onclick = () => document.body.removeChild(modal);
-                      
-                      const img = document.createElement('img');
-                      img.src = '/no-code-claude-professional-setup.png';
-                      img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
-                      img.onclick = (e) => e.stopPropagation();
-                      
-                      modal.appendChild(img);
-                      document.body.appendChild(modal);
-                    }}
-                  >
-                    <img 
-                      src="/no-code-claude-professional-setup.png" 
-                      alt="No Code Claude Professional Setup"
-                      className="w-full max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
-                    />
-                  </motion.div>
+              {/* Setup Tab Content */}
+              <div id="content-setup" className="tab-content hidden">
+                <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12">
+                  <div className="mx-auto max-w-4xl text-center mb-12">
+                    <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
+                      Claude Code is the real deal — when it's set up right.
+                    </h3>
+                    <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+                      Most people never get past the configuration stage. Even experienced developers struggle to unlock its full potential.
+                    </p>
+                  </div>
+                  <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16 mx-auto">
+                    {setupChallenges.map((challenge, index) => (
+                      <motion.div 
+                        key={challenge.name} 
+                        className="relative pl-12 sm:pl-16 group"
+                        whileHover={{ scale: 1.02 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+                          <motion.div 
+                            className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
+                            animate={{ 
+                              y: [-1, -4, -1],
+                              rotate: [
+                                index === 0 ? -4 : index === 1 ? 0 : 4,
+                                index === 0 ? -8 : index === 1 ? 0 : 8,
+                                index === 0 ? -4 : index === 1 ? 0 : 4
+                              ],
+                              scale: [1, 1.04, 1]
+                            }}
+                            transition={{ 
+                              duration: 3.2 + (index * 0.4),
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                              delay: index * 0.7
+                            }}
+                            whileHover={{ 
+                              scale: 1.15,
+                              y: -6
+                            }}
+                          >
+                            <challenge.icon />
+                          </motion.div>
+                          {challenge.name}
+                        </dt>
+                        <dd className="mt-2 text-base leading-7 text-[#6B7280]">{challenge.description}</dd>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
-            </div>
-            <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
-              <div className="absolute inset-px rounded-lg bg-white" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)]">
-                <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Same AI, better interface</p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Same AI that builds production-ready apps, wrapped in an interface you can use. No architectural limitations.
-                  </p>
-                </div>
-                <div className="flex flex-1 items-center max-lg:py-6 lg:pb-2">
-                  <motion.div 
-                    className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => {
-                      // Create modal overlay
-                      const modal = document.createElement('div');
-                      modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-                      modal.onclick = () => document.body.removeChild(modal);
-                      
-                      const img = document.createElement('img');
-                      img.src = '/ncc-same-ai-better-ui.png';
-                      img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
-                      img.onclick = (e) => e.stopPropagation();
-                      
-                      modal.appendChild(img);
-                      document.body.appendChild(modal);
-                    }}
-                  >
-                    <img 
-                      src="/ncc-same-ai-better-ui.png" 
-                      alt="No Code Claude Same AI Better Interface"
-                      className="w-full rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
-                    />
-                  </motion.div>
-                </div>
-              </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
-            </div>
-            <div className="relative lg:row-span-2">
-              <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
-              <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
-                <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                  <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
-                    Expert-level infrastructure
-                  </p>
-                  <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    We've built the expert-level infrastructure (Claude.md, testing, debugging) that takes others weeks to figure out.
-                  </p>
-                </div>
-                <div className="relative min-h-[30rem] w-full grow">
-                  <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white border-t border-l border-gray-200 p-2 shadow-2xl">
-                    <div className="relative flex text-center">
-                      <div className="flex pl-3.5 pt-3">
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.5 mr-1.5 h-3 w-3 text-red-500/60">
-                          <circle r="12" cy="12" cx="12"></circle>
-                        </svg>
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.75 mr-1.5 h-3 w-3 text-yellow-500/60">
-                          <circle r="12" cy="12" cx="12"></circle>
-                        </svg>
-                        <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.75 mr-1.5 h-3 w-3 text-green-500/60">
-                          <circle r="12" cy="12" cx="12"></circle>
-                        </svg>
+
+              {/* Solution Tab Content */}
+              <div id="content-solution" className="tab-content hidden">
+                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
+                  <div className="mx-auto max-w-4xl text-center mb-12">
+                    <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
+                      How <ShineText>No Code Claude</ShineText> Solves This
+                    </h3>
+                    <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+                      Get Claude Code's full power, properly configured
+                    </p>
+                  </div>
+                  <div className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
+                    <div className="relative lg:row-span-2">
+                      <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]" />
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] lg:rounded-l-[calc(2rem+1px)]">
+                        <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
+                            Built for non-technical users who want real apps
+                          </p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                            Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
+                          </p>
+                        </div>
+                        <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm flex items-center justify-center">
+                          <motion.div 
+                            className="cursor-pointer hover:scale-105 transition-transform duration-200"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                              const modal = document.createElement('div');
+                              modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                              modal.onclick = () => document.body.removeChild(modal);
+                              
+                              const img = document.createElement('img');
+                              img.src = '/no-code-claude-simple-ui.png';
+                              img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                              img.onclick = (e) => e.stopPropagation();
+                              
+                              modal.appendChild(img);
+                              document.body.appendChild(modal);
+                            }}
+                          >
+                            <img 
+                              src="/no-code-claude-simple-ui.png" 
+                              alt="No Code Claude Simple Interface"
+                              className="w-full h-auto max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                            />
+                          </motion.div>
+                        </div>
                       </div>
-                      <span className="absolute inset-x-0 top-2 text-xs text-gray-600">claude.md</span>
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]" />
                     </div>
-                    <div className="mt-5 space-y-1.5 px-5 pb-10">
-                      <p className="mt-4 font-mono text-xs font-normal tracking-wide text-gray-700">
-                        <span className="text-gray-500">#</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Expert Infrastructure</span></span>
-                      </p>
-                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
-                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Claude.md configuration</span></span> <span className="text-green-600">✓</span>
-                      </p>
-                      <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-gray-700">
-                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">MCP servers</span></span> <span className="text-green-600">✓</span>
-                      </p>
-                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
-                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Testing frameworks</span></span> <span className="text-green-600">✓</span>
-                      </p>
-                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
-                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Debugging workflows</span></span> <span className="text-green-600">✓</span>
-                      </p>
-                      <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-gray-700">
-                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Production deployment</span></span> <span className="text-green-600">✓</span>
-                      </p>
-                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
-                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Security hardening</span></span> <span className="text-green-600">✓</span>
-                      </p>
+                    <div className="relative max-lg:row-start-1">
+                      <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
+                        <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Professional setup, ready to use</p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                            Skip the configuration complexity that stops most people. Get the infrastructure knowledge we've refined through trial and error.
+                          </p>
+                        </div>
+                        <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
+                          <motion.div 
+                            className="cursor-pointer hover:scale-105 transition-transform duration-200"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                              const modal = document.createElement('div');
+                              modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                              modal.onclick = () => document.body.removeChild(modal);
+                              
+                              const img = document.createElement('img');
+                              img.src = '/no-code-claude-professional-setup.png';
+                              img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                              img.onclick = (e) => e.stopPropagation();
+                              
+                              modal.appendChild(img);
+                              document.body.appendChild(modal);
+                            }}
+                          >
+                            <img 
+                              src="/no-code-claude-professional-setup.png" 
+                              alt="No Code Claude Professional Setup"
+                              className="w-full max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                            />
+                          </motion.div>
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
+                    </div>
+                    <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
+                      <div className="absolute inset-px rounded-lg bg-white" />
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)]">
+                        <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Same AI, better interface</p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                            Same AI that builds production-ready apps, wrapped in an interface you can use. No architectural limitations.
+                          </p>
+                        </div>
+                        <div className="flex flex-1 items-center max-lg:py-6 lg:pb-2">
+                          <motion.div 
+                            className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            onClick={() => {
+                              const modal = document.createElement('div');
+                              modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                              modal.onclick = () => document.body.removeChild(modal);
+                              
+                              const img = document.createElement('img');
+                              img.src = '/ncc-same-ai-better-ui.png';
+                              img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                              img.onclick = (e) => e.stopPropagation();
+                              
+                              modal.appendChild(img);
+                              document.body.appendChild(modal);
+                            }}
+                          >
+                            <img 
+                              src="/ncc-same-ai-better-ui.png" 
+                              alt="No Code Claude Same AI Better Interface"
+                              className="w-full rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                            />
+                          </motion.div>
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
+                    </div>
+                    <div className="relative lg:row-span-2">
+                      <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
+                      <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
+                        <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
+                            Expert-level infrastructure
+                          </p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                            We've built the expert-level infrastructure (Claude.md, testing, debugging) that takes others weeks to figure out.
+                          </p>
+                        </div>
+                        <div className="relative min-h-[30rem] w-full grow">
+                          <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white border-t border-l border-gray-200 p-2 shadow-2xl">
+                            <div className="relative flex text-center">
+                              <div className="flex pl-3.5 pt-3">
+                                <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.5 mr-1.5 h-3 w-3 text-red-500/60">
+                                  <circle r="12" cy="12" cx="12"></circle>
+                                </svg>
+                                <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.75 mr-1.5 h-3 w-3 text-yellow-500/60">
+                                  <circle r="12" cy="12" cx="12"></circle>
+                                </svg>
+                                <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.75 mr-1.5 h-3 w-3 text-green-500/60">
+                                  <circle r="12" cy="12" cx="12"></circle>
+                                </svg>
+                              </div>
+                              <span className="absolute inset-x-0 top-2 text-xs text-gray-600">claude.md</span>
+                            </div>
+                            <div className="mt-5 space-y-1.5 px-5 pb-10">
+                              <p className="mt-4 font-mono text-xs font-normal tracking-wide text-gray-700">
+                                <span className="text-gray-500">#</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Expert Infrastructure</span></span>
+                              </p>
+                              <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                                <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Claude.md configuration</span></span> <span className="text-green-600">✓</span>
+                              </p>
+                              <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-gray-700">
+                                <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">MCP servers</span></span> <span className="text-green-600">✓</span>
+                              </p>
+                              <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                                <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Testing frameworks</span></span> <span className="text-green-600">✓</span>
+                              </p>
+                              <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                                <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Debugging workflows</span></span> <span className="text-green-600">✓</span>
+                              </p>
+                              <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-gray-700">
+                                <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Production deployment</span></span> <span className="text-green-600">✓</span>
+                              </p>
+                              <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                                <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Security hardening</span></span> <span className="text-green-600">✓</span>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
             </div>
           </div>
         </div>
-        </section>
-      </div>
+      </section>
 
       {/* How It Works */}
       <section id="how-it-works" className="relative isolate bg-white py-24 sm:py-32">
