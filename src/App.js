@@ -413,6 +413,107 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isSignedUp, isFooterVisible]);
 
+  // Auto-cycling tabs functionality
+  React.useEffect(() => {
+    const tabs = ['tab-problems', 'tab-setup', 'tab-solution'];
+    let currentIndex = 0;
+    let autoInterval;
+    let isHovered = false;
+    
+    function switchToTab(tabId) {
+      // Remove active class from all tabs and reset styles
+      document.querySelectorAll('[id^="tab-"]').forEach(tab => {
+        tab.classList.remove('tab-active');
+        if (tab.id === 'tab-solution') {
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+        } else {
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+        }
+      });
+      document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
+      
+      // Add active class to target tab
+      const activeTab = document.getElementById(tabId);
+      if (activeTab) {
+        activeTab.classList.add('tab-active');
+        if (tabId === 'tab-solution') {
+          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
+        } else {
+          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
+        }
+        const contentId = 'content-' + tabId.replace('tab-', '');
+        const contentElement = document.getElementById(contentId);
+        if (contentElement) {
+          contentElement.classList.remove('hidden');
+        }
+      }
+    }
+    
+    function startAutoSwitch() {
+      if (autoInterval) clearTimeout(autoInterval);
+      
+      function scheduleNext() {
+        if (autoInterval) clearTimeout(autoInterval);
+        
+        const currentTab = tabs[currentIndex];
+        const delay = currentTab === 'tab-solution' ? 8000 : 4000; // 8s for solution, 4s for others
+        
+        autoInterval = setTimeout(() => {
+          if (!isHovered) {
+            currentIndex = (currentIndex + 1) % tabs.length;
+            switchToTab(tabs[currentIndex]);
+            scheduleNext();
+          }
+        }, delay);
+      }
+      
+      scheduleNext();
+    }
+    
+    function stopAutoSwitch() {
+      if (autoInterval) {
+        clearTimeout(autoInterval);
+        autoInterval = null;
+      }
+    }
+    
+    // Start auto-switching after 2 seconds
+    const startTimer = setTimeout(() => {
+      startAutoSwitch();
+    }, 2000);
+    
+    // Add hover and click listeners to all tabs
+    const addListeners = () => {
+      document.querySelectorAll('[id^="tab-"]').forEach((tab, index) => {
+        tab.addEventListener('mouseenter', () => {
+          isHovered = true;
+          stopAutoSwitch();
+        });
+        
+        tab.addEventListener('mouseleave', () => {
+          isHovered = false;
+          startAutoSwitch();
+        });
+        
+        tab.addEventListener('click', () => {
+          currentIndex = index;
+          stopAutoSwitch();
+          setTimeout(startAutoSwitch, 1000); // Restart after 1 second
+        });
+      });
+    };
+    
+    // Add listeners immediately and also after a short delay to ensure elements exist
+    addListeners();
+    setTimeout(addListeners, 100);
+    
+    // Cleanup function
+    return () => {
+      clearTimeout(startTimer);
+      stopAutoSwitch();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-white">
       <style jsx>{`
@@ -783,92 +884,6 @@ const App = () => {
               </button>
             </div>
 
-            {/* Auto-cycling functionality */}
-            <script dangerouslySetInnerHTML={{
-              __html: `
-                (function() {
-                  const tabs = ['tab-problems', 'tab-setup', 'tab-solution'];
-                  let currentIndex = 0;
-                  let autoInterval;
-                  let isHovered = false;
-                  
-                  function switchToTab(tabId) {
-                    // Remove active class from all tabs and reset styles
-                    document.querySelectorAll('[id^="tab-"]').forEach(tab => {
-                      tab.classList.remove('tab-active');
-                      if (tab.id === 'tab-solution') {
-                        tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
-                      } else {
-                        tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
-                      }
-                    });
-                    document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
-                    
-                    // Add active class to target tab
-                    const activeTab = document.getElementById(tabId);
-                    if (activeTab) {
-                      activeTab.classList.add('tab-active');
-                      if (tabId === 'tab-solution') {
-                        activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
-                      } else {
-                        activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
-                      }
-                      document.getElementById('content-' + tabId.replace('tab-', '')).classList.remove('hidden');
-                    }
-                  }
-                  
-                  function startAutoSwitch() {
-                    if (autoInterval) clearInterval(autoInterval);
-                    
-                    function scheduleNext() {
-                      if (autoInterval) clearTimeout(autoInterval);
-                      
-                      const currentTab = tabs[currentIndex];
-                      const delay = currentTab === 'tab-solution' ? 8000 : 4000; // 8s for solution, 4s for others
-                      
-                      autoInterval = setTimeout(() => {
-                        if (!isHovered) {
-                          currentIndex = (currentIndex + 1) % tabs.length;
-                          switchToTab(tabs[currentIndex]);
-                          scheduleNext();
-                        }
-                      }, delay);
-                    }
-                    
-                    scheduleNext();
-                  }
-                  
-                  function stopAutoSwitch() {
-                    if (autoInterval) {
-                      clearTimeout(autoInterval);
-                      autoInterval = null;
-                    }
-                  }
-                  
-                  // Start auto-switching when page loads
-                  setTimeout(startAutoSwitch, 2000); // Start after 2 seconds
-                  
-                  // Add hover listeners to all tabs
-                  document.querySelectorAll('[id^="tab-"]').forEach((tab, index) => {
-                    tab.addEventListener('mouseenter', () => {
-                      isHovered = true;
-                      stopAutoSwitch();
-                    });
-                    
-                    tab.addEventListener('mouseleave', () => {
-                      isHovered = false;
-                      startAutoSwitch();
-                    });
-                    
-                    tab.addEventListener('click', () => {
-                      currentIndex = index;
-                      stopAutoSwitch();
-                      setTimeout(startAutoSwitch, 1000); // Restart after 1 second
-                    });
-                  });
-                })();
-              `
-            }} />
 
             {/* Tab Content */}
             <div className="relative">
