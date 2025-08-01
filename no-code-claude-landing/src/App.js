@@ -172,17 +172,17 @@ const alternativesProblems = [
   {
     name: 'They\'re not built for Claude Code.',
     description: 'Many tools wrap Claude with limited API access — meaning weaker results and capped capabilities.',
-    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'They skip the hard setup.',
     description: 'Claude.md configuration, MCP servers, debugging workflows — even experienced developers get stuck here.',
-    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'They rely on templates, not full control.',
     description: 'You\'re locked into pre-built flows. Real apps need custom logic, not canned components.',
-    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   }
 ];
 
@@ -190,17 +190,17 @@ const setupChallenges = [
   {
     name: 'Claude.md configuration',
     description: 'Crucial to making Claude behave like an agent — but tricky to get right without deep experience.',
-    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'Complex infrastructure',
     description: 'Requires orchestration across MCP servers, custom testing frameworks, and reliable debugging workflows.',
-    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   },
   {
     name: 'Not beginner-friendly',
     description: 'It\'s not just about writing prompts — it\'s about building a system that responds like a teammate.',
-    icon: () => <span className="animate-pulse text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
   }
 ];
 
@@ -553,17 +553,17 @@ const App = () => {
             </p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-            <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
+            <dl className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
               {alternativesProblems.map((problem, index) => (
                 <motion.div 
                   key={problem.name} 
-                  className="relative pl-16 group"
+                  className="relative pl-12 sm:pl-16 group"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
                   <dt className="text-base leading-7 font-semibold text-[#1F2937]">
                     <motion.div 
-                      className="absolute top-0 left-0 flex size-10 items-center justify-center"
+                      className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
                       animate={{ 
                         y: [-1, -3, -1],
                         rotate: [-2, 2, -2],
@@ -614,17 +614,17 @@ const App = () => {
               </p>
             </div>
             <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-              <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
+              <dl className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
                 {setupChallenges.map((challenge, index) => (
                   <motion.div 
                     key={challenge.name} 
-                    className="relative pl-16 group"
+                    className="relative pl-12 sm:pl-16 group"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
                     <dt className="text-base leading-7 font-semibold text-[#1F2937]">
                       <motion.div 
-                        className="absolute top-0 left-0 flex size-10 items-center justify-center"
+                        className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [
