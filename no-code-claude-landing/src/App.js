@@ -272,7 +272,7 @@ const App = () => {
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
             style={{
-              clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
+              clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
@@ -323,7 +323,7 @@ const App = () => {
         <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
           <div 
             style={{
-              clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
+              clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
             className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
           />
@@ -391,7 +391,7 @@ const App = () => {
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
             style={{
-              clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
+              clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F59E0B] to-[#EAB308] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
@@ -456,7 +456,7 @@ const App = () => {
           <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
             <div 
               style={{
-                clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
+                clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
               }}
               className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             />
