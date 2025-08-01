@@ -482,8 +482,9 @@ const App = () => {
       startAutoSwitch();
     }, 2000);
     
-    // Add hover and click listeners to all tabs
+    // Add hover and click listeners to all tabs and content areas
     const addListeners = () => {
+      // Tab button listeners
       document.querySelectorAll('[id^="tab-"]').forEach((tab, index) => {
         tab.addEventListener('mouseenter', () => {
           isHovered = true;
@@ -499,6 +500,19 @@ const App = () => {
           currentIndex = index;
           stopAutoSwitch();
           setTimeout(startAutoSwitch, 1000); // Restart after 1 second
+        });
+      });
+      
+      // Tab content listeners
+      document.querySelectorAll('[id^="content-"]').forEach((content) => {
+        content.addEventListener('mouseenter', () => {
+          isHovered = true;
+          stopAutoSwitch();
+        });
+        
+        content.addEventListener('mouseleave', () => {
+          isHovered = false;
+          startAutoSwitch();
         });
       });
     };
