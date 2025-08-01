@@ -6,6 +6,7 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isContracting, setIsContracting] = useState(false);
 
   const handleButtonClick = () => {
     setIsInputMode(true);
@@ -23,10 +24,17 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
       console.log('Email submitted:', email);
       // Here you would typically send the email to your backend
       setEmail('');
-      setIsInputMode(false);
       setIsError(false);
-      setShowSuccess(true);
-      // No timeout - stays as "You're all set!" permanently
+      
+      // Start contraction animation
+      setIsContracting(true);
+      
+      // After contraction completes, show success state
+      setTimeout(() => {
+        setIsInputMode(false);
+        setIsContracting(false);
+        setShowSuccess(true);
+      }, 300); // Match the CSS transition duration
     } else {
       // Just shake the text, no alerts or tooltips
       setIsError(true);
@@ -35,10 +43,10 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
   };
 
   const handleInputBlur = () => {
-    if (!email.trim()) {
-      setIsInputMode(false);
-      setIsError(false);
-    }
+    // Always reset to button mode when clicking outside, regardless of content
+    setIsInputMode(false);
+    setIsError(false);
+    setEmail(''); // Clear any partial input
   };
 
   // Success state with heart
@@ -72,8 +80,8 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
   if (isInputMode) {
     return (
       <StyledWrapper>
-        <form onSubmit={handleEmailSubmit} className="email-form">
-          <div className={`input-container ${isError ? 'error' : ''}`}>
+        <form onSubmit={handleEmailSubmit} className="email-form" noValidate>
+          <div className={`input-container ${isError ? 'error' : ''} ${isContracting ? 'contracting' : ''}`}>
             <input
               type="email"
               className={`email-input ${isError ? 'shake' : ''}`}
@@ -82,7 +90,7 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
               onChange={(e) => setEmail(e.target.value)}
               onBlur={handleInputBlur}
               autoFocus
-              required
+              noValidate
             />
             <button type="submit" className="icon-button">
               <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
@@ -353,8 +361,19 @@ const StyledWrapper = styled.div`
     max-width: 300px;
   }
 
+  /* Contracting animation - contract to success button width */
+  .input-container.contracting {
+    max-width: 160px !important; /* Approximate width for "You're all set!" with heart icon */
+    transition: max-width 0.3s ease-in-out;
+  }
+
+  .input-container.contracting .email-input {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+  }
+
   /* Pulsing effect for entire container when icon is hovered */
-  .input-container:hover {
+  .input-container:hover:not(.contracting) {
     animation: pulse512 1.5s infinite;
   }
 
