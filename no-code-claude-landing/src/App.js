@@ -1,10 +1,148 @@
 import React, { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon } from '@heroicons/react/20/solid';
+import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, CloudArrowUpIcon, LockClosedIcon, ServerIcon, ShoppingCartIcon, UserGroupIcon, ChartBarIcon } from '@heroicons/react/20/solid';
 import { ExclamationTriangleIcon, XMarkIcon as XMarkSolidIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
+
+// Typewriter effect component
+const TypewriterText = () => {
+  const [currentText, setCurrentText] = useState('');
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+  
+  const texts = [
+    "Create a website for my bakery",
+    "Help me organize my photos by date", 
+    "Build a simple game for my kids",
+    "Make a todo list app",
+    "Create a budget tracker",
+    "Build a recipe organizer"
+  ];
+
+  React.useEffect(() => {
+    const currentFullText = texts[currentIndex];
+    
+    const timeout = setTimeout(() => {
+      if (!isDeleting && currentText === currentFullText) {
+        // Pause at end before deleting
+        setTimeout(() => setIsDeleting(true), 2000);
+      } else if (isDeleting && currentText === '') {
+        // Move to next text
+        setIsDeleting(false);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+      } else if (isDeleting) {
+        // Delete character
+        setCurrentText(currentFullText.substring(0, currentText.length - 1));
+      } else {
+        // Add character
+        setCurrentText(currentFullText.substring(0, currentText.length + 1));
+      }
+    }, isDeleting ? 50 : 100);
+
+    return () => clearTimeout(timeout);
+  }, [currentText, currentIndex, isDeleting]);
+
+  return (
+    <span>
+      {currentText}
+      <span className="animate-pulse">|</span>
+    </span>
+  );
+};
+
+// Styled component for shining separator line
+const ShineLine = styled.hr`
+  height: 1px;
+  border: none;
+  background: linear-gradient(to right, #f12711 0, #f5af19 10%, #f12711 20%);
+  background-size: 300% 100%;
+  background-position: -300% 0;
+  animation: shine 36s infinite linear;
+  margin: 1.5rem auto;
+
+  @-moz-keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+  @-webkit-keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+  @-o-keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+  @keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+`;
+
+// Styled component for gradient shine effect on "No Code Claude" text
+const ShineText = styled.span`
+  background: linear-gradient(to right, #f12711 0, #f5af19 10%, #f12711 20%);
+  background-size: 300% 100%;
+  background-position: -300% 0;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 36s infinite linear;
+  animation-fill-mode: forwards;
+  -webkit-text-size-adjust: none;
+  font-weight: 600;
+  white-space: nowrap;
+
+  @-moz-keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+  @-webkit-keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+  @-o-keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+  @keyframes shine {
+    0% {
+      background-position: -300% 0;
+    }
+    100% {
+      background-position: 300% 0;
+    }
+  }
+`;
 
 const navigation = [
   { name: 'Features', href: '#features' },
@@ -193,7 +331,7 @@ const App = () => {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">No Code Claude</span>
-              <div className="h-8 w-8 bg-[#6366F1] rounded-lg flex items-center justify-center">
+              <div className="h-8 w-8 bg-[#D97706] rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">NC</span>
               </div>
             </a>
@@ -225,7 +363,7 @@ const App = () => {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">No Code Claude</span>
-                <div className="h-8 w-8 bg-[#6366F1] rounded-lg flex items-center justify-center">
+                <div className="h-8 w-8 bg-[#D97706] rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">NC</span>
                 </div>
               </a>
@@ -274,7 +412,7 @@ const App = () => {
             style={{
               clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#D97706] to-[#F59E0B] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
         
@@ -282,7 +420,7 @@ const App = () => {
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#6366F1]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+              Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
             </div>
           </div>
           
@@ -291,7 +429,7 @@ const App = () => {
               Claude Code for non-developers
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] sm:text-xl/8">
-              No Code Claude gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
+              <ShineText>No Code Claude</ShineText> gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="relative inline-block">
@@ -325,7 +463,7 @@ const App = () => {
             style={{
               clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#D97706] to-[#F59E0B] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
           />
         </div>
       </div>
@@ -336,7 +474,7 @@ const App = () => {
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pt-4 lg:pr-8">
               <div className="lg:max-w-lg">
-                <h2 className="text-base font-semibold leading-7 text-[#6366F1]">Why Claude Code matters</h2>
+                <h2 className="text-base font-semibold leading-7 text-[#D97706]">Why Claude Code matters</h2>
                 <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl">
                   Real developers choose Claude Code
                 </p>
@@ -348,7 +486,7 @@ const App = () => {
                     <div key={feature.name} className="relative pl-9">
                       <dt className="inline font-semibold text-[#1F2937]">
                         <motion.div
-                          className="absolute top-1 left-1 size-5 text-[#6366F1]"
+                          className="absolute top-1 left-1 size-5 text-[#D97706]"
                           animate={{ 
                             y: [-1, -4, -1],
                             rotate: [
@@ -385,8 +523,9 @@ const App = () => {
         </div>
       </section>
 
-      {/* Problem with Alternatives Section - Sticky */}
-      <div className="relative z-10">
+      {/* Sticky Stacking Container */}
+      <div className="relative">
+        {/* Problem with Alternatives Section */}
         <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
@@ -412,7 +551,7 @@ const App = () => {
               {alternativesProblems.map((problem, index) => (
                 <motion.div 
                   key={problem.name} 
-                  className="relative pl-16 group cursor-pointer hover:bg-[#FEF3C7]/30 rounded-lg p-4 -m-4 transition-colors duration-300"
+                  className="relative pl-16 group"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -445,19 +584,17 @@ const App = () => {
             </dl>
           </div>
         </div>
-      </section>
-      </div>
+        </section>
 
-      {/* Sticky Setup Challenge Section */}
-      <div className="relative z-20">
-        <div className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
+        {/* Setup Challenge Section */}
+        <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
           {/* Background gradient blob */}
           <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
             <div 
               style={{
                 clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
               }}
-              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+              className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#D97706] to-[#F59E0B] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             />
           </div>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -475,7 +612,7 @@ const App = () => {
                 {setupChallenges.map((challenge, index) => (
                   <motion.div 
                     key={challenge.name} 
-                    className="relative pl-16 group cursor-pointer hover:bg-[#FEE2E2]/30 rounded-lg p-4 -m-4 transition-colors duration-300"
+                    className="relative pl-16 group"
                     whileHover={{ scale: 1.02 }}
                     transition={{ duration: 0.2 }}
                   >
@@ -512,15 +649,14 @@ const App = () => {
               </dl>
             </div>
           </div>
-        </div>
-      </div>
+        </section>
 
-      {/* How No Code Claude Solves This - Bento Grid */}
-      <section className="bg-gray-50 py-24 sm:py-32">
+        {/* How No Code Claude Solves This - Bento Grid */}
+        <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-gray-50 py-24 sm:py-32">
         <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-          <h2 className="text-center text-base/7 font-semibold text-[#6366F1]">How No Code Claude Solves This</h2>
+          <h2 className="text-center text-base/7 font-semibold text-[#D97706]">Get Claude Code's full power, properly configured</h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-[#1F2937] sm:text-5xl">
-            Get Claude Code's full power, properly configured
+            How <ShineText>No Code Claude</ShineText> Solves This
           </p>
           <div className="mt-10 grid gap-4 sm:mt-16 lg:grid-cols-3 lg:grid-rows-2">
             <div className="relative lg:row-span-2">
@@ -531,12 +667,12 @@ const App = () => {
                     Built for non-technical users who want real apps
                   </p>
                   <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
-                    Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. No Code Claude builds apps you can actually use.
+                    Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
                   </p>
                 </div>
                 <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm">
                   <div className="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
-                    <div className="size-full bg-gradient-to-br from-[#6366F1] to-[#0D9488] flex items-center justify-center">
+                    <div className="size-full bg-gradient-to-br from-[#D97706] to-[#D97706] flex items-center justify-center">
                       <div className="text-white text-center">
                         <div className="text-4xl mb-2">🎯</div>
                         <div className="text-sm">Real Apps</div>
@@ -557,7 +693,7 @@ const App = () => {
                   </p>
                 </div>
                 <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
-                  <div className="w-full max-lg:max-w-xs bg-gradient-to-r from-[#0D9488] to-[#6366F1] rounded-lg p-8 text-white text-center">
+                  <div className="w-full max-lg:max-w-xs bg-gradient-to-r from-[#F59E0B] to-[#F59E0B] rounded-lg p-8 text-white text-center">
                     <div className="text-3xl mb-2">⚙️</div>
                     <div className="text-lg font-semibold">Ready to Use</div>
                     <div className="text-sm opacity-90">Professional setup</div>
@@ -576,7 +712,7 @@ const App = () => {
                   </p>
                 </div>
                 <div className="flex flex-1 items-center max-lg:py-6 lg:pb-2">
-                  <div className="w-full bg-gradient-to-br from-[#6366F1] to-[#0D9488] rounded-lg p-6 text-white text-center">
+                  <div className="w-full bg-gradient-to-br from-[#D97706] to-[#D97706] rounded-lg p-6 text-white text-center">
                     <div className="text-2xl mb-2">🤖</div>
                     <div className="text-sm font-semibold">Same Powerful AI</div>
                   </div>
@@ -619,55 +755,136 @@ const App = () => {
             </div>
           </div>
         </div>
-      </section>
+        </section>
+      </div>
 
       {/* How It Works */}
-      <section id="how-it-works" className="px-6 py-16 bg-[#F8FAFC]">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-semibold tracking-tight text-[#1F2937] mb-12 text-center sm:text-5xl">
-            How It Works
-          </h2>
+      <section id="how-it-works" className="relative isolate bg-white py-24 sm:py-32">
+        {/* Background gradient blob */}
+        <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
+          <div 
+            style={{
+              clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
+            }}
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#D97706] to-[#F59E0B] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+          />
+        </div>
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl lg:text-center">
+            <h2 className="text-base font-semibold leading-7 text-[#D97706]">Simple Process</h2>
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
+              How It Works
+            </p>
+            <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
+              From idea to production-ready app in three simple steps
+            </p>
+          </div>
           
-          <div className="space-y-12">
-            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-              <div className="bg-[#BEAEE2] text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold flex-shrink-0">
-                1
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
-                  Describe your app to our Claude Code interface
-                </h3>
-                <div className="bg-white p-4 rounded-lg italic text-[#1F2937] border border-gray-200 shadow-sm">
-                  "Build a budget tracker that splits roommate expenses, integrates with bank APIs, and sends weekly reports"
-                </div>
-              </div>
-            </div>
-            
-            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-              <div className="bg-[#BEAEE2] text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold flex-shrink-0">
-                2
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
-                  Watch Claude Code build with our expert infrastructure
-                </h3>
-                <p className="text-[#6B7280]">
-                  Same powerful AI, supported by professional-grade configuration and testing
-                </p>
-              </div>
-            </div>
-            
-            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
-              <div className="bg-[#BEAEE2] text-white rounded-full w-12 h-12 flex items-center justify-center text-xl font-bold flex-shrink-0">
-                3
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
-                  Get production-ready apps, not prototypes
-                </h3>
-                <p className="text-[#6B7280]">
-                  Fully functional applications that scale with your business needs
-                </p>
+          {/* Horizontal Timeline */}
+          <div className="mx-auto mt-16 max-w-6xl sm:mt-20 lg:mt-24">
+            <div className="relative">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
+                {/* Step 1 */}
+                <motion.div 
+                  className="relative text-center group"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.div 
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#D97706] shadow-lg group-hover:shadow-xl"
+                    animate={{ 
+                      y: [-1, -3, -1],
+                      scale: [1, 1.03, 1]
+                    }}
+                    transition={{ 
+                      duration: 2.5,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      y: -5
+                    }}
+                  >
+                    <span className="text-2xl font-bold text-white">1</span>
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
+                    Describe your app
+                  </h3>
+                  <div className="bg-white p-4 rounded-lg italic text-[#1F2937] shadow-sm mb-4">
+                    "<TypewriterText />"
+                  </div>
+                  <p className="text-sm text-[#6B7280]">
+                    Tell our Claude Code interface what you want to build
+                  </p>
+                </motion.div>
+
+                {/* Step 2 */}
+                <motion.div 
+                  className="relative text-center group"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.div 
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#F59E0B] shadow-lg group-hover:shadow-xl"
+                    animate={{ 
+                      y: [-1, -4, -1],
+                      scale: [1, 1.04, 1]
+                    }}
+                    transition={{ 
+                      duration: 3.0,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 0.5
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      y: -5
+                    }}
+                  >
+                    <span className="text-2xl font-bold text-white">2</span>
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
+                    Watch Claude Code build
+                  </h3>
+                  <p className="text-[#6B7280] mb-4">
+                    Same powerful AI, supported by professional-grade configuration and testing
+                  </p>
+                </motion.div>
+
+                {/* Step 3 */}
+                <motion.div 
+                  className="relative text-center group"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <motion.div 
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#D97706] shadow-lg group-hover:shadow-xl"
+                    animate={{ 
+                      y: [-1, -3, -1],
+                      scale: [1, 1.03, 1]
+                    }}
+                    transition={{ 
+                      duration: 2.8,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1.0
+                    }}
+                    whileHover={{ 
+                      scale: 1.1,
+                      y: -5
+                    }}
+                  >
+                    <span className="text-2xl font-bold text-white">3</span>
+                  </motion.div>
+                  <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
+                    Get production-ready apps
+                  </h3>
+                  <p className="text-[#6B7280] mb-4">
+                    Fully functional applications that scale with your business needs
+                  </p>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -675,73 +892,177 @@ const App = () => {
       </section>
 
       {/* What You Can Build */}
-      <section id="examples" className="px-6 py-16">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-4xl font-semibold tracking-tight text-[#1F2937] mb-12 text-center sm:text-5xl">
-            What You Can Build
-          </h2>
-          <p className="text-lg font-medium text-[#6B7280] mb-12 text-center">
-            Real examples from our expert-configured Claude Code:
-          </p>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <h3 className="font-semibold text-[#1F2937] mb-2">Multi-tenant SaaS</h3>
-              <p className="text-[#6B7280]">With user authentication and billing</p>
+      <section id="examples" className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+        <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
+          <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+            <div className="lg:pr-4">
+              <div className="lg:max-w-lg">
+                <p className="text-base/7 font-semibold text-[#D97706]">Real Examples</p>
+                <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl">
+                  What You Can Build
+                </h1>
+                <p className="mt-6 text-xl/8 text-[#6B7280]">
+                  From simple apps to complex systems, our expert-configured Claude Code handles projects that other tools can't touch.
+                </p>
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <h3 className="font-semibold text-[#1F2937] mb-2">E-commerce platform</h3>
-              <p className="text-[#6B7280]">With payment processing and inventory management</p>
+          </div>
+          <div className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
+            <div className="w-full max-w-none rounded-xl bg-gradient-to-br from-[#D97706] to-[#F59E0B] p-8 shadow-2xl">
+              <div className="space-y-6 text-white">
+                <div className="flex items-center gap-3">
+                  <BuildingOffice2Icon className="h-6 w-6" />
+                  <span className="font-semibold">Multi-tenant SaaS platforms</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <ShoppingCartIcon className="h-6 w-6" />
+                  <span className="font-semibold">E-commerce systems</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <UserGroupIcon className="h-6 w-6" />
+                  <span className="font-semibold">Team collaboration tools</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <ChartBarIcon className="h-6 w-6" />
+                  <span className="font-semibold">Analytics dashboards</span>
+                </div>
+              </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <h3 className="font-semibold text-[#1F2937] mb-2">Project management system</h3>
-              <p className="text-[#6B7280]">With team collaboration and reporting</p>
-            </div>
-            <div className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-              <h3 className="font-semibold text-[#1F2937] mb-2">Custom CRM</h3>
-              <p className="text-[#6B7280]">With automated workflows and integrations</p>
+          </div>
+          <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+            <div className="lg:pr-4">
+              <div className="max-w-xl text-base/7 text-[#6B7280] lg:max-w-lg">
+                <p>
+                  Other no-code tools create prototypes. We build production-ready applications with the same AI that professional developers use, backed by infrastructure that scales.
+                </p>
+                <ul role="list" className="mt-8 space-y-8 text-[#6B7280]">
+                  <li className="flex gap-x-3">
+                    <CloudArrowUpIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#D97706]" />
+                    <span>
+                      <strong className="font-semibold text-[#1F2937]">Professional deployment.</strong> Automated CI/CD pipelines, staging environments, and production monitoring that enterprise teams rely on.
+                    </span>
+                  </li>
+                  <li className="flex gap-x-3">
+                    <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#D97706]" />
+                    <span>
+                      <strong className="font-semibold text-[#1F2937]">Enterprise security.</strong> SOC 2 compliance, encrypted data at rest, and security headers configured by default.
+                    </span>
+                  </li>
+                  <li className="flex gap-x-3">
+                    <ServerIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#D97706]" />
+                    <span>
+                      <strong className="font-semibold text-[#1F2937]">Scalable infrastructure.</strong> Load balancing, auto-scaling, and database optimization that handles real user traffic.
+                    </span>
+                  </li>
+                </ul>
+                <p className="mt-8">
+                  The difference isn't the AI—it's the expert-level configuration and infrastructure that most people never get right. We've done the hard work so you don't have to.
+                </p>
+                <h2 className="mt-16 text-2xl font-bold tracking-tight text-[#1F2937]">The Bottom Line</h2>
+                <p className="mt-6">
+                  Most people never unlock Claude Code's full potential because proper setup is incredibly complex. We've solved that problem.
+                </p>
+                <p className="mt-4">
+                  You get the same AI that professional developers trust, with infrastructure that even experienced engineers struggle to configure properly.
+                </p>
+                <p className="mt-6 text-lg font-semibold text-[#1F2937]">
+                  Ready for Claude Code that's properly configured?
+                </p>
+                <div className="mt-6 relative inline-block">
+                  {isSignedUp && showShareButton && (
+                    <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
+                      <div className="flex items-center">
+                        <span className="heart-icon">❤️</span>
+                        <span className="heart-text">You're all set!</span>
+                      </div>
+                    </div>
+                  )}
+                  <AnimatedButton 
+                    isShareMode={showShareButton} 
+                    showSuccess={isSignedUp && !showShareButton}
+                    onSignup={() => setIsSignedUp(true)}
+                    isExpanding={isExpanding}
+                  >
+                    {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
+                  </AnimatedButton>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section id="footer-section" className="px-6 py-16 bg-[#333333] text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-semibold tracking-tight mb-6">
-            The Bottom Line
-          </h2>
-          <div className="space-y-6 text-lg lg:text-xl mb-12 max-w-3xl mx-auto">
-            <p>
-              Most people never unlock Claude Code's full potential because proper setup is incredibly complex. We've solved that problem.
-            </p>
-            <p>
-              You get the same AI that professional developers trust, with infrastructure that even experienced engineers struggle to configure properly.
-            </p>
+      {/* Footer */}
+      <footer className="bg-white">
+        <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+          <div className="md:flex md:justify-between">
+            <div className="mb-6 md:mb-0">
+              <a href="#" className="flex items-center">
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937]"><ShineText>No Code Claude</ShineText></span>
+              </a>
+            </div>
+            <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+              <div>
+                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Product</h2>
+                <ul className="text-[#6B7280] font-medium">
+                  <li className="mb-4">
+                    <a href="#features" className="hover:underline">Features</a>
+                  </li>
+                  <li>
+                    <a href="#how-it-works" className="hover:underline">How it works</a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Support</h2>
+                <ul className="text-[#6B7280] font-medium">
+                  <li className="mb-4">
+                    <a href="#" className="hover:underline">Documentation</a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:underline">Help Center</a>
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Legal</h2>
+                <ul className="text-[#6B7280] font-medium">
+                  <li className="mb-4">
+                    <a href="#" className="hover:underline">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a href="#" className="hover:underline">Terms & Conditions</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div>
-            <p className="text-xl mb-6">Ready for Claude Code that's properly configured?</p>
-            <div className="relative inline-block">
-              {isSignedUp && showShareButton && (
-                <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
-                  <div className="flex items-center">
-                    <span className="heart-icon">❤️</span>
-                    <span className="heart-text">You're all set!</span>
-                  </div>
-                </div>
-              )}
-              <AnimatedButton 
-                isShareMode={showShareButton} 
-                showSuccess={isSignedUp && !showShareButton}
-                onSignup={() => setIsSignedUp(true)}
-                isExpanding={isExpanding}
-              >
-                {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
-              </AnimatedButton>
+          <ShineLine className="sm:mx-auto lg:my-8" />
+          <div className="sm:flex sm:items-center sm:justify-between">
+            <span className="text-sm text-[#6B7280] sm:text-center">© 2024 <a href="#" className="hover:underline">No Code Claude</a>. All Rights Reserved.</span>
+            <div className="flex mt-4 sm:justify-center sm:mt-0">
+              <a href="#" className="text-[#6B7280] hover:text-[#1F2937]">
+                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
+                  <path fillRule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clipRule="evenodd"/>
+                </svg>
+                <span className="sr-only">Twitter page</span>
+              </a>
+              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5">
+                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path fillRule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clipRule="evenodd"/>
+                </svg>
+                <span className="sr-only">GitHub account</span>
+              </a>
+              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5">
+                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
+                  <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
+                </svg>
+                <span className="sr-only">Discord community</span>
+              </a>
             </div>
           </div>
         </div>
-      </section>
+      </footer>
     </div>
   );
 };

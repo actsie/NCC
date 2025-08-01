@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess: externalShowSuccess, isExpanding, ...props }) => {
@@ -7,6 +7,16 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
   const [isError, setIsError] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [isContracting, setIsContracting] = useState(false);
+  const [shouldBounce, setShouldBounce] = useState(false);
+
+  // Trigger bounce when switching to share mode
+  useEffect(() => {
+    if (isShareMode) {
+      setShouldBounce(true);
+      // Stop bouncing after animation completes (2 bounces = ~1.2s)
+      setTimeout(() => setShouldBounce(false), 1200);
+    }
+  }, [isShareMode]);
 
   const handleButtonClick = () => {
     if (isShareMode) {
@@ -66,7 +76,20 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
         if (onSignup) onSignup();
       }, 300); // Match the CSS transition duration
     } else {
-      // Just shake the text, no alerts or tooltips
+      // Shake for both empty email and invalid email, but don't close input
+      setIsError(true);
+      setTimeout(() => setIsError(false), 600); // Remove error state after animation
+    }
+  };
+
+  const handleSparkleButtonClick = (e) => {
+    e.preventDefault(); // Prevent any default behavior
+    e.stopPropagation(); // Stop event bubbling
+    
+    if (email.trim() && validateEmail(email)) {
+      handleEmailSubmit({ preventDefault: () => {} });
+    } else {
+      // Shake for both empty email and invalid email, but don't close input
       setIsError(true);
       setTimeout(() => setIsError(false), 600); // Remove error state after animation
     }
@@ -122,7 +145,12 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
               autoFocus
               noValidate
             />
-            <button type="submit" className="icon-button">
+            <button 
+              type="button" 
+              className="icon-button" 
+              onClick={handleSparkleButtonClick}
+              onMouseDown={(e) => e.preventDefault()} // Prevent blur when clicking button
+            >
               <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
                 <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                 <path d="M5 3v4" />
@@ -139,7 +167,7 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
 
   return (
     <StyledWrapper>
-      <button type="button" className={`button ${isShareMode ? 'share-mode' : ''} ${isExpanding ? 'expanding' : ''}`} onClick={handleButtonClick} {...props}>
+      <button type="button" className={`button ${isShareMode ? 'share-mode' : ''} ${isExpanding ? 'expanding' : ''} ${shouldBounce ? 'bounce' : ''}`} onClick={handleButtonClick} {...props}>
         <div className="points_wrapper">
           <i className="point" />
           <i className="point" />
@@ -220,6 +248,26 @@ const StyledWrapper = styled.div`
   
   .button:active {
     transform: scale(0.95);
+  }
+
+  /* Bounce animation for share mode */
+  .button.bounce {
+    animation: bounce 0.6s ease-in-out 2;
+  }
+
+  @keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+      transform: translateY(0);
+    }
+    40%, 43% {
+      transform: translateY(-12px);
+    }
+    70% {
+      transform: translateY(-6px);
+    }
+    90% {
+      transform: translateY(-2px);
+    }
   }
 
   /* Success state styling */
