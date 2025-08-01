@@ -20,6 +20,7 @@ const tabStyles = `
       background: white;
       border: 1px solid transparent;
       background-clip: padding-box;
+      overflow: hidden;
     }
     .tab-solution-shine::before {
       content: '';
@@ -34,9 +35,80 @@ const tabStyles = `
       z-index: -1;
       animation: shimmer 3s ease-in-out infinite;
     }
+    .tab-solution-shine.tab-active {
+      background: linear-gradient(30deg, #f12711, #f5af19) !important;
+      color: white !important;
+      border-color: transparent !important;
+    }
     .tab-solution-shine.tab-active::before {
-      background: linear-gradient(to right, #F59E0B, #EAB308);
+      background: linear-gradient(30deg, #f12711, #f5af19);
       animation: none;
+    }
+    .tab-solution-particles {
+      overflow: hidden;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+    }
+    .tab-solution-particles .particle {
+      bottom: -10px;
+      position: absolute;
+      animation: floating-particles infinite ease-in-out;
+      pointer-events: none;
+      width: 2px;
+      height: 2px;
+      background-color: #fff;
+      border-radius: 9999px;
+    }
+    @keyframes floating-particles {
+      0% {
+        transform: translateY(0);
+      }
+      85% {
+        opacity: 0;
+      }
+      100% {
+        transform: translateY(-40px);
+        opacity: 0;
+      }
+    }
+    .tab-solution-particles .particle:nth-child(1) {
+      left: 15%;
+      opacity: 1;
+      animation-duration: 2.35s;
+      animation-delay: 0.2s;
+    }
+    .tab-solution-particles .particle:nth-child(2) {
+      left: 35%;
+      opacity: 0.7;
+      animation-duration: 2.5s;
+      animation-delay: 0.5s;
+    }
+    .tab-solution-particles .particle:nth-child(3) {
+      left: 25%;
+      opacity: 0.8;
+      animation-duration: 2.2s;
+      animation-delay: 0.1s;
+    }
+    .tab-solution-particles .particle:nth-child(4) {
+      left: 55%;
+      opacity: 0.6;
+      animation-duration: 2.05s;
+    }
+    .tab-solution-particles .particle:nth-child(5) {
+      left: 70%;
+      opacity: 1;
+      animation-duration: 1.9s;
+    }
+    .tab-solution-particles .particle:nth-child(6) {
+      left: 85%;
+      opacity: 0.5;
+      animation-duration: 1.5s;
+      animation-delay: 1.5s;
     }
     .tab-content {
       animation: fadeIn 0.3s ease-in-out;
@@ -672,11 +744,21 @@ const App = () => {
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-solution');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#F59E0B] to-[#EAB308] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
                   document.getElementById('content-solution').classList.remove('hidden');
                 }}
               >
-<ShineText>How We Solve This</ShineText>
+                <div className="tab-solution-particles">
+                  <i className="particle"></i>
+                  <i className="particle"></i>
+                  <i className="particle"></i>
+                  <i className="particle"></i>
+                  <i className="particle"></i>
+                  <i className="particle"></i>
+                </div>
+                <span style={{ position: 'relative', zIndex: 2 }}>
+                  <ShineText>How We Solve This</ShineText>
+                </span>
               </button>
             </div>
 
