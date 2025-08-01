@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-const AnimatedButton = ({ children, onClick, ...props }) => {
+const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess: externalShowSuccess, isExpanding, ...props }) => {
   const [isInputMode, setIsInputMode] = useState(false);
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
@@ -9,7 +9,32 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
   const [isContracting, setIsContracting] = useState(false);
 
   const handleButtonClick = () => {
-    setIsInputMode(true);
+    if (isShareMode) {
+      // Handle share functionality
+      if (navigator.share) {
+        navigator.share({
+          title: 'No Code Claude - Early Access',
+          text: 'Get Claude Code access with professional-grade infrastructure that even experienced developers struggle to set up!',
+          url: window.location.href,
+        }).catch((err) => {
+          // If share fails, fallback to clipboard
+          navigator.clipboard.writeText(window.location.href);
+          // Could add a toast notification here instead of alert
+        });
+      } else {
+        // Fallback: copy to clipboard
+        navigator.clipboard.writeText(window.location.href);
+        // Show brief feedback - could be replaced with toast
+        const button = document.activeElement;
+        const originalText = button.textContent;
+        button.textContent = 'Link copied!';
+        setTimeout(() => {
+          button.textContent = originalText;
+        }, 2000);
+      }
+    } else {
+      setIsInputMode(true);
+    }
     if (onClick) onClick();
   };
 
@@ -33,7 +58,12 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
       setTimeout(() => {
         setIsInputMode(false);
         setIsContracting(false);
-        setShowSuccess(true);
+        // Only set internal success state if no external state management is provided
+        if (typeof externalShowSuccess === 'undefined') {
+          setShowSuccess(true);
+        }
+        // Notify parent component about signup
+        if (onSignup) onSignup();
       }, 300); // Match the CSS transition duration
     } else {
       // Just shake the text, no alerts or tooltips
@@ -50,7 +80,7 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
   };
 
   // Success state with heart
-  if (showSuccess) {
+  if (showSuccess || externalShowSuccess) {
     return (
       <StyledWrapper>
         <button type="button" className="button success" disabled>
@@ -109,7 +139,7 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
 
   return (
     <StyledWrapper>
-      <button type="button" className="button" onClick={handleButtonClick} {...props}>
+      <button type="button" className={`button ${isShareMode ? 'share-mode' : ''} ${isExpanding ? 'expanding' : ''}`} onClick={handleButtonClick} {...props}>
         <div className="points_wrapper">
           <i className="point" />
           <i className="point" />
@@ -123,13 +153,19 @@ const AnimatedButton = ({ children, onClick, ...props }) => {
           <i className="point" />
         </div>
         <span className="inner">
-          <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
-            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
-            <path d="M5 3v4" />
-            <path d="M19 17v4" />
-            <path d="M3 5h4" />
-            <path d="M17 19h4" />
-          </svg>
+          {isShareMode ? (
+            <svg className="icon heart" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
+              <path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          ) : (
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+              <path d="M5 3v4" />
+              <path d="M19 17v4" />
+              <path d="M3 5h4" />
+              <path d="M17 19h4" />
+            </svg>
+          )}
           {children}
         </span>
       </button>
@@ -155,6 +191,25 @@ const StyledWrapper = styled.div`
     overflow: hidden;
     transition: all 0.25s ease;
     outline: none;
+    white-space: nowrap;
+    width: auto;
+  }
+
+  /* Success state has specific width */
+  .button.success {
+    width: 180px; /* Width for "You're all set!" with heart icon */
+    transition: width 0.3s ease-in-out;
+  }
+
+  /* Expanding animation for text change - like email input expansion */
+  .button.expanding {
+    width: 220px !important; /* Target width for "Share with friends" */
+    transition: width 0.3s ease-in-out;
+  }
+
+  .button.expanding .inner {
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
   }
   
   .button:hover {
@@ -171,6 +226,22 @@ const StyledWrapper = styled.div`
   .button.success {
     background-image: linear-gradient(30deg, #ee0979, #ff6a00);
     cursor: default;
+  }
+
+  /* Share mode styling */
+  .button.share-mode {
+    background-image: linear-gradient(30deg, #ee0979, #ff6a00);
+    cursor: pointer;
+  }
+
+  .button.share-mode .heart {
+    fill: transparent;
+    animation: dasharray 1s linear forwards, filled 0.1s linear forwards 0.95s, heartbeat 1.5s ease-in-out infinite 1.1s;
+  }
+
+  .button.share-mode .heart path {
+    fill: transparent;
+    animation: filled 0.1s linear forwards 0.95s;
   }
 
   .button.success .heart {

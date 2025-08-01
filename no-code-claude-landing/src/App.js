@@ -68,9 +68,125 @@ const setupChallenges = [
 
 const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isFooterVisible, setIsFooterVisible] = useState(false);
+  const [showShareButton, setShowShareButton] = useState(false);
+  const [isExpanding, setIsExpanding] = useState(false);
+
+  // Handle tooltip visibility when user signs up
+  React.useEffect(() => {
+    if (isSignedUp) {
+      // After 2 seconds, start expanding and changing to "Share with friends"
+      setTimeout(() => {
+        setIsExpanding(true);
+        // Show tooltip and change text after expansion starts
+        setTimeout(() => {
+          setShowShareButton(true);
+          setShowTooltip(true);
+          setIsExpanding(false);
+        }, 300); // Match CSS transition duration
+      }, 2000);
+      
+      // Hide tooltip after 2.5 more seconds (4.5 seconds total from signup)
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 4500);
+    }
+  }, [isSignedUp]);
+
+  // Handle scroll detection for footer visibility
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const footer = document.querySelector('#footer-section');
+      if (footer) {
+        const rect = footer.getBoundingClientRect();
+        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isVisible && isSignedUp && !isFooterVisible) {
+          setIsFooterVisible(true);
+          
+          // Only show tooltip if we're already in share mode
+          if (showShareButton) {
+            setShowTooltip(true);
+            // Hide tooltip after 2.5 seconds
+            setTimeout(() => {
+              setShowTooltip(false);
+            }, 2500);
+          }
+        } else if (!isVisible) {
+          setIsFooterVisible(false);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isSignedUp, isFooterVisible]);
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        .signup-tooltip {
+          position: absolute;
+          bottom: calc(100% + 15px);
+          left: 50%;
+          transform: translateX(-50%) translateY(10px);
+          padding: 12px 20px;
+          background: linear-gradient(135deg, #ffffff, #f8f9fa);
+          border-radius: 10px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          color: #1f2937;
+          font-size: 14px;
+          white-space: nowrap;
+          opacity: 0;
+          visibility: hidden;
+          transition: all 0.3s ease;
+          border: 1px solid rgba(229, 231, 235, 1);
+          z-index: 10;
+        }
+
+        .signup-tooltip.show {
+          opacity: 1;
+          visibility: visible;
+          transform: translateX(-50%) translateY(0);
+        }
+
+        /* Tooltip arrow */
+        .signup-tooltip::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          transform: translateX(-50%);
+          border-width: 8px;
+          border-style: solid;
+          border-color: #ffffff transparent transparent transparent;
+        }
+
+
+        @keyframes glow {
+          0% { text-shadow: 0 0 10px rgba(239, 9, 121, 0.5); }
+          50% { text-shadow: 0 0 20px rgba(239, 9, 121, 0.7); }
+          100% { text-shadow: 0 0 10px rgba(239, 9, 121, 0.5); }
+        }
+
+        .signup-tooltip .heart-text {
+          animation: glow 2s infinite;
+          font-weight: 600;
+        }
+
+        .signup-tooltip .heart-icon {
+          margin-right: 6px;
+          color: #ef0979;
+        }
+
+        @media (max-width: 768px) {
+          .signup-tooltip {
+            font-size: 13px;
+            padding: 10px 16px;
+          }
+        }
+      `}</style>
       {/* Navigation Header */}
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -156,7 +272,7 @@ const App = () => {
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
             style={{
-              clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+              clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
             }}
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
@@ -178,9 +294,24 @@ const App = () => {
               No Code Claude gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-              <AnimatedButton>
-                Get early access
-              </AnimatedButton>
+              <div className="relative inline-block">
+                {isSignedUp && showShareButton && (
+                  <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
+                    <div className="flex items-center">
+                      <span className="heart-icon">❤️</span>
+                      <span className="heart-text">You're all set!</span>
+                    </div>
+                  </div>
+                )}
+                <AnimatedButton 
+                  onSignup={() => setIsSignedUp(true)}
+                  showSuccess={isSignedUp && !showShareButton}
+                  isShareMode={showShareButton}
+                  isExpanding={isExpanding}
+                >
+                  {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
+                </AnimatedButton>
+              </div>
               <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937]">
                 Learn more <span aria-hidden="true">→</span>
               </a>
@@ -192,7 +323,7 @@ const App = () => {
         <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
           <div 
             style={{
-              clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+              clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
             }}
             className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
           />
@@ -212,17 +343,12 @@ const App = () => {
                 <p className="mt-6 text-lg leading-8 text-[#6B7280]">
                   Professional developers trust Claude Code because it's uniquely powerful—offering capabilities that other tools simply can't match.
                 </p>
-                <dl className="mt-10 max-w-xl space-y-8 text-base leading-7 text-[#6B7280] lg:max-w-none">
+                <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-[#6B7280] lg:max-w-none">
                   {claudeFeatures.map((feature, index) => (
-                    <motion.div 
-                      key={feature.name} 
-                      className="relative pl-9 group cursor-pointer hover:bg-white/50 rounded-lg p-3 -m-3 transition-colors duration-300"
-                      whileHover={{ scale: 1.02 }}
-                      transition={{ duration: 0.2 }}
-                    >
+                    <div key={feature.name} className="relative pl-9">
                       <dt className="inline font-semibold text-[#1F2937]">
-                        <motion.div 
-                          className="absolute top-1 left-1 size-8 bg-white grid place-items-center ring-1 ring-black/[0.08] rounded-xl shadow-sm group-hover:shadow-md"
+                        <motion.div
+                          className="absolute top-1 left-1 size-5 text-[#6366F1]"
                           animate={{ 
                             y: [-1, -4, -1],
                             rotate: [
@@ -238,17 +364,13 @@ const App = () => {
                             ease: "easeInOut",
                             delay: index * 0.8
                           }}
-                          whileHover={{ 
-                            scale: 1.15,
-                            y: -6
-                          }}
                         >
-                          <feature.icon aria-hidden="true" className="size-5 text-[#6366F1]" />
+                          <feature.icon aria-hidden="true" className="size-5" />
                         </motion.div>
-                        <span className="ml-6">{feature.name}</span>
+                        {feature.name}
                       </dt>{' '}
-                      <dd className="inline ml-6">{feature.description}</dd>
-                    </motion.div>
+                      <dd className="inline">{feature.description}</dd>
+                    </div>
                   ))}
                 </dl>
               </div>
@@ -269,7 +391,7 @@ const App = () => {
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
             style={{
-              clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+              clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
             }}
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F59E0B] to-[#EAB308] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
@@ -334,7 +456,7 @@ const App = () => {
           <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
             <div 
               style={{
-                clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)'
+                clipPath: 'polygon(50% 0%, 60% 35%, 100% 35%, 70% 57%, 80% 100%, 50% 75%, 20% 100%, 30% 57%, 0% 35%, 40% 35%)'
               }}
               className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#f12711] to-[#f5af19] opacity-20 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
             />
@@ -585,7 +707,7 @@ const App = () => {
       </section>
 
       {/* Bottom CTA */}
-      <section className="px-6 py-16 bg-[#333333] text-white">
+      <section id="footer-section" className="px-6 py-16 bg-[#333333] text-white">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-semibold tracking-tight mb-6">
             The Bottom Line
@@ -600,9 +722,24 @@ const App = () => {
           </div>
           <div>
             <p className="text-xl mb-6">Ready for Claude Code that's properly configured?</p>
-            <AnimatedButton>
-              Get early access
-            </AnimatedButton>
+            <div className="relative inline-block">
+              {isSignedUp && showShareButton && (
+                <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
+                  <div className="flex items-center">
+                    <span className="heart-icon">❤️</span>
+                    <span className="heart-text">You're all set!</span>
+                  </div>
+                </div>
+              )}
+              <AnimatedButton 
+                isShareMode={showShareButton} 
+                showSuccess={isSignedUp && !showShareButton}
+                onSignup={() => setIsSignedUp(true)}
+                isExpanding={isExpanding}
+              >
+                {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
+              </AnimatedButton>
+            </div>
           </div>
         </div>
       </section>
