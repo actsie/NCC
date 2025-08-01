@@ -385,8 +385,9 @@ const App = () => {
         </div>
       </section>
 
-      {/* Problem with Alternatives Section */}
-      <section className="relative isolate bg-white py-24 sm:py-32">
+      {/* Problem with Alternatives Section - Sticky */}
+      <div className="relative z-10">
+        <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -445,9 +446,10 @@ const App = () => {
           </div>
         </div>
       </section>
+      </div>
 
       {/* Sticky Setup Challenge Section */}
-      <div className="relative">
+      <div className="relative z-20">
         <div className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
           {/* Background gradient blob */}
           <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
