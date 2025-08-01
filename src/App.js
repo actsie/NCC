@@ -877,7 +877,10 @@ const App = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#D97706] shadow-lg group-hover:shadow-xl"
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl relative overflow-hidden"
+                    style={{
+                      backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
+                    }}
                     animate={{ 
                       y: [-1, -3, -1],
                       scale: [1, 1.03, 1]
@@ -893,7 +896,29 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <span className="text-2xl font-bold text-white">1</span>
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      {[...Array(10)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70"
+                          style={{
+                            left: `${10 + (i * 8)}%`,
+                            bottom: '-2px'
+                          }}
+                          animate={{
+                            y: [0, -55],
+                            opacity: [1, 0]
+                          }}
+                          transition={{
+                            duration: 2.35 + (i * 0.15),
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.2 + (i * 0.1)
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-2xl font-bold text-white relative z-10">1</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
                     Describe your app
@@ -913,7 +938,10 @@ const App = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#F59E0B] shadow-lg group-hover:shadow-xl"
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl relative overflow-hidden"
+                    style={{
+                      backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
+                    }}
                     animate={{ 
                       y: [-1, -4, -1],
                       scale: [1, 1.04, 1]
@@ -929,7 +957,29 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <span className="text-2xl font-bold text-white">2</span>
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      {[...Array(10)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70"
+                          style={{
+                            left: `${10 + (i * 8)}%`,
+                            bottom: '-2px'
+                          }}
+                          animate={{
+                            y: [0, -55],
+                            opacity: [1, 0]
+                          }}
+                          transition={{
+                            duration: 2.5 + (i * 0.15),
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 0.5 + (i * 0.1)
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-2xl font-bold text-white relative z-10">2</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
                     Watch Claude Code build
@@ -946,7 +996,10 @@ const App = () => {
                   transition={{ duration: 0.2 }}
                 >
                   <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-[#D97706] shadow-lg group-hover:shadow-xl"
+                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl relative overflow-hidden"
+                    style={{
+                      backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
+                    }}
                     animate={{ 
                       y: [-1, -3, -1],
                       scale: [1, 1.03, 1]
@@ -962,7 +1015,29 @@ const App = () => {
                       y: -5
                     }}
                   >
-                    <span className="text-2xl font-bold text-white">3</span>
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                      {[...Array(10)].map((_, i) => (
+                        <motion.div
+                          key={i}
+                          className="absolute w-0.5 h-0.5 bg-white rounded-full opacity-70"
+                          style={{
+                            left: `${10 + (i * 8)}%`,
+                            bottom: '-2px'
+                          }}
+                          animate={{
+                            y: [0, -55],
+                            opacity: [1, 0]
+                          }}
+                          transition={{
+                            duration: 2.6 + (i * 0.15),
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: 1.0 + (i * 0.1)
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-2xl font-bold text-white relative z-10">3</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
                     Get production-ready apps
