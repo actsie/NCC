@@ -526,7 +526,7 @@ const App = () => {
       {/* Sticky Stacking Container */}
       <div className="relative">
         {/* Problem with Alternatives Section */}
-        <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
+        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -587,7 +587,7 @@ const App = () => {
         </section>
 
         {/* Setup Challenge Section */}
-        <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
+        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-center relative isolate bg-white py-24 sm:py-32">
           {/* Background gradient blob */}
           <div aria-hidden="true" className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]">
             <div 
@@ -652,7 +652,7 @@ const App = () => {
         </section>
 
         {/* How No Code Claude Solves This - Bento Grid */}
-        <section className="sticky top-0 h-screen flex flex-col items-center justify-center relative isolate bg-gray-50 py-24 sm:py-32">
+        <section className="sticky top-0 min-h-screen flex flex-col items-center justify-center relative isolate bg-gray-50 py-24 sm:py-32">
         <div className="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
           <h2 className="text-center text-base/7 font-semibold text-[#D97706]">Get Claude Code's full power, properly configured</h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-4xl font-semibold tracking-tight text-balance text-[#1F2937] sm:text-5xl">
@@ -710,11 +710,31 @@ const App = () => {
                   </p>
                 </div>
                 <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
-                  <div className="w-full max-lg:max-w-xs bg-gradient-to-r from-[#F59E0B] to-[#F59E0B] rounded-lg p-8 text-white text-center">
-                    <div className="text-3xl mb-2">⚙️</div>
-                    <div className="text-lg font-semibold">Ready to Use</div>
-                    <div className="text-sm opacity-90">Professional setup</div>
-                  </div>
+                  <motion.div 
+                    className="cursor-pointer hover:scale-105 transition-transform duration-200"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      // Create modal overlay
+                      const modal = document.createElement('div');
+                      modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                      modal.onclick = () => document.body.removeChild(modal);
+                      
+                      const img = document.createElement('img');
+                      img.src = '/no-code-claude-professional-setup.png';
+                      img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                      img.onclick = (e) => e.stopPropagation();
+                      
+                      modal.appendChild(img);
+                      document.body.appendChild(modal);
+                    }}
+                  >
+                    <img 
+                      src="/no-code-claude-professional-setup.png" 
+                      alt="No Code Claude Professional Setup"
+                      className="w-full max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                    />
+                  </motion.div>
                 </div>
               </div>
               <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
@@ -729,10 +749,31 @@ const App = () => {
                   </p>
                 </div>
                 <div className="flex flex-1 items-center max-lg:py-6 lg:pb-2">
-                  <div className="w-full bg-gradient-to-br from-[#D97706] to-[#D97706] rounded-lg p-6 text-white text-center">
-                    <div className="text-2xl mb-2">🤖</div>
-                    <div className="text-sm font-semibold">Same Powerful AI</div>
-                  </div>
+                  <motion.div 
+                    className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      // Create modal overlay
+                      const modal = document.createElement('div');
+                      modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                      modal.onclick = () => document.body.removeChild(modal);
+                      
+                      const img = document.createElement('img');
+                      img.src = '/ncc-same-ai-better-ui.png';
+                      img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                      img.onclick = (e) => e.stopPropagation();
+                      
+                      modal.appendChild(img);
+                      document.body.appendChild(modal);
+                    }}
+                  >
+                    <img 
+                      src="/ncc-same-ai-better-ui.png" 
+                      alt="No Code Claude Same AI Better Interface"
+                      className="w-full rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                    />
+                  </motion.div>
                 </div>
               </div>
               <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
@@ -749,21 +790,43 @@ const App = () => {
                   </p>
                 </div>
                 <div className="relative min-h-[30rem] w-full grow">
-                  <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-tl-xl bg-gray-900 shadow-2xl ring-1 ring-white/10">
-                    <div className="flex bg-gray-800 ring-1 ring-white/5">
-                      <div className="-mb-px flex text-sm/6 font-medium text-gray-400">
-                        <div className="border-r border-b border-r-white/10 border-b-white/20 bg-white/5 px-4 py-2 text-white">
-                          claude.md
-                        </div>
-                        <div className="border-r border-gray-600/10 px-4 py-2">App.jsx</div>
+                  <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white border-t border-l border-gray-200 p-2 shadow-2xl">
+                    <div className="relative flex text-center">
+                      <div className="flex pl-3.5 pt-3">
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.5 mr-1.5 h-3 w-3 text-red-500/60">
+                          <circle r="12" cy="12" cx="12"></circle>
+                        </svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.75 mr-1.5 h-3 w-3 text-yellow-500/60">
+                          <circle r="12" cy="12" cx="12"></circle>
+                        </svg>
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.75 mr-1.5 h-3 w-3 text-green-500/60">
+                          <circle r="12" cy="12" cx="12"></circle>
+                        </svg>
                       </div>
+                      <span className="absolute inset-x-0 top-2 text-xs text-gray-600">claude.md</span>
                     </div>
-                    <div className="px-6 pt-6 pb-14 text-sm text-gray-300 font-mono">
-                      <div className="text-emerald-400"># Expert Infrastructure</div>
-                      <div className="mt-2 text-gray-400">- Claude.md configuration ✓</div>
-                      <div className="text-gray-400">- MCP servers ✓</div>
-                      <div className="text-gray-400">- Testing frameworks ✓</div>
-                      <div className="text-gray-400">- Debugging workflows ✓</div>
+                    <div className="mt-5 space-y-1.5 px-5 pb-10">
+                      <p className="mt-4 font-mono text-xs font-normal tracking-wide text-gray-700">
+                        <span className="text-gray-500">#</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Expert Infrastructure</span></span>
+                      </p>
+                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Claude.md configuration</span></span> <span className="text-green-600">✓</span>
+                      </p>
+                      <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-gray-700">
+                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">MCP servers</span></span> <span className="text-green-600">✓</span>
+                      </p>
+                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Testing frameworks</span></span> <span className="text-green-600">✓</span>
+                      </p>
+                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Debugging workflows</span></span> <span className="text-green-600">✓</span>
+                      </p>
+                      <p className="ml-3 font-mono text-xs font-normal leading-4 tracking-wide text-gray-700">
+                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Production deployment</span></span> <span className="text-green-600">✓</span>
+                      </p>
+                      <p className="ml-3 font-mono text-xs font-normal tracking-wide text-gray-700">
+                        <span className="text-gray-500">-</span> <span className="relative inline-block px-1 before:absolute before:-inset-0.5 before:block before:rounded before:bg-blue-100"><span className="relative text-blue-700">Security hardening</span></span> <span className="text-green-600">✓</span>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -919,16 +982,23 @@ const App = () => {
                   What You Can Build
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280]">
-                  Claude Code builds production apps that other AI tools can't touch. Full system control, real databases, custom integrations, end-to-end testing. Professional developers choose it because it actually works—no hitting walls, no "sorry, can't do that."
+                  Claude Code builds real, production-level apps — not just frontends.<br />
+                  Think full system control, real databases, custom logic, and end-to-end testing. It's what professional developers use when they want working software, not workarounds.
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280]">
-                  The problem? Claude Code requires terminal skills and programming knowledge most people don't have.
+                  The problem? Claude Code requires terminal skills and setup knowledge most people don't have.
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#1F2937] font-semibold">
                   We solve that.
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280]">
-                  Get Claude Code's full power through an interface anyone can use:
+                  You get Claude Code's full capabilities — without touching the terminal.
+                </p>
+                <h3 className="mt-8 text-xl font-semibold text-[#1F2937]">
+                  What You Can Build
+                </h3>
+                <p className="mt-4 text-lg leading-8 text-[#6B7280]">
+                  Just describe what you want:
                 </p>
                 <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] lg:max-w-none">
                   <div className="relative pl-9">
@@ -1106,8 +1176,14 @@ const App = () => {
                     <dd className="inline">Build a recipe organizer</dd>
                   </div>
                 </dl>
-                <p className="mt-8 text-lg leading-8 text-[#6B7280]">
-                  But unlike other no-code tools that hit limits fast, you get the same capabilities as professional developers:
+                <p className="mt-8 text-lg leading-8 text-[#1F2937] font-semibold">
+                  No templates. No simplified builders. Just real software.
+                </p>
+                <h3 className="mt-8 text-xl font-semibold text-[#1F2937]">
+                  What It's Really Capable Of
+                </h3>
+                <p className="mt-4 text-lg leading-8 text-[#6B7280]">
+                  Unlike other tools, you're not limited to toy apps. Claude Code (with the right setup) can build:
                 </p>
                 <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] lg:max-w-none">
                   <div className="relative pl-9">
@@ -1162,7 +1238,7 @@ const App = () => {
                         }} />
                       </motion.div>
                     </dt>{' '}
-                    <dd className="inline">E-commerce systems with custom payment flows</dd>
+                    <dd className="inline">E-commerce flows with custom logic</dd>
                   </div>
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937]">
@@ -1189,7 +1265,7 @@ const App = () => {
                         }} />
                       </motion.div>
                     </dt>{' '}
-                    <dd className="inline">Team collaboration tools with real-time sync</dd>
+                    <dd className="inline">Team tools with real-time sync</dd>
                   </div>
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937]">
@@ -1216,14 +1292,11 @@ const App = () => {
                         }} />
                       </motion.div>
                     </dt>{' '}
-                    <dd className="inline">Analytics dashboards pulling from multiple APIs</dd>
+                    <dd className="inline">Dashboards pulling from multiple APIs</dd>
                   </div>
                 </dl>
-                <p className="mt-8 text-lg leading-8 text-[#6B7280]">
-                  The difference: Other platforms give you simplified builders that break on complex requirements. We give you Claude Code—the AI professional developers trust—plus expert infrastructure most people never get right.
-                </p>
-                <p className="mt-6 text-lg leading-8 text-[#1F2937] font-semibold">
-                  You get apps that work like a developer built them, because the same AI that builds them did.
+                <p className="mt-8 text-lg leading-8 text-[#1F2937] font-semibold">
+                  Apps that work like a developer built them — because the same AI that builds them did.
                 </p>
               </div>
             </div>
@@ -1317,7 +1390,7 @@ const App = () => {
           </div>
           <ShineLine className="sm:mx-auto lg:my-8" />
           <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-[#6B7280] sm:text-center">© 2024 <a href="#" className="hover:underline">No Code Claude</a>. All Rights Reserved.</span>
+            <span className="text-sm text-[#6B7280] sm:text-center">© 2025 <a href="#" className="hover:underline">No Code Claude</a>. All Rights Reserved.</span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
               <a href="#" className="text-[#6B7280] hover:text-[#1F2937]">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
