@@ -516,7 +516,7 @@ const App = () => {
 
             <img
               alt="Claude Code terminal interface"
-              src="/claude-code-screenshot.png"
+              src="/ClaudeCode.png"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
             />
           </div>
@@ -670,15 +670,32 @@ const App = () => {
                     Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
                   </p>
                 </div>
-                <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm">
-                  <div className="absolute inset-x-10 top-10 bottom-0 overflow-hidden rounded-t-[12cqw] border-x-[3cqw] border-t-[3cqw] border-gray-700 bg-gray-900 shadow-2xl">
-                    <div className="size-full bg-gradient-to-br from-[#D97706] to-[#D97706] flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="text-4xl mb-2">🎯</div>
-                        <div className="text-sm">Real Apps</div>
-                      </div>
-                    </div>
-                  </div>
+                <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm flex items-center justify-center">
+                  <motion.div 
+                    className="cursor-pointer hover:scale-105 transition-transform duration-200"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      // Create modal overlay
+                      const modal = document.createElement('div');
+                      modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                      modal.onclick = () => document.body.removeChild(modal);
+                      
+                      const img = document.createElement('img');
+                      img.src = '/no-code-claude-simple-ui.png';
+                      img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                      img.onclick = (e) => e.stopPropagation();
+                      
+                      modal.appendChild(img);
+                      document.body.appendChild(modal);
+                    }}
+                  >
+                    <img 
+                      src="/no-code-claude-simple-ui.png" 
+                      alt="No Code Claude Simple Interface"
+                      className="w-full h-auto max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                    />
+                  </motion.div>
                 </div>
               </div>
               <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]" />
@@ -901,73 +918,334 @@ const App = () => {
                 <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl">
                   What You Can Build
                 </h1>
-                <p className="mt-6 text-xl/8 text-[#6B7280]">
-                  From simple apps to complex systems, our expert-configured Claude Code handles projects that other tools can't touch.
+                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                  Claude Code builds production apps that other AI tools can't touch. Full system control, real databases, custom integrations, end-to-end testing. Professional developers choose it because it actually works—no hitting walls, no "sorry, can't do that."
+                </p>
+                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                  The problem? Claude Code requires terminal skills and programming knowledge most people don't have.
+                </p>
+                <p className="mt-6 text-lg leading-8 text-[#1F2937] font-semibold">
+                  We solve that.
+                </p>
+                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                  Get Claude Code's full power through an interface anyone can use:
+                </p>
+                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] lg:max-w-none">
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [-3, -6, -3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0
+                        }}
+                        style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontSize: '20px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        *
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Create a website for my bakery</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [0, 0, 0],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.8
+                        }}
+                        style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontSize: '20px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        *
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Help me organize my photos by date</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [3, 6, 3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.6
+                        }}
+                        style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontSize: '20px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        *
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Build a simple game for my kids</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [-3, -6, -3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 2.4
+                        }}
+                        style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontSize: '20px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        *
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Make a todo list app</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [0, 0, 0],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 3.2
+                        }}
+                        style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontSize: '20px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        *
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Create a budget tracker</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [3, 6, 3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 4.0
+                        }}
+                        style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          fontSize: '20px',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        *
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Build a recipe organizer</dd>
+                  </div>
+                </dl>
+                <p className="mt-8 text-lg leading-8 text-[#6B7280]">
+                  But unlike other no-code tools that hit limits fast, you get the same capabilities as professional developers:
+                </p>
+                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] lg:max-w-none">
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5 text-[#D97706]"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [-3, -6, -3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0
+                        }}
+                      >
+                        <BuildingOffice2Icon aria-hidden="true" className="size-5" style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: '#f12711'
+                        }} />
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Multi-tenant SaaS platforms</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5 text-[#D97706]"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [0, 0, 0],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 0.8
+                        }}
+                      >
+                        <ShoppingCartIcon aria-hidden="true" className="size-5" style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: '#f12711'
+                        }} />
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">E-commerce systems with custom payment flows</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5 text-[#D97706]"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [3, 6, 3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3.5,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 1.6
+                        }}
+                      >
+                        <UserGroupIcon aria-hidden="true" className="size-5" style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: '#f12711'
+                        }} />
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Team collaboration tools with real-time sync</dd>
+                  </div>
+                  <div className="relative pl-9">
+                    <dt className="inline font-semibold text-[#1F2937]">
+                      <motion.div
+                        className="absolute top-1 left-1 size-5 text-[#D97706]"
+                        animate={{ 
+                          y: [-1, -4, -1],
+                          rotate: [-3, -6, -3],
+                          scale: [1, 1.05, 1]
+                        }}
+                        transition={{ 
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                          delay: 2.4
+                        }}
+                      >
+                        <ChartBarIcon aria-hidden="true" className="size-5" style={{
+                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          WebkitBackgroundClip: 'text',
+                          WebkitTextFillColor: 'transparent',
+                          backgroundClip: 'text',
+                          color: '#f12711'
+                        }} />
+                      </motion.div>
+                    </dt>{' '}
+                    <dd className="inline">Analytics dashboards pulling from multiple APIs</dd>
+                  </div>
+                </dl>
+                <p className="mt-8 text-lg leading-8 text-[#6B7280]">
+                  The difference: Other platforms give you simplified builders that break on complex requirements. We give you Claude Code—the AI professional developers trust—plus expert infrastructure most people never get right.
+                </p>
+                <p className="mt-6 text-lg leading-8 text-[#1F2937] font-semibold">
+                  You get apps that work like a developer built them, because the same AI that builds them did.
                 </p>
               </div>
             </div>
           </div>
           <div className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-            <div className="w-full max-w-none rounded-xl bg-gradient-to-br from-[#D97706] to-[#F59E0B] p-8 shadow-2xl">
-              <div className="space-y-6 text-white">
-                <div className="flex items-center gap-3">
-                  <BuildingOffice2Icon className="h-6 w-6" />
-                  <span className="font-semibold">Multi-tenant SaaS platforms</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <ShoppingCartIcon className="h-6 w-6" />
-                  <span className="font-semibold">E-commerce systems</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <UserGroupIcon className="h-6 w-6" />
-                  <span className="font-semibold">Team collaboration tools</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <ChartBarIcon className="h-6 w-6" />
-                  <span className="font-semibold">Analytics dashboards</span>
-                </div>
-              </div>
+            <div className="w-full max-w-none rounded-xl shadow-2xl overflow-hidden">
+              <video 
+                className="w-full h-full object-cover"
+                autoPlay 
+                muted 
+                loop
+                poster="/video-poster.jpg"
+              >
+                <source src="/demo-video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
           </div>
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="max-w-xl text-base/7 text-[#6B7280] lg:max-w-lg">
-                <p>
-                  Other no-code tools create prototypes. We build production-ready applications with the same AI that professional developers use, backed by infrastructure that scales.
-                </p>
-                <ul role="list" className="mt-8 space-y-8 text-[#6B7280]">
-                  <li className="flex gap-x-3">
-                    <CloudArrowUpIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#D97706]" />
-                    <span>
-                      <strong className="font-semibold text-[#1F2937]">Professional deployment.</strong> Automated CI/CD pipelines, staging environments, and production monitoring that enterprise teams rely on.
-                    </span>
-                  </li>
-                  <li className="flex gap-x-3">
-                    <LockClosedIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#D97706]" />
-                    <span>
-                      <strong className="font-semibold text-[#1F2937]">Enterprise security.</strong> SOC 2 compliance, encrypted data at rest, and security headers configured by default.
-                    </span>
-                  </li>
-                  <li className="flex gap-x-3">
-                    <ServerIcon aria-hidden="true" className="mt-1 size-5 flex-none text-[#D97706]" />
-                    <span>
-                      <strong className="font-semibold text-[#1F2937]">Scalable infrastructure.</strong> Load balancing, auto-scaling, and database optimization that handles real user traffic.
-                    </span>
-                  </li>
-                </ul>
-                <p className="mt-8">
-                  The difference isn't the AI—it's the expert-level configuration and infrastructure that most people never get right. We've done the hard work so you don't have to.
-                </p>
-                <h2 className="mt-16 text-2xl font-bold tracking-tight text-[#1F2937]">The Bottom Line</h2>
-                <p className="mt-6">
-                  Most people never unlock Claude Code's full potential because proper setup is incredibly complex. We've solved that problem.
-                </p>
-                <p className="mt-4">
-                  You get the same AI that professional developers trust, with infrastructure that even experienced engineers struggle to configure properly.
-                </p>
-                <p className="mt-6 text-lg font-semibold text-[#1F2937]">
-                  Ready for Claude Code that's properly configured?
-                </p>
+                <h2 className="mt-8 text-2xl font-bold tracking-tight text-[#1F2937]">Ready for Claude Code that's properly configured?</h2>
                 <div className="mt-6 relative inline-block">
                   {isSignedUp && showShareButton && (
                     <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
