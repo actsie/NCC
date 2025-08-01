@@ -18,16 +18,16 @@ const tabStyles = `
     .tab-solution-shine {
       position: relative;
       background: white;
-      border: 2px solid transparent;
+      border: 1px solid transparent;
       background-clip: padding-box;
     }
     .tab-solution-shine::before {
       content: '';
       position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
       background: linear-gradient(45deg, #f12711, #f5af19, #f12711, #f5af19);
       background-size: 400% 400%;
       border-radius: inherit;
@@ -599,7 +599,7 @@ const App = () => {
           <div className="mx-auto max-w-4xl lg:text-center mb-16">
             <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">Understanding the Challenge</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
-              Why No Code Claude exists
+              Why <ShineText>No Code Claude</ShineText> exists
             </p>
           </div>
           
@@ -676,7 +676,7 @@ const App = () => {
                   document.getElementById('content-solution').classList.remove('hidden');
                 }}
               >
-                How We Solve This
+<ShineText>How We Solve This</ShineText>
               </button>
             </div>
 
@@ -789,7 +789,7 @@ const App = () => {
                 <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
                     <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
-                      How <ShineText>No Code Claude</ShineText> Solves This
+                      Our Approach
                     </h3>
                     <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
                       Get Claude Code's full power, properly configured
