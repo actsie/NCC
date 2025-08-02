@@ -7,21 +7,51 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
 
-// Tab styles
+// Tab styles with neumorphic animations
 const tabStyles = `
   <style>
-    .tab-active {
-      background: linear-gradient(to right, #F59E0B, #EAB308) !important;
-      color: white !important;
+    /* Base tab styles with neumorphic design */
+    [id^="tab-"] {
+      position: relative;
+      background: linear-gradient(145deg, #ffffff, #e6e6e6);
+      box-shadow:
+        3px 3px 6px rgba(0, 0, 0, 0.1),
+        -3px -3px 6px rgba(255, 255, 255, 0.7);
+      transition: all 0.2s ease;
+      overflow: visible;
       border: none !important;
     }
-    .tab-solution-shine {
-      position: relative;
-      background: transparent !important;
-      border: 1px solid transparent;
-      background-clip: padding-box;
-      overflow: hidden;
+
+    /* Hover effect for all tabs */
+    [id^="tab-"]:hover:not(.tab-active) {
+      background: linear-gradient(145deg, #f0f0f0, #ffffff);
+      transform: translateY(-1px);
+      box-shadow:
+        4px 4px 8px rgba(0, 0, 0, 0.1),
+        -4px -4px 8px rgba(255, 255, 255, 0.8);
     }
+
+    /* Active tab styles with orange gradient */
+    .tab-active {
+      background: linear-gradient(145deg, #f12711, #f5af19) !important;
+      color: white !important;
+      font-weight: 600;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      box-shadow:
+        inset 2px 2px 5px rgba(0, 0, 0, 0.2),
+        inset -2px -2px 5px rgba(255, 255, 255, 0.1),
+        3px 3px 8px rgba(241, 39, 17, 0.3);
+      transform: translateY(2px);
+      border: none !important;
+      animation: select 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Active tab hover effect */
+    [id^="tab-"]:hover.tab-active {
+      transform: translateY(1px);
+    }
+
+    /* Shine effect for solution tab when not active */
     .tab-solution-shine:not(.tab-active)::before {
       content: '';
       position: absolute;
@@ -50,11 +80,84 @@ const tabStyles = `
       position: relative;
       z-index: 1;
     }
-    .tab-solution-shine.tab-active {
-      background: linear-gradient(30deg, #f12711, #f5af19) !important;
-      color: white !important;
-      border: none !important;
+
+    /* Particle animation for active tabs */
+    .tab-active::before,
+    .tab-active::after {
+      content: "";
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
     }
+
+    .tab-active::before {
+      background: #f5af19;
+      box-shadow: 
+        0 0 6px #f5af19,
+        10px -10px 0 #f5af19,
+        -10px -10px 0 #f5af19;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: multi-particles-top 0.8s ease-out forwards;
+    }
+
+    .tab-active::after {
+      background: #f12711;
+      box-shadow: 
+        0 0 8px #f12711,
+        10px 10px 0 #f12711,
+        -10px 10px 0 #f12711;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: multi-particles-bottom 0.8s ease-out forwards;
+    }
+
+    /* Ripple effect */
+    .tab-active {
+      position: relative;
+    }
+
+    .tab-active:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(
+        circle at 50% 50%,
+        rgba(255, 255, 255, 0.5) 0%,
+        transparent 50%
+      );
+      opacity: 0;
+      animation: ripple 0.8s ease-out;
+      z-index: 1;
+    }
+
+    /* Glowing border for active tabs */
+    .tab-active:after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      background: linear-gradient(
+        45deg,
+        rgba(241, 39, 17, 0.5),
+        rgba(245, 175, 25, 0.5)
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      animation: border-glow 1.5s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    /* Solution tab particles when active */
     .tab-solution-shine.tab-active .tab-solution-particles {
       display: block;
     }
@@ -63,6 +166,8 @@ const tabStyles = `
       -webkit-background-clip: unset !important;
       -webkit-text-fill-color: white !important;
       color: white !important;
+      position: relative;
+      z-index: 2;
     }
     .tab-solution-particles {
       display: none;
@@ -85,6 +190,84 @@ const tabStyles = `
       background-color: #fff;
       border-radius: 9999px;
     }
+
+    /* Tab content fade in */
+    .tab-content {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    /* Keyframe animations */
+    @keyframes select {
+      0% {
+        transform: scale(0.95) translateY(2px);
+      }
+      50% {
+        transform: scale(1.05) translateY(-1px);
+      }
+      100% {
+        transform: scale(1) translateY(2px);
+      }
+    }
+
+    @keyframes multi-particles-top {
+      0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      40% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px) scale(0);
+        box-shadow:
+          0 0 6px transparent,
+          20px -20px 0 transparent,
+          -20px -20px 0 transparent;
+      }
+    }
+
+    @keyframes multi-particles-bottom {
+      0% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
+      40% {
+        opacity: 0.8;
+      }
+      100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px) scale(0);
+        box-shadow:
+          0 0 8px transparent,
+          20px 20px 0 transparent,
+          -20px 20px 0 transparent;
+      }
+    }
+
+    @keyframes ripple {
+      0% {
+        opacity: 1;
+        transform: scale(0.2);
+      }
+      50% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 0;
+        transform: scale(2.5);
+      }
+    }
+
+    @keyframes border-glow {
+      0% {
+        opacity: 0.5;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
     @keyframes floating-particles {
       0% {
         transform: translateY(0);
@@ -97,6 +280,7 @@ const tabStyles = `
         opacity: 0;
       }
     }
+
     .tab-solution-particles .particle:nth-child(1) {
       left: 15%;
       opacity: 1;
@@ -131,9 +315,7 @@ const tabStyles = `
       animation-duration: 1.5s;
       animation-delay: 1.5s;
     }
-    .tab-content {
-      animation: fadeIn 0.3s ease-in-out;
-    }
+
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
@@ -142,6 +324,21 @@ const tabStyles = `
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
+    }
+
+    /* Fix placeholder links */
+    .placeholder-link {
+      cursor: default !important;
+      pointer-events: none;
+    }
+    .placeholder-link:hover {
+      text-decoration: none !important;
+    }
+
+    /* Update link hover styles */
+    a:hover {
+      text-decoration: none !important;
+      color: #f36e15 !important;
     }
   </style>
 `;
@@ -359,6 +556,17 @@ const App = () => {
   const [isExpanding, setIsExpanding] = useState(false);
   const [footerButtonBounce, setFooterButtonBounce] = useState(false);
 
+  // Ensure page loads at the top on mobile
+  React.useEffect(() => {
+    // Force scroll to top on component mount
+    window.scrollTo(0, 0);
+    
+    // Prevent browser scroll restoration
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
   // Handle tooltip visibility when user signs up
   React.useEffect(() => {
     if (isSignedUp) {
@@ -419,6 +627,7 @@ const App = () => {
     let currentIndex = 0;
     let autoInterval;
     let isHovered = false;
+    let isTabsSectionVisible = false; // Start as false, will be set correctly on first scroll check
     
     function switchToTab(tabId) {
       // Remove active class from all tabs and reset styles
@@ -459,10 +668,13 @@ const App = () => {
         const delay = currentTab === 'tab-solution' ? 8000 : 4000; // 8s for solution, 4s for others
         
         autoInterval = setTimeout(() => {
-          if (!isHovered) {
+          if (!isHovered && isTabsSectionVisible) {
             currentIndex = (currentIndex + 1) % tabs.length;
             switchToTab(tabs[currentIndex]);
             scheduleNext();
+          } else {
+            // If still hovered or not visible, check again in 500ms
+            autoInterval = setTimeout(scheduleNext, 500);
           }
         }, delay);
       }
@@ -477,9 +689,28 @@ const App = () => {
       }
     }
     
-    // Start auto-switching after 2 seconds
-    const startTimer = setTimeout(() => {
-      startAutoSwitch();
+    // Initialize first tab as active
+    switchToTab(tabs[0]); // Ensure first tab is properly initialized
+    
+    // Check initial visibility of Understanding the Challenge section
+    const checkInitialVisibility = () => {
+      const challengeSection = Array.from(document.querySelectorAll('h2')).find(h2 => 
+        h2.textContent.includes('Understanding the Challenge')
+      );
+      
+      if (challengeSection) {
+        const rect = challengeSection.getBoundingClientRect();
+        const viewportBuffer = window.innerWidth <= 768 ? 100 : 50;
+        isTabsSectionVisible = rect.top < (window.innerHeight + viewportBuffer) && rect.bottom > -viewportBuffer;
+      }
+    };
+    
+    // Check initial visibility and start auto-switching after 2 seconds if visible
+    setTimeout(() => {
+      checkInitialVisibility();
+      if (isTabsSectionVisible) {
+        startAutoSwitch();
+      }
     }, 2000);
     
     // Add hover and click listeners to all tabs and content areas
@@ -493,7 +724,12 @@ const App = () => {
         
         tab.addEventListener('mouseleave', () => {
           isHovered = false;
-          startAutoSwitch();
+          // Add a small delay to prevent rapid restart when moving between elements
+          setTimeout(() => {
+            if (!isHovered && isTabsSectionVisible) {
+              startAutoSwitch();
+            }
+          }, 100);
         });
         
         tab.addEventListener('click', () => {
@@ -512,7 +748,12 @@ const App = () => {
         
         content.addEventListener('mouseleave', () => {
           isHovered = false;
-          startAutoSwitch();
+          // Add a small delay to prevent rapid restart when moving between elements
+          setTimeout(() => {
+            if (!isHovered && isTabsSectionVisible) {
+              startAutoSwitch();
+            }
+          }, 100);
         });
       });
     };
@@ -521,10 +762,47 @@ const App = () => {
     addListeners();
     setTimeout(addListeners, 100);
     
+    // Add scroll listener to detect when tabs section is visible
+    // Throttle for better mobile performance
+    let scrollTimeout;
+    const handleTabsScroll = () => {
+      // Clear previous timeout
+      if (scrollTimeout) clearTimeout(scrollTimeout);
+      
+      // Use requestAnimationFrame for smooth performance on mobile
+      scrollTimeout = setTimeout(() => {
+        // Target the "Understanding the Challenge" section specifically
+        const challengeSection = Array.from(document.querySelectorAll('h2')).find(h2 => 
+          h2.textContent.includes('Understanding the Challenge')
+        );
+        
+        if (challengeSection) {
+          const rect = challengeSection.getBoundingClientRect();
+          const wasVisible = isTabsSectionVisible;
+          // Use larger buffer for mobile viewport detection
+          const viewportBuffer = window.innerWidth <= 768 ? 100 : 50;
+          isTabsSectionVisible = rect.top < (window.innerHeight + viewportBuffer) && rect.bottom > -viewportBuffer;
+          
+          // If section became visible and we're not hovered, restart auto-switch
+          if (!wasVisible && isTabsSectionVisible && !isHovered) {
+            startAutoSwitch();
+          }
+          // If section became invisible, stop auto-switch
+          else if (wasVisible && !isTabsSectionVisible) {
+            stopAutoSwitch();
+          }
+        }
+      }, 16); // ~60fps throttling
+    };
+    
+    // Use passive listener for better mobile scroll performance
+    window.addEventListener('scroll', handleTabsScroll, { passive: true });
+    
     // Cleanup function
     return () => {
-      clearTimeout(startTimer);
+      if (scrollTimeout) clearTimeout(scrollTimeout);
       stopAutoSwitch();
+      window.removeEventListener('scroll', handleTabsScroll);
     };
   }, []);
 
@@ -596,7 +874,7 @@ const App = () => {
       <header className="absolute inset-x-0 top-0 z-50">
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="#" className="-m-1.5 p-1.5 placeholder-link">
               <span className="sr-only">No Code Claude</span>
               <div className="h-8 w-8 bg-[#D97706] rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">NC</span>
@@ -621,14 +899,14 @@ const App = () => {
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937]">Log in <span aria-hidden="true">→</span></a>
+            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937] placeholder-link">Log in <span aria-hidden="true">→</span></a>
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5">
+              <a href="#" className="-m-1.5 p-1.5 placeholder-link">
                 <span className="sr-only">No Code Claude</span>
                 <div className="h-8 w-8 bg-[#D97706] rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">NC</span>
@@ -660,7 +938,7 @@ const App = () => {
                 <div className="py-6">
                   <a
                     href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] hover:bg-gray-50"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] hover:bg-gray-50 placeholder-link"
                   >
                     Log in
                   </a>
@@ -687,7 +965,7 @@ const App = () => {
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+              Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706] placeholder-link"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
             </div>
           </div>
           
@@ -903,7 +1181,7 @@ const App = () => {
             <div className="relative">
               {/* Problems Tab Content */}
               <div id="content-problems" className="tab-content">
-                <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12">
+                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
                     <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
                       Claude Code is powerful — but most tools can't handle it.
@@ -952,7 +1230,7 @@ const App = () => {
 
               {/* Setup Tab Content */}
               <div id="content-setup" className="tab-content hidden">
-                <div className="bg-white rounded-2xl shadow-xl p-8 sm:p-12">
+                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
                     <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
                       Claude Code is the real deal — when it's set up right.
@@ -1667,7 +1945,7 @@ const App = () => {
             </div>
           </div>
           <div className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
-            <div className="w-full max-w-none rounded-xl shadow-2xl overflow-hidden">
+            <div className="w-full max-w-none rounded-xl shadow-xl overflow-hidden">
               <video 
                 className="w-full h-full object-cover"
                 autoPlay 
@@ -1714,7 +1992,7 @@ const App = () => {
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
-              <a href="#" className="flex items-center">
+              <a href="#" className="flex items-center placeholder-link">
                 <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937]"><ShineText>No Code Claude</ShineText></span>
               </a>
             </div>
@@ -1734,10 +2012,10 @@ const App = () => {
                 <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Support</h2>
                 <ul className="text-[#6B7280] font-medium">
                   <li className="mb-4">
-                    <a href="#" className="hover:underline">Documentation</a>
+                    <a href="#" className="hover:underline placeholder-link">Documentation</a>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">Help Center</a>
+                    <a href="#" className="hover:underline placeholder-link">Help Center</a>
                   </li>
                 </ul>
               </div>
@@ -1745,10 +2023,10 @@ const App = () => {
                 <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Legal</h2>
                 <ul className="text-[#6B7280] font-medium">
                   <li className="mb-4">
-                    <a href="#" className="hover:underline">Privacy Policy</a>
+                    <a href="#" className="hover:underline placeholder-link">Privacy Policy</a>
                   </li>
                   <li>
-                    <a href="#" className="hover:underline">Terms & Conditions</a>
+                    <a href="#" className="hover:underline placeholder-link">Terms & Conditions</a>
                   </li>
                 </ul>
               </div>
@@ -1756,21 +2034,21 @@ const App = () => {
           </div>
           <ShineLine className="sm:mx-auto lg:my-8" />
           <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-[#6B7280] sm:text-center">© 2025 <a href="#" className="hover:underline">No Code Claude</a>. All Rights Reserved.</span>
+            <span className="text-sm text-[#6B7280] sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">No Code Claude</a>. All Rights Reserved.</span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
-              <a href="#" className="text-[#6B7280] hover:text-[#1F2937]">
+              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
                   <path fillRule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clipRule="evenodd"/>
                 </svg>
                 <span className="sr-only">Twitter page</span>
               </a>
-              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5">
+              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5 placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clipRule="evenodd"/>
                 </svg>
                 <span className="sr-only">GitHub account</span>
               </a>
-              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5">
+              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5 placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
                   <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
                 </svg>
