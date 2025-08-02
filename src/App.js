@@ -345,10 +345,15 @@ const tabStyles = `
     .hero-announcement {
       position: relative;
       background: transparent !important;
-      border: 1px solid transparent;
+      border: 1px solid rgba(17, 24, 39, 0.1);
       background-clip: padding-box;
       overflow: hidden;
       transition: all 0.3s ease;
+    }
+    
+    /* Replace default border with shine border on hover */
+    .hero-announcement:hover {
+      border: 1px solid transparent;
     }
     
     .hero-announcement:hover::before {
@@ -366,8 +371,9 @@ const tabStyles = `
         transparent
       );
       animation: shine-sweep 1.5s ease-in-out;
-      z-index: 1;
+      z-index: 3;
       border-radius: inherit;
+      pointer-events: none;
     }
     
     .hero-announcement:hover::after {
@@ -380,7 +386,7 @@ const tabStyles = `
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: exclude;
       mask-composite: exclude;
-      z-index: 0;
+      z-index: 1;
     }
     
     .hero-announcement .hero-announcement-content {
@@ -1020,7 +1026,7 @@ const App = () => {
         <section className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] ring-1 ring-gray-900/10">
+            <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280]">
               <div className="hero-announcement-content">
                 Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706] placeholder-link"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
               </div>
