@@ -6,6 +6,7 @@ import { ExclamationTriangleIcon, XMarkIcon as XMarkSolidIcon, CogIcon, Document
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
+import DarkModeToggle from './DarkModeToggle';
 
 // Tab styles with neumorphic animations
 const tabStyles = `
@@ -869,7 +870,7 @@ const App = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <style jsx>{`
         .signup-tooltip {
           position: absolute;
@@ -960,13 +961,14 @@ const App = () => {
               </a>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937] placeholder-link">Log in <span aria-hidden="true">→</span></a>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
+            <DarkModeToggle />
+            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300 placeholder-link">Log in <span aria-hidden="true">→</span></a>
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
           <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:ring-gray-100/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5 placeholder-link">
                 <span className="sr-only">No Code Claude</span>
@@ -991,7 +993,7 @@ const App = () => {
                       key={item.name}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[#1F2937] hover:bg-gray-50"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[#1F2937] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                     >
                       {item.name}
                     </a>
@@ -1000,7 +1002,7 @@ const App = () => {
                 <div className="py-6">
                   <a
                     href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] hover:bg-gray-50 placeholder-link"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 placeholder-link"
                   >
                     Log in
                   </a>
@@ -1026,7 +1028,7 @@ const App = () => {
         <section className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280]">
+            <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] dark:text-gray-300">
               <div className="hero-announcement-content">
                 Professional Claude Code setup, no complexity. <a href="#features" className="font-semibold text-[#D97706]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
               </div>
@@ -1034,10 +1036,10 @@ const App = () => {
           </div>
           
           <div className="text-center">
-            <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] sm:text-7xl">
+            <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] dark:text-white sm:text-7xl">
               Claude Code for non-developers
             </h1>
-            <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] sm:text-xl/8">
+            <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
               <ShineText>No Code Claude</ShineText> gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
@@ -1059,7 +1061,7 @@ const App = () => {
                   {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                 </AnimatedButton>
               </div>
-              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937]">
+              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -1078,13 +1080,13 @@ const App = () => {
       </div>
 
       {/* Why Claude Code Matters */}
-      <section id="features" className="overflow-hidden bg-white py-24 sm:py-32">
+      <section id="features" className="overflow-hidden bg-white dark:bg-gray-900 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pt-4 lg:pr-8">
               <div className="lg:max-w-lg">
-                <h2 className="text-base font-semibold leading-7 text-[#D97706]">Why Claude Code matters</h2>
-                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl">
+                <h2 className="text-base font-semibold leading-7 text-[#D97706] dark:text-[#F59E0B]">Why Claude Code matters</h2>
+                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
                   Real developers choose Claude Code
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280]">
@@ -1133,7 +1135,7 @@ const App = () => {
       </section>
 
       {/* Tab-based Problem & Solution Section */}
-      <section className="relative isolate bg-white py-24 sm:py-32">
+      <section className="relative isolate bg-white dark:bg-gray-900 py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -1537,7 +1539,7 @@ const App = () => {
       </section>
 
       {/* How It Works */}
-      <section id="how-it-works" className="relative isolate bg-white py-24 sm:py-32">
+      <section id="how-it-works" className="relative isolate bg-white dark:bg-gray-900 py-24 sm:py-32">
         {/* Background gradient blob */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -1679,7 +1681,7 @@ const App = () => {
       </section>
 
       {/* What You Can Build */}
-      <section id="examples" className="relative isolate overflow-hidden bg-white px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
+      <section id="examples" className="relative isolate overflow-hidden bg-white dark:bg-gray-900 px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:mx-0 lg:max-w-none lg:grid-cols-2 lg:items-start lg:gap-y-10">
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
@@ -2052,7 +2054,7 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer id="footer-section" className="bg-white">
+      <footer id="footer-section" className="bg-white dark:bg-gray-900">
         <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
