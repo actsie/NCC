@@ -1028,7 +1028,7 @@ const App = () => {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280]">
               <div className="hero-announcement-content">
-                Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706] placeholder-link"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+                Professional Claude Code setup, no complexity. <a href="#features" className="font-semibold text-[#D97706]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
