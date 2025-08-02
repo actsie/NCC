@@ -53,28 +53,47 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
     return emailRegex.test(email);
   };
 
-  const handleEmailSubmit = (e) => {
+  const handleEmailSubmit = async (e) => {
     e.preventDefault();
     if (email.trim() && validateEmail(email)) {
-      console.log('Email submitted:', email);
-      // Here you would typically send the email to your backend
-      setEmail('');
-      setIsError(false);
-      
-      // Start contraction animation
-      setIsContracting(true);
-      
-      // After contraction completes, show success state
-      setTimeout(() => {
-        setIsInputMode(false);
-        setIsContracting(false);
-        // Only set internal success state if no external state management is provided
-        if (typeof externalShowSuccess === 'undefined') {
-          setShowSuccess(true);
+      try {
+        // Submit to Formspree
+        const response = await fetch('https://formspree.io/f/xjkoegnv', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: email }),
+        });
+
+        if (response.ok) {
+          console.log('Email submitted successfully:', email);
+          setEmail('');
+          setIsError(false);
+          
+          // Start contraction animation
+          setIsContracting(true);
+          
+          // After contraction completes, show success state
+          setTimeout(() => {
+            setIsInputMode(false);
+            setIsContracting(false);
+            // Only set internal success state if no external state management is provided
+            if (typeof externalShowSuccess === 'undefined') {
+              setShowSuccess(true);
+            }
+            // Notify parent component about signup
+            if (onSignup) onSignup();
+          }, 300); // Match the CSS transition duration
+        } else {
+          throw new Error('Failed to submit');
         }
-        // Notify parent component about signup
-        if (onSignup) onSignup();
-      }, 300); // Match the CSS transition duration
+      } catch (error) {
+        console.error('Error submitting email:', error);
+        // Show error state - reuse existing shake animation
+        setIsError(true);
+        setTimeout(() => setIsError(false), 600);
+      }
     } else {
       // Shake for both empty email and invalid email, but don't close input
       setIsError(true);
