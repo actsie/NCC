@@ -340,6 +340,62 @@ const tabStyles = `
       text-decoration: none !important;
       color: #f36e15 !important;
     }
+
+    /* Hero announcement banner shine effect */
+    .hero-announcement {
+      position: relative;
+      background: transparent !important;
+      border: 1px solid transparent;
+      background-clip: padding-box;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .hero-announcement:hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(241, 39, 17, 0.4),
+        rgba(245, 175, 25, 0.4),
+        transparent
+      );
+      animation: shine-sweep 1.5s ease-in-out;
+      z-index: 1;
+      border-radius: inherit;
+    }
+    
+    .hero-announcement:hover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(45deg, #f12711, #f5af19);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: exclude;
+      mask-composite: exclude;
+      z-index: 0;
+    }
+    
+    .hero-announcement .hero-announcement-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    @keyframes shine-sweep {
+      0% {
+        left: -100%;
+      }
+      100% {
+        left: 100%;
+      }
+    }
   </style>
 `;
 
@@ -964,8 +1020,10 @@ const App = () => {
         <section className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-            <div className="relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-              Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706] placeholder-link"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+            <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+              <div className="hero-announcement-content">
+                Professional Claude Code setup, no complexity. <a href="#" className="font-semibold text-[#D97706] placeholder-link"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+              </div>
             </div>
           </div>
           
