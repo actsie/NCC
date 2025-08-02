@@ -1002,7 +1002,6 @@ const App = () => {
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
             <DarkModeToggle />
-            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white dark:text-gray-300 placeholder-link">Log in <span aria-hidden="true">→</span></a>
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -1037,14 +1036,6 @@ const App = () => {
                       {item.name}
                     </a>
                   ))}
-                </div>
-                <div className="py-6">
-                  <a
-                    href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] dark:text-white dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:bg-gray-800 placeholder-link"
-                  >
-                    Log in
-                  </a>
                 </div>
               </div>
             </div>
@@ -1167,7 +1158,12 @@ const App = () => {
             <img
               alt="Claude Code terminal interface"
               src="/ClaudeCode.png"
-              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 dark:hidden"
+            />
+            <img
+              alt="Claude Code terminal interface dark mode"
+              src="/Claude-Code-dark.png"
+              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 hidden dark:block"
             />
           </div>
         </div>
