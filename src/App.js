@@ -21,6 +21,19 @@ const tabStyles = `
       transition: all 0.2s ease;
       overflow: visible;
       border: none !important;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Dark mode styles for tabs */
+    .dark [id^="tab-"] {
+      background: linear-gradient(145deg, #374151, #4b5563);
+      box-shadow:
+        3px 3px 6px rgba(0, 0, 0, 0.5),
+        -3px -3px 6px rgba(30, 35, 42, 0.8);
+      color: #e5e7eb !important;
     }
 
     /* Hover effect for all tabs */
@@ -30,6 +43,17 @@ const tabStyles = `
       box-shadow:
         4px 4px 8px rgba(0, 0, 0, 0.1),
         -4px -4px 8px rgba(255, 255, 255, 0.8);
+      height: 48px;
+    }
+
+    /* Dark mode hover effect for tabs */
+    .dark [id^="tab-"]:hover:not(.tab-active) {
+      background: linear-gradient(145deg, #1f2937, #374151);
+      box-shadow:
+        4px 4px 8px rgba(0, 0, 0, 0.6),
+        -4px -4px 8px rgba(17, 24, 39, 0.9);
+      color: #f3f4f6 !important;
+      height: 48px;
     }
 
     /* Active tab styles with orange gradient */
@@ -45,11 +69,16 @@ const tabStyles = `
       transform: translateY(2px);
       border: none !important;
       animation: select 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Active tab hover effect */
     [id^="tab-"]:hover.tab-active {
       transform: translateY(1px);
+      height: 48px;
     }
 
     /* Shine effect for solution tab when not active */
@@ -76,6 +105,11 @@ const tabStyles = `
       background: rgba(255, 255, 255, 0.9);
       border-radius: inherit;
       z-index: 0;
+    }
+
+    /* Dark mode shine effect background */
+    .dark .tab-solution-shine:not(.tab-active)::after {
+      background: rgba(31, 41, 55, 0.95);
     }
     .tab-solution-shine:not(.tab-active) span {
       position: relative;
@@ -697,9 +731,9 @@ const App = () => {
       document.querySelectorAll('[id^="tab-"]').forEach(tab => {
         tab.classList.remove('tab-active');
         if (tab.id === 'tab-solution') {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
         } else {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
         }
       });
       document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -948,7 +982,7 @@ const App = () => {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-[#1F2937]"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-[#1F2937] dark:text-white"
             >
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="size-6" />
@@ -956,14 +990,14 @@ const App = () => {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-[#1F2937]">
+              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white">
                 {item.name}
               </a>
             ))}
           </div>
           <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
             <DarkModeToggle />
-            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300 placeholder-link">Log in <span aria-hidden="true">→</span></a>
+            <a href="#" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white dark:text-gray-300 placeholder-link">Log in <span aria-hidden="true">→</span></a>
           </div>
         </nav>
         <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
@@ -979,7 +1013,7 @@ const App = () => {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-[#1F2937]"
+                className="-m-2.5 rounded-md p-2.5 text-[#1F2937] dark:text-white"
               >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="size-6" />
@@ -993,7 +1027,7 @@ const App = () => {
                       key={item.name}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[#1F2937] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[#1F2937] dark:text-white dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:bg-gray-800"
                     >
                       {item.name}
                     </a>
@@ -1002,7 +1036,7 @@ const App = () => {
                 <div className="py-6">
                   <a
                     href="#"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 placeholder-link"
+                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-[#1F2937] dark:text-white dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:bg-gray-800 placeholder-link"
                   >
                     Log in
                   </a>
@@ -1036,7 +1070,7 @@ const App = () => {
           </div>
           
           <div className="text-center">
-            <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] dark:text-white sm:text-7xl">
+            <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] dark:text-white dark:text-white sm:text-7xl">
               Claude Code for non-developers
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
@@ -1061,7 +1095,7 @@ const App = () => {
                   {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                 </AnimatedButton>
               </div>
-              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
+              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white dark:text-gray-300">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -1086,16 +1120,16 @@ const App = () => {
             <div className="lg:pt-4 lg:pr-8">
               <div className="lg:max-w-lg">
                 <h2 className="text-base font-semibold leading-7 text-[#D97706] dark:text-[#F59E0B]">Why Claude Code matters</h2>
-                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
+                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white dark:text-white sm:text-5xl">
                   Real developers choose Claude Code
                 </p>
-                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   Professional developers trust Claude Code because it's uniquely powerful—offering capabilities that other tools simply can't match.
                 </p>
-                <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-[#6B7280] lg:max-w-none">
+                <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-none">
                   {claudeFeatures.map((feature, index) => (
                     <div key={feature.name} className="relative pl-9">
-                      <dt className="inline font-semibold text-[#1F2937]">
+                      <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                         <motion.div
                           className="absolute top-1 left-1 size-5 text-[#D97706]"
                           animate={{ 
@@ -1150,7 +1184,7 @@ const App = () => {
           {/* Tab Navigation */}
           <div className="mx-auto max-w-4xl lg:text-center mb-16">
             <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">Understanding the Challenge</h2>
-            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
               Why <ShineText>No Code Claude</ShineText> exists
             </p>
           </div>
@@ -1166,9 +1200,9 @@ const App = () => {
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
                     } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
                     }
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -1184,15 +1218,15 @@ const App = () => {
               </button>
               <button 
                 id="tab-setup"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
                     } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
                     }
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -1208,15 +1242,15 @@ const App = () => {
               </button>
               <button 
                 id="tab-solution"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] rounded-lg hover:bg-gray-50 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
                     } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] bg-white border border-gray-200 rounded-lg hover:bg-gray-50 transition-all duration-200';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
                     }
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -1247,12 +1281,12 @@ const App = () => {
             <div className="relative">
               {/* Problems Tab Content */}
               <div id="content-problems" className="tab-content">
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
+                <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
-                    <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
+                    <h3 className="text-3xl font-semibold text-[#1F2937] dark:text-white mb-4">
                       Claude Code is powerful — but most tools can't handle it.
                     </h3>
-                    <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+                    <p className="text-lg text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
                       Claude Code is capable of building real, production-level apps with minimal human input. But unlocking that power takes serious setup: expert-level config files, server orchestration, and testing infrastructure.
                     </p>
                   </div>
@@ -1264,7 +1298,7 @@ const App = () => {
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+                        <dt className="text-base leading-7 font-semibold text-[#1F2937] dark:text-white">
                           <motion.div 
                             className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
                             animate={{ 
@@ -1287,7 +1321,7 @@ const App = () => {
                           </motion.div>
                           {problem.name}
                         </dt>
-                        <dd className="mt-2 text-base leading-7 text-[#6B7280]">{problem.description}</dd>
+                        <dd className="mt-2 text-base leading-7 text-[#6B7280] dark:text-gray-300">{problem.description}</dd>
                       </motion.div>
                     ))}
                   </div>
@@ -1296,12 +1330,12 @@ const App = () => {
 
               {/* Setup Tab Content */}
               <div id="content-setup" className="tab-content hidden">
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
+                <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
-                    <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
+                    <h3 className="text-3xl font-semibold text-[#1F2937] dark:text-white mb-4">
                       Claude Code is the real deal — when it's set up right.
                     </h3>
-                    <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+                    <p className="text-lg text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
                       Most people never get past the configuration stage. Even experienced developers struggle to unlock its full potential.
                     </p>
                   </div>
@@ -1313,7 +1347,7 @@ const App = () => {
                         whileHover={{ scale: 1.02 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <dt className="text-base leading-7 font-semibold text-[#1F2937]">
+                        <dt className="text-base leading-7 font-semibold text-[#1F2937] dark:text-white">
                           <motion.div 
                             className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
                             animate={{ 
@@ -1340,7 +1374,7 @@ const App = () => {
                           </motion.div>
                           {challenge.name}
                         </dt>
-                        <dd className="mt-2 text-base leading-7 text-[#6B7280]">{challenge.description}</dd>
+                        <dd className="mt-2 text-base leading-7 text-[#6B7280] dark:text-gray-300">{challenge.description}</dd>
                       </motion.div>
                     ))}
                   </div>
@@ -1349,24 +1383,24 @@ const App = () => {
 
               {/* Solution Tab Content */}
               <div id="content-solution" className="tab-content hidden">
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-xl p-8 sm:p-12">
+                <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
-                    <h3 className="text-3xl font-semibold text-[#1F2937] mb-4">
+                    <h3 className="text-3xl font-semibold text-[#1F2937] dark:text-white mb-4">
                       Our Approach
                     </h3>
-                    <p className="text-lg text-[#6B7280] max-w-3xl mx-auto">
+                    <p className="text-lg text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
                       Get Claude Code's full power, properly configured
                     </p>
                   </div>
                   <div className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
                     <div className="relative lg:row-span-2">
-                      <div className="absolute inset-px rounded-lg bg-white lg:rounded-l-[2rem]" />
+                      <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700 lg:rounded-l-[2rem]" />
                       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] lg:rounded-l-[calc(2rem+1px)]">
                         <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] dark:text-white max-lg:text-center">
                             Built for non-technical users who want real apps
                           </p>
-                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
                             Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
                           </p>
                         </div>
@@ -1400,11 +1434,11 @@ const App = () => {
                       <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]" />
                     </div>
                     <div className="relative max-lg:row-start-1">
-                      <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem]" />
+                      <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700 max-lg:rounded-t-[2rem]" />
                       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
                         <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Professional setup, ready to use</p>
-                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] dark:text-white max-lg:text-center">Professional setup, ready to use</p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
                             Skip the configuration complexity that stops most people. Get the infrastructure knowledge we've refined through trial and error.
                           </p>
                         </div>
@@ -1438,11 +1472,11 @@ const App = () => {
                       <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
                     </div>
                     <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
-                      <div className="absolute inset-px rounded-lg bg-white" />
+                      <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700" />
                       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)]">
                         <div className="px-8 pt-8 sm:px-10 sm:pt-10">
-                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">Same AI, better interface</p>
-                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] dark:text-white max-lg:text-center">Same AI, better interface</p>
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
                             Same AI that builds production-ready apps, wrapped in an interface you can use. No architectural limitations.
                           </p>
                         </div>
@@ -1476,18 +1510,18 @@ const App = () => {
                       <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
                     </div>
                     <div className="relative lg:row-span-2">
-                      <div className="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
+                      <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
                       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-r-[calc(2rem+1px)]">
                         <div className="px-8 pt-8 pb-3 sm:px-10 sm:pt-10 sm:pb-0">
-                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] max-lg:text-center">
+                          <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] dark:text-white max-lg:text-center">
                             Expert-level infrastructure
                           </p>
-                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] max-lg:text-center">
+                          <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
                             We've built the expert-level infrastructure (Claude.md, testing, debugging) that takes others weeks to figure out.
                           </p>
                         </div>
                         <div className="relative min-h-[30rem] w-full grow">
-                          <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white border-t border-l border-gray-200 p-2 shadow-2xl">
+                          <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white dark:bg-gray-800 border-t border-l border-gray-200 dark:border-gray-900 p-2 shadow-2xl">
                             <div className="relative flex text-center">
                               <div className="flex pl-3.5 pt-3">
                                 <svg viewBox="0 0 24 24" fill="currentColor" className="-ml-0.5 mr-1.5 h-3 w-3 text-red-500/60">
@@ -1552,10 +1586,10 @@ const App = () => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl lg:text-center">
             <h2 className="text-base font-semibold leading-7 text-[#D97706]">Simple Process</h2>
-            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl lg:text-balance">
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
               How It Works
             </p>
-            <p className="mt-6 text-lg leading-8 text-[#6B7280] max-w-3xl mx-auto">
+            <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
               From idea to production-ready app in three simple steps
             </p>
           </div>
@@ -1592,13 +1626,13 @@ const App = () => {
                   >
                     <span className="text-2xl font-bold text-white">1</span>
                   </motion.div>
-                  <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
+                  <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
                     Describe your app
                   </h3>
-                  <div className="bg-white p-4 rounded-lg italic text-[#1F2937] shadow-sm mb-4">
+                  <div className="p-4 rounded-lg italic text-[#1F2937] dark:text-white mb-4">
                     "<TypewriterText />"
                   </div>
-                  <p className="text-sm text-[#6B7280]">
+                  <p className="text-sm text-[#6B7280] dark:text-gray-300">
                     Tell our Claude Code interface what you want to build
                   </p>
                 </motion.div>
@@ -1631,10 +1665,10 @@ const App = () => {
                   >
                     <span className="text-2xl font-bold text-white">2</span>
                   </motion.div>
-                  <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
+                  <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
                     Watch Claude Code build
                   </h3>
-                  <p className="text-[#6B7280] mb-4">
+                  <p className="text-[#6B7280] dark:text-gray-300 mb-4">
                     Same powerful AI, supported by professional-grade configuration and testing
                   </p>
                 </motion.div>
@@ -1667,10 +1701,10 @@ const App = () => {
                   >
                     <span className="text-2xl font-bold text-white">3</span>
                   </motion.div>
-                  <h3 className="text-xl font-semibold text-[#1F2937] mb-3">
+                  <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
                     Get production-ready apps
                   </h3>
-                  <p className="text-[#6B7280] mb-4">
+                  <p className="text-[#6B7280] dark:text-gray-300 mb-4">
                     Fully functional applications that scale with your business needs
                   </p>
                 </motion.div>
@@ -1687,31 +1721,31 @@ const App = () => {
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
                 <p className="text-base/7 font-semibold text-[#D97706]">Real Examples</p>
-                <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] sm:text-5xl">
+                <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
                   What You Can Build
                 </h1>
-                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   Claude Code builds real, production-level apps — not just frontends.<br />
                   Think full system control, real databases, custom logic, and end-to-end testing. It's what professional developers use when they want working software, not workarounds.
                 </p>
-                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   The problem? Claude Code requires terminal skills and setup knowledge most people don't have.
                 </p>
-                <p className="mt-6 text-lg leading-8 text-[#1F2937] font-semibold">
+                <p className="mt-6 text-lg leading-8 text-[#1F2937] dark:text-white font-semibold">
                   We solve that.
                 </p>
-                <p className="mt-6 text-lg leading-8 text-[#6B7280]">
+                <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   You get Claude Code's full capabilities — without touching the terminal.
                 </p>
-                <h3 className="mt-8 text-xl font-semibold text-[#1F2937]">
+                <h3 className="mt-8 text-xl font-semibold text-[#1F2937] dark:text-white">
                   What You Can Build
                 </h3>
-                <p className="mt-4 text-lg leading-8 text-[#6B7280]">
+                <p className="mt-4 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   Just describe what you want:
                 </p>
-                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] lg:max-w-none">
+                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-none">
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5"
                         animate={{ 
@@ -1740,7 +1774,7 @@ const App = () => {
                     <dd className="inline">Create a website for my bakery</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5"
                         animate={{ 
@@ -1769,7 +1803,7 @@ const App = () => {
                     <dd className="inline">Help me organize my photos by date</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5"
                         animate={{ 
@@ -1798,7 +1832,7 @@ const App = () => {
                     <dd className="inline">Build a simple game for my kids</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5"
                         animate={{ 
@@ -1827,7 +1861,7 @@ const App = () => {
                     <dd className="inline">Make a todo list app</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5"
                         animate={{ 
@@ -1856,7 +1890,7 @@ const App = () => {
                     <dd className="inline">Create a budget tracker</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5"
                         animate={{ 
@@ -1885,18 +1919,18 @@ const App = () => {
                     <dd className="inline">Build a recipe organizer</dd>
                   </div>
                 </dl>
-                <p className="mt-8 text-lg leading-8 text-[#1F2937] font-semibold">
+                <p className="mt-8 text-lg leading-8 text-[#1F2937] dark:text-white font-semibold">
                   No templates. No simplified builders. Just real software.
                 </p>
-                <h3 className="mt-8 text-xl font-semibold text-[#1F2937]">
+                <h3 className="mt-8 text-xl font-semibold text-[#1F2937] dark:text-white">
                   What It's Really Capable Of
                 </h3>
-                <p className="mt-4 text-lg leading-8 text-[#6B7280]">
+                <p className="mt-4 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   Unlike other tools, you're not limited to toy apps. Claude Code (with the right setup) can build:
                 </p>
-                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] lg:max-w-none">
+                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-none">
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5 text-[#D97706]"
                         animate={{ 
@@ -1923,7 +1957,7 @@ const App = () => {
                     <dd className="inline">Multi-tenant SaaS platforms</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5 text-[#D97706]"
                         animate={{ 
@@ -1950,7 +1984,7 @@ const App = () => {
                     <dd className="inline">E-commerce flows with custom logic</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5 text-[#D97706]"
                         animate={{ 
@@ -1977,7 +2011,7 @@ const App = () => {
                     <dd className="inline">Team tools with real-time sync</dd>
                   </div>
                   <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937]">
+                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
                         className="absolute top-1 left-1 size-5 text-[#D97706]"
                         animate={{ 
@@ -2004,7 +2038,7 @@ const App = () => {
                     <dd className="inline">Dashboards pulling from multiple APIs</dd>
                   </div>
                 </dl>
-                <p className="mt-8 text-lg leading-8 text-[#1F2937] font-semibold">
+                <p className="mt-8 text-lg leading-8 text-[#1F2937] dark:text-white font-semibold">
                   Apps that work like a developer built them — because the same AI that builds them did.
                 </p>
               </div>
@@ -2026,8 +2060,8 @@ const App = () => {
           </div>
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
-              <div className="max-w-xl text-base/7 text-[#6B7280] lg:max-w-lg">
-                <h2 className="mt-8 text-2xl font-bold tracking-tight text-[#1F2937]">Ready for Claude Code that's properly configured?</h2>
+              <div className="max-w-xl text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-lg">
+                <h2 className="mt-8 text-2xl font-bold tracking-tight text-[#1F2937] dark:text-white">Ready for Claude Code that's properly configured?</h2>
                 <div className="mt-6 relative inline-block">
                   {isSignedUp && (showShareButton || isFooterVisible) && (
                     <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
@@ -2059,13 +2093,13 @@ const App = () => {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="#" className="flex items-center placeholder-link">
-                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937]"><ShineText>No Code Claude</ShineText></span>
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937] dark:text-white"><ShineText>No Code Claude</ShineText></span>
               </a>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Product</h2>
-                <ul className="text-[#6B7280] font-medium">
+                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Product</h2>
+                <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
                   <li className="mb-4">
                     <a href="#features" className="hover:underline">Features</a>
                   </li>
@@ -2075,8 +2109,8 @@ const App = () => {
                 </ul>
               </div>
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Support</h2>
-                <ul className="text-[#6B7280] font-medium">
+                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Support</h2>
+                <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
                   <li className="mb-4">
                     <a href="#" className="hover:underline placeholder-link">Documentation</a>
                   </li>
@@ -2086,8 +2120,8 @@ const App = () => {
                 </ul>
               </div>
               <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] uppercase">Legal</h2>
-                <ul className="text-[#6B7280] font-medium">
+                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Legal</h2>
+                <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
                   <li className="mb-4">
                     <a href="#" className="hover:underline placeholder-link">Privacy Policy</a>
                   </li>
@@ -2100,21 +2134,21 @@ const App = () => {
           </div>
           <ShineLine className="sm:mx-auto lg:my-8" />
           <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-[#6B7280] sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">No Code Claude</a>. All Rights Reserved.</span>
+            <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">No Code Claude</a>. All Rights Reserved.</span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
-              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] placeholder-link">
+              <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
                   <path fillRule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clipRule="evenodd"/>
                 </svg>
                 <span className="sr-only">Twitter page</span>
               </a>
-              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5 placeholder-link">
+              <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white ms-5 placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clipRule="evenodd"/>
                 </svg>
                 <span className="sr-only">GitHub account</span>
               </a>
-              <a href="#" className="text-[#6B7280] hover:text-[#1F2937] ms-5 placeholder-link">
+              <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white ms-5 placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
                   <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
                 </svg>
