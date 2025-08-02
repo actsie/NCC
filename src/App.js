@@ -11,8 +11,8 @@ import DarkModeToggle from './DarkModeToggle';
 // Tab styles with neumorphic animations
 const tabStyles = `
   <style>
-    /* Base tab styles with neumorphic design */
-    [id^="tab-"] {
+    /* Base tab styles with neumorphic design - only for inactive tabs */
+    [id^="tab-"]:not(.tab-active) {
       position: relative;
       background: linear-gradient(145deg, #ffffff, #e6e6e6);
       box-shadow:
@@ -27,8 +27,8 @@ const tabStyles = `
       justify-content: center;
     }
 
-    /* Dark mode styles for tabs */
-    .dark [id^="tab-"] {
+    /* Dark mode styles for inactive tabs */
+    .dark [id^="tab-"]:not(.tab-active) {
       background: linear-gradient(145deg, #374151, #4b5563);
       box-shadow:
         3px 3px 6px rgba(0, 0, 0, 0.5),
@@ -36,9 +36,9 @@ const tabStyles = `
       color: #e5e7eb !important;
     }
 
-    /* Hover effect for all tabs */
+    /* Hover effect for inactive tabs only */
     [id^="tab-"]:hover:not(.tab-active) {
-      background: linear-gradient(145deg, #f0f0f0, #ffffff);
+      background: linear-gradient(145deg, #f0f0f0, #ffffff) !important;
       transform: translateY(-1px);
       box-shadow:
         4px 4px 8px rgba(0, 0, 0, 0.1),
@@ -46,9 +46,9 @@ const tabStyles = `
       height: 48px;
     }
 
-    /* Dark mode hover effect for tabs */
+    /* Dark mode hover effect for inactive tabs only */
     .dark [id^="tab-"]:hover:not(.tab-active) {
-      background: linear-gradient(145deg, #1f2937, #374151);
+      background: linear-gradient(145deg, #1f2937, #374151) !important;
       box-shadow:
         4px 4px 8px rgba(0, 0, 0, 0.6),
         -4px -4px 8px rgba(17, 24, 39, 0.9);
