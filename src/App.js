@@ -1037,6 +1037,11 @@ const App = () => {
                     </a>
                   ))}
                 </div>
+                <div className="py-6">
+                  <div className="-mx-3 px-3">
+                    <DarkModeToggle />
+                  </div>
+                </div>
               </div>
             </div>
           </DialogPanel>
