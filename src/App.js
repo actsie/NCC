@@ -1071,7 +1071,7 @@ const App = () => {
           </div>
           
           <div className="text-center">
-            <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] dark:text-white dark:text-white sm:text-7xl">
+            <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] dark:text-white sm:text-7xl">
               Claude Code for non-developers
             </h1>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
@@ -1096,7 +1096,7 @@ const App = () => {
                   {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                 </AnimatedButton>
               </div>
-              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white dark:text-gray-300">
+              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -1121,7 +1121,7 @@ const App = () => {
             <div className="lg:pt-4 lg:pr-8">
               <div className="lg:max-w-lg">
                 <h2 className="text-base font-semibold leading-7 text-[#D97706] dark:text-[#F59E0B]">Why Claude Code matters</h2>
-                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white dark:text-white sm:text-5xl">
+                <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
                   Real developers choose Claude Code
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
@@ -2059,7 +2059,7 @@ const App = () => {
                 loop
                 poster="/video-poster.jpg"
               >
-                <source src="/demo-video.mp4" type="video/mp4" />
+                <source src="/NCC-first-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
