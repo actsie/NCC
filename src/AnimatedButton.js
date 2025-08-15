@@ -224,7 +224,7 @@ const StyledWrapper = styled.div`
   .button {
     border: none;
     color: #fff;
-    background-image: linear-gradient(30deg, #f12711, #f5af19);
+    background-image: linear-gradient(30deg, #7866CC, #AF97F8);
     border-radius: 20px;
     background-size: 100% auto;
     font-family: inherit;
@@ -291,13 +291,13 @@ const StyledWrapper = styled.div`
 
   /* Success state styling */
   .button.success {
-    background-image: linear-gradient(30deg, #ee0979, #ff6a00);
+    background-image: linear-gradient(30deg, #5E50A0, #C3B1FA);
     cursor: default;
   }
 
   /* Share mode styling */
   .button.share-mode {
-    background-image: linear-gradient(30deg, #ee0979, #ff6a00);
+    background-image: linear-gradient(30deg, #5E50A0, #C3B1FA);
     cursor: pointer;
   }
 
@@ -332,13 +332,13 @@ const StyledWrapper = styled.div`
 
   @keyframes pulse512 {
     0% {
-      box-shadow: 0 0 0 0 rgba(241, 39, 17, 0.4);
+      box-shadow: 0 0 0 0 rgba(120, 102, 204, 0.4);
     }
     70% {
-      box-shadow: 0 0 0 10px rgba(245, 175, 25, 0), 0 0 20px rgba(241, 39, 17, 0.2);
+      box-shadow: 0 0 0 10px rgba(175, 151, 248, 0), 0 0 20px rgba(120, 102, 204, 0.2);
     }
     100% {
-      box-shadow: 0 0 0 0 rgba(245, 175, 25, 0), 0 0 0 rgba(241, 39, 17, 0);
+      box-shadow: 0 0 0 0 rgba(175, 151, 248, 0), 0 0 0 rgba(120, 102, 204, 0);
     }
   }
 
@@ -490,7 +490,7 @@ const StyledWrapper = styled.div`
     transition: max-width 0.3s ease-in-out;
     display: flex;
     align-items: center;
-    background: linear-gradient(30deg, #f12711, #f5af19);
+    background: linear-gradient(30deg, #7866CC, #AF97F8);
     border-radius: 20px;
     padding: 2px; /* Border thickness */
   }
@@ -553,7 +553,7 @@ const StyledWrapper = styled.div`
     top: 50%;
     right: 6px;
     transform: translateY(-50%);
-    background: linear-gradient(30deg, #f12711, #f5af19);
+    background: linear-gradient(30deg, #7866CC, #AF97F8);
     border: none;
     cursor: pointer;
     padding: 6px;

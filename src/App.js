@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
+import { Dialog, DialogPanel, Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, CloudArrowUpIcon, LockClosedIcon, ServerIcon, ShoppingCartIcon, UserGroupIcon, ChartBarIcon } from '@heroicons/react/20/solid';
-import { ExclamationTriangleIcon, XMarkIcon as XMarkSolidIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon } from '@heroicons/react/20/solid';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
@@ -58,14 +58,14 @@ const tabStyles = `
 
     /* Active tab styles with orange gradient */
     .tab-active {
-      background: linear-gradient(145deg, #f12711, #f5af19) !important;
+      background: linear-gradient(145deg, #7866CC, #AF97F8) !important;
       color: white !important;
       font-weight: 600;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
       box-shadow:
         inset 2px 2px 5px rgba(0, 0, 0, 0.2),
         inset -2px -2px 5px rgba(255, 255, 255, 0.1),
-        3px 3px 8px rgba(241, 39, 17, 0.3);
+        3px 3px 8px rgba(120, 102, 204, 0.3);
       transform: translateY(2px);
       border: none !important;
       animation: select 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -89,7 +89,7 @@ const tabStyles = `
       left: -1px;
       right: -1px;
       bottom: -1px;
-      background: linear-gradient(45deg, #f12711, #f5af19, #f12711, #f5af19);
+      background: linear-gradient(45deg, #7866CC, #AF97F8, #7866CC, #AF97F8);
       background-size: 400% 400%;
       border-radius: inherit;
       z-index: -1;
@@ -129,11 +129,11 @@ const tabStyles = `
     }
 
     .tab-active::before {
-      background: #f5af19;
+      background: #AF97F8;
       box-shadow: 
-        0 0 6px #f5af19,
-        10px -10px 0 #f5af19,
-        -10px -10px 0 #f5af19;
+        0 0 6px #AF97F8,
+        10px -10px 0 #AF97F8,
+        -10px -10px 0 #AF97F8;
       top: -10px;
       left: 50%;
       transform: translateX(-50%);
@@ -141,11 +141,11 @@ const tabStyles = `
     }
 
     .tab-active::after {
-      background: #f12711;
+      background: #7866CC;
       box-shadow: 
-        0 0 8px #f12711,
-        10px 10px 0 #f12711,
-        -10px 10px 0 #f12711;
+        0 0 8px #7866CC,
+        10px 10px 0 #7866CC,
+        -10px 10px 0 #7866CC;
       bottom: -10px;
       left: 50%;
       transform: translateX(-50%);
@@ -373,7 +373,7 @@ const tabStyles = `
     /* Update link hover styles */
     a:hover {
       text-decoration: none !important;
-      color: #f36e15 !important;
+      color: #7866CC !important;
     }
 
     /* Hero announcement banner shine effect */
@@ -406,8 +406,8 @@ const tabStyles = `
       background: linear-gradient(
         90deg,
         transparent,
-        rgba(241, 39, 17, 0.4),
-        rgba(245, 175, 25, 0.4),
+        rgba(120, 102, 204, 0.4),
+        rgba(175, 151, 248, 0.4),
         transparent
       );
       animation: shine-sweep 1.5s ease-in-out;
@@ -422,7 +422,7 @@ const tabStyles = `
       inset: 0;
       border-radius: inherit;
       padding: 1px;
-      background: linear-gradient(45deg, #f12711, #f5af19);
+      background: linear-gradient(45deg, #7866CC, #AF97F8);
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: exclude;
       mask-composite: exclude;
@@ -502,7 +502,7 @@ const TypewriterText = () => {
 const ShineLine = styled.hr`
   height: 1px;
   border: none;
-  background: linear-gradient(to right, #f12711 0, #f5af19 10%, #f12711 20%);
+  background: linear-gradient(to right, #7866CC 0, #AF97F8 10%, #7866CC 20%);
   background-size: 300% 100%;
   background-position: -300% 0;
   animation: shine 36s infinite linear;
@@ -544,7 +544,7 @@ const ShineLine = styled.hr`
 
 // Styled component for gradient shine effect on "No Code Claude" text
 const ShineText = styled.span`
-  background: linear-gradient(to right, #f12711 0, #f5af19 10%, #f12711 20%);
+  background: linear-gradient(to right, #7866CC 0, #AF97F8 10%, #7866CC 20%);
   background-size: 300% 100%;
   background-position: -300% 0;
   -webkit-background-clip: text;
@@ -590,64 +590,51 @@ const ShineText = styled.span`
 `;
 
 const navigation = [
-  { name: 'Features', href: '#features' },
-  { name: 'How it works', href: '#how-it-works' },
   { name: 'Examples', href: '#examples' },
+  { name: 'How it works', href: '#how-it-works' },
+  { name: 'FAQ', href: '#faq' },
 ];
 
 const claudeFeatures = [
   {
-    name: 'Full system control.',
-    description: 'Reads/writes files, installs tools, creates databases, runs apps locally',
+    name: 'Your idea, your tool',
+    description: 'Describe what you want, get exactly that (not a template that\'s "close enough")',
     icon: CommandLineIcon,
   },
   {
-    name: 'Built by Anthropic.',
-    description: 'Who makes Claude—not a third-party tool paying for API access',
+    name: 'Works on your computer',
+    description: 'Your data stays private, runs fast',
     icon: BuildingOffice2Icon,
   },
   {
-    name: 'End-to-end capability.',
-    description: 'From idea to deployed app without developer intervention',
+    name: 'Powered by Claude Code',
+    description: 'The same AI developers use, now friendly for everyone',
     icon: RocketLaunchIcon,
   }
 ];
 
-const alternativesProblems = [
+// Removed unused alternativesProblems array
+
+const faqData = [
   {
-    name: 'They\'re not built for Claude Code.',
-    description: 'Many tools wrap Claude with limited API access — meaning weaker results and capped capabilities.',
-    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    question: "Do I need to know how to code?",
+    answer: "No. You'll still run a few basic terminal commands to start your tool (like npm install and npm start), but you don't need to write or understand code."
   },
   {
-    name: 'They skip the hard setup.',
-    description: 'Claude.md configuration, MCP servers, debugging workflows — even experienced developers get stuck here.',
-    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    question: "Where does my stuff live?",
+    answer: "On your computer. Your data, your control."
   },
   {
-    name: 'They rely on templates, not full control.',
-    description: 'You\'re locked into pre-built flows. Real apps need custom logic, not canned components.',
-    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
+    question: "What if I want to change something?",
+    answer: "Just tell it what to adjust. It's your tool."
+  },
+  {
+    question: "How much does it cost?",
+    answer: "We're figuring that out, but the goal is to keep it accessible for personal use."
   }
 ];
 
-const setupChallenges = [
-  {
-    name: 'Claude.md configuration',
-    description: 'Crucial to making Claude behave like an agent — but tricky to get right without deep experience.',
-    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
-  },
-  {
-    name: 'Complex infrastructure',
-    description: 'Requires orchestration across MCP servers, custom testing frameworks, and reliable debugging workflows.',
-    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
-  },
-  {
-    name: 'Not beginner-friendly',
-    description: 'It\'s not just about writing prompts — it\'s about building a system that responds like a teammate.',
-    icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#f12711] via-[#f5af19] to-[#f12711] bg-clip-text text-transparent">*</span>,
-  }
-];
+// Removed unused setupChallenges array
 
 const App = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -760,36 +747,9 @@ const App = () => {
       }
     }
     
-    function startAutoSwitch() {
-      if (autoInterval) clearTimeout(autoInterval);
-      
-      function scheduleNext() {
-        if (autoInterval) clearTimeout(autoInterval);
-        
-        const currentTab = tabs[currentIndex];
-        const delay = currentTab === 'tab-solution' ? 8000 : 4000; // 8s for solution, 4s for others
-        
-        autoInterval = setTimeout(() => {
-          if (!isHovered && isTabsSectionVisible) {
-            currentIndex = (currentIndex + 1) % tabs.length;
-            switchToTab(tabs[currentIndex]);
-            scheduleNext();
-          } else {
-            // If still hovered or not visible, check again in 500ms
-            autoInterval = setTimeout(scheduleNext, 500);
-          }
-        }, delay);
-      }
-      
-      scheduleNext();
-    }
+    // Auto-switching removed
     
-    function stopAutoSwitch() {
-      if (autoInterval) {
-        clearTimeout(autoInterval);
-        autoInterval = null;
-      }
-    }
+    // Auto-switching removed
     
     // Initialize first tab as active
     switchToTab(tabs[0]); // Ensure first tab is properly initialized
@@ -807,55 +767,15 @@ const App = () => {
       }
     };
     
-    // Check initial visibility and start auto-switching after 2 seconds if visible
-    setTimeout(() => {
-      checkInitialVisibility();
-      if (isTabsSectionVisible) {
-        startAutoSwitch();
-      }
-    }, 2000);
+    // Auto-switching removed - no initial timer
     
-    // Add hover and click listeners to all tabs and content areas
+    // Add click listeners to tabs only
     const addListeners = () => {
-      // Tab button listeners
+      // Tab button listeners - only click handlers
       document.querySelectorAll('[id^="tab-"]').forEach((tab, index) => {
-        tab.addEventListener('mouseenter', () => {
-          isHovered = true;
-          stopAutoSwitch();
-        });
-        
-        tab.addEventListener('mouseleave', () => {
-          isHovered = false;
-          // Add a small delay to prevent rapid restart when moving between elements
-          setTimeout(() => {
-            if (!isHovered && isTabsSectionVisible) {
-              startAutoSwitch();
-            }
-          }, 100);
-        });
-        
         tab.addEventListener('click', () => {
           currentIndex = index;
-          stopAutoSwitch();
-          setTimeout(startAutoSwitch, 1000); // Restart after 1 second
-        });
-      });
-      
-      // Tab content listeners
-      document.querySelectorAll('[id^="content-"]').forEach((content) => {
-        content.addEventListener('mouseenter', () => {
-          isHovered = true;
-          stopAutoSwitch();
-        });
-        
-        content.addEventListener('mouseleave', () => {
-          isHovered = false;
-          // Add a small delay to prevent rapid restart when moving between elements
-          setTimeout(() => {
-            if (!isHovered && isTabsSectionVisible) {
-              startAutoSwitch();
-            }
-          }, 100);
+          switchToTab(tabs[currentIndex]);
         });
       });
     };
@@ -864,47 +784,9 @@ const App = () => {
     addListeners();
     setTimeout(addListeners, 100);
     
-    // Add scroll listener to detect when tabs section is visible
-    // Throttle for better mobile performance
-    let scrollTimeout;
-    const handleTabsScroll = () => {
-      // Clear previous timeout
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      
-      // Use requestAnimationFrame for smooth performance on mobile
-      scrollTimeout = setTimeout(() => {
-        // Target the "Understanding the Challenge" section specifically
-        const challengeSection = Array.from(document.querySelectorAll('h2')).find(h2 => 
-          h2.textContent.includes('Understanding the Challenge')
-        );
-        
-        if (challengeSection) {
-          const rect = challengeSection.getBoundingClientRect();
-          const wasVisible = isTabsSectionVisible;
-          // Use larger buffer for mobile viewport detection
-          const viewportBuffer = window.innerWidth <= 768 ? 100 : 50;
-          isTabsSectionVisible = rect.top < (window.innerHeight + viewportBuffer) && rect.bottom > -viewportBuffer;
-          
-          // If section became visible and we're not hovered, restart auto-switch
-          if (!wasVisible && isTabsSectionVisible && !isHovered) {
-            startAutoSwitch();
-          }
-          // If section became invisible, stop auto-switch
-          else if (wasVisible && !isTabsSectionVisible) {
-            stopAutoSwitch();
-          }
-        }
-      }, 16); // ~60fps throttling
-    };
-    
-    // Use passive listener for better mobile scroll performance
-    window.addEventListener('scroll', handleTabsScroll, { passive: true });
-    
-    // Cleanup function
+    // Cleanup function - simplified since no auto-switching
     return () => {
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      stopAutoSwitch();
-      window.removeEventListener('scroll', handleTabsScroll);
+      // No cleanup needed for manual-only tabs
     };
   }, []);
 
@@ -962,7 +844,7 @@ const App = () => {
 
         .signup-tooltip .heart-icon {
           margin-right: 6px;
-          color: #ef0979;
+          color: #7866CC;
         }
 
         @media (max-width: 768px) {
@@ -978,7 +860,7 @@ const App = () => {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5 placeholder-link">
               <span className="sr-only">No Code Claude</span>
-              <div className="h-8 w-8 bg-[#D97706] rounded-lg flex items-center justify-center">
+              <div className="h-8 w-8 bg-[#7866CC] rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">NC</span>
               </div>
             </a>
@@ -1010,7 +892,7 @@ const App = () => {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5 placeholder-link">
                 <span className="sr-only">No Code Claude</span>
-                <div className="h-8 w-8 bg-[#D97706] rounded-lg flex items-center justify-center">
+                <div className="h-8 w-8 bg-[#7866CC] rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">NC</span>
                 </div>
               </a>
@@ -1056,7 +938,7 @@ const App = () => {
             style={{
               clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#D97706] to-[#F59E0B] dark:from-[#78350F] dark:to-[#A16207] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#7866CC] to-[#AF97F8] dark:from-[#362B6B] dark:to-[#5E50A0] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
         
@@ -1065,17 +947,20 @@ const App = () => {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] dark:text-gray-300">
               <div className="hero-announcement-content">
-                Professional Claude Code setup, no complexity. <a href="#features" className="font-semibold text-[#D97706]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+                Professional Claude Code setup, no complexity. <a href="#examples" className="font-semibold text-[#7866CC]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
           
           <div className="text-center">
             <h1 className="text-5xl font-semibold tracking-tight text-balance text-[#1F2937] dark:text-white sm:text-7xl">
-              Claude Code for non-developers
+              Unlock the power of Claude Code
             </h1>
+            <p className="mt-4 text-2xl font-medium text-[#7866CC] dark:text-purple-300 sm:text-3xl">
+              For everyone, not just developers
+            </p>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
-              <ShineText>No Code Claude</ShineText> gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
+              You don't need to know code to solve your daily frustrations. Turn any annoying task into a tool that works exactly how you want it to—no complex command-line setup, just a few simple commands to run your tool.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="relative inline-block">
@@ -1093,10 +978,10 @@ const App = () => {
                   isShareMode={showShareButton}
                   isExpanding={isExpanding}
                 >
-                  {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
+                  {showShareButton ? 'Tell a friend' : isSignedUp ? "You're all set!" : 'Build my first tool'}
                 </AnimatedButton>
               </div>
-              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
+              <a href="#examples" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
@@ -1109,30 +994,30 @@ const App = () => {
             style={{
               clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
-            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#D97706] to-[#F59E0B] dark:from-[#78350F] dark:to-[#A16207] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#7866CC] to-[#AF97F8] dark:from-[#362B6B] dark:to-[#5E50A0] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
           />
         </div>
       </div>
 
       {/* Why Claude Code Matters */}
-      <section id="features" className="overflow-hidden bg-white dark:bg-gray-900 py-24 sm:py-32">
+      <section id="examples" className="overflow-hidden bg-white dark:bg-gray-900 py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pt-4 lg:pr-8">
               <div className="lg:max-w-lg">
-                <h2 className="text-base font-semibold leading-7 text-[#D97706] dark:text-[#F59E0B]">Why Claude Code matters</h2>
+                <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-[#AF97F8]">Why This Works</h2>
                 <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
-                  Real developers choose Claude Code
+                  Finally—something built just for you
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
-                  Professional developers trust Claude Code because it's uniquely powerful—offering capabilities that other tools simply can't match.
+                  Most tools force you into their boxes. This lets you build exactly what you need, the way you want it to work.
                 </p>
                 <dl className="mt-10 max-w-xl space-y-8 text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-none">
                   {claudeFeatures.map((feature, index) => (
                     <div key={feature.name} className="relative pl-9">
                       <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                         <motion.div
-                          className="absolute top-1 left-1 size-5 text-[#D97706]"
+                          className="absolute top-1 left-1 size-5 text-[#7866CC]"
                           animate={{ 
                             y: [-1, -4, -1],
                             rotate: [
@@ -1182,14 +1067,14 @@ const App = () => {
             style={{
               clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#F59E0B] to-[#EAB308] dark:from-[#A16207] dark:to-[#78350F] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#AF97F8] to-[#C3B1FA] dark:from-[#5E50A0] dark:to-[#362B6B] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
         
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Tab Navigation */}
           <div className="mx-auto max-w-4xl lg:text-center mb-16">
-            <h2 className="text-base font-semibold leading-7 text-[#F59E0B]">Understanding the Challenge</h2>
+            <h2 className="text-base font-semibold leading-7 text-[#7866CC]">Understanding the Challenge</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
               Why <ShineText>No Code Claude</ShineText> exists
             </p>
@@ -1200,7 +1085,7 @@ const App = () => {
             <div className="flex flex-col sm:flex-row justify-center mb-12 gap-2">
               <button 
                 id="tab-problems"
-                className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#F59E0B] to-[#EAB308] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active"
+                className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#7866CC] to-[#AF97F8] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
@@ -1220,7 +1105,7 @@ const App = () => {
                   document.getElementById('content-problems').classList.remove('hidden');
                 }}
               >
-                Problems with Alternatives
+                The Personal Tool Problem
               </button>
               <button 
                 id="tab-setup"
@@ -1244,7 +1129,7 @@ const App = () => {
                   document.getElementById('content-setup').classList.remove('hidden');
                 }}
               >
-                Setup Challenges
+                Building It Yourself Feels Impossible
               </button>
               <button 
                 id="tab-solution"
@@ -1277,7 +1162,7 @@ const App = () => {
                   <i className="particle"></i>
                 </div>
                 <span style={{ position: 'relative', zIndex: 2 }}>
-                  <ShineText>How We Solve This</ShineText>
+                  <ShineText>What If It Could Be Simple?</ShineText>
                 </span>
               </button>
             </div>
@@ -1290,47 +1175,13 @@ const App = () => {
                 <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
                     <h3 className="text-3xl font-semibold text-[#1F2937] dark:text-white mb-4">
-                      Claude Code is powerful — but most tools can't handle it.
+                      Your specific needs don't fit existing apps
                     </h3>
                     <p className="text-lg text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
-                      Claude Code is capable of building real, production-level apps with minimal human input. But unlocking that power takes serious setup: expert-level config files, server orchestration, and testing infrastructure.
+                      You know exactly what would make your day easier, but there's no app for it. Generic productivity tools are built for everyone, which means they're perfect for no one. You end up forcing your workflow into their boxes instead of getting something that actually fits how you think.
                     </p>
                   </div>
-                  <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16 mx-auto">
-                    {alternativesProblems.map((problem, index) => (
-                      <motion.div 
-                        key={problem.name} 
-                        className="relative pl-12 sm:pl-16 group"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <dt className="text-base leading-7 font-semibold text-[#1F2937] dark:text-white">
-                          <motion.div 
-                            className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
-                            animate={{ 
-                              y: [-1, -3, -1],
-                              rotate: [-2, 2, -2],
-                              scale: [1, 1.03, 1]
-                            }}
-                            transition={{ 
-                              duration: 2.5 + (index * 0.3),
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: index * 0.6
-                            }}
-                            whileHover={{ 
-                              scale: 1.1,
-                              y: -5
-                            }}
-                          >
-                            <problem.icon />
-                          </motion.div>
-                          {problem.name}
-                        </dt>
-                        <dd className="mt-2 text-base leading-7 text-[#6B7280] dark:text-gray-300">{problem.description}</dd>
-                      </motion.div>
-                    ))}
-                  </div>
+                  {/* Content is now in the paragraph above - no bullet points needed */}
                 </div>
               </div>
 
@@ -1339,51 +1190,13 @@ const App = () => {
                 <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
                     <h3 className="text-3xl font-semibold text-[#1F2937] dark:text-white mb-4">
-                      Claude Code is the real deal — when it's set up right.
+                      You shouldn't need a computer science degree
                     </h3>
                     <p className="text-lg text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
-                      Most people never get past the configuration stage. Even experienced developers struggle to unlock its full potential.
+                      The gap between "I know what I want" and "here's a working tool" feels huge. Learning to code takes months. Hiring someone costs thousands. No-code tools are still too complex and limit you to their templates. You're stuck with almost-solutions that don't quite work.
                     </p>
                   </div>
-                  <div className="grid max-w-2xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16 mx-auto">
-                    {setupChallenges.map((challenge, index) => (
-                      <motion.div 
-                        key={challenge.name} 
-                        className="relative pl-12 sm:pl-16 group"
-                        whileHover={{ scale: 1.02 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <dt className="text-base leading-7 font-semibold text-[#1F2937] dark:text-white">
-                          <motion.div 
-                            className="absolute top-0 left-0 flex size-8 sm:size-10 items-center justify-center"
-                            animate={{ 
-                              y: [-1, -4, -1],
-                              rotate: [
-                                index === 0 ? -4 : index === 1 ? 0 : 4,
-                                index === 0 ? -8 : index === 1 ? 0 : 8,
-                                index === 0 ? -4 : index === 1 ? 0 : 4
-                              ],
-                              scale: [1, 1.04, 1]
-                            }}
-                            transition={{ 
-                              duration: 3.2 + (index * 0.4),
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: index * 0.7
-                            }}
-                            whileHover={{ 
-                              scale: 1.15,
-                              y: -6
-                            }}
-                          >
-                            <challenge.icon />
-                          </motion.div>
-                          {challenge.name}
-                        </dt>
-                        <dd className="mt-2 text-base leading-7 text-[#6B7280] dark:text-gray-300">{challenge.description}</dd>
-                      </motion.div>
-                    ))}
-                  </div>
+                  {/* Content is now in the paragraph above - no bullet points needed */}
                 </div>
               </div>
 
@@ -1392,10 +1205,10 @@ const App = () => {
                 <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-700 rounded-2xl shadow-xl p-8 sm:p-12">
                   <div className="mx-auto max-w-4xl text-center mb-12">
                     <h3 className="text-3xl font-semibold text-[#1F2937] dark:text-white mb-4">
-                      Our Approach
+                      What If It Could Be Simple?
                     </h3>
                     <p className="text-lg text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
-                      Get Claude Code's full power, properly configured
+                      What if you could skip all the technical stuff and just explain your idea? That's what we built. You describe your tool in plain English, and Claude figures out how to make it work. No templates, no limitations—just your idea turned into something you can actually use.
                     </p>
                   </div>
                   <div className="grid gap-4 lg:grid-cols-3 lg:grid-rows-2">
@@ -1586,17 +1399,17 @@ const App = () => {
             style={{
               clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
             }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#D97706] to-[#F59E0B] dark:from-[#78350F] dark:to-[#A16207] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#7866CC] to-[#AF97F8] dark:from-[#362B6B] dark:to-[#5E50A0] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
         </div>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-[#D97706]">Simple Process</h2>
+            <h2 className="text-base font-semibold leading-7 text-[#7866CC]">Simple Process</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
-              How It Works
+              Three steps to your own tool
             </p>
             <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
-              From idea to production-ready app in three simple steps
+              Simple process from idea to working tool
             </p>
           </div>
           
@@ -1613,7 +1426,7 @@ const App = () => {
                   <motion.div 
                     className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
                     style={{
-                      backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
+                      backgroundImage: 'linear-gradient(30deg, #7866CC, #AF97F8)'
                     }}
                     animate={{ 
                       y: [-1, -3, -1],
@@ -1633,7 +1446,7 @@ const App = () => {
                     <span className="text-2xl font-bold text-white">1</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
-                    Describe your app
+                    Tell it what you want
                   </h3>
                   <div className="p-4 rounded-lg italic text-[#1F2937] dark:text-white mb-4">
                     "<TypewriterText />"
@@ -1652,7 +1465,7 @@ const App = () => {
                   <motion.div 
                     className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
                     style={{
-                      backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
+                      backgroundImage: 'linear-gradient(30deg, #7866CC, #AF97F8)'
                     }}
                     animate={{ 
                       y: [-1, -4, -1],
@@ -1672,10 +1485,10 @@ const App = () => {
                     <span className="text-2xl font-bold text-white">2</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
-                    Watch Claude Code build
+                    Watch it build
                   </h3>
                   <p className="text-[#6B7280] dark:text-gray-300 mb-4">
-                    Same powerful AI, supported by professional-grade configuration and testing
+                    Claude creates exactly what you described (we handle all the Claude Code CLI setup automatically)
                   </p>
                 </motion.div>
 
@@ -1688,7 +1501,7 @@ const App = () => {
                   <motion.div 
                     className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
                     style={{
-                      backgroundImage: 'linear-gradient(30deg, #f12711, #f5af19)'
+                      backgroundImage: 'linear-gradient(30deg, #7866CC, #AF97F8)'
                     }}
                     animate={{ 
                       y: [-1, -3, -1],
@@ -1708,10 +1521,10 @@ const App = () => {
                     <span className="text-2xl font-bold text-white">3</span>
                   </motion.div>
                   <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
-                    Get production-ready apps
+                    Get working code
                   </h3>
                   <p className="text-[#6B7280] dark:text-gray-300 mb-4">
-                    Fully functional applications that scale with your business needs
+                    Complete application files with step-by-step terminal commands (npm install, npm start) so you can run it on your computer
                   </p>
                 </motion.div>
               </div>
@@ -1726,63 +1539,18 @@ const App = () => {
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
-                <p className="text-base/7 font-semibold text-[#D97706]">Real Examples</p>
+                <p className="text-base/7 font-semibold text-[#7866CC]">Real Examples</p>
                 <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
-                  What You Can Build
+                  Real examples from real people
                 </h1>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
-                  Claude Code builds real, production-level apps — not just frontends.<br />
-                  Think full system control, real databases, custom logic, and end-to-end testing. It's what professional developers use when they want working software, not workarounds.
-                </p>
-                <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
-                  The problem? Claude Code requires terminal skills and setup knowledge most people don't have.
-                </p>
-                <p className="mt-6 text-lg leading-8 text-[#1F2937] dark:text-white font-semibold">
-                  We solve that.
-                </p>
-                <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
-                  You get Claude Code's full capabilities — without touching the terminal.
-                </p>
-                <h3 className="mt-8 text-xl font-semibold text-[#1F2937] dark:text-white">
-                  What You Can Build
-                </h3>
-                <p className="mt-4 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
-                  Just describe what you want:
+                  Personal Tools:
                 </p>
                 <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-none">
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
-                        className="absolute top-1 left-1 size-5"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [-3, -6, -3],
-                          scale: [1, 1.05, 1]
-                        }}
-                        transition={{ 
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0
-                        }}
-                        style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          fontSize: '20px',
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        *
-                      </motion.div>
-                    </dt>{' '}
-                    <dd className="inline">Create a website for my bakery</dd>
-                  </div>
-                  <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
-                      <motion.div
-                        className="absolute top-1 left-1 size-5"
+                        className="absolute top-1 left-1 size-5 text-[#7866CC]"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [0, 0, 0],
@@ -1795,7 +1563,7 @@ const App = () => {
                           delay: 0.8
                         }}
                         style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          background: 'linear-gradient(45deg, #7866CC, #AF97F8)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
@@ -1811,7 +1579,7 @@ const App = () => {
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
-                        className="absolute top-1 left-1 size-5"
+                        className="absolute top-1 left-1 size-5 text-[#7866CC]"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [3, 6, 3],
@@ -1824,7 +1592,7 @@ const App = () => {
                           delay: 1.6
                         }}
                         style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          background: 'linear-gradient(45deg, #7866CC, #AF97F8)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
@@ -1840,7 +1608,7 @@ const App = () => {
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
-                        className="absolute top-1 left-1 size-5"
+                        className="absolute top-1 left-1 size-5 text-[#7866CC]"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [-3, -6, -3],
@@ -1853,7 +1621,7 @@ const App = () => {
                           delay: 2.4
                         }}
                         style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          background: 'linear-gradient(45deg, #7866CC, #AF97F8)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
@@ -1869,7 +1637,7 @@ const App = () => {
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
-                        className="absolute top-1 left-1 size-5"
+                        className="absolute top-1 left-1 size-5 text-[#7866CC]"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [0, 0, 0],
@@ -1882,7 +1650,7 @@ const App = () => {
                           delay: 3.2
                         }}
                         style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          background: 'linear-gradient(45deg, #7866CC, #AF97F8)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
@@ -1898,7 +1666,7 @@ const App = () => {
                   <div className="relative pl-9">
                     <dt className="inline font-semibold text-[#1F2937] dark:text-white">
                       <motion.div
-                        className="absolute top-1 left-1 size-5"
+                        className="absolute top-1 left-1 size-5 text-[#7866CC]"
                         animate={{ 
                           y: [-1, -4, -1],
                           rotate: [3, 6, 3],
@@ -1911,7 +1679,7 @@ const App = () => {
                           delay: 4.0
                         }}
                         style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
+                          background: 'linear-gradient(45deg, #7866CC, #AF97F8)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
                           backgroundClip: 'text',
@@ -1925,127 +1693,16 @@ const App = () => {
                     <dd className="inline">Build a recipe organizer</dd>
                   </div>
                 </dl>
+                <div className="mt-4 space-y-2 text-[#6B7280] dark:text-gray-300">
+                  <p>- Reading list with notes and ratings</p>
+                  <p>- Plant care reminder system</p>
+                  <p>- Gift idea collector that learns from your conversations</p>
+                  <p>- Expense tracker for your specific budget categories</p>
+                  <p>- Habit tracker that actually matches your routines</p>
+                  <p>- Photo organizer by trips, people, or whatever makes sense to you</p>
+                </div>
                 <p className="mt-8 text-lg leading-8 text-[#1F2937] dark:text-white font-semibold">
-                  No templates. No simplified builders. Just real software.
-                </p>
-                <h3 className="mt-8 text-xl font-semibold text-[#1F2937] dark:text-white">
-                  What It's Really Capable Of
-                </h3>
-                <p className="mt-4 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
-                  Unlike other tools, you're not limited to toy apps. Claude Code (with the right setup) can build:
-                </p>
-                <dl className="mt-6 max-w-xl space-y-4 text-base/7 text-[#6B7280] dark:text-gray-300 lg:max-w-none">
-                  <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
-                      <motion.div
-                        className="absolute top-1 left-1 size-5 text-[#D97706]"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [-3, -6, -3],
-                          scale: [1, 1.05, 1]
-                        }}
-                        transition={{ 
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0
-                        }}
-                      >
-                        <BuildingOffice2Icon aria-hidden="true" className="size-5" style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          color: '#f12711'
-                        }} />
-                      </motion.div>
-                    </dt>{' '}
-                    <dd className="inline">Multi-tenant SaaS platforms</dd>
-                  </div>
-                  <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
-                      <motion.div
-                        className="absolute top-1 left-1 size-5 text-[#D97706]"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [0, 0, 0],
-                          scale: [1, 1.05, 1]
-                        }}
-                        transition={{ 
-                          duration: 3.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 0.8
-                        }}
-                      >
-                        <ShoppingCartIcon aria-hidden="true" className="size-5" style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          color: '#f12711'
-                        }} />
-                      </motion.div>
-                    </dt>{' '}
-                    <dd className="inline">E-commerce flows with custom logic</dd>
-                  </div>
-                  <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
-                      <motion.div
-                        className="absolute top-1 left-1 size-5 text-[#D97706]"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [3, 6, 3],
-                          scale: [1, 1.05, 1]
-                        }}
-                        transition={{ 
-                          duration: 3.5,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 1.6
-                        }}
-                      >
-                        <UserGroupIcon aria-hidden="true" className="size-5" style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          color: '#f12711'
-                        }} />
-                      </motion.div>
-                    </dt>{' '}
-                    <dd className="inline">Team tools with real-time sync</dd>
-                  </div>
-                  <div className="relative pl-9">
-                    <dt className="inline font-semibold text-[#1F2937] dark:text-white">
-                      <motion.div
-                        className="absolute top-1 left-1 size-5 text-[#D97706]"
-                        animate={{ 
-                          y: [-1, -4, -1],
-                          rotate: [-3, -6, -3],
-                          scale: [1, 1.05, 1]
-                        }}
-                        transition={{ 
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                          delay: 2.4
-                        }}
-                      >
-                        <ChartBarIcon aria-hidden="true" className="size-5" style={{
-                          background: 'linear-gradient(45deg, #f12711, #f5af19)',
-                          WebkitBackgroundClip: 'text',
-                          WebkitTextFillColor: 'transparent',
-                          backgroundClip: 'text',
-                          color: '#f12711'
-                        }} />
-                      </motion.div>
-                    </dt>{' '}
-                    <dd className="inline">Dashboards pulling from multiple APIs</dd>
-                  </div>
-                </dl>
-                <p className="mt-8 text-lg leading-8 text-[#1F2937] dark:text-white font-semibold">
-                  Apps that work like a developer built them — because the same AI that builds them did.
+                  The difference: These aren't templates—they're built exactly how YOU think about your stuff.
                 </p>
               </div>
             </div>
@@ -2084,11 +1741,53 @@ const App = () => {
                     isExpanding={isExpanding}
                     forceBounce={footerButtonBounce}
                   >
-                    {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
+                    {showShareButton ? 'Tell a friend' : isSignedUp ? "You're all set!" : 'Build my first tool'}
                   </AnimatedButton>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="bg-gray-50 dark:bg-gray-800 py-24 sm:py-32">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <div className="mx-auto max-w-2xl lg:text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+              Frequently Asked Questions
+            </h2>
+            <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
+              Got questions? Here are the most common ones.
+            </p>
+          </div>
+          <div className="mx-auto mt-16 max-w-2xl">
+            <dl className="space-y-6 divide-y divide-gray-900/10 dark:divide-gray-100/10">
+              {faqData.map((faq, index) => (
+                <Disclosure key={index} as="div" className="pt-6">
+                  {({ open }) => (
+                    <>
+                      <dt>
+                        <DisclosureButton className="flex w-full items-start justify-between text-left text-gray-900 dark:text-white">
+                          <span className="text-base font-semibold leading-7">{faq.question}</span>
+                          <span className="ml-6 flex h-7 items-center">
+                            <ChevronDownIcon
+                              className={`${
+                                open ? 'rotate-180 transform' : ''
+                              } h-6 w-6 transition-transform duration-200`}
+                              aria-hidden="true"
+                            />
+                          </span>
+                        </DisclosureButton>
+                      </dt>
+                      <DisclosurePanel as="dd" className="mt-2 pr-12">
+                        <p className="text-base leading-7 text-gray-600 dark:text-gray-300">{faq.answer}</p>
+                      </DisclosurePanel>
+                    </>
+                  )}
+                </Disclosure>
+              ))}
+            </dl>
           </div>
         </div>
       </section>
@@ -2107,10 +1806,13 @@ const App = () => {
                 <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Product</h2>
                 <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
                   <li className="mb-4">
-                    <a href="#features" className="hover:underline">Features</a>
+                    <a href="#examples" className="hover:underline">Examples</a>
                   </li>
                   <li>
                     <a href="#how-it-works" className="hover:underline">How it works</a>
+                  </li>
+                  <li>
+                    <a href="#faq" className="hover:underline">FAQ</a>
                   </li>
                 </ul>
               </div>
