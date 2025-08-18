@@ -1308,7 +1308,7 @@ const App = () => {
                     <div className="relative max-lg:row-start-1">
                       <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700 max-lg:rounded-t-[2rem]" />
                       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)] max-lg:rounded-t-[calc(2rem+1px)]">
-                        <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                        <div className="px-8 pt-8 sm:px-10 sm:pt-10 mb-6">
                           <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] dark:text-white max-lg:text-center">Professional setup, ready to use</p>
                           <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
                             Skip the configuration complexity that stops most people. Get the infrastructure knowledge we've refined through trial and error.
@@ -1346,15 +1346,15 @@ const App = () => {
                     <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                       <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700" />
                       <div className="relative flex h-full flex-col overflow-hidden rounded-[calc(0.75rem+1px)]">
-                        <div className="px-8 pt-8 sm:px-10 sm:pt-10">
+                        <div className="px-8 pt-8 sm:px-10 sm:pt-10 mb-6">
                           <p className="mt-2 text-lg font-medium tracking-tight text-[#1F2937] dark:text-white max-lg:text-center">Same AI, better interface</p>
                           <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
                             Same AI that builds production-ready apps, wrapped in an interface you can use. No architectural limitations.
                           </p>
                         </div>
-                        <div className="flex flex-1 items-center max-lg:py-6 lg:pb-2">
+                        <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
                           <motion.div 
-                            className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full"
+                            className="cursor-pointer hover:scale-105 transition-transform duration-200"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => {
@@ -1363,7 +1363,7 @@ const App = () => {
                               modal.onclick = () => document.body.removeChild(modal);
                               
                               const img = document.createElement('img');
-                              img.src = '/ncc-same-ai-better-ui.png';
+                              img.src = '/betterUI.png';
                               img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
                               img.onclick = (e) => e.stopPropagation();
                               
@@ -1372,9 +1372,9 @@ const App = () => {
                             }}
                           >
                             <img 
-                              src="/ncc-same-ai-better-ui.png" 
-                              alt="No Code Claude Same AI Better Interface"
-                              className="w-full rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
+                              src="/betterUI.png" 
+                              alt="Better UI - Same AI, better interface"
+                              className="w-full max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
                             />
                           </motion.div>
                         </div>
