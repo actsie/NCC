@@ -1247,7 +1247,7 @@ const App = () => {
                   document.getElementById('content-setup').classList.remove('hidden');
                 }}
               >
-                Setup Challenges
+                Why it's hard to use Claude Code
               </button>
               <button 
                 id="tab-solution"
