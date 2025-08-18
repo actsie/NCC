@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, CloudArrowUpIcon, LockClosedIcon, ServerIcon, ShoppingCartIcon, UserGroupIcon, ChartBarIcon } from '@heroicons/react/20/solid';
+import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, CloudArrowUpIcon, LockClosedIcon, ServerIcon, ShoppingCartIcon, UserGroupIcon, ChartBarIcon, GiftIcon, SparklesIcon, ArchiveBoxIcon, BookOpenIcon, PhotoIcon, LightBulbIcon, ComputerDesktopIcon, WrenchScrewdriverIcon, BoltIcon } from '@heroicons/react/20/solid';
 import { ExclamationTriangleIcon, XMarkIcon as XMarkSolidIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -602,7 +602,7 @@ const claudeFeatures = [
     icon: CommandLineIcon,
   },
   {
-    name: 'Built by Anthropic.',
+    name: 'Claude Code is built by Anthropic.',
     description: 'Who makes Claude—not a third-party tool paying for API access',
     icon: BuildingOffice2Icon,
   },
@@ -615,7 +615,7 @@ const claudeFeatures = [
 
 const alternativesProblems = [
   {
-    name: 'Built by Anthropic, the frontier model provider.',
+    name: 'Claude Code is built by Anthropic, the frontier model provider.',
     description: 'Because Claude Code is built by Anthropic, the tokens you can use is a lot more generous than other tools.',
     icon: () => <span className="animate-pulse text-xl sm:text-2xl font-bold bg-gradient-to-r from-[#7866CC] via-[#AF97F8] to-[#7866CC] bg-clip-text text-transparent">*</span>,
   },
@@ -946,7 +946,11 @@ const App = () => {
                 {isSignedUp && showShareButton && (
                   <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
                     <div className="flex items-center">
-                      <span className="heart-icon">❤️</span>
+                      <span className="heart-icon">
+                        <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                      </span>
                       <span className="heart-text">You're all set!</span>
                     </div>
                   </div>
@@ -964,6 +968,9 @@ const App = () => {
                 Learn more <span aria-hidden="true">→</span>
               </a>
             </div>
+            <p className="mt-6 text-xs text-[#6B7280] dark:text-gray-400 text-center">
+              *Requires Claude Code subscription. Not affiliated with Anthropic.
+            </p>
           </div>
         </section>
         
@@ -1464,6 +1471,11 @@ const App = () => {
             <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
               From idea to production-ready app in three simple steps
             </p>
+            <div className="mt-4 text-center">
+              <p className="text-sm text-[#7866CC] dark:text-purple-300 font-medium">
+                Note: You'll need an active Claude Code subscription to use this service.
+              </p>
+            </div>
           </div>
           
           {/* Horizontal Timeline */}
@@ -1505,7 +1517,7 @@ const App = () => {
                     "<TypewriterText />"
                   </div>
                   <p className="text-sm text-[#6B7280] dark:text-gray-300">
-                    Tell our Claude Code interface what you want to build
+                    Tell our interface to Claude Code what you want to build
                   </p>
                 </motion.div>
 
@@ -1904,7 +1916,11 @@ const App = () => {
                   {isSignedUp && (showShareButton || isFooterVisible) && (
                     <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
                       <div className="flex items-center">
-                        <span className="heart-icon">❤️</span>
+                        <span className="heart-icon">
+                        <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                          <path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                      </span>
                         <span className="heart-text">You're all set!</span>
                       </div>
                     </div>
@@ -1919,6 +1935,148 @@ const App = () => {
                     {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                   </AnimatedButton>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* From Simple Ideas to Enterprise Solutions */}
+      <section className="py-16 px-6 bg-gradient-to-b from-white via-violet-50/30 to-white dark:from-gray-900 dark:via-violet-950/20 dark:to-gray-900">
+        <div className="max-w-7xl mx-auto">
+          
+          {/* Header */}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
+              Personal tools that solve your actual problems
+            </h2>
+            <p className="mt-3 text-base sm:text-lg text-neutral-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Turn daily workflow frustrations into custom tools using Claude Code's power — without the technical headaches.
+            </p>
+          </div>
+
+          {/* Tier 1: Workflow Problems Card */}
+          <div className="mb-12">
+            <div className="rounded-3xl border border-violet-200 dark:border-violet-800/50 bg-white/70 dark:bg-gray-800/70 shadow-sm p-8">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+                Your specific problems, solved
+              </h3>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow">
+                  <GiftIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 mb-2" />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">Gift Idea Tracker</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">"Sarah mentioned mystery novels" → logged for December</div>
+                </div>
+                
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow">
+                  <SparklesIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 mb-2" />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">Smart Plant Care</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Water plants *before* they die, not on a rigid schedule</div>
+                </div>
+                
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow">
+                  <ArchiveBoxIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 mb-2" />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">Lending Tracker</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">"Who has my camping gear?" with gentle reminder system</div>
+                </div>
+                
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow">
+                  <BookOpenIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 mb-2" />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">Reading List That Learns</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Track books by mood, remind you about exciting ones</div>
+                </div>
+                
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow">
+                  <ChartBarIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 mb-2" />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">Pattern Spotter</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Find patterns in your mood tracking spreadsheet</div>
+                </div>
+                
+                <div className="rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-4 hover:shadow-md transition-shadow">
+                  <PhotoIcon className="h-6 w-6 text-gray-600 dark:text-gray-400 mb-2" />
+                  <div className="text-sm font-medium text-gray-900 dark:text-white mb-1">Memory-Based Organizer</div>
+                  <div className="text-xs text-gray-600 dark:text-gray-400">Sort photos by vacation and moments, not just dates</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Transition Connector */}
+          <div className="relative mb-12">
+            <div className="h-px bg-gradient-to-r from-transparent via-violet-300 dark:via-violet-600 to-transparent"></div>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="bg-white dark:bg-gray-900 px-4 py-2 text-sm font-medium text-violet-700 dark:text-violet-300 rounded-full border border-violet-200 dark:border-violet-700">
+                Claude Code doesn't just organize — it thinks
+              </span>
+            </div>
+          </div>
+
+          {/* Tier 2: Claude Code Power Card */}
+          <div className="mb-12">
+            <div className="rounded-3xl bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 border-2 border-violet-200 dark:border-violet-700 p-8">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+                Claude Code's power, no technical headaches
+              </h3>
+              
+              <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
+                <div className="flex items-start space-x-3 p-4 bg-white/70 dark:bg-gray-800/70 rounded-xl border border-violet-100 dark:border-violet-800">
+                  <div className="bg-violet-600 p-2 rounded-lg flex-shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M9,2V8H11V11H5L12,22V16H10V13H16L9,2Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">Actually Thinks</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Suggests improvements you hadn't thought of, adapts to your workflow</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3 p-4 bg-white/70 dark:bg-gray-800/70 rounded-xl border border-violet-100 dark:border-violet-800">
+                  <div className="bg-violet-600 p-2 rounded-lg flex-shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">Your Computer, Your Data</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Access files, data, local tools — no API limitations or cloud dependencies</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3 p-4 bg-white/70 dark:bg-gray-800/70 rounded-xl border border-violet-100 dark:border-violet-800">
+                  <div className="bg-violet-600 p-2 rounded-lg flex-shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">Personal Tools, Not Products</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Built for your life, not the app store — exactly how you think about your stuff</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start space-x-3 p-4 bg-white/70 dark:bg-gray-800/70 rounded-xl border border-violet-100 dark:border-violet-800">
+                  <div className="bg-violet-600 p-2 rounded-lg flex-shrink-0">
+                    <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8,3A2,2 0 0,0 6,5V9A2,2 0 0,1 4,11H3V13H4A2,2 0 0,1 6,15V19A2,2 0 0,0 8,21H10V19H8V14A2,2 0 0,0 6,12A2,2 0 0,0 8,10V5H10V3M16,3A2,2 0 0,1 18,5V9A2,2 0 0,0 20,11H21V13H20A2,2 0 0,0 18,15V19A2,2 0 0,1 16,21H14V19H16V14A2,2 0 0,1 18,12A2,2 0 0,1 16,10V5H14V3H16Z"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900 dark:text-white">Real Software</h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Not templates or simple automation — tools that adapt and learn from your patterns</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Call-to-Action Row */}
+              <div className="mt-8 flex items-center justify-center space-x-4">
+                <button className="bg-violet-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-violet-700 transition-colors">
+                  Build my first tool
+                </button>
+                <button className="border border-violet-600 bg-white dark:bg-gray-800 text-violet-700 dark:text-violet-300 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
+                  See Examples
+                </button>
               </div>
             </div>
           </div>
@@ -1971,6 +2129,12 @@ const App = () => {
             </div>
           </div>
           <ShineLine className="sm:mx-auto lg:my-8" />
+          <div className="mb-4 text-center">
+            <p className="text-sm text-[#6B7280] dark:text-gray-300">
+              <strong>Important:</strong> We are not affiliated with Claude Code or Anthropic. 
+              Claude Code subscription required. This service provides setup and configuration assistance.
+            </p>
+          </div>
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">No Code Claude</a>. All Rights Reserved.</span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">

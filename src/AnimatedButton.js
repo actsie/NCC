@@ -48,6 +48,14 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
     if (onClick) onClick();
   };
 
+  const sanitizeEmail = (email) => {
+    // Remove invalid Unicode surrogate pairs and normalize the string
+    return email
+      .replace(/[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?<![\uD800-\uDBFF])[\uDC00-\uDFFF]/g, '')
+      .normalize('NFC')
+      .trim();
+  };
+
   const validateEmail = (email) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
@@ -55,7 +63,8 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
-    if (email.trim() && validateEmail(email)) {
+    const sanitizedEmail = sanitizeEmail(email);
+    if (sanitizedEmail && validateEmail(sanitizedEmail)) {
       try {
         // Submit to Formspree
         const response = await fetch('https://formspree.io/f/xjkoegnv', {
@@ -63,7 +72,7 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email: email }),
+          body: JSON.stringify({ email: sanitizedEmail }),
         });
 
         if (response.ok) {
@@ -105,7 +114,8 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
     e.preventDefault(); // Prevent any default behavior
     e.stopPropagation(); // Stop event bubbling
     
-    if (email.trim() && validateEmail(email)) {
+    const sanitizedEmail = sanitizeEmail(email);
+    if (sanitizedEmail && validateEmail(sanitizedEmail)) {
       handleEmailSubmit({ preventDefault: () => {} });
     } else {
       // Shake for both empty email and invalid email, but don't close input
