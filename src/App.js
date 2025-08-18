@@ -1797,13 +1797,15 @@ const App = () => {
               </div>
 
               {/* Call-to-Action Row */}
-              <div className="mt-8 flex items-center justify-center space-x-4">
-                <button className="bg-violet-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-violet-700 transition-colors">
-                  Build my first tool
-                </button>
-                <button className="border border-violet-600 bg-white dark:bg-gray-800 text-violet-700 dark:text-violet-300 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                  See Examples
-                </button>
+              <div className="mt-8 flex items-center justify-center">
+                <AnimatedButton 
+                  onSignup={() => setIsSignedUp(true)}
+                  showSuccess={isSignedUp && !showShareButton}
+                  isShareMode={showShareButton}
+                  isExpanding={isExpanding}
+                >
+                  {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Build my first tool'}
+                </AnimatedButton>
               </div>
             </div>
           </div>
