@@ -1274,31 +1274,33 @@ const App = () => {
                             Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
                           </p>
                         </div>
-                        <div className="relative min-h-[30rem] w-full grow max-lg:mx-auto max-lg:max-w-sm flex items-center justify-center">
-                          <motion.div 
-                            className="cursor-pointer hover:scale-105 transition-transform duration-200"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                            onClick={() => {
-                              const modal = document.createElement('div');
-                              modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
-                              modal.onclick = () => document.body.removeChild(modal);
-                              
-                              const img = document.createElement('img');
-                              img.src = '/no-code-claude-simple-ui.png';
-                              img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
-                              img.onclick = (e) => e.stopPropagation();
-                              
-                              modal.appendChild(img);
-                              document.body.appendChild(modal);
-                            }}
-                          >
-                            <img 
-                              src="/no-code-claude-simple-ui.png" 
-                              alt="No Code Claude Simple Interface"
-                              className="w-full h-auto max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
-                            />
-                          </motion.div>
+                        <div className="relative min-h-[30rem] w-full grow">
+                          <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white dark:bg-gray-800 border-t border-l border-gray-200 dark:border-gray-900 p-2 shadow-2xl">
+                            <motion.div 
+                              className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full h-full"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              onClick={() => {
+                                const modal = document.createElement('div');
+                                modal.className = 'fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50';
+                                modal.onclick = () => document.body.removeChild(modal);
+                                
+                                const img = document.createElement('img');
+                                img.src = '/project_outcome.png';
+                                img.className = 'max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl';
+                                img.onclick = (e) => e.stopPropagation();
+                                
+                                modal.appendChild(img);
+                                document.body.appendChild(modal);
+                              }}
+                            >
+                              <img 
+                                src="/project_outcome.png" 
+                                alt="Project Outcome - Built for non-technical users"
+                                className="w-full h-full object-cover object-left rounded-lg"
+                              />
+                            </motion.div>
+                          </div>
                         </div>
                       </div>
                       <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]" />
