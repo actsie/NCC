@@ -723,13 +723,9 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isSignedUp, isFooterVisible]);
 
-  // Auto-cycling tabs functionality
+  // Manual tabs functionality
   React.useEffect(() => {
     const tabs = ['tab-problems', 'tab-setup', 'tab-solution'];
-    let currentIndex = 0;
-    let autoInterval;
-    let isHovered = false;
-    let isTabsSectionVisible = false; // Start as false, will be set correctly on first scroll check
     
     function switchToTab(tabId) {
       // Remove active class from all tabs and reset styles
@@ -760,151 +756,16 @@ const App = () => {
       }
     }
     
-    function startAutoSwitch() {
-      if (autoInterval) clearTimeout(autoInterval);
-      
-      function scheduleNext() {
-        if (autoInterval) clearTimeout(autoInterval);
-        
-        const currentTab = tabs[currentIndex];
-        const delay = currentTab === 'tab-solution' ? 8000 : 4000; // 8s for solution, 4s for others
-        
-        autoInterval = setTimeout(() => {
-          if (!isHovered && isTabsSectionVisible) {
-            currentIndex = (currentIndex + 1) % tabs.length;
-            switchToTab(tabs[currentIndex]);
-            scheduleNext();
-          } else {
-            // If still hovered or not visible, check again in 500ms
-            autoInterval = setTimeout(scheduleNext, 500);
-          }
-        }, delay);
-      }
-      
-      scheduleNext();
-    }
-    
-    function stopAutoSwitch() {
-      if (autoInterval) {
-        clearTimeout(autoInterval);
-        autoInterval = null;
-      }
-    }
     
     // Initialize first tab as active
     switchToTab(tabs[0]); // Ensure first tab is properly initialized
     
-    // Check initial visibility of Understanding the Challenge section
-    const checkInitialVisibility = () => {
-      const challengeSection = Array.from(document.querySelectorAll('h2')).find(h2 => 
-        h2.textContent.includes('Understanding the Challenge')
-      );
-      
-      if (challengeSection) {
-        const rect = challengeSection.getBoundingClientRect();
-        const viewportBuffer = window.innerWidth <= 768 ? 100 : 50;
-        isTabsSectionVisible = rect.top < (window.innerHeight + viewportBuffer) && rect.bottom > -viewportBuffer;
-      }
-    };
     
-    // Check initial visibility and start auto-switching after 2 seconds if visible
-    setTimeout(() => {
-      checkInitialVisibility();
-      if (isTabsSectionVisible) {
-        startAutoSwitch();
-      }
-    }, 2000);
     
-    // Add hover and click listeners to all tabs and content areas
-    const addListeners = () => {
-      // Tab button listeners
-      document.querySelectorAll('[id^="tab-"]').forEach((tab, index) => {
-        tab.addEventListener('mouseenter', () => {
-          isHovered = true;
-          stopAutoSwitch();
-        });
-        
-        tab.addEventListener('mouseleave', () => {
-          isHovered = false;
-          // Add a small delay to prevent rapid restart when moving between elements
-          setTimeout(() => {
-            if (!isHovered && isTabsSectionVisible) {
-              startAutoSwitch();
-            }
-          }, 100);
-        });
-        
-        tab.addEventListener('click', () => {
-          currentIndex = index;
-          stopAutoSwitch();
-          setTimeout(startAutoSwitch, 1000); // Restart after 1 second
-        });
-      });
-      
-      // Tab content listeners
-      document.querySelectorAll('[id^="content-"]').forEach((content) => {
-        content.addEventListener('mouseenter', () => {
-          isHovered = true;
-          stopAutoSwitch();
-        });
-        
-        content.addEventListener('mouseleave', () => {
-          isHovered = false;
-          // Add a small delay to prevent rapid restart when moving between elements
-          setTimeout(() => {
-            if (!isHovered && isTabsSectionVisible) {
-              startAutoSwitch();
-            }
-          }, 100);
-        });
-      });
-    };
-    
-    // Add listeners immediately and also after a short delay to ensure elements exist
-    addListeners();
-    setTimeout(addListeners, 100);
-    
-    // Add scroll listener to detect when tabs section is visible
-    // Throttle for better mobile performance
-    let scrollTimeout;
-    const handleTabsScroll = () => {
-      // Clear previous timeout
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      
-      // Use requestAnimationFrame for smooth performance on mobile
-      scrollTimeout = setTimeout(() => {
-        // Target the "Understanding the Challenge" section specifically
-        const challengeSection = Array.from(document.querySelectorAll('h2')).find(h2 => 
-          h2.textContent.includes('Understanding the Challenge')
-        );
-        
-        if (challengeSection) {
-          const rect = challengeSection.getBoundingClientRect();
-          const wasVisible = isTabsSectionVisible;
-          // Use larger buffer for mobile viewport detection
-          const viewportBuffer = window.innerWidth <= 768 ? 100 : 50;
-          isTabsSectionVisible = rect.top < (window.innerHeight + viewportBuffer) && rect.bottom > -viewportBuffer;
-          
-          // If section became visible and we're not hovered, restart auto-switch
-          if (!wasVisible && isTabsSectionVisible && !isHovered) {
-            startAutoSwitch();
-          }
-          // If section became invisible, stop auto-switch
-          else if (wasVisible && !isTabsSectionVisible) {
-            stopAutoSwitch();
-          }
-        }
-      }, 16); // ~60fps throttling
-    };
-    
-    // Use passive listener for better mobile scroll performance
-    window.addEventListener('scroll', handleTabsScroll, { passive: true });
     
     // Cleanup function
     return () => {
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      stopAutoSwitch();
-      window.removeEventListener('scroll', handleTabsScroll);
+      // No cleanup needed for manual-only tabs
     };
   }, []);
 
