@@ -23,7 +23,7 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
       // Handle share functionality
       if (navigator.share) {
         navigator.share({
-          title: 'No Code Claude - Early Access',
+          title: 'Pawgrammer - Early Access',
           text: 'Get Claude Code access with professional-grade infrastructure that even experienced developers struggle to set up!',
           url: window.location.href,
         }).catch((err) => {

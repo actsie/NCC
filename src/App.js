@@ -542,7 +542,7 @@ const ShineLine = styled.hr`
   }
 `;
 
-// Styled component for gradient shine effect on "No Code Claude" text
+// Styled component for gradient shine effect on "Pawgrammer" text
 const ShineText = styled.span`
   background: linear-gradient(to right, #7866CC 0, #AF97F8 10%, #7866CC 20%);
   background-size: 300% 100%;
@@ -838,7 +838,7 @@ const App = () => {
         <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5 placeholder-link">
-              <span className="sr-only">No Code Claude</span>
+              <span className="sr-only">Pawgrammer</span>
               <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
                 <img 
                   src="/pawgrammer.png" 
@@ -874,7 +874,7 @@ const App = () => {
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:ring-gray-100/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5 placeholder-link">
-                <span className="sr-only">No Code Claude</span>
+                <span className="sr-only">Pawgrammer</span>
                 <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
                   <img 
                     src="/pawgrammer.png" 
@@ -947,7 +947,7 @@ const App = () => {
               For everyone, not just developers
             </p>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
-              <ShineText>No Code Claude</ShineText> gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
+              <ShineText>Pawgrammer</ShineText> gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="relative inline-block">
@@ -1070,7 +1070,7 @@ const App = () => {
           <div className="mx-auto max-w-4xl lg:text-center mb-16">
             <h2 className="text-base font-semibold leading-7 text-[#7866CC]">Understanding the Challenge</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
-              Why <ShineText>No Code Claude</ShineText> exists
+              Why <ShineText>Pawgrammer</ShineText> exists
             </p>
           </div>
           
@@ -1286,7 +1286,7 @@ const App = () => {
                             Built for non-technical users who want real apps
                           </p>
                           <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
-                            Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>No Code Claude</ShineText> builds apps you can actually use.
+                            Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>Pawgrammer</ShineText> builds apps you can actually use.
                           </p>
                         </div>
                         <div className="relative min-h-[30rem] w-full grow">
@@ -1350,7 +1350,7 @@ const App = () => {
                           >
                             <img 
                               src="/no-code-claude-professional-setup.png" 
-                              alt="No Code Claude Professional Setup"
+                              alt="Pawgrammer Professional Setup"
                               className="w-full max-w-xs rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-200"
                             />
                           </motion.div>
@@ -1826,7 +1826,12 @@ const App = () => {
           <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
               <a href="#" className="flex items-center placeholder-link">
-                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937] dark:text-white"><ShineText>No Code Claude</ShineText></span>
+                <img 
+                  src="/pawgrammer.png" 
+                  alt="Pawgrammer" 
+                  className="h-8 w-8 mr-3"
+                />
+                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937] dark:text-white"><ShineText>Pawgrammer</ShineText></span>
               </a>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
@@ -1873,7 +1878,7 @@ const App = () => {
             </p>
           </div>
           <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">No Code Claude</a>. All Rights Reserved.</span>
+            <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">Pawgrammer</a>. All Rights Reserved.</span>
             <div className="flex mt-4 sm:justify-center sm:mt-0">
               <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white placeholder-link">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
