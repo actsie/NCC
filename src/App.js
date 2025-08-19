@@ -934,7 +934,7 @@ const App = () => {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] dark:text-gray-300">
               <div className="hero-announcement-content">
-                Professional Claude Code setup, no complexity. <a href="#features" className="font-semibold text-[#7866CC]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+                Claude Code infrastructure, no complexity. <a href="#features" className="font-semibold text-[#7866CC]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
@@ -947,7 +947,7 @@ const App = () => {
               For everyone, not just developers
             </p>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
-              <ShineText>Pawgrammer</ShineText> gives non-technical users access to Claude Code with professional-grade infrastructure that even experienced developers struggle to set up themselves.
+              <ShineText>Pawgrammer</ShineText> makes Claude Code simple. Non-technical users get pro-grade setup — the kind even developers find painful to do on their own.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="relative inline-block">
@@ -1040,13 +1040,13 @@ const App = () => {
             </div>
 
             <img
-              alt="Claude Code terminal interface"
-              src="/ClaudeCode.png"
+              alt="Pawgrammer interface"
+              src="/Pawgrammer-light.png"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 dark:hidden"
             />
             <img
-              alt="Claude Code terminal interface dark mode"
-              src="/Claude-Code-dark.png"
+              alt="Pawgrammer interface"
+              src="/Pawgrammer-light.png"
               className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 hidden dark:block"
             />
           </div>
@@ -1286,13 +1286,13 @@ const App = () => {
                             Built for non-technical users who want real apps
                           </p>
                           <p className="mt-2 max-w-lg text-sm/6 text-[#6B7280] dark:text-gray-300 max-lg:text-center">
-                            Yes, there's a learning curve—but you get apps that actually work long-term. Other tools work for demos. <ShineText>Pawgrammer</ShineText> builds apps you can actually use.
+                            There's still a learning curve — but the result is real, lasting software. Other tools work for demos. <ShineText>Pawgrammer</ShineText> builds apps you can actually use.
                           </p>
                         </div>
                         <div className="relative min-h-[30rem] w-full grow">
                           <div className="absolute top-10 right-0 bottom-0 left-10 overflow-hidden rounded-lg bg-white dark:bg-gray-800 border-t border-l border-gray-200 dark:border-gray-900 p-2 shadow-2xl">
                             <motion.div 
-                              className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full h-full"
+                              className="cursor-pointer hover:scale-105 transition-transform duration-200 w-full h-full relative z-10"
                               whileHover={{ scale: 1.05 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => {
@@ -1318,7 +1318,7 @@ const App = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem]" />
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 lg:rounded-l-[2rem] z-0" />
                     </div>
                     <div className="relative max-lg:row-start-1">
                       <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700 max-lg:rounded-t-[2rem]" />
@@ -1356,7 +1356,7 @@ const App = () => {
                           </motion.div>
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem]" />
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-t-[2rem] z-0" />
                     </div>
                     <div className="relative max-lg:row-start-3 lg:col-start-2 lg:row-start-2">
                       <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700" />
@@ -1369,7 +1369,7 @@ const App = () => {
                         </div>
                         <div className="flex flex-1 items-center justify-center px-8 max-lg:pt-10 max-lg:pb-12 sm:px-10 lg:pb-2">
                           <motion.div 
-                            className="cursor-pointer hover:scale-105 transition-transform duration-200"
+                            className="cursor-pointer hover:scale-105 transition-transform duration-200 relative z-10"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => {
@@ -1394,7 +1394,7 @@ const App = () => {
                           </motion.div>
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5" />
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 z-0" />
                     </div>
                     <div className="relative lg:row-span-2">
                       <div className="absolute inset-px rounded-lg bg-white dark:bg-gray-700 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
@@ -1449,7 +1449,7 @@ const App = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem]" />
+                      <div className="pointer-events-none absolute inset-px rounded-lg shadow-sm ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-r-[2rem] z-0" />
                     </div>
                   </div>
                 </div>
@@ -1638,7 +1638,7 @@ const App = () => {
                 loop
                 poster="/video-poster.jpg"
               >
-                <source src="/NCC-first-demo.mp4" type="video/mp4" />
+                <source src="/rank-tool-demo.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
@@ -1694,7 +1694,7 @@ const App = () => {
           <div className="mb-12">
             <div className="rounded-3xl border border-violet-200 dark:border-violet-800/50 bg-white/70 dark:bg-gray-800/70 shadow-sm p-8">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
-                Your specific problems, solved
+                Your specific problems, solved.
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1751,7 +1751,7 @@ const App = () => {
           <div className="mb-12">
             <div className="rounded-3xl bg-gradient-to-br from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 border-2 border-violet-200 dark:border-violet-700 p-8">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
-                Claude Code's power, no technical headaches
+                Claude Code's power, no technical headaches.
               </h3>
               
               <div className="grid sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
@@ -1775,7 +1775,7 @@ const App = () => {
                   </div>
                   <div>
                     <h4 className="font-medium text-gray-900 dark:text-white">Your Computer, Your Data</h4>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Access files, data, local tools — no API limitations or cloud dependencies</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Work directly with your files, databases, and tools — not stuck behind APIs or cloud limits</p>
                   </div>
                 </div>
                 
@@ -1834,44 +1834,20 @@ const App = () => {
                 <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937] dark:text-white"><ShineText>Pawgrammer</ShineText></span>
               </a>
             </div>
-            <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Product</h2>
-                <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
-                  <li className="mb-4">
-                    <a href="#features" className="hover:underline">Features</a>
-                  </li>
-                  <li>
-                    <a href="#how-it-works" className="hover:underline">How it works</a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Support</h2>
-                <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline placeholder-link">Documentation</a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline placeholder-link">Help Center</a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Legal</h2>
-                <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
-                  <li className="mb-4">
-                    <a href="#" className="hover:underline placeholder-link">Privacy Policy</a>
-                  </li>
-                  <li>
-                    <a href="#" className="hover:underline placeholder-link">Terms & Conditions</a>
-                  </li>
-                </ul>
-              </div>
+            <div>
+              <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Product</h2>
+              <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
+                <li className="mb-4">
+                  <a href="#features" className="hover:underline">Features</a>
+                </li>
+                <li>
+                  <a href="#how-it-works" className="hover:underline">How it works</a>
+                </li>
+              </ul>
             </div>
           </div>
           <ShineLine className="sm:mx-auto lg:my-8" />
-          <div className="mb-4 text-center">
+          <div className="mb-8 text-center">
             <p className="text-sm text-[#6B7280] dark:text-gray-300">
               <strong>Important:</strong> We are not affiliated with Claude Code or Anthropic. 
               Claude Code subscription required. This service provides setup and configuration assistance.
@@ -1879,24 +1855,12 @@ const App = () => {
           </div>
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">Pawgrammer</a>. All Rights Reserved.</span>
-            <div className="flex mt-4 sm:justify-center sm:mt-0">
+            <div className="flex mt-6 sm:justify-center sm:mt-0 sm:ml-6">
               <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white placeholder-link">
-                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
-                  <path fillRule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clipRule="evenodd"/>
+                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
-                <span className="sr-only">Twitter page</span>
-              </a>
-              <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white ms-5 placeholder-link">
-                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clipRule="evenodd"/>
-                </svg>
-                <span className="sr-only">GitHub account</span>
-              </a>
-              <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white ms-5 placeholder-link">
-                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
-                  <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
-                </svg>
-                <span className="sr-only">Discord community</span>
+                <span className="sr-only">X page</span>
               </a>
             </div>
           </div>
