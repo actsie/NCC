@@ -1001,7 +1001,7 @@ const App = () => {
               <div className="lg:max-w-lg">
                 <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-[#AF97F8]">Why Claude Code matters</h2>
                 <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
-                  Real developers choose Claude Code
+                  Real developer tools accessible to everyone
                 </p>
                 <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300">
                   Professional developers trust Claude Code because it's uniquely powerful—offering capabilities that other tools simply can't match.
@@ -1068,7 +1068,7 @@ const App = () => {
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Tab Navigation */}
           <div className="mx-auto max-w-4xl lg:text-center mb-16">
-            <h2 className="text-base font-semibold leading-7 text-[#7866CC]">Understanding the Challenge</h2>
+            <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-purple-300">Understanding the Challenge</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
               Why <ShineText>Pawgrammer</ShineText> exists
             </p>
@@ -1694,7 +1694,7 @@ const App = () => {
           <div className="mb-12">
             <div className="rounded-3xl border border-violet-200 dark:border-violet-800/50 bg-white/70 dark:bg-gray-800/70 shadow-sm p-8">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
-                Your specific problems, solved.
+                The ideas that you can build with our tool:
               </h3>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
