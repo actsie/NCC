@@ -839,8 +839,12 @@ const App = () => {
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5 placeholder-link">
               <span className="sr-only">No Code Claude</span>
-              <div className="h-8 w-8 bg-[#7866CC] rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">NC</span>
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
+                <img 
+                  src="/pawgrammer.png" 
+                  alt="Pawgrammer" 
+                  className="h-full w-full object-contain"
+                />
               </div>
             </a>
           </div>
@@ -871,8 +875,12 @@ const App = () => {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5 placeholder-link">
                 <span className="sr-only">No Code Claude</span>
-                <div className="h-8 w-8 bg-[#7866CC] rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">NC</span>
+                <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
+                  <img 
+                    src="/pawgrammer.png" 
+                    alt="Pawgrammer" 
+                    className="h-full w-full object-contain"
+                  />
                 </div>
               </a>
               <button
