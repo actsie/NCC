@@ -1472,7 +1472,7 @@ const App = () => {
         </div>
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-4xl lg:text-center">
-            <h2 className="text-base font-semibold leading-7 text-[#7866CC]">Simple Process</h2>
+            <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-purple-300">Simple Process</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
               How It Works
             </p>
@@ -1480,7 +1480,7 @@ const App = () => {
               From idea to production-ready app in three simple steps
             </p>
             <div className="mt-4 text-center">
-              <p className="text-sm text-[#7866CC] dark:text-purple-300 font-medium">
+              <p className="text-sm text-[#6B7280] dark:text-gray-400 font-medium">
                 Note: You'll need an active Claude Code subscription to use this service.
               </p>
             </div>
@@ -1612,7 +1612,7 @@ const App = () => {
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
-                <p className="text-base/7 font-semibold text-[#7866CC]">Real Examples</p>
+                <p className="text-base/7 font-semibold text-[#7866CC] dark:text-purple-300">Real Examples</p>
                 <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl">
                   What You Can Build
                 </h1>
