@@ -95,6 +95,12 @@ const tabStyles = `
       z-index: -1;
       animation: shimmer 3s ease-in-out infinite;
     }
+    
+    /* Disable shimmer animation on hover */
+    .tab-solution-shine:not(.tab-active):hover::before {
+      animation: none;
+    }
+    
     .tab-solution-shine:not(.tab-active)::after {
       content: '';
       position: absolute;
@@ -732,7 +738,7 @@ const App = () => {
       document.querySelectorAll('[id^="tab-"]').forEach(tab => {
         tab.classList.remove('tab-active');
         if (tab.id === 'tab-solution') {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
         } else {
           tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
         }
@@ -1085,7 +1091,7 @@ const App = () => {
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
                     } else {
                       tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
                     }
@@ -1109,7 +1115,7 @@ const App = () => {
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
                     } else {
                       tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
                     }
@@ -1127,13 +1133,13 @@ const App = () => {
               </button>
               <button 
                 id="tab-solution"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg transition-all duration-200 tab-solution-shine"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
                     } else {
                       tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
                     }
@@ -1856,7 +1862,7 @@ const App = () => {
           <div className="sm:flex sm:items-center sm:justify-between">
             <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">Pawgrammer</a>. All Rights Reserved.</span>
             <div className="flex mt-6 sm:justify-center sm:mt-0 sm:ml-6">
-              <a href="#" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white placeholder-link">
+              <a href="https://x.com/pawgrammercom" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white" target="_blank" rel="noopener noreferrer">
                 <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
