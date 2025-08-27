@@ -9,6 +9,7 @@ import AnimatedButton from './AnimatedButton';
 import DarkModeToggle from './DarkModeToggle';
 import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
 import BlogIndex from './BlogIndex';
+import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ShineText from './components/ShineText';
@@ -695,6 +696,11 @@ const App = () => {
   // If it's the blog post route, render the blog component
   if (currentPath === '/blog/build-ai-tool-with-claude-no-code') {
     return <BlogPostClaudeNoCode />;
+  }
+  
+  // If it's the examples route, render the examples index
+  if (currentPath === '/examples') {
+    return <ExamplesIndex />;
   }
 
   return (

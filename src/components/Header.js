@@ -1,13 +1,52 @@
 import React, { useState } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
+import { Dialog, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, PlayCircleIcon } from '@heroicons/react/20/solid';
+import {
+  ChatBubbleLeftRightIcon,
+  MagnifyingGlassIcon,
+  DocumentTextIcon,
+  ChartBarIcon,
+  CodeBracketIcon,
+} from '@heroicons/react/24/outline';
 import DarkModeToggle from '../DarkModeToggle';
 
 const navigation = [
   { name: 'Features', href: '/#features' },
   { name: 'How it works', href: '/#how-it-works' },
-  { name: 'Examples', href: '/#examples' },
   { name: 'Blog', href: '/blog' },
+];
+
+const automationExamples = [
+  { 
+    name: 'Feedback Processor', 
+    description: 'Cut through the noise. Instantly surface what matters, what\'s blocked, and who needs to decide.', 
+    href: '#feedback-processor', 
+    icon: ChatBubbleLeftRightIcon 
+  },
+  { 
+    name: 'X Discovery Bot', 
+    description: 'Find and engage with relevant conversations on X/Twitter', 
+    href: '#x-discovery-bot', 
+    icon: MagnifyingGlassIcon 
+  },
+  { 
+    name: 'Negative Visualization Journal', 
+    description: 'Daily prompts for stoic reflection and gratitude practice', 
+    href: '#negative-visualization', 
+    icon: DocumentTextIcon 
+  },
+  { 
+    name: 'Goal Tracker', 
+    description: 'Smart progress tracking with automated check-ins', 
+    href: '#goal-tracker', 
+    icon: ChartBarIcon 
+  },
+];
+
+const callsToAction = [
+  { name: 'Watch demo', href: '/examples', icon: PlayCircleIcon },
+  { name: 'GitHub', href: 'https://github.com', icon: CodeBracketIcon },
 ];
 
 const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
@@ -51,7 +90,7 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
         </div>
-        <div className="hidden lg:flex lg:gap-x-12">
+        <div className="hidden lg:flex lg:gap-x-12 lg:items-center">
           {navigation.map((item) => (
             <a 
               key={item.name} 
@@ -65,6 +104,67 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
               {item.name}
             </a>
           ))}
+          
+          {/* Examples Popover */}
+          <Popover className="relative">
+            {({ open }) => (
+              <>
+                <PopoverButton className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2] focus:outline-none">
+                  <span>Examples</span>
+                  <ChevronDownIcon 
+                    aria-hidden="true" 
+                    className={`size-5 transition-transform duration-200 ${open ? 'rotate-180' : 'rotate-0'}`} 
+                  />
+                </PopoverButton>
+
+            <PopoverPanel
+              transition
+              className="absolute left-1/2 z-50 mt-5 flex -translate-x-1/2 px-4 transition-all duration-300 ease-out data-[closed]:opacity-0 data-[closed]:scale-95 data-[closed]:-translate-y-2 data-[enter]:duration-300 data-[leave]:duration-200"
+            >
+              <div className="relative w-96 overflow-hidden rounded-3xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
+                {/* Coming Soon Top Banner */}
+                <div className="bg-[#7866CC] px-4 py-2 rounded-t-3xl">
+                  <div className="text-center text-white text-sm font-medium">
+                    Coming Soon ✨
+                  </div>
+                </div>
+                
+                <div className="p-4">
+                  {automationExamples.map((item) => (
+                    <div key={item.name} className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                      <div className="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700/50 group-hover:bg-[#7866CC] dark:group-hover:bg-[#7866CC]">
+                        <item.icon aria-hidden="true" className="size-6 text-gray-600 dark:text-gray-400 group-hover:text-white" />
+                      </div>
+                      <div>
+                        <a href={item.href} className="font-semibold text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2] cursor-not-allowed" onClick={(e) => e.preventDefault()}>
+                          {item.name}
+                          <span className="absolute inset-0" />
+                        </a>
+                        <p className="mt-1 text-gray-600 dark:text-gray-400">{item.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-2 divide-x divide-gray-900/5 dark:divide-gray-100/10 bg-gray-50 dark:bg-gray-700/50">
+                  {callsToAction.map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      className={`flex items-center justify-center gap-x-2.5 p-3 font-semibold text-[#1F2937] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                        item.name === 'GitHub' ? 'cursor-not-allowed' : ''
+                      }`}
+                      onClick={item.name === 'GitHub' ? (e) => e.preventDefault() : undefined}
+                    >
+                      <item.icon aria-hidden="true" className="size-5 flex-none text-gray-500 dark:text-gray-400" />
+                      {item.name}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </PopoverPanel>
+              </>
+            )}
+          </Popover>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
           <DarkModeToggle />
@@ -110,6 +210,39 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                     {item.name}
                   </a>
                 ))}
+                
+                {/* Mobile Examples Section */}
+                <div className="-mx-3 px-3 py-2">
+                  <div className="text-base font-semibold leading-7 text-[#1F2937] dark:text-white mb-3">
+                    Examples
+                  </div>
+                  <div className="space-y-2 ml-3">
+                    {automationExamples.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm leading-6 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                      >
+                        <item.icon className="size-5 flex-none text-gray-500 dark:text-gray-400" />
+                        <span>{item.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                  <div className="mt-4 grid grid-cols-2 gap-2">
+                    {callsToAction.map((item) => (
+                      <a
+                        key={item.name}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center justify-center gap-x-2 rounded-lg bg-gray-50 dark:bg-gray-800 px-3 py-2 text-sm font-semibold text-[#1F2937] dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                      >
+                        <item.icon className="size-4 flex-none text-gray-500 dark:text-gray-400" />
+                        {item.name}
+                      </a>
+                    ))}
+                  </div>
+                </div>
               </div>
               <div className="py-6">
                 <div className="-mx-3 px-3">
