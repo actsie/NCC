@@ -694,7 +694,7 @@ const App = () => {
   }
   
   // If it's the blog post route, render the blog component
-  if (currentPath === '/blog/build-ai-tool-with-claude-no-code') {
+  if (currentPath === '/blog/build-custom-ai-workflows-without-code') {
     return <BlogPostClaudeNoCode />;
   }
   

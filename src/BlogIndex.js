@@ -7,12 +7,12 @@ import Footer from './components/Footer';
 const posts = [
   {
     id: 1,
-    title: 'Build Automation That Fits Your Brain — No Code, Powered by Claude',
-    href: '/blog/build-ai-tool-with-claude-no-code',
-    description: 'Tired of rigid tools that don\'t match how you think? Learn how to build Claude-powered automations using plain language. No code, no templates, just describe what you need.',
-    date: 'Aug 26, 2025',
-    datetime: '2025-08-26',
-    category: { title: 'No-Code', href: '#' },
+    title: 'How to Build Custom Workflow Tools Using AI (Without Code)',
+    href: '/blog/build-custom-ai-workflows-without-code',
+    description: 'Learn how to build custom workflow tools that solve your unique problems using AI. From feedback processing to social media discovery - create tools that work exactly how you think.',
+    date: 'Aug 27, 2025',
+    datetime: '2025-08-27',
+    category: { title: 'AI Tools', href: '#' },
     imageUrl: '/no-code-claude-professional-setup.png',
     author: {
       name: 'Pawgrammer Team',
