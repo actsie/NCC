@@ -7,6 +7,11 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
 import DarkModeToggle from './DarkModeToggle';
+import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
+import BlogIndex from './BlogIndex';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ShineText from './components/ShineText';
 
 // Tab styles with neumorphic animations
 const tabStyles = `
@@ -504,102 +509,7 @@ const TypewriterText = () => {
   );
 };
 
-// Styled component for shining separator line
-const ShineLine = styled.hr`
-  height: 1px;
-  border: none;
-  background: linear-gradient(to right, #7866CC 0, #AF97F8 10%, #7866CC 20%);
-  background-size: 300% 100%;
-  background-position: -300% 0;
-  animation: shine 36s infinite linear;
-  margin: 1.5rem auto;
 
-  @-moz-keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-  @-webkit-keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-  @-o-keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-  @keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-`;
-
-// Styled component for gradient shine effect on "Pawgrammer" text
-const ShineText = styled.span`
-  background: linear-gradient(to right, #7866CC 0, #AF97F8 10%, #7866CC 20%);
-  background-size: 300% 100%;
-  background-position: -300% 0;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shine 36s infinite linear;
-  animation-fill-mode: forwards;
-  -webkit-text-size-adjust: none;
-  font-weight: 600;
-  white-space: nowrap;
-
-  @-moz-keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-  @-webkit-keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-  @-o-keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-  @keyframes shine {
-    0% {
-      background-position: -300% 0;
-    }
-    100% {
-      background-position: 300% 0;
-    }
-  }
-`;
-
-const navigation = [
-  { name: 'Features', href: '#features' },
-  { name: 'How it works', href: '#how-it-works' },
-  { name: 'Examples', href: '#examples' },
-];
 
 const claudeFeatures = [
   {
@@ -656,7 +566,6 @@ const setupChallenges = [
 ];
 
 const App = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isSignedUp, setIsSignedUp] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
@@ -775,6 +684,19 @@ const App = () => {
     };
   }, []);
 
+  // Simple routing logic
+  const currentPath = window.location.pathname;
+  
+  // If it's the blog index route, render the blog index
+  if (currentPath === '/blog') {
+    return <BlogIndex />;
+  }
+  
+  // If it's the blog post route, render the blog component
+  if (currentPath === '/blog/build-ai-tool-with-claude-no-code') {
+    return <BlogPostClaudeNoCode />;
+  }
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <style jsx>{`
@@ -840,88 +762,7 @@ const App = () => {
         }
       `}</style>
       {/* Navigation Header */}
-      <header className="absolute inset-x-0 top-0 z-50">
-        <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-          <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5 placeholder-link">
-              <span className="sr-only">Pawgrammer</span>
-              <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
-                <img 
-                  src="/pawgrammer.png" 
-                  alt="Pawgrammer" 
-                  className="h-full w-full object-contain"
-                />
-              </div>
-            </a>
-          </div>
-          <div className="flex lg:hidden">
-            <button
-              type="button"
-              onClick={() => setMobileMenuOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-[#1F2937] dark:text-white"
-            >
-              <span className="sr-only">Open main menu</span>
-              <Bars3Icon aria-hidden="true" className="size-6" />
-            </button>
-          </div>
-          <div className="hidden lg:flex lg:gap-x-12">
-            {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white">
-                {item.name}
-              </a>
-            ))}
-          </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
-            <DarkModeToggle />
-          </div>
-        </nav>
-        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
-          <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:ring-gray-100/10">
-            <div className="flex items-center justify-between">
-              <a href="#" className="-m-1.5 p-1.5 placeholder-link">
-                <span className="sr-only">Pawgrammer</span>
-                <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
-                  <img 
-                    src="/pawgrammer.png" 
-                    alt="Pawgrammer" 
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-              </a>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-[#1F2937] dark:text-white"
-              >
-                <span className="sr-only">Close menu</span>
-                <XMarkIcon aria-hidden="true" className="size-6" />
-              </button>
-            </div>
-            <div className="mt-6 flow-root">
-              <div className="-my-6 divide-y divide-gray-500/10">
-                <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-[#1F2937] dark:text-white dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-600 dark:hover:bg-gray-800"
-                    >
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-                <div className="py-6">
-                  <div className="-mx-3 px-3">
-                    <DarkModeToggle />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </DialogPanel>
-        </Dialog>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <div className="relative isolate px-6 pt-14 lg:px-8">
@@ -1827,51 +1668,7 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer id="footer-section" className="bg-white dark:bg-gray-900">
-        <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-          <div className="md:flex md:justify-between">
-            <div className="mb-6 md:mb-0">
-              <a href="#" className="flex items-center placeholder-link">
-                <img 
-                  src="/pawgrammer.png" 
-                  alt="Pawgrammer" 
-                  className="h-8 w-8 mr-3"
-                />
-                <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937] dark:text-white"><ShineText>Pawgrammer</ShineText></span>
-              </a>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Product</h2>
-              <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
-                <li className="mb-4">
-                  <a href="#features" className="hover:underline">Features</a>
-                </li>
-                <li>
-                  <a href="#how-it-works" className="hover:underline">How it works</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <ShineLine className="sm:mx-auto lg:my-8" />
-          <div className="mb-8 text-center">
-            <p className="text-sm text-[#6B7280] dark:text-gray-300">
-              <strong>Important:</strong> We are not affiliated with Claude Code or Anthropic. 
-              Claude Code subscription required. This service provides setup and configuration assistance.
-            </p>
-          </div>
-          <div className="sm:flex sm:items-center sm:justify-between">
-            <span className="text-sm text-[#6B7280] dark:text-gray-300 sm:text-center">© 2025 <a href="#" className="hover:underline placeholder-link">Pawgrammer</a>. All Rights Reserved.</span>
-            <div className="flex mt-6 sm:justify-center sm:mt-0 sm:ml-6">
-              <a href="https://x.com/pawgrammercom" className="text-[#6B7280] dark:text-gray-300 hover:text-[#1F2937] dark:text-white" target="_blank" rel="noopener noreferrer">
-                <svg className="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-                <span className="sr-only">X page</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer id="footer-section" />
     </div>
   );
 };
