@@ -1491,7 +1491,7 @@ const App = () => {
                 loop
                 poster="/video-poster.jpg"
               >
-                <source src="/rank-tool-demo.mp4" type="video/mp4" />
+                <source src="/negative-vis-journal3.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
             </div>
