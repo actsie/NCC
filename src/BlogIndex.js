@@ -3,25 +3,12 @@ import { motion } from 'framer-motion';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import { getAllBlogPosts } from './data/blogPosts';
 
-const posts = [
-  {
-    id: 1,
-    title: 'How to Build Custom Workflow Tools Using AI (Without Code)',
-    href: '/blog/build-custom-ai-workflows-without-code',
-    description: 'Learn how to build custom workflow tools that solve your unique problems using AI. From feedback processing to social media discovery - create tools that work exactly how you think.',
-    date: 'Aug 27, 2025',
-    datetime: '2025-08-27',
-    category: { title: 'AI Tools', href: '#' },
-    imageUrl: '/no-code-claude-professional-setup.png',
-    author: {
-      name: 'Pawgrammer Team',
-      role: 'Product Team',
-      href: '#',
-      imageUrl: '/pawgrammer.png',
-    },
-  },
-];
+const posts = getAllBlogPosts().map(post => ({
+  ...post,
+  href: `/blog/${post.slug}`
+}));
 
 const BlogIndex = () => {
   return (

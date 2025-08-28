@@ -4,8 +4,10 @@ import { CheckIcon, ArrowRightIcon, CalendarIcon, UserIcon, ChevronRightIcon } f
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AnimatedButton from './AnimatedButton';
+import { getBlogPostBySlug } from './data/blogPosts';
 
 const BlogPostClaudeNoCode = () => {
+  const post = getBlogPostBySlug('build-custom-ai-workflows-without-code');
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
@@ -19,20 +21,20 @@ const BlogPostClaudeNoCode = () => {
             <div className="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
               <div className="flex items-center space-x-1">
                 <CalendarIcon className="h-4 w-4" />
-                <time dateTime="2025-01-15">January 15, 2025</time>
+                <time dateTime={post.datetime}>{post.date}</time>
               </div>
               <div className="flex items-center space-x-1">
                 <UserIcon className="h-4 w-4" />
-                <span>Pawgrammer Team</span>
+                <span>{post.author.name}</span>
               </div>
             </div>
             
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-white mb-6">
-              How to Build Custom Workflow Tools Using AI (Without Code)
+              {post.title}
             </h1>
             
             <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-              Your workflow is unique. Generic apps force you into their templates. AI-powered tools like Claude can understand natural language descriptions and create solutions that match your specific process — here's how it works in practice.
+              {post.metaDescription}
             </p>
           </header>
 
