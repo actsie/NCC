@@ -17,8 +17,8 @@ import ShineText from './components/ShineText';
 // Tab styles with neumorphic animations
 const tabStyles = `
   <style>
-    /* Base tab styles with neumorphic design - only for inactive tabs */
-    [id^="tab-"]:not(.tab-active) {
+    /* Base tab styles with neumorphic design - only for inactive tabs (excluding solution tab) */
+    [id^="tab-"]:not(.tab-active):not(.tab-solution-shine) {
       position: relative;
       background: linear-gradient(145deg, #ffffff, #e6e6e6);
       box-shadow:
@@ -33,8 +33,8 @@ const tabStyles = `
       justify-content: center;
     }
 
-    /* Dark mode styles for inactive tabs */
-    .dark [id^="tab-"]:not(.tab-active) {
+    /* Dark mode styles for inactive tabs (excluding solution tab) */
+    .dark [id^="tab-"]:not(.tab-active):not(.tab-solution-shine) {
       background: linear-gradient(145deg, #374151, #4b5563);
       box-shadow:
         3px 3px 6px rgba(0, 0, 0, 0.5),
@@ -42,8 +42,8 @@ const tabStyles = `
       color: #e5e7eb !important;
     }
 
-    /* Hover effect for inactive tabs only */
-    [id^="tab-"]:hover:not(.tab-active) {
+    /* Hover effect for inactive tabs only (excluding solution tab) */
+    [id^="tab-"]:hover:not(.tab-active):not(.tab-solution-shine) {
       background: linear-gradient(145deg, #f0f0f0, #ffffff) !important;
       transform: translateY(-1px);
       box-shadow:
@@ -52,8 +52,8 @@ const tabStyles = `
       height: 48px;
     }
 
-    /* Dark mode hover effect for inactive tabs only */
-    .dark [id^="tab-"]:hover:not(.tab-active) {
+    /* Dark mode hover effect for inactive tabs only (excluding solution tab) */
+    .dark [id^="tab-"]:hover:not(.tab-active):not(.tab-solution-shine) {
       background: linear-gradient(145deg, #1f2937, #374151) !important;
       box-shadow:
         4px 4px 8px rgba(0, 0, 0, 0.6),
@@ -87,45 +87,66 @@ const tabStyles = `
       height: 48px;
     }
 
-    /* Shine effect for solution tab when not active */
-    .tab-solution-shine:not(.tab-active)::before {
-      content: '';
-      position: absolute;
-      top: -1px;
-      left: -1px;
-      right: -1px;
-      bottom: -1px;
-      background: linear-gradient(45deg, #7866CC, #AF97F8, #7866CC, #AF97F8);
-      background-size: 400% 400%;
-      border-radius: inherit;
-      z-index: -1;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-    
-    /* Disable shimmer animation on hover */
-    .tab-solution-shine:not(.tab-active):hover::before {
-      animation: none;
-    }
-    
-    .tab-solution-shine:not(.tab-active)::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: inherit;
-      z-index: 0;
+    /* CSS custom properties for conic gradient animation */
+    @property --shimmer-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
     }
 
-    /* Dark mode shine effect background */
-    .dark .tab-solution-shine:not(.tab-active)::after {
-      background: rgba(31, 41, 55, 0.95);
-    }
-    .tab-solution-shine:not(.tab-active) span {
+    /* Special shimmery border for solution tab when not active */
+    .tab-solution-shine:not(.tab-active) {
       position: relative;
-      z-index: 1;
+      --shimmer-angle: 0deg;
+      border: 1px solid transparent;
+      background-image:
+        linear-gradient(#f9fafb, #f9fafb),
+        conic-gradient(
+          from var(--shimmer-angle),
+          #7866CC 0deg,
+          #AF97F8 90deg,
+          #9B7EF7 180deg,
+          #AF97F8 270deg,
+          #7866CC 360deg
+        );
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      animation: shimmerRotate 4s linear infinite;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s ease;
+      overflow: visible;
+    }
+
+    /* Dark mode special border for solution tab */
+    .dark .tab-solution-shine:not(.tab-active) {
+      background-image:
+        linear-gradient(#1f2937, #1f2937),
+        conic-gradient(
+          from var(--shimmer-angle),
+          #7866CC 0deg,
+          #AF97F8 90deg,
+          #9B7EF7 180deg,
+          #AF97F8 270deg,
+          #7866CC 360deg
+        ) !important;
+      background-origin: border-box;
+      background-clip: padding-box, border-box;
+      animation: shimmerRotate 4s linear infinite;
+    }
+
+    /* Rotation animation for conic gradient */
+    @keyframes shimmerRotate {
+      to {
+        --shimmer-angle: 360deg;
+      }
+    }
+    
+    /* Hover effect for solution tab */
+    .tab-solution-shine:not(.tab-active):hover {
+      transform: translateY(-1px);
     }
 
     /* Particle animation for active tabs */
@@ -980,7 +1001,7 @@ const App = () => {
               </button>
               <button 
                 id="tab-solution"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg transition-all duration-200 tab-solution-shine"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
