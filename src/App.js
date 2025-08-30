@@ -74,7 +74,7 @@ const tabStyles = `
         3px 3px 8px rgba(120, 102, 204, 0.3);
       transform: translateY(2px);
       border: none !important;
-      animation: select 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      animation: select 0.15s cubic-bezier(0.4, 0, 0.2, 1);
       height: 48px;
       display: flex;
       align-items: center;
@@ -709,9 +709,9 @@ const App = () => {
       document.querySelectorAll('[id^="tab-"]').forEach(tab => {
         tab.classList.remove('tab-active');
         if (tab.id === 'tab-solution') {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
         } else {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
+          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
         }
       });
       document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -721,9 +721,9 @@ const App = () => {
       if (activeTab) {
         activeTab.classList.add('tab-active');
         if (tabId === 'tab-solution') {
-          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
+          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active tab-solution-shine';
         } else {
-          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
+          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active';
         }
         const contentId = 'content-' + tabId.replace('tab-', '');
         const contentElement = document.getElementById(contentId);
@@ -993,15 +993,15 @@ const App = () => {
             <div className="flex flex-col sm:flex-row justify-center mb-12 gap-2">
               <button 
                 id="tab-problems"
-                className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#7866CC] to-[#AF97F8] rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active"
+                className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#7866CC] to-[#AF97F8] rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
                     } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
                     }
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -1009,7 +1009,7 @@ const App = () => {
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-problems');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active';
                   document.getElementById('content-problems').classList.remove('hidden');
                 }}
               >
@@ -1017,15 +1017,15 @@ const App = () => {
               </button>
               <button 
                 id="tab-setup"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
                     } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
                     }
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -1033,7 +1033,7 @@ const App = () => {
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-setup');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active';
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active';
                   document.getElementById('content-setup').classList.remove('hidden');
                 }}
               >
@@ -1041,15 +1041,15 @@ const App = () => {
               </button>
               <button 
                 id="tab-solution"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine"
+                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
                     if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-200 tab-solution-shine';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
                     } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-200';
+                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
                     }
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
@@ -1057,7 +1057,7 @@ const App = () => {
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-solution');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-200 tab-active tab-solution-shine';
+                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active tab-solution-shine';
                   document.getElementById('content-solution').classList.remove('hidden');
                 }}
               >
