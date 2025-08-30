@@ -606,6 +606,46 @@ const App = () => {
     }
   }, []);
 
+  // Handle hash scroll navigation for cross-page links
+  React.useEffect(() => {
+    const scrollToHash = (hash) => {
+      if (hash) {
+        // Run after DOM is painted
+        setTimeout(() => {
+          const id = hash.replace("#", "");
+          const element = document.getElementById(id);
+          if (element) {
+            // Account for header height (adjust as needed)
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+        }, 100);
+      }
+    };
+
+    // Handle hash on initial load
+    if (window.location.hash) {
+      scrollToHash(window.location.hash);
+    }
+
+    // Handle hash changes (for same-page navigation)
+    const handleHashChange = () => {
+      scrollToHash(window.location.hash);
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
   // Handle tooltip visibility when user signs up
   React.useEffect(() => {
     if (isSignedUp) {
