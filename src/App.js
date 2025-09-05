@@ -956,12 +956,12 @@ const App = () => {
             <img
               alt="Pawgrammer interface"
               src="/Pawgrammer-light.png"
-              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 dark:hidden"
+              className="w-full max-w-full sm:w-[57rem] sm:max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0 dark:hidden"
             />
             <img
               alt="Pawgrammer interface"
               src="/Pawgrammer-light.png"
-              className="w-[48rem] max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0 hidden dark:block"
+              className="w-full max-w-full sm:w-[57rem] sm:max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0 hidden dark:block"
             />
           </div>
         </div>
@@ -1545,16 +1545,16 @@ const App = () => {
           </div>
           <div className="-mt-12 -ml-12 p-12 lg:sticky lg:top-4 lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:overflow-hidden">
             <div className="w-full max-w-none rounded-xl shadow-xl overflow-hidden">
-              <video 
-                className="w-full h-full object-cover"
-                autoPlay 
-                muted 
-                loop
-                poster="/video-poster.jpg"
-              >
-                <source src="/pawgrammer-demo-video-7.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+              <div className="relative w-full h-0" style={{paddingBottom: '56.25%'}}>
+                <iframe 
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/ZJGbfHvtfmQ?autoplay=1&mute=1&loop=1&playlist=ZJGbfHvtfmQ&controls=0&showinfo=0&rel=0&modestbranding=1"
+                  title="Pawgrammer Demo Video"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </div>
             </div>
           </div>
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
