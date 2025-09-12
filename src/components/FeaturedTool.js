@@ -163,6 +163,14 @@ const FeaturedTool = ({
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 {oneLiner}
               </p>
+              <p className="mt-3">
+                <a 
+                  href="/blog/how-job-seekers-track-applications" 
+                  className="text-sm text-[#7866CC] hover:text-[#6B5CB7] transition-colors duration-200 font-medium"
+                >
+                  Read the full build story →
+                </a>
+              </p>
             </div>
 
             <div className="flex flex-wrap items-center gap-4">

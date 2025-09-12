@@ -171,7 +171,7 @@ const BlogPostJobTracking = () => {
 
             <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">The Most Interesting Nuances</h2>
 
-            <h3 className="mt-8 text-xl font-semibold text-gray-900 dark:text-white">Resume Chaos</h3>
+            <h3 className="mt-8 text-xl font-semibold text-gray-900 dark:text-white">Resume Version Management</h3>
             <p className="mt-4">
               Multiple people mentioned the challenge of tracking which resume version went where:
             </p>
