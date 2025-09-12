@@ -3,7 +3,6 @@ import { Dialog, DialogPanel, DialogTitle } from '@headlessui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ClipboardDocumentListIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { PlayIcon } from '@heroicons/react/24/solid';
-import AnimatedButton from '../AnimatedButton';
 
 const FeaturedTool = ({
   title,
@@ -35,6 +34,104 @@ const FeaturedTool = ({
 
   return (
     <section aria-labelledby="featured-tool" className="mx-auto max-w-5xl mb-16">
+      {/* Shine Border Demo Button Styles */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .shine-demo-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 16px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ffffff, #f9fafb);
+            color: #1f2937;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            overflow: hidden;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(120, 102, 204, 0.3);
+          }
+
+          .shine-demo-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(120, 102, 204, 0.1);
+          }
+
+          .shine-border-mask {
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.5px;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+            -webkit-mask-composite: xor;
+            pointer-events: none;
+          }
+
+          .shine-border-glow {
+            background: conic-gradient(
+              from 0deg,
+              transparent 0%,
+              rgba(120, 102, 204, 0.4) 8%,
+              rgba(175, 151, 248, 0.3) 12%,
+              transparent 18%
+            );
+            position: absolute;
+            inset: -150px;
+            animation: rotateShine 4s linear infinite;
+          }
+
+          @keyframes rotateShine {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(360deg);
+            }
+          }
+
+          /* Pause animation on hover for better UX */
+          .shine-demo-button:hover .shine-border-glow {
+            animation-play-state: paused;
+          }
+
+          /* Dark mode adjustments */
+          .dark .shine-demo-button {
+            background: linear-gradient(135deg, #1f2937, #374151);
+            color: #ffffff;
+            border-color: rgba(190, 174, 226, 0.3);
+          }
+
+          .dark .shine-demo-button:hover {
+            box-shadow: 0 10px 25px rgba(120, 102, 204, 0.2);
+          }
+
+          .dark .shine-border-glow {
+            background: conic-gradient(
+              from 0deg,
+              transparent 0%,
+              rgba(190, 174, 226, 0.7) 10%,
+              rgba(175, 151, 248, 0.5) 15%,
+              transparent 20%
+            );
+          }
+
+          /* Accessibility: Respect reduced motion preference */
+          @media (prefers-reduced-motion: reduce) {
+            .shine-border-glow {
+              animation: none;
+            }
+          }
+
+          /* Focus styles for accessibility */
+          .shine-demo-button:focus {
+            outline: 2px solid rgba(120, 102, 204, 0.5);
+            outline-offset: 2px;
+          }
+        `
+      }} />
       <div className="mb-6 flex items-center gap-3">
         <h2 id="featured-tool" className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
           Featured Tool
@@ -69,33 +166,20 @@ const FeaturedTool = ({
             </div>
 
             <div className="flex flex-wrap items-center gap-4">
-              {/* Primary CTA */}
+              {/* Primary CTA - Custom Shine Border Button */}
               <a
                 href={demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Open live demo in a new tab"
                 onClick={() => track('examples.featured_demo_click')}
-                className="inline-block"
+                className="shine-demo-button"
               >
-                <AnimatedButton>
-                  Try the Demo
-                </AnimatedButton>
+                <div className="shine-border-mask">
+                  <div className="shine-border-glow"></div>
+                </div>
+                <span className="relative z-10">Try the Demo</span>
               </a>
-
-              {/* Secondary CTA */}
-              <button
-                type="button"
-                className="inline-flex items-center gap-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 px-4 py-2.5 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-                onClick={() => {
-                  setOpen(true);
-                  track('examples.video_open');
-                }}
-                aria-label="Watch overview video"
-              >
-                <PlayIcon className="h-4 w-4" />
-                Watch Demo
-              </button>
             </div>
           </div>
 
@@ -123,10 +207,6 @@ const FeaturedTool = ({
                 <div className="rounded-full bg-white/90 backdrop-blur-sm p-4 shadow-lg">
                   <PlayIcon className="h-8 w-8 text-[#7866CC]" />
                 </div>
-              </div>
-              {/* Live Demo Badge */}
-              <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg">
-                Live Demo
               </div>
             </motion.button>
           </div>

@@ -106,8 +106,8 @@ const Footer = ({ id = "footer-section" }) => {
                 </li>
                 <li>
                   <a 
-                    href="/#examples" 
-                    className={`hover:underline ${isActive('/#examples') ? 'text-[#7866CC] font-semibold' : ''}`}
+                    href="/examples" 
+                    className={`hover:underline ${isActive('/examples') ? 'text-[#7866CC] font-semibold' : ''}`}
                   >
                     Examples
                   </a>
