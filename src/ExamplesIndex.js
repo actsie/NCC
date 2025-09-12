@@ -11,6 +11,7 @@ import {
 import Header from './components/Header';
 import Footer from './components/Footer';
 import AnimatedButton from './AnimatedButton';
+import FeaturedTool from './components/FeaturedTool';
 
 const examples = [
   {
@@ -56,8 +57,39 @@ const examples = [
 ];
 
 const ExamplesIndex = () => {
+  // Schema markup for SEO
+  const softwareSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Job Application Tracker",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "url": "https://jobapplication.pawgrammer.com/",
+    "screenshot": "https://i.ytimg.com/vi/pGNIEEcD3f8/maxresdefault.jpg"
+  };
+
+  const videoSchema = {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    "name": "Job Application Tracker Demo",
+    "description": "Overview and quick demo of the Job Application Tracker tool.",
+    "thumbnailUrl": ["https://i.ytimg.com/vi/pGNIEEcD3f8/maxresdefault.jpg"],
+    "contentUrl": "https://www.youtube.com/watch?v=pGNIEEcD3f8",
+    "embedUrl": "https://www.youtube-nocookie.com/embed/pGNIEEcD3f8"
+  };
+
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
+      {/* Schema markup */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(videoSchema) }}
+      />
       {/* Header */}
       <Header />
 
@@ -101,8 +133,30 @@ const ExamplesIndex = () => {
             </motion.p>
           </div>
           
-          {/* Examples Grid - Centered and Larger */}
-          <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-16 sm:mt-20 lg:grid-cols-2 lg:gap-20">
+          {/* Featured Tool Section */}
+          <div className="mt-16 sm:mt-20">
+            <FeaturedTool
+              title="Job Application Tracker"
+              oneLiner="Track applications, interviews, and follow-ups in one place — private and local (web demo is just for preview)"
+              videoId="pGNIEEcD3f8"
+              demoUrl="https://jobapplication.pawgrammer.com/"
+              badge="NEW"
+            />
+          </div>
+
+          {/* Coming Soon Section */}
+          <section aria-labelledby="coming-soon" className="mt-16 sm:mt-20">
+            <div className="mx-auto max-w-4xl text-center mb-12">
+              <h2 id="coming-soon" className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                Coming Soon
+              </h2>
+              <p className="mt-2 text-lg text-gray-600 dark:text-gray-300">
+                More tools are in development
+              </p>
+            </div>
+            
+            {/* Examples Grid - Centered and Larger */}
+            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
             {examples.map((example, index) => (
               <motion.article 
                 key={example.id} 
@@ -132,7 +186,7 @@ const ExamplesIndex = () => {
                     </div>
                   </div>
                   {/* Coming Soon Badge */}
-                  <div className="absolute top-4 right-4 bg-[#7866CC] text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-lg backdrop-blur-sm">
+                  <div className="absolute top-4 right-4 bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-3 py-1.5 rounded-full text-sm font-medium shadow-lg backdrop-blur-sm">
                     Coming Soon ✨
                   </div>
                 </div>
@@ -159,7 +213,8 @@ const ExamplesIndex = () => {
                 </div>
               </motion.article>
             ))}
-          </div>
+            </div>
+          </section>
         </div>
       </div>
 

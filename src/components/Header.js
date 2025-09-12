@@ -8,6 +8,7 @@ import {
   DocumentTextIcon,
   ChartBarIcon,
   CodeBracketIcon,
+  ClipboardDocumentListIcon,
 } from '@heroicons/react/24/outline';
 import DarkModeToggle from '../DarkModeToggle';
 
@@ -19,28 +20,10 @@ const navigation = [
 
 const automationExamples = [
   { 
-    name: 'Feedback Processor', 
-    description: 'Cut through the noise. Instantly surface what matters, what\'s blocked, and who needs to decide.', 
-    href: '#feedback-processor', 
-    icon: ChatBubbleLeftRightIcon 
-  },
-  { 
-    name: 'X Discovery Bot', 
-    description: 'Find and engage with relevant conversations on X/Twitter', 
-    href: '#x-discovery-bot', 
-    icon: MagnifyingGlassIcon 
-  },
-  { 
-    name: 'Negative Visualization Journal', 
-    description: 'Daily prompts for stoic reflection and gratitude practice', 
-    href: '#negative-visualization', 
-    icon: DocumentTextIcon 
-  },
-  { 
-    name: 'Goal Tracker', 
-    description: 'Smart progress tracking with automated check-ins', 
-    href: '#goal-tracker', 
-    icon: ChartBarIcon 
+    name: 'Job Application Tracker', 
+    description: 'Stay organized and track every application, interview, and follow-up in one place.', 
+    href: 'https://jobapplication.pawgrammer.com/', 
+    icon: ClipboardDocumentListIcon 
   },
 ];
 
@@ -122,10 +105,10 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
               className="absolute left-1/2 z-50 mt-5 flex -translate-x-1/2 px-4 transition-all duration-300 ease-out data-[closed]:opacity-0 data-[closed]:scale-95 data-[closed]:-translate-y-2 data-[enter]:duration-300 data-[leave]:duration-200"
             >
               <div className="relative w-96 overflow-hidden rounded-3xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
-                {/* Coming Soon Top Banner */}
+                {/* New ✨ Top Banner */}
                 <div className="bg-[#7866CC] px-4 py-2 rounded-t-3xl">
                   <div className="text-center text-white text-sm font-medium">
-                    Coming Soon ✨
+                    New ✨
                   </div>
                 </div>
                 
@@ -136,7 +119,7 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                         <item.icon aria-hidden="true" className="size-6 text-gray-600 dark:text-gray-400 group-hover:text-white" />
                       </div>
                       <div>
-                        <a href={item.href} className="font-semibold text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2] cursor-not-allowed" onClick={(e) => e.preventDefault()}>
+                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]">
                           {item.name}
                           <span className="absolute inset-0" />
                         </a>
@@ -221,6 +204,8 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                       <a
                         key={item.name}
                         href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         onClick={() => setMobileMenuOpen(false)}
                         className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm leading-6 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                       >
