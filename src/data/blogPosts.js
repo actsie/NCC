@@ -1,6 +1,25 @@
 // Blog post data - single source of truth for all blog content
 export const blogPosts = [
   {
+    id: 2,
+    slug: 'how-job-seekers-track-applications',
+    title: 'How Job Seekers Actually Track Their Applications (Based on 90+ Real Replies)',
+    description: 'How do job seekers really track applications, resumes, and follow-ups? We analyzed 90+ real replies from Reddit to uncover the most common systems, pain points, and opportunities for something better.',
+    date: 'Sep 12, 2025',
+    datetime: '2025-09-12',
+    category: { title: 'Research', href: '#' },
+    imageUrl: '/job-app-tracker-blog.png',
+    author: {
+      name: 'Pawgrammer Team',
+      role: 'Product Team',
+      href: '#',
+      imageUrl: '/pawgrammer.png',
+    },
+    // Meta data for SEO
+    metaTitle: 'How Job Seekers Actually Track Their Applications (Based on 90+ Real Replies)',
+    metaDescription: 'How do job seekers really track applications, resumes, and follow-ups? We analyzed 90+ real replies from Reddit to uncover the most common systems, pain points, and opportunities for something better.',
+  },
+  {
     id: 1,
     slug: 'build-custom-ai-workflows-without-code',
     title: 'How to Build Custom Workflow Tools Using AI (Without Code)',

@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import AnimatedButton from './AnimatedButton';
 import DarkModeToggle from './DarkModeToggle';
 import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
+import BlogPostJobTracking from './components/BlogPostJobTracking';
 import BlogIndex from './BlogIndex';
 import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
@@ -757,6 +758,10 @@ const App = () => {
   // If it's the blog post route, render the blog component
   if (currentPath === '/blog/build-custom-ai-workflows-without-code') {
     return <BlogPostClaudeNoCode />;
+  }
+  
+  if (currentPath === '/blog/how-job-seekers-track-applications') {
+    return <BlogPostJobTracking />;
   }
   
   // If it's the examples route, render the examples index
