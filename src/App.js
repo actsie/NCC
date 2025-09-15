@@ -993,8 +993,15 @@ const App = () => {
           {/* Tab Navigation */}
           <div className="mx-auto max-w-4xl lg:text-center mb-16">
             <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-purple-300">Understanding the Challenge</h2>
-            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
-              Why <ShineText>Pawgrammer</ShineText> exists
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance flex items-center justify-center flex-wrap" style={{gap: '1.15rem'}}>
+              Why 
+              <img 
+                src="/pawgrammer-logo-purple.svg" 
+                alt="Pawgrammer" 
+                className="h-16 sm:h-20 inline"
+                style={{transform: 'translateY(-0.25rem)'}}
+              /> 
+              <span style={{transform: 'translateY(0rem)', marginLeft: '-0.55rem'}}>exists</span>
             </p>
           </div>
           
