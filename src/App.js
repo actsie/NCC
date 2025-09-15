@@ -1751,6 +1751,110 @@ const App = () => {
         </div>
       </section>
 
+      {/* Founding Team Section */}
+      <section className="bg-white dark:bg-gray-900 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-4xl lg:text-center">
+            <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-purple-300">Who We Are</h2>
+            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
+              Team
+            </p>
+          </div>
+          
+          <div className="mx-auto mt-16 grid max-w-6xl grid-cols-1 gap-8 sm:mt-20 lg:grid-cols-3">
+            {/* Mai - Co-Founder */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-lg dark:shadow-none">
+              <div className="mb-6 h-10 flex items-center justify-center">
+                <span className="text-sm font-mono text-[#7866CC] dark:text-purple-300">[ CO-FOUNDER ]</span>
+              </div>
+              <div className="mx-auto mb-6 h-32 w-32 rounded-full bg-gradient-to-r from-[#7866CC] to-[#AF97F8] p-1">
+                <img 
+                  src="/mai.jpeg" 
+                  alt="Mai" 
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#1F2937] dark:text-white mb-4">Mai</h3>
+              <div className="flex justify-center space-x-4 mb-6">
+                <a href="https://x.com/mai_on_chain" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-white">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/mai-akiyoshi-97234533/" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-white">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+              </div>
+              <p className="text-[#6B7280] dark:text-gray-300 text-sm leading-relaxed">
+                Mai co-founded a startup that generated $2M in revenue, grew to over 1M users, raised $3.4M in venture funding, and was acquired by one of the fastest-growing unicorns. Previously, she was a Senior Software Engineer on the Growth team at Gusto, where she led the Top-of-Funnel team driving user acquisition.
+              </p>
+            </div>
+
+            {/* Ben - Co-Founder */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-lg dark:shadow-none">
+              <div className="mb-6 h-10 flex items-center justify-center">
+                <span className="text-sm font-mono text-[#7866CC] dark:text-purple-300">[ CO-FOUNDER ]</span>
+              </div>
+              <div className="mx-auto mb-6 h-32 w-32 rounded-full bg-gradient-to-r from-[#7866CC] to-[#AF97F8] p-1">
+                <img 
+                  src="/ben.jpeg" 
+                  alt="Ben" 
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#1F2937] dark:text-white mb-4">Ben</h3>
+              <div className="flex justify-center space-x-4 mb-6">
+                <a href="https://x.com/intenex" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-white">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/intenex/" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-white">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+              </div>
+              <p className="text-[#6B7280] dark:text-gray-300 text-sm leading-relaxed">
+                Ben dropped out of Harvard to become an inaugural Thiel Fellow, immersing himself early in the startup space. In 2017, he co-founded Stream, a startup that raised $20 million led by Pantera Capital, aiming to align incentives for content creators through blockchain technology.
+              </p>
+            </div>
+
+            {/* Stacy - Head of Marketing and Customer Success */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 text-center shadow-lg dark:shadow-none">
+              <div className="mb-6 h-10 flex items-center justify-center">
+                <span className="text-sm font-mono text-[#7866CC] dark:text-purple-300 text-center leading-tight">[ HEAD OF MARKETING AND CUSTOMER SUCCESS ]</span>
+              </div>
+              <div className="mx-auto mb-6 h-32 w-32 rounded-full bg-gradient-to-r from-[#7866CC] to-[#AF97F8] p-1">
+                <img 
+                  src="/stacy2.jpg" 
+                  alt="Stacy" 
+                  className="h-full w-full rounded-full object-cover"
+                />
+              </div>
+              <h3 className="text-2xl font-semibold text-[#1F2937] dark:text-white mb-4">Stacy</h3>
+              <div className="flex justify-center space-x-4 mb-6">
+                <a href="https://x.com/stacydj0x" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-white">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/stacydonnaj/" target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-white">
+                  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                  </svg>
+                </a>
+              </div>
+              <p className="text-[#6B7280] dark:text-gray-300 text-sm leading-relaxed">
+                Stacy began her career in Customer Success and quickly rose through the ranks to become CS Manager, then expanded her scope to social media and marketing. Her talent and work ethic propelled her to Head of Marketing at a Silicon Valley startup, where she drove growth and brand presence across multiple channels.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
       <Footer id="footer-section" />
     </div>
