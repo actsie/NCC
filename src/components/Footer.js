@@ -62,13 +62,10 @@ const Footer = ({ id = "footer-section" }) => {
           <div className="mb-6 md:mb-0">
             <a href="/" className="flex items-center">
               <img 
-                src="/pawgrammer.png" 
+                src="/pawgrammer-logo-purple.svg" 
                 alt="Pawgrammer" 
-                className="h-8 w-8 mr-3"
+                className="h-8"
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#1F2937] dark:text-white">
-                <ShineText>Pawgrammer</ShineText>
-              </span>
             </a>
           </div>
           <div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2">

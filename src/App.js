@@ -866,7 +866,12 @@ const App = () => {
               For everyone, not just developers
             </p>
             <p className="mt-8 text-lg font-medium text-pretty text-[#6B7280] dark:text-gray-300 sm:text-xl/8">
-              <ShineText>Pawgrammer</ShineText> makes Claude Code simple. Non-technical users get pro-grade setup — the kind even developers find painful to do on their own.
+              <img 
+                src="/pawgrammer-logo-purple.svg" 
+                alt="Pawgrammer" 
+                className="h-7 sm:h-8 inline"
+                style={{transform: 'translateY(-0.25rem)'}}
+              /> makes Claude Code simple. Non-technical users get pro-grade setup — the kind even developers find painful to do on their own.
             </p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <div className="relative inline-block">
