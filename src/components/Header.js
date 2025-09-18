@@ -19,11 +19,12 @@ const navigation = [
 ];
 
 const automationExamples = [
-  { 
-    name: 'Job Application Tracker', 
-    description: 'Stay organized and track every application, interview, and follow-up in one place.', 
-    href: 'https://jobapplication.pawgrammer.com/', 
-    icon: ClipboardDocumentListIcon 
+  {
+    name: 'Job Application Tracker',
+    description: 'Stay organized and track every application, interview, and follow-up in one place.',
+    href: '/examples?tool=job-application-tracker',
+    slug: 'job-application-tracker',
+    icon: ClipboardDocumentListIcon
   },
 ];
 
@@ -183,7 +184,7 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                         <item.icon aria-hidden="true" className="size-6 text-gray-600 dark:text-gray-400 group-hover:text-white" />
                       </div>
                       <div>
-                        <a href={item.href} target="_blank" rel="noopener noreferrer" className="font-semibold text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]">
+                        <a href={item.href} className="font-semibold text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]">
                           {item.name}
                           <span className="absolute inset-0" />
                         </a>
@@ -268,8 +269,6 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                       <a
                         key={item.name}
                         href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         onClick={() => setMobileMenuOpen(false)}
                         className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm leading-6 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
                       >

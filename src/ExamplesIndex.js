@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { PlayIcon } from '@heroicons/react/24/solid';
@@ -79,12 +79,14 @@ const ExamplesIndex = () => {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [currentVideoId, setCurrentVideoId] = useState(null);
+  const [selectedFromDropdown, setSelectedFromDropdown] = useState(false);
   const activeExample = examples[activeSlide];
 
   // Function to handle slide clicks
   const handleSlideClick = (index) => {
     if (swiperInstance && index !== activeSlide) {
       swiperInstance.slideToLoop(index);
+      setSelectedFromDropdown(false); // Clear dropdown selection when user manually navigates
     }
   };
 
@@ -96,6 +98,45 @@ const ExamplesIndex = () => {
       setVideoModalOpen(true);
     }
   };
+
+  // Handle URL parameters to focus specific tool
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const toolParam = urlParams.get('tool');
+
+    if (toolParam) {
+      // Find the example with matching slug
+      const targetExample = examples.find(example => example.slug === toolParam);
+      if (targetExample) {
+        setActiveSlide(targetExample.id);
+        setSelectedFromDropdown(true);
+        // If swiper is ready, slide to the target
+        if (swiperInstance) {
+          swiperInstance.slideToLoop(targetExample.id);
+        }
+        // Clear the URL parameter after processing to clean up URL
+        setTimeout(() => {
+          const newUrl = window.location.pathname;
+          window.history.replaceState({}, document.title, newUrl);
+        }, 1000);
+      }
+    }
+  }, [swiperInstance]);
+
+  // Also handle when swiper instance changes
+  useEffect(() => {
+    if (swiperInstance) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const toolParam = urlParams.get('tool');
+
+      if (toolParam) {
+        const targetExample = examples.find(example => example.slug === toolParam);
+        if (targetExample) {
+          swiperInstance.slideToLoop(targetExample.id);
+        }
+      }
+    }
+  }, [swiperInstance]);
 
   // Schema markup for SEO
   const softwareSchema = {
@@ -376,6 +417,7 @@ const ExamplesIndex = () => {
                     // Get the real index (accounting for loop)
                     const realIndex = swiper.realIndex;
                     setActiveSlide(realIndex);
+                    setSelectedFromDropdown(false); // Clear dropdown selection when slide changes
                   }}
                   navigation={{
                     nextEl: '.swiper-button-next-custom',
@@ -483,9 +525,21 @@ const ExamplesIndex = () => {
                   transition={{ duration: 0.4, ease: "easeInOut" }}
                 >
                   {/* Hero Section */}
-                  <div className="relative overflow-hidden rounded-3xl bg-gray-100/50 dark:bg-gray-800/50 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-lg dark:shadow-xl px-8 py-12 sm:px-12 sm:py-16">
+                  <div className={`relative overflow-hidden rounded-3xl bg-gray-100/50 dark:bg-gray-800/50 backdrop-blur-sm border border-white/20 dark:border-white/10 shadow-lg dark:shadow-xl px-8 py-12 sm:px-12 sm:py-16 transition-all duration-500 ${
+                    selectedFromDropdown
+                      ? 'ring-2 ring-[#7866CC]/30 shadow-2xl shadow-[#7866CC]/10'
+                      : ''
+                  }`}>
                     {/* Liquid Glass Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-white/5 to-white/10 dark:from-white/5 dark:to-white/10"></div>
+
+                    {/* Dropdown Selection Indicator */}
+                    {selectedFromDropdown && (
+                      <div className="absolute top-4 right-4 flex items-center gap-2 bg-[#7866CC]/10 dark:bg-[#7866CC]/20 backdrop-blur-sm border border-[#7866CC]/30 rounded-full px-3 py-1.5 animate-in fade-in duration-300">
+                        <div className="w-2 h-2 bg-[#7866CC] rounded-full animate-pulse"></div>
+                        <span className="text-xs font-medium text-[#7866CC] dark:text-[#BEAEE2]">From menu</span>
+                      </div>
+                    )}
 
                     <div className="relative">
                       {activeExample.id === 0 ? (
