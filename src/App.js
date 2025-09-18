@@ -897,8 +897,8 @@ const App = () => {
                   {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                 </AnimatedButton>
               </div>
-              <a href="#features" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
-                Learn more <span aria-hidden="true">→</span>
+              <a href="#community" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
+                Join a builder community <span aria-hidden="true">→</span>
               </a>
             </div>
             <p className="mt-6 text-xs text-[#6B7280] dark:text-gray-400 text-center">
@@ -1857,7 +1857,7 @@ const App = () => {
       </section>
 
       {/* Community CTA Section */}
-      <section className="py-24 px-6 bg-white dark:bg-gray-900 relative overflow-hidden">
+      <section id="community" className="py-24 px-6 bg-white dark:bg-gray-900 relative overflow-hidden">
         {/* Discord Banner Background - Full Width */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
