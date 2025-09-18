@@ -114,6 +114,17 @@ const ExamplesIndex = () => {
         if (swiperInstance) {
           swiperInstance.slideToLoop(targetExample.id);
         }
+
+        // Scroll to the tool details section after a brief delay
+        setTimeout(() => {
+          const toolDetailsSection = document.getElementById('tool-details');
+          if (toolDetailsSection) {
+            const yOffset = -80; // Account for header height
+            const y = toolDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 500);
+
         // Clear the URL parameter after processing to clean up URL
         setTimeout(() => {
           const newUrl = window.location.pathname;
@@ -133,6 +144,16 @@ const ExamplesIndex = () => {
         const targetExample = examples.find(example => example.slug === toolParam);
         if (targetExample) {
           swiperInstance.slideToLoop(targetExample.id);
+
+          // Scroll to the tool details section
+          setTimeout(() => {
+            const toolDetailsSection = document.getElementById('tool-details');
+            if (toolDetailsSection) {
+              const yOffset = -80; // Account for header height
+              const y = toolDetailsSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+              window.scrollTo({ top: y, behavior: 'smooth' });
+            }
+          }, 500);
         }
       }
     }
