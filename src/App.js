@@ -749,6 +749,7 @@ const App = () => {
 
   // Simple routing logic
   const currentPath = window.location.pathname;
+  console.log('Current path:', currentPath);
   
   // If it's the blog index route, render the blog index
   if (currentPath === '/blog') {
@@ -765,7 +766,7 @@ const App = () => {
   }
   
   // If it's the examples route, render the examples index
-  if (currentPath === '/examples') {
+  if (currentPath === '/examples' || currentPath === '/examples/') {
     return <ExamplesIndex />;
   }
 
@@ -1565,7 +1566,7 @@ const App = () => {
               <div className="relative w-full h-0" style={{paddingBottom: '56.25%'}}>
                 <iframe 
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/pGNIEEcD3f8?autoplay=1&mute=1&loop=1&playlist=pGNIEEcD3f8&controls=0&showinfo=0&rel=0&modestbranding=1"
+                  src="https://www.youtube.com/embed/ql06ZfTCSLc?autoplay=1&mute=1&loop=1&playlist=ql06ZfTCSLc&controls=0&showinfo=0&rel=0&modestbranding=1"
                   title="Pawgrammer Demo Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -1850,6 +1851,81 @@ const App = () => {
               <p className="text-[#6B7280] dark:text-gray-300 text-sm leading-relaxed">
                 Stacy began her career in Customer Success and quickly rose through the ranks to become CS Manager, then expanded her scope to social media and marketing. Her talent and work ethic propelled her to Head of Marketing at a Silicon Valley startup, where she drove growth and brand presence across multiple channels.
               </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Community CTA Section */}
+      <section className="py-24 px-6 bg-white dark:bg-gray-900 relative overflow-hidden">
+        {/* Discord Banner Background - Full Width */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: 'url(/Discord-Banner_8.png)'
+          }}
+        ></div>
+
+        <div className="mx-auto max-w-7xl relative z-10">
+          <style>{`
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+            .cta-background {
+              background: linear-gradient(to bottom, #f4eefc, #fcf3fa, #fdf6ef, #f9f1fc);
+              backdrop-filter: blur(20px);
+              box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+
+            .dark .cta-background {
+              background: linear-gradient(to bottom, #202a37, #111827);
+              box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+              border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .join-community-btn {
+              color: white !important;
+              font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            }
+
+            .join-community-btn:hover {
+              color: white !important;
+            }
+
+            .cta-text {
+              font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !important;
+            }
+          `}</style>
+          <div
+            className="cta-background relative max-w-5xl py-16 md:pl-24 md:w-full mx-2 md:mx-auto flex flex-col items-start justify-center text-left rounded-2xl p-10 overflow-hidden border border-white/20 shadow-2xl"
+            style={{
+              fontFamily: 'Poppins, sans-serif'
+            }}
+          >
+
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex items-center mb-5">
+                <div className="flex pr-3">
+                  <img src="/discord.svg" alt="Discord" className="size-6 hover:-translate-y-px transition" />
+                </div>
+                <div>
+                  <p className="cta-text text-sm text-gray-600 dark:text-gray-300">Join our Discord community</p>
+                </div>
+              </div>
+              <h1 className="cta-text text-4xl md:text-[46px] md:leading-[60px] font-semibold bg-gradient-to-r from-[#4C0083] to-[#7866CC] dark:from-purple-400 dark:to-purple-300 text-transparent bg-clip-text">
+                Have awesome ideas but don't know how to build?
+              </h1>
+              <p className="cta-text text-gray-700 dark:text-gray-200 text-lg mt-4">
+                Join the Discord community to get guidance and advice from founders who built a product used by over a million users.
+              </p>
+              <a
+                href="https://discord.gg/RFuCgdTxXx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="join-community-btn inline-flex items-center px-4 py-2 bg-[#7866CC] text-white text-sm font-medium rounded-lg hover:bg-[#6B5BB3] hover:text-white dark:hover:bg-[#6242c3] dark:hover:text-white transition-colors duration-200 mt-6"
+              >
+                Join Community
+              </a>
             </div>
           </div>
         </div>
