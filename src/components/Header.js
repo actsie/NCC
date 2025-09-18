@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Dialog, DialogPanel, Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
+import React, { useState, useEffect } from 'react';
+import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, PlayCircleIcon } from '@heroicons/react/20/solid';
 import {
@@ -34,19 +34,67 @@ const callsToAction = [
 
 const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  
+  const [examplesHoverOpen, setExamplesHoverOpen] = useState(false);
+  const [hoverTimeout, setHoverTimeout] = useState(null);
+
   // Detect current path for active state highlighting
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
-  
+
   const isActive = (href) => {
     if (href === '/blog') {
       return currentPath === '/blog' || currentPath.startsWith('/blog/');
+    }
+    if (href === '/examples') {
+      return currentPath === '/examples' || currentPath.startsWith('/examples');
     }
     if (href.startsWith('/#')) {
       return typeof window !== 'undefined' && window.location.hash === href.substring(1);
     }
     return currentPath === href;
   };
+
+  // Handle hover with delay for better UX
+  const handleMouseEnter = () => {
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    setExamplesHoverOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    const timeout = setTimeout(() => {
+      setExamplesHoverOpen(false);
+      setHoverTimeout(null);
+    }, 150); // Small delay before closing
+    setHoverTimeout(timeout);
+  };
+
+  // Handle keyboard navigation
+  const handleKeyDown = (event) => {
+    if (event.key === 'Escape' && examplesHoverOpen) {
+      setExamplesHoverOpen(false);
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+        setHoverTimeout(null);
+      }
+    }
+    if (event.key === 'Enter' || event.key === ' ') {
+      if (!examplesHoverOpen) {
+        event.preventDefault();
+        setExamplesHoverOpen(true);
+      }
+    }
+  };
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeout) {
+        clearTimeout(hoverTimeout);
+      }
+    };
+  }, [hoverTimeout]);
 
   return (
     <header className={className}>
@@ -88,23 +136,39 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
             </a>
           ))}
           
-          {/* Examples Popover */}
-          <Popover className="relative">
-            {({ open }) => (
-              <>
-                <PopoverButton className="inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2] focus:outline-none">
-                  <span>Examples</span>
-                  <ChevronDownIcon 
-                    aria-hidden="true" 
-                    className={`size-5 transition-transform duration-200 ${open ? 'rotate-180' : 'rotate-0'}`} 
-                  />
-                </PopoverButton>
-
-            <PopoverPanel
-              transition
-              className="absolute left-1/2 z-50 mt-5 flex -translate-x-1/2 px-4 transition-all duration-300 ease-out data-[closed]:opacity-0 data-[closed]:scale-95 data-[closed]:-translate-y-2 data-[enter]:duration-300 data-[leave]:duration-200"
+          {/* Examples Hover Menu */}
+          <div
+            className="relative"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <a
+              id="examples-menu"
+              href="/examples"
+              className={`inline-flex items-center gap-x-1 text-sm font-semibold leading-6 ${
+                isActive('/examples')
+                  ? 'text-[#7866CC]'
+                  : 'text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]'
+              } focus:outline-none focus:ring-2 focus:ring-[#7866CC] focus:ring-offset-2 rounded-md`}
+              onKeyDown={handleKeyDown}
+              aria-expanded={examplesHoverOpen}
+              aria-haspopup="true"
+              aria-label="Examples navigation with dropdown menu"
             >
-              <div className="relative w-96 overflow-hidden rounded-3xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
+              <span>Examples</span>
+              <ChevronDownIcon
+                aria-hidden="true"
+                className={`size-5 transition-transform duration-200 ${examplesHoverOpen ? 'rotate-180' : 'rotate-0'}`}
+              />
+            </a>
+
+            {examplesHoverOpen && (
+              <div
+                className="absolute left-1/2 z-50 mt-5 flex -translate-x-1/2 px-4 transition-all duration-200 ease-out opacity-100 scale-100 animate-in fade-in slide-in-from-top-2"
+                role="menu"
+                aria-labelledby="examples-menu"
+              >
+                <div className="relative w-96 overflow-hidden rounded-3xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
                 {/* New ✨ Top Banner */}
                 <div className="bg-[#7866CC] px-4 py-2 rounded-t-3xl">
                   <div className="text-center text-white text-sm font-medium">
@@ -114,7 +178,7 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                 
                 <div className="p-4">
                   {automationExamples.map((item) => (
-                    <div key={item.name} className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50">
+                    <div key={item.name} className="group relative flex gap-x-6 rounded-lg p-4 hover:bg-gray-50 dark:hover:bg-gray-700/50" role="menuitem">
                       <div className="mt-1 flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 dark:bg-gray-700/50 group-hover:bg-[#7866CC] dark:group-hover:bg-[#7866CC]">
                         <item.icon aria-hidden="true" className="size-6 text-gray-600 dark:text-gray-400 group-hover:text-white" />
                       </div>
@@ -137,17 +201,17 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
                         item.name === 'GitHub' ? 'cursor-not-allowed' : ''
                       }`}
                       onClick={item.name === 'GitHub' ? (e) => e.preventDefault() : undefined}
+                      role="menuitem"
                     >
                       <item.icon aria-hidden="true" className="size-5 flex-none text-gray-500 dark:text-gray-400" />
                       {item.name}
                     </a>
                   ))}
                 </div>
+                </div>
               </div>
-            </PopoverPanel>
-              </>
             )}
-          </Popover>
+          </div>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
           <DarkModeToggle />
