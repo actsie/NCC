@@ -1912,9 +1912,20 @@ const App = () => {
                   </div>
                   <div className="flex items-center gap-3">
                     <p className="cta-text text-sm text-gray-600 dark:text-gray-300">Join our Discord community</p>
-                    <div className="relative">
-                      <img src="/pawgrammericonnew.png" alt="Community Member" className="w-8 h-8 rounded-full object-cover border-2 border-white dark:border-gray-600 shadow-sm" />
-                      <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 animate-pulse"></div>
+                    <div className="flex items-center">
+                      <div className="relative">
+                        <div className="w-8 h-8 rounded-full bg-white/15 dark:bg-gray-600/40 backdrop-blur-lg border border-white/40 dark:border-gray-700/70 shadow-md p-0.5 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent dark:from-gray-400/10 dark:to-transparent rounded-full"></div>
+                          <img src="/royaldependent.png" alt="Community Member" className="w-full h-full rounded-full object-cover object-top relative z-10" />
+                        </div>
+                      </div>
+                      <div className="relative -ml-2">
+                        <div className="w-8 h-8 rounded-full bg-white/15 dark:bg-gray-600/40 backdrop-blur-lg border border-white/40 dark:border-gray-700/70 shadow-md p-0.5 relative overflow-hidden">
+                          <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent dark:from-gray-400/10 dark:to-transparent rounded-full"></div>
+                          <img src="/pawgrammericonnew.png" alt="Community Member" className="w-full h-full rounded-full object-cover relative z-10" />
+                        </div>
+                        <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 animate-pulse"></div>
+                      </div>
                     </div>
                   </div>
                 </div>
