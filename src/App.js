@@ -1891,7 +1891,7 @@ const App = () => {
             }
           `}</style>
           <div
-            className="cta-background relative max-w-5xl py-16 md:pl-24 md:w-full mx-2 md:mx-auto flex flex-col items-start justify-center text-left rounded-2xl p-10 overflow-hidden border border-white/20 shadow-2xl"
+            className="cta-background relative max-w-5xl py-16 md:pl-24 md:pr-24 md:w-full mx-2 md:mx-auto flex flex-col items-start justify-center text-left rounded-2xl p-10 overflow-hidden border border-white/20 shadow-2xl"
             style={{
               fontFamily: 'Poppins, sans-serif'
             }}
