@@ -1903,29 +1903,61 @@ const App = () => {
           >
 
             {/* Content */}
-            <div className="relative z-10">
-              <div className="flex items-center mb-5">
-                <div className="flex pr-3">
-                  <img src="/discord.svg" alt="Discord" className="size-6 hover:-translate-y-px transition" />
+            <div className="relative z-10 flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8">
+              {/* Left Content */}
+              <div className="lg:flex-1">
+                <div className="flex items-center mb-5">
+                  <div className="flex pr-3">
+                    <img src="/discord.svg" alt="Discord" className="size-6 hover:-translate-y-px transition" />
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <p className="cta-text text-sm text-gray-600 dark:text-gray-300">Join our Discord community</p>
+                    <div className="relative">
+                      <img src="/pawgrammericonnew.png" alt="Community Member" className="w-8 h-8 rounded-full object-cover border-2 border-white dark:border-gray-600 shadow-sm" />
+                      <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-gray-800 animate-pulse"></div>
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <p className="cta-text text-sm text-gray-600 dark:text-gray-300">Join our Discord community</p>
+                <h1 className="cta-text text-4xl md:text-[46px] md:leading-[60px] font-semibold bg-gradient-to-r from-[#4C0083] to-[#7866CC] dark:from-purple-400 dark:to-purple-300 text-transparent bg-clip-text">
+                  Bring an idea. Leave with a tool.
+                </h1>
+                <div className="cta-text mt-8">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <div className="relative overflow-hidden rounded-full bg-white/10 dark:bg-gray-700/30 backdrop-blur-lg border border-white/20 dark:border-gray-600/40 shadow-md px-6 py-3 text-base font-medium text-[#7866CC] dark:text-[#D1C7F0] hover:bg-white/15 dark:hover:bg-gray-600/40 hover:scale-[1.02] transition-all duration-200 flex items-center gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#7866CC]/5 to-[#BEAEE2]/5 dark:from-[#7866CC]/15 dark:to-[#BEAEE2]/15"></div>
+                      <span className="relative text-lg">🎯</span>
+                      <span className="relative">Get step-by-step guidance on where to start</span>
+                    </div>
+                    <div className="relative overflow-hidden rounded-full bg-white/10 dark:bg-gray-700/30 backdrop-blur-lg border border-white/20 dark:border-gray-600/40 shadow-md px-6 py-3 text-base font-medium text-[#7866CC] dark:text-[#D1C7F0] hover:bg-white/15 dark:hover:bg-gray-600/40 hover:scale-[1.02] transition-all duration-200 flex items-center gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#7866CC]/5 to-[#BEAEE2]/5 dark:from-[#7866CC]/15 dark:to-[#BEAEE2]/15"></div>
+                      <span className="relative text-lg">⚡</span>
+                      <span className="relative">Learn the shortcuts builders use to move faster</span>
+                    </div>
+                    <div className="relative overflow-hidden rounded-full bg-white/10 dark:bg-gray-700/30 backdrop-blur-lg border border-white/20 dark:border-gray-600/40 shadow-md px-6 py-3 text-base font-medium text-[#7866CC] dark:text-[#D1C7F0] hover:bg-white/15 dark:hover:bg-gray-600/40 hover:scale-[1.02] transition-all duration-200 flex items-center gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#7866CC]/5 to-[#BEAEE2]/5 dark:from-[#7866CC]/15 dark:to-[#BEAEE2]/15"></div>
+                      <span className="relative text-lg">🔨</span>
+                      <span className="relative">Build simple apps with guidance (we'll walk you through it)</span>
+                    </div>
+                    <div className="relative overflow-hidden rounded-full bg-white/10 dark:bg-gray-700/30 backdrop-blur-lg border border-white/20 dark:border-gray-600/40 shadow-md px-6 py-3 text-base font-medium text-[#7866CC] dark:text-[#D1C7F0] hover:bg-white/15 dark:hover:bg-gray-600/40 hover:scale-[1.02] transition-all duration-200 flex items-center gap-2">
+                      <div className="absolute inset-0 bg-gradient-to-r from-[#7866CC]/5 to-[#BEAEE2]/5 dark:from-[#7866CC]/15 dark:to-[#BEAEE2]/15"></div>
+                      <span className="relative text-lg">💬</span>
+                      <span className="relative">Ask questions anytime and get direct feedback from us</span>
+                    </div>
+                  </div>
+
+                  {/* Join Us Button - Right Aligned */}
+                  <div className="flex justify-end">
+                    <a
+                      href="https://discord.gg/RFuCgdTxXx"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="join-community-btn inline-flex items-center px-6 py-3 bg-[#7866CC] text-white text-base font-medium rounded-lg hover:bg-[#6B5BB3] hover:text-white dark:hover:bg-[#6242c3] dark:hover:text-white transition-colors duration-200"
+                    >
+                      Join Us
+                    </a>
+                  </div>
                 </div>
               </div>
-              <h1 className="cta-text text-4xl md:text-[46px] md:leading-[60px] font-semibold bg-gradient-to-r from-[#4C0083] to-[#7866CC] dark:from-purple-400 dark:to-purple-300 text-transparent bg-clip-text">
-                Have awesome ideas but don't know how to build?
-              </h1>
-              <p className="cta-text text-gray-700 dark:text-gray-200 text-lg mt-4">
-                Join the Discord community to get guidance and advice from founders who built a product used by over a million users.
-              </p>
-              <a
-                href="https://discord.gg/RFuCgdTxXx"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="join-community-btn inline-flex items-center px-4 py-2 bg-[#7866CC] text-white text-sm font-medium rounded-lg hover:bg-[#6B5BB3] hover:text-white dark:hover:bg-[#6242c3] dark:hover:text-white transition-colors duration-200 mt-6"
-              >
-                Join Community
-              </a>
             </div>
           </div>
         </div>
