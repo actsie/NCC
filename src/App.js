@@ -902,7 +902,7 @@ const App = () => {
               </a>
             </div>
             <p className="mt-6 text-xs text-[#6B7280] dark:text-gray-400 text-center">
-              *Requires Claude Code subscription. Not affiliated with Anthropic.
+              ✨ Build for free, no Claude account or API keys required. First month's on us (limited tester spots).
             </p>
           </div>
         </section>
@@ -1411,11 +1411,6 @@ const App = () => {
             <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
               From idea to production-ready app in three simple steps
             </p>
-            <div className="mt-4 text-center">
-              <p className="text-sm text-[#6B7280] dark:text-gray-400 font-medium">
-                Note: You'll need an active Claude Code subscription to use this service.
-              </p>
-            </div>
           </div>
           
           {/* Horizontal Timeline */}

@@ -15,7 +15,7 @@ const NoCodeClaudeLanding = () => {
           Request early access
         </button>
         <p className="mt-6 text-xs text-[#7A7A7A] dark:text-gray-400 text-center">
-          *Requires Claude Code subscription. Not affiliated with Anthropic.
+          ✨ Build for free, no Claude account or API keys required. First month's on us (limited tester spots).
         </p>
       </section>
 
@@ -190,11 +190,6 @@ const NoCodeClaudeLanding = () => {
           <h2 className="text-3xl lg:text-4xl font-bold text-[#333333] dark:text-white mb-8 text-center">
             How It Works
           </h2>
-          <div className="mb-8 text-center">
-            <p className="text-sm text-[#7A7A7A] dark:text-gray-400">
-              Note: You'll need an active Claude Code subscription to use this service.
-            </p>
-          </div>
           
           <div className="space-y-12">
             <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8">
@@ -300,8 +295,7 @@ const NoCodeClaudeLanding = () => {
       <section className="px-6 py-8 bg-[#F9F9F9] dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-sm text-[#7A7A7A] dark:text-gray-400">
-            <strong>Important:</strong> We are not affiliated with Claude Code or Anthropic. 
-            Claude Code subscription required. This service provides setup and configuration assistance.
+            <strong>Important:</strong> We are not affiliated with Claude Code or Anthropic. This service provides setup and configuration assistance.
           </p>
         </div>
       </section>
