@@ -745,6 +745,50 @@ const ExamplesIndex = () => {
                           <p className="text-gray-600 dark:text-gray-400 mb-8 text-lg max-w-2xl mx-auto">
                             Explore the demo and start building your own tracker now.
                           </p>
+
+                          {/* Feature Update Section - Two Cards Layout */}
+                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 max-w-4xl mx-auto">
+                            {/* Left Card - Feature Info */}
+                            <div className="bg-white dark:bg-gray-900/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                              <div className="flex items-center justify-center lg:justify-start mb-4">
+                                <span className="text-white text-xs font-semibold px-3 py-1 rounded-full" style={{background: 'linear-gradient(to right, #7866CC, #9B7EF7, #AF97F8)'}}>
+                                  Feature Update
+                                </span>
+                              </div>
+                              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 text-center lg:text-left">Calendar Integration</h4>
+                              <p className="text-gray-600 dark:text-gray-400 mb-6 text-center lg:text-left">
+                                Add follow-up reminders directly to your calendar:
+                              </p>
+                              <div className="space-y-3 text-center lg:text-left">
+                                <div className="text-gray-700 dark:text-gray-300">
+                                  <span>✨ Export to Calendar (.ics)</span>
+                                </div>
+                                <div className="text-gray-700 dark:text-gray-300">
+                                  <span>✨ Add to Google Calendar</span>
+                                </div>
+                              </div>
+                            </div>
+
+                            {/* Right Card - GIF Demo */}
+                            <div className="bg-white dark:bg-gray-900/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+                              <div className="text-center">
+                                <p className="text-sm text-gray-500 dark:text-gray-400 mb-4">AI-assisted improvements:</p>
+                                <a
+                                  href="/addcalfeature.gif"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-block cursor-pointer hover:opacity-80 transition-opacity duration-200 hover:scale-105 transform transition-transform"
+                                >
+                                  <img
+                                    src="/addcalfeature.gif"
+                                    alt="Calendar integration demo - click to view larger"
+                                    className="rounded-lg shadow-lg w-full h-auto mx-auto"
+                                  />
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+
                           <a
                             href="https://jobapplication.pawgrammer.com/"
                             target="_blank"
