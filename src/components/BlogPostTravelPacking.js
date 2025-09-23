@@ -288,19 +288,16 @@ const BlogPostTravelPacking = () => {
             </p>
 
             <div className="mt-8">
-              <div className="w-full max-w-2xl">
-                <a
-                  href="https://packing-list-generator-zeta.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block hover:opacity-90 transition-opacity cursor-pointer"
-                >
-                  <img
-                    src="/packing-list-generator.png"
-                    alt="Packing List Generator Demo"
-                    className="w-full h-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700"
-                  />
-                </a>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Watch the walkthrough video:</h3>
+              <div className="aspect-video w-full max-w-2xl">
+                <iframe
+                  className="w-full h-full rounded-lg"
+                  src="https://www.youtube.com/embed/ql06ZfTCSLc"
+                  title="Packing List Generator Walkthrough"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
 
