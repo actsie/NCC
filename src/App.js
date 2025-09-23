@@ -1534,89 +1534,263 @@ const App = () => {
 
           {/* Steps Container */}
           <div className="step-container w-full max-w-4xl mt-10 mx-auto">
-            {/* Expandable Cards */}
-            <div className="step-gallery flex items-center gap-2 h-[400px]">
-              {/* Step 1 */}
-              <div className="step-container-1 relative group flex-grow transition-all w-[120%] rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] z-10">
-                <img
-                  className="h-full w-full object-cover object-center rounded-lg"
-                  src="/step1.png"
-                  alt="Step 1 - Describe your app"
-                />
-              </div>
 
-              {/* Step 2 */}
-              <div className="step-container-2 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
-                <img
-                  className="h-full w-full object-cover object-center rounded-lg"
-                  src="/step2.png"
-                  alt="Step 2 - Review AI changes"
-                />
-              </div>
+            {/* Mobile: Vertical Stack Layout */}
+            <div className="block md:hidden">
+              <div className="flex flex-col gap-6">
+                {/* Mobile Step 1 */}
+                <div className="mobile-step-card w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step1.png"
+                      alt="Step 1 - Describe your app"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 1</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Describe your app idea</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Write what you want in plain language — no code needed.</p>
+                  </div>
+                </div>
 
-              {/* Step 3 */}
-              <div className="step-container-3 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
-                <img
-                  className="h-full w-full object-cover object-center rounded-lg"
-                  src="/step3.png"
-                  alt="Step 3 - Tweak and customize"
-                />
-              </div>
+                {/* Mobile Step 2 */}
+                <div className="mobile-step-card w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step2.png"
+                      alt="Step 2 - Review AI changes"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 2</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Answer a few quick questions</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Pick from multiple-choice or checkboxes to refine details.</p>
+                  </div>
+                </div>
 
-              {/* Step 4 */}
-              <div className="step-container-4 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
-                <img
-                  className="h-full w-full object-cover object-center rounded-lg"
-                  src="/step4.png"
-                  alt="Step 4 - Deploy and share"
-                />
-              </div>
+                {/* Mobile Step 3 */}
+                <div className="mobile-step-card w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step3.png"
+                      alt="Step 3 - Tweak and customize"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 3</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Review your generated spec</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">See the step-by-step plan before anything gets built.</p>
+                  </div>
+                </div>
 
-              {/* Step 5 */}
-              <div className="step-container-5 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
-                <img
-                  className="h-full w-full object-cover object-center rounded-lg"
-                  src="/step5.png"
-                  alt="Step 5 - Monitor and scale"
-                />
+                {/* Mobile Step 4 */}
+                <div className="mobile-step-card w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step4.png"
+                      alt="Step 4 - Deploy and share"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 4</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Execute build tasks</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Each click executes a task — watch your app take shape.</p>
+                  </div>
+                </div>
+
+                {/* Mobile Step 5 */}
+                <div className="mobile-step-card w-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step5.png"
+                      alt="Step 5 - Monitor and scale"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 5</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Chat with AI to tweak or improve</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Ask for changes in simple language, get instant updates.</p>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Step Description Cards */}
-            <div className="step-descriptions grid grid-cols-1 md:grid-cols-5 gap-4 mt-8">
-              {/* Description 1 */}
-              <div className="step-description-1 step-description rounded-lg p-4 border transform scale-[1.02]" style={{background: 'rgba(120, 102, 204, 0.05)', borderColor: 'rgba(120, 102, 204, 0.2)', boxShadow: '0 4px 12px rgba(120, 102, 204, 0.1)'}}>
-                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 1</div>
-                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Describe your app idea</h4>
-                <p className="text-sm text-[#6B7280] dark:text-gray-300">Write what you want in plain language — no code needed.</p>
+            {/* Tablet: 2-Column Grid Layout */}
+            <div className="hidden md:block lg:hidden">
+              <div className="grid grid-cols-2 gap-6">
+                {/* Tablet Step 1 */}
+                <div className="tablet-step-card border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step1.png"
+                      alt="Step 1 - Describe your app"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 1</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Describe your app idea</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Write what you want in plain language — no code needed.</p>
+                  </div>
+                </div>
+
+                {/* Tablet Step 2 */}
+                <div className="tablet-step-card border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step2.png"
+                      alt="Step 2 - Review AI changes"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 2</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Answer a few quick questions</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Pick from multiple-choice or checkboxes to refine details.</p>
+                  </div>
+                </div>
+
+                {/* Tablet Step 3 */}
+                <div className="tablet-step-card border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step3.png"
+                      alt="Step 3 - Tweak and customize"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 3</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Review your generated spec</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">See the step-by-step plan before anything gets built.</p>
+                  </div>
+                </div>
+
+                {/* Tablet Step 4 */}
+                <div className="tablet-step-card border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step4.png"
+                      alt="Step 4 - Deploy and share"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 4</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Execute build tasks</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Each click executes a task — watch your app take shape.</p>
+                  </div>
+                </div>
+
+                {/* Tablet Step 5 - Centered */}
+                <div className="tablet-step-card border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden bg-white dark:bg-gray-800 shadow-lg col-span-2 max-w-md mx-auto">
+                  <div className="aspect-[16/10] w-full">
+                    <img
+                      className="h-full w-full object-cover object-center"
+                      src="/step5.png"
+                      alt="Step 5 - Monitor and scale"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 5</div>
+                    <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Chat with AI to tweak or improve</h4>
+                    <p className="text-sm text-[#6B7280] dark:text-gray-300">Ask for changes in simple language, get instant updates.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop: Original Horizontal Gallery */}
+            <div className="hidden lg:block">
+              {/* Expandable Cards */}
+              <div className="step-gallery flex items-center gap-2 h-[400px]">
+                {/* Step 1 */}
+                <div className="step-container-1 relative group flex-grow transition-all w-[120%] rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] z-10">
+                  <img
+                    className="h-full w-full object-cover object-center rounded-lg"
+                    src="/step1.png"
+                    alt="Step 1 - Describe your app"
+                  />
+                </div>
+
+                {/* Step 2 */}
+                <div className="step-container-2 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                  <img
+                    className="h-full w-full object-cover object-center rounded-lg"
+                    src="/step2.png"
+                    alt="Step 2 - Review AI changes"
+                  />
+                </div>
+
+                {/* Step 3 */}
+                <div className="step-container-3 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                  <img
+                    className="h-full w-full object-cover object-center rounded-lg"
+                    src="/step3.png"
+                    alt="Step 3 - Tweak and customize"
+                  />
+                </div>
+
+                {/* Step 4 */}
+                <div className="step-container-4 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                  <img
+                    className="h-full w-full object-cover object-center rounded-lg"
+                    src="/step4.png"
+                    alt="Step 4 - Deploy and share"
+                  />
+                </div>
+
+                {/* Step 5 */}
+                <div className="step-container-5 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                  <img
+                    className="h-full w-full object-cover object-center rounded-lg"
+                    src="/step5.png"
+                    alt="Step 5 - Monitor and scale"
+                  />
+                </div>
               </div>
 
-              {/* Description 2 */}
-              <div className="step-description-2 step-description rounded-lg p-4 border">
-                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 2</div>
-                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Answer a few quick questions</h4>
-                <p className="text-sm text-[#6B7280] dark:text-gray-300">Pick from multiple-choice or checkboxes to refine details.</p>
-              </div>
+              {/* Step Description Cards */}
+              <div className="step-descriptions grid grid-cols-1 md:grid-cols-5 gap-4 mt-8">
+                {/* Description 1 */}
+                <div className="step-description-1 step-description rounded-lg p-4 border transform scale-[1.02]" style={{background: 'rgba(120, 102, 204, 0.05)', borderColor: 'rgba(120, 102, 204, 0.2)', boxShadow: '0 4px 12px rgba(120, 102, 204, 0.1)'}}>
+                  <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 1</div>
+                  <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Describe your app idea</h4>
+                  <p className="text-sm text-[#6B7280] dark:text-gray-300">Write what you want in plain language — no code needed.</p>
+                </div>
 
-              {/* Description 3 */}
-              <div className="step-description-3 step-description rounded-lg p-4 border">
-                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 3</div>
-                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Review your generated spec</h4>
-                <p className="text-sm text-[#6B7280] dark:text-gray-300">See the step-by-step plan before anything gets built.</p>
-              </div>
+                {/* Description 2 */}
+                <div className="step-description-2 step-description rounded-lg p-4 border">
+                  <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 2</div>
+                  <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Answer a few quick questions</h4>
+                  <p className="text-sm text-[#6B7280] dark:text-gray-300">Pick from multiple-choice or checkboxes to refine details.</p>
+                </div>
 
-              {/* Description 4 */}
-              <div className="step-description-4 step-description rounded-lg p-4 border">
-                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 4</div>
-                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Execute build tasks</h4>
-                <p className="text-sm text-[#6B7280] dark:text-gray-300">Each click executes a task — watch your app take shape.</p>
-              </div>
+                {/* Description 3 */}
+                <div className="step-description-3 step-description rounded-lg p-4 border">
+                  <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 3</div>
+                  <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Review your generated spec</h4>
+                  <p className="text-sm text-[#6B7280] dark:text-gray-300">See the step-by-step plan before anything gets built.</p>
+                </div>
 
-              {/* Description 5 */}
-              <div className="step-description-5 step-description rounded-lg p-4 border">
-                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 5</div>
-                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Chat with AI to tweak or improve</h4>
-                <p className="text-sm text-[#6B7280] dark:text-gray-300">Ask for changes in simple language, get instant updates.</p>
+                {/* Description 4 */}
+                <div className="step-description-4 step-description rounded-lg p-4 border">
+                  <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 4</div>
+                  <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Execute build tasks</h4>
+                  <p className="text-sm text-[#6B7280] dark:text-gray-300">Each click executes a task — watch your app take shape.</p>
+                </div>
+
+                {/* Description 5 */}
+                <div className="step-description-5 step-description rounded-lg p-4 border">
+                  <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 5</div>
+                  <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Chat with AI to tweak or improve</h4>
+                  <p className="text-sm text-[#6B7280] dark:text-gray-300">Ask for changes in simple language, get instant updates.</p>
+                </div>
               </div>
             </div>
           </div>
