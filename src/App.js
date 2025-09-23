@@ -9,6 +9,7 @@ import AnimatedButton from './AnimatedButton';
 import DarkModeToggle from './DarkModeToggle';
 import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
 import BlogPostJobTracking from './components/BlogPostJobTracking';
+import BlogPostTravelPacking from './components/BlogPostTravelPacking';
 import BlogIndex from './BlogIndex';
 import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
@@ -763,6 +764,10 @@ const App = () => {
   
   if (currentPath === '/blog/how-job-seekers-track-applications') {
     return <BlogPostJobTracking />;
+  }
+
+  if (currentPath === '/blog/how-travelers-really-pack') {
+    return <BlogPostTravelPacking />;
   }
   
   // If it's the examples route, render the examples index
@@ -1646,7 +1651,7 @@ const App = () => {
               <div className="relative w-full h-0" style={{paddingBottom: '56.25%'}}>
                 <iframe 
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/ql06ZfTCSLc?autoplay=1&mute=1&loop=1&playlist=ql06ZfTCSLc&controls=0&showinfo=0&rel=0&modestbranding=1"
+                  src="https://www.youtube.com/embed/DadTiwSlrC4?autoplay=1&mute=1&loop=1&playlist=DadTiwSlrC4&controls=0&showinfo=0&rel=0&modestbranding=1"
                   title="Pawgrammer Demo Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

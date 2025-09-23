@@ -1,6 +1,29 @@
 // Blog post data - single source of truth for all blog content
 export const blogPosts = [
   {
+    id: 3,
+    slug: 'how-travelers-really-pack',
+    title: 'How travelers really pack (and what they leave behind)',
+    description: 'From pre-packed kits to "just buy it later," here\'s how people really pack. We analyzed real traveler insights to uncover the systems that work.',
+    date: 'Sep 23, 2025',
+    datetime: '2025-09-23',
+    category: { title: 'Travel', href: '#' },
+    imageUrl: '/packing-list-generator.png',
+    author: {
+      name: 'Pawgrammer Team',
+      role: 'Product Team',
+      href: '#',
+      imageUrl: '/pawgrammer.png',
+    },
+    // Meta data for SEO
+    metaTitle: 'How travelers really pack (and what they leave behind) - Travel Packing Systems That Work',
+    metaDescription: 'From pre-packed kits to "just buy it later," discover how experienced travelers really pack. Learn the master list system, essential-only mindset, and actionable packing tips that reduce stress.',
+    // SEO keywords for travel packing
+    keywords: 'travel packing, packing list, travel tips, overpacking, travel essentials, packing system, travel organization',
+    readingTime: '5 min',
+    tags: ['overpacking', 'packing list', 'essential travel pack'],
+  },
+  {
     id: 2,
     slug: 'how-job-seekers-track-applications',
     title: 'How Job Seekers Actually Track Their Applications (Based on 90+ Real Replies)',
