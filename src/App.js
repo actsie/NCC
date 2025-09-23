@@ -1391,142 +1391,227 @@ const App = () => {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section id="how-it-works" className="relative isolate bg-white dark:bg-gray-900 py-24 sm:py-32">
-        {/* Background gradient blob */}
-        <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
-          <div 
-            style={{
-              clipPath: 'polygon(50% 0%, 55% 25%, 75% 7%, 65% 32%, 100% 25%, 70% 45%, 93% 57%, 62% 62%, 75% 93%, 50% 68%, 25% 93%, 38% 62%, 7% 57%, 30% 45%, 0% 25%, 35% 32%, 25% 7%, 45% 25%)'
-            }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#7866CC] to-[#AF97F8] dark:from-[#362B6B] dark:to-[#5E50A0] opacity-20 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          />
-        </div>
+
+      {/* How It Works - Expandable Cards */}
+      <section className="relative bg-gradient-to-br from-white/60 via-gray-50/80 to-white/40 dark:from-gray-900/60 dark:via-gray-800/80 dark:to-gray-900/40 backdrop-blur-xl backdrop-saturate-150 py-24 sm:py-32">
+        <style>{`
+          @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+          .step-gallery * {
+            font-family: 'Poppins', sans-serif;
+          }
+
+          .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+          }
+
+          .step-container .step-gallery .step-container-1:hover ~ .step-descriptions .step-description-1,
+          .step-container .step-gallery .step-container-2:hover ~ .step-descriptions .step-description-2,
+          .step-container .step-gallery .step-container-3:hover ~ .step-descriptions .step-description-3,
+          .step-container .step-gallery .step-container-4:hover ~ .step-descriptions .step-description-4,
+          .step-container .step-gallery .step-container-5:hover ~ .step-descriptions .step-description-5,
+          .step-container:has(.step-container-1:hover) .step-description-1,
+          .step-container:has(.step-container-2:hover) .step-description-2,
+          .step-container:has(.step-container-3:hover) .step-description-3,
+          .step-container:has(.step-container-4:hover) .step-description-4,
+          .step-container:has(.step-container-5:hover) .step-description-5 {
+            transform: scale(1.02);
+            background: rgba(120, 102, 204, 0.05);
+            border-color: rgba(120, 102, 204, 0.2);
+            box-shadow: 0 4px 12px rgba(120, 102, 204, 0.1);
+          }
+
+          .step-description {
+            transition: all 0.5s ease;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+          }
+
+          .dark .step-description {
+            background: rgba(31, 41, 55, 0.8);
+            border-color: rgba(75, 85, 99, 0.3);
+          }
+
+          .dark .step-container:has(.step-container-1:hover) .step-description-1,
+          .dark .step-container:has(.step-container-2:hover) .step-description-2,
+          .dark .step-container:has(.step-container-3:hover) .step-description-3,
+          .dark .step-container:has(.step-container-4:hover) .step-description-4,
+          .dark .step-container:has(.step-container-5:hover) .step-description-5 {
+            background: rgba(120, 102, 204, 0.1);
+            border-color: rgba(120, 102, 204, 0.25);
+          }
+
+          /* Bidirectional: Card hover expands corresponding image */
+          .step-container:has(.step-description-1:hover) .step-container-1,
+          .step-container:has(.step-description-2:hover) .step-container-2,
+          .step-container:has(.step-description-3:hover) .step-container-3,
+          .step-container:has(.step-description-4:hover) .step-container-4,
+          .step-container:has(.step-description-5:hover) .step-container-5 {
+            width: 120%;
+            z-index: 10;
+          }
+
+          /* Reset Step 1 when other steps are hovered */
+          .step-container:has(.step-container-2:hover) .step-container-1,
+          .step-container:has(.step-container-3:hover) .step-container-1,
+          .step-container:has(.step-container-4:hover) .step-container-1,
+          .step-container:has(.step-container-5:hover) .step-container-1,
+          .step-container:has(.step-description-2:hover) .step-container-1,
+          .step-container:has(.step-description-3:hover) .step-container-1,
+          .step-container:has(.step-description-4:hover) .step-container-1,
+          .step-container:has(.step-description-5:hover) .step-container-1 {
+            width: 14rem;
+            z-index: 1;
+          }
+
+          /* Card hover self-highlighting */
+          .step-description-1:hover,
+          .step-description-2:hover,
+          .step-description-3:hover,
+          .step-description-4:hover,
+          .step-description-5:hover {
+            transform: scale(1.02);
+            background: rgba(120, 102, 204, 0.05);
+            border-color: rgba(120, 102, 204, 0.2);
+            box-shadow: 0 4px 12px rgba(120, 102, 204, 0.1);
+          }
+
+          .dark .step-description-1:hover,
+          .dark .step-description-2:hover,
+          .dark .step-description-3:hover,
+          .dark .step-description-4:hover,
+          .dark .step-description-5:hover {
+            background: rgba(120, 102, 204, 0.1);
+            border-color: rgba(120, 102, 204, 0.25);
+          }
+
+          /* Reset Step 1 card when other cards/images are hovered */
+          .step-container:has(.step-container-2:hover) .step-description-1,
+          .step-container:has(.step-container-3:hover) .step-description-1,
+          .step-container:has(.step-container-4:hover) .step-description-1,
+          .step-container:has(.step-container-5:hover) .step-description-1,
+          .step-container:has(.step-description-2:hover) .step-description-1,
+          .step-container:has(.step-description-3:hover) .step-description-1,
+          .step-container:has(.step-description-4:hover) .step-description-1,
+          .step-container:has(.step-description-5:hover) .step-description-1 {
+            transform: scale(1) !important;
+            background: rgba(255, 255, 255, 0.8) !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            box-shadow: none !important;
+          }
+
+          .dark .step-container:has(.step-container-2:hover) .step-description-1,
+          .dark .step-container:has(.step-container-3:hover) .step-description-1,
+          .dark .step-container:has(.step-container-4:hover) .step-description-1,
+          .dark .step-container:has(.step-container-5:hover) .step-description-1,
+          .dark .step-container:has(.step-description-2:hover) .step-description-1,
+          .dark .step-container:has(.step-description-3:hover) .step-description-1,
+          .dark .step-container:has(.step-description-4:hover) .step-description-1,
+          .dark .step-container:has(.step-description-5:hover) .step-description-1 {
+            background: rgba(31, 41, 55, 0.8) !important;
+            border-color: rgba(75, 85, 99, 0.3) !important;
+          }
+        `}</style>
+
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-4xl lg:text-center">
+          <div className="mx-auto max-w-4xl text-center mb-16">
             <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-purple-300">Simple Process</h2>
-            <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
+            <h1 className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance">
               How It Works
-            </p>
+            </h1>
             <p className="mt-6 text-lg leading-8 text-[#6B7280] dark:text-gray-300 max-w-3xl mx-auto">
-              From idea to production-ready app in three simple steps
+              See your ideas turn into working apps in real time.
             </p>
           </div>
-          
-          {/* Horizontal Timeline */}
-          <div className="mx-auto mt-16 max-w-6xl sm:mt-20 lg:mt-24">
-            <div className="relative">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4">
-                {/* Step 1 */}
-                <motion.div 
-                  className="relative text-center group"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
-                    style={{
-                      backgroundImage: 'linear-gradient(30deg, #7866CC, #AF97F8)'
-                    }}
-                    animate={{ 
-                      y: [-1, -3, -1],
-                      scale: [1, 1.03, 1]
-                    }}
-                    transition={{ 
-                      duration: 2.5,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0
-                    }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      y: -5
-                    }}
-                  >
-                    <span className="text-2xl font-bold text-white">1</span>
-                  </motion.div>
-                  <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
-                    Describe your app
-                  </h3>
-                  <div className="p-4 rounded-lg italic text-[#1F2937] dark:text-white mb-4">
-                    "<TypewriterText />"
-                  </div>
-                  <p className="text-sm text-[#6B7280] dark:text-gray-300">
-                    Tell our interface to Claude Code what you want to build
-                  </p>
-                </motion.div>
 
-                {/* Step 2 */}
-                <motion.div 
-                  className="relative text-center group"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
-                    style={{
-                      backgroundImage: 'linear-gradient(30deg, #7866CC, #AF97F8)'
-                    }}
-                    animate={{ 
-                      y: [-1, -4, -1],
-                      scale: [1, 1.04, 1]
-                    }}
-                    transition={{ 
-                      duration: 3.0,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 0.5
-                    }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      y: -5
-                    }}
-                  >
-                    <span className="text-2xl font-bold text-white">2</span>
-                  </motion.div>
-                  <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
-                    Watch Claude Code build
-                  </h3>
-                  <p className="text-[#6B7280] dark:text-gray-300 mb-4">
-                    Same powerful AI, supported by professional-grade configuration and testing
-                  </p>
-                </motion.div>
+          {/* Steps Container */}
+          <div className="step-container w-full max-w-4xl mt-10 mx-auto">
+            {/* Expandable Cards */}
+            <div className="step-gallery flex items-center gap-2 h-[400px]">
+              {/* Step 1 */}
+              <div className="step-container-1 relative group flex-grow transition-all w-[120%] rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] z-10">
+                <img
+                  className="h-full w-full object-cover object-center rounded-lg"
+                  src="/step1.png"
+                  alt="Step 1 - Describe your app"
+                />
+              </div>
 
-                {/* Step 3 */}
-                <motion.div 
-                  className="relative text-center group"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <motion.div 
-                    className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full shadow-lg group-hover:shadow-xl"
-                    style={{
-                      backgroundImage: 'linear-gradient(30deg, #7866CC, #AF97F8)'
-                    }}
-                    animate={{ 
-                      y: [-1, -3, -1],
-                      scale: [1, 1.03, 1]
-                    }}
-                    transition={{ 
-                      duration: 2.8,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                      delay: 1.0
-                    }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      y: -5
-                    }}
-                  >
-                    <span className="text-2xl font-bold text-white">3</span>
-                  </motion.div>
-                  <h3 className="text-xl font-semibold text-[#1F2937] dark:text-white mb-3">
-                    Get production-ready apps
-                  </h3>
-                  <p className="text-[#6B7280] dark:text-gray-300 mb-4">
-                    Fully functional applications that scale with your business needs
-                  </p>
-                </motion.div>
+              {/* Step 2 */}
+              <div className="step-container-2 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                <img
+                  className="h-full w-full object-cover object-center rounded-lg"
+                  src="/step2.png"
+                  alt="Step 2 - Review AI changes"
+                />
+              </div>
+
+              {/* Step 3 */}
+              <div className="step-container-3 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                <img
+                  className="h-full w-full object-cover object-center rounded-lg"
+                  src="/step3.png"
+                  alt="Step 3 - Tweak and customize"
+                />
+              </div>
+
+              {/* Step 4 */}
+              <div className="step-container-4 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                <img
+                  className="h-full w-full object-cover object-center rounded-lg"
+                  src="/step4.png"
+                  alt="Step 4 - Deploy and share"
+                />
+              </div>
+
+              {/* Step 5 */}
+              <div className="step-container-5 relative group flex-grow transition-all w-56 rounded-lg overflow-visible h-[400px] duration-500 hover:w-[120%] hover:z-10">
+                <img
+                  className="h-full w-full object-cover object-center rounded-lg"
+                  src="/step5.png"
+                  alt="Step 5 - Monitor and scale"
+                />
+              </div>
+            </div>
+
+            {/* Step Description Cards */}
+            <div className="step-descriptions grid grid-cols-1 md:grid-cols-5 gap-4 mt-8">
+              {/* Description 1 */}
+              <div className="step-description-1 step-description rounded-lg p-4 border transform scale-[1.02]" style={{background: 'rgba(120, 102, 204, 0.05)', borderColor: 'rgba(120, 102, 204, 0.2)', boxShadow: '0 4px 12px rgba(120, 102, 204, 0.1)'}}>
+                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 1</div>
+                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Describe your app idea</h4>
+                <p className="text-sm text-[#6B7280] dark:text-gray-300">Write what you want in plain language — no code needed.</p>
+              </div>
+
+              {/* Description 2 */}
+              <div className="step-description-2 step-description rounded-lg p-4 border">
+                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 2</div>
+                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Answer a few quick questions</h4>
+                <p className="text-sm text-[#6B7280] dark:text-gray-300">Pick from multiple-choice or checkboxes to refine details.</p>
+              </div>
+
+              {/* Description 3 */}
+              <div className="step-description-3 step-description rounded-lg p-4 border">
+                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 3</div>
+                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Review your generated spec</h4>
+                <p className="text-sm text-[#6B7280] dark:text-gray-300">See the step-by-step plan before anything gets built.</p>
+              </div>
+
+              {/* Description 4 */}
+              <div className="step-description-4 step-description rounded-lg p-4 border">
+                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 4</div>
+                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Execute build tasks</h4>
+                <p className="text-sm text-[#6B7280] dark:text-gray-300">Each click executes a task — watch your app take shape.</p>
+              </div>
+
+              {/* Description 5 */}
+              <div className="step-description-5 step-description rounded-lg p-4 border">
+                <div className="text-sm font-medium text-[#7866CC] dark:text-purple-300 mb-2">Step 5</div>
+                <h4 className="font-semibold text-[#1F2937] dark:text-white mb-2">Chat with AI to tweak or improve</h4>
+                <p className="text-sm text-[#6B7280] dark:text-gray-300">Ask for changes in simple language, get instant updates.</p>
               </div>
             </div>
           </div>
