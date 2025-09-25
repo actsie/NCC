@@ -17,7 +17,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
     setTimeout(() => {
       setIsClosing(false);
       onClose();
-    }, 150); // Give animation time to complete (120ms + buffer)
+    }, 120);
   };
 
   // Focus on "other platform" input when "Other" is selected
@@ -268,7 +268,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
       `}</style>
       <Dialog open={isOpen} onClose={handleClose} className="relative z-50">
         {/* Backdrop with blur */}
-        <div className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-150 ease-out ${isClosing ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
+        <div className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-[120ms] ease-out ${isClosing ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
 
       {/* Full-screen container to center the panel */}
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
