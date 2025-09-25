@@ -244,6 +244,15 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
           text-align: right;
         }
 
+        /* Hide scrollbar but allow scrolling */
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+
         @keyframes popIn {
           0% {
             opacity: 0;
@@ -271,8 +280,8 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
         <div className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-[120ms] ease-out ${isClosing ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
 
       {/* Full-screen container to center the panel */}
-      <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <DialogPanel className={`max-w-lg w-full bg-white dark:bg-gray-900 p-10 rounded-lg shadow-lg font-sans ${isClosing ? 'modal-pop-out' : 'modal-pop'}`}>
+      <div className="fixed inset-0 flex w-screen items-center justify-center p-4 max-h-screen overflow-y-auto scrollbar-hide sm:overflow-visible">
+        <DialogPanel className={`max-w-lg w-full bg-white dark:bg-gray-900 p-10 rounded-lg shadow-lg font-sans my-auto ${isClosing ? 'modal-pop-out' : 'modal-pop'}`}>
           {/* Close button */}
           <div className="flex justify-end mb-4">
             <button
@@ -415,7 +424,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="firstTool"
-                  className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
+                  className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px] text-right"
                   placeholder="What's the first tool you'd want to build?"
                 />
                 <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
