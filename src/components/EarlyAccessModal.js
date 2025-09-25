@@ -149,6 +149,13 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
           color: #1F2937; /* normal text color */
         }
 
+        html.dark .platform-select {
+          color: #6B7280; /* darker placeholder color */
+        }
+        html.dark .platform-select.has-value {
+          color: #F3F4F6; /* light text color */
+        }
+
         /* Chat bubble success styles */
         .chat-success-container {
           display: flex;
@@ -194,6 +201,12 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
           position: relative;
         }
 
+        html.dark .message-content-success {
+          background: rgba(31, 41, 55, 0.9);
+          border: 1px solid rgba(75, 85, 99, 0.3);
+          box-shadow: 0 8px 32px rgba(120, 102, 204, 0.25);
+        }
+
         .message-content-success::before {
           content: '';
           position: absolute;
@@ -207,12 +220,20 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
           filter: blur(20px);
         }
 
+        html.dark .message-content-success::before {
+          border-top: 8px solid rgba(31, 41, 55, 0.9);
+        }
+
         .message-content-success p {
           margin: 0;
           font-size: 16px;
           font-weight: 500;
           color: #1F2937;
           line-height: 1.4;
+        }
+
+        html.dark .message-content-success p {
+          color: #F3F4F6;
         }
 
         .message-content-success p:first-child {
@@ -251,13 +272,13 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
 
       {/* Full-screen container to center the panel */}
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
-        <DialogPanel className={`max-w-lg w-full bg-white p-10 rounded-lg shadow-lg font-sans ${isClosing ? 'modal-pop-out' : 'modal-pop'}`}>
+        <DialogPanel className={`max-w-lg w-full bg-white dark:bg-gray-900 p-10 rounded-lg shadow-lg font-sans ${isClosing ? 'modal-pop-out' : 'modal-pop'}`}>
           {/* Close button */}
           <div className="flex justify-end mb-4">
             <button
               type="button"
               onClick={handleClose}
-              className="text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#7866CC] focus:ring-offset-2 rounded-md"
+              className="text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 focus:outline-none focus:ring-2 focus:ring-[#7866CC] focus:ring-offset-2 rounded-md"
             >
               <span className="sr-only">Close</span>
               <XMarkIcon className="h-6 w-6" aria-hidden="true" />
@@ -267,8 +288,8 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
           {/* Header section */}
           {!isSubmitted && (
             <div className="mb-10 text-center">
-              <div className="text-base text-gray-800 font-semibold">✨ You're early — that means perks.</div>
-              <div className="mt-2 text-sm text-gray-500">
+              <div className="text-base text-gray-800 dark:text-gray-200 font-semibold">✨ You're early — that means perks.</div>
+              <div className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                 Turn your idea into a working app — with guidance on your first build.
               </div>
             </div>
@@ -284,10 +305,10 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                   <input
                     type="text"
                     name="firstName"
-                    className="block w-full text-sm h-[50px] px-4 text-slate-900 bg-white rounded-[8px] border border-violet-200 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] peer invalid:border-error-500 invalid:focus:border-error-500 overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
+                    className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer invalid:border-error-500 invalid:focus:border-error-500 overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
                     placeholder="First name"
                   />
-                  <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] peer-invalid:text-error-500 focus:invalid:text-error-500 duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                  <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] peer-invalid:text-error-500 focus:invalid:text-error-500 duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     First name
                   </label>
                 </div>
@@ -295,10 +316,10 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                   <input
                     type="text"
                     name="email"
-                    className="block w-full text-sm h-[50px] px-4 text-slate-900 bg-white rounded-[8px] border border-violet-200 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] peer invalid:border-error-500 invalid:focus:border-error-500 overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
+                    className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer invalid:border-error-500 invalid:focus:border-error-500 overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
                     placeholder="Email"
                   />
-                  <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] peer-invalid:text-error-500 focus:invalid:text-error-500 duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                  <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] peer-invalid:text-error-500 focus:invalid:text-error-500 duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                     Email
                   </label>
                 </div>
@@ -311,7 +332,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                     name="platform"
                     value={selectedPlatform}
                     onChange={(e) => setSelectedPlatform(e.target.value)}
-                    className={`block w-full text-sm h-[50px] px-4 bg-white rounded-[8px] border border-violet-200 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] peer platform-select ${selectedPlatform ? 'has-value' : ''} relative z-10`}
+                    className={`block w-full text-sm h-[50px] px-4 bg-white dark:bg-gray-900 text-slate-900 dark:text-gray-100 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer platform-select ${selectedPlatform ? 'has-value' : ''} relative z-10`}
                   >
                     <option value="">Select your platform</option>
                     <option value="Mac">Mac</option>
@@ -319,7 +340,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                     <option value="Linux">Linux</option>
                     <option value="Other">Other</option>
                   </select>
-                  <label className="absolute text-[14px] leading-[150%] text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-20 origin-[0] bg-white px-2 start-1">
+                  <label className="absolute text-[14px] leading-[150%] text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-20 origin-[0] bg-white dark:bg-gray-900 px-2 start-1">
                     Platform
                   </label>
                 </div>
@@ -331,10 +352,10 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                       ref={otherPlatformRef}
                       type="text"
                       name="otherPlatform"
-                      className="block w-full text-sm h-[50px] px-4 text-slate-900 bg-white rounded-[8px] border border-violet-200 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
+                      className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
                       placeholder="Specify your platform"
                     />
-                    <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                    <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                       Specify your platform
                     </label>
                   </div>
@@ -343,7 +364,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
 
               {/* Onboarding support question */}
               <div className={`space-y-3 ${wiggleFields.has('onboardingSupport') ? 'wiggle' : ''}`}>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Would you like onboarding support?
                 </label>
                 <div className="space-y-2">
@@ -353,9 +374,9 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                       name="onboardingSupport"
                       value="async-walkthrough"
                       onChange={(e) => setSelectedOnboarding(e.target.value)}
-                      className="w-4 h-4 text-[#7866CC] border-gray-300 focus:ring-[#7866CC] focus:ring-2"
+                      className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#7866CC] focus:ring-2 focus:outline-none focus:ring-offset-0"
                     />
-                    <span className="ml-2 text-sm text-gray-700">Async walk-through</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Async walk-through</span>
                   </label>
                   <label className="flex items-center">
                     <input
@@ -363,9 +384,9 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                       name="onboardingSupport"
                       value="quick-call"
                       onChange={(e) => setSelectedOnboarding(e.target.value)}
-                      className="w-4 h-4 text-[#7866CC] border-gray-300 focus:ring-[#7866CC] focus:ring-2"
+                      className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#7866CC] focus:ring-2 focus:outline-none focus:ring-offset-0"
                     />
-                    <span className="ml-2 text-sm text-gray-700">Quick call</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Quick call</span>
                   </label>
                   <label className="flex items-center">
                     <input
@@ -373,16 +394,16 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                       name="onboardingSupport"
                       value="solo-first"
                       onChange={(e) => setSelectedOnboarding(e.target.value)}
-                      className="w-4 h-4 text-[#7866CC] border-gray-300 focus:ring-[#7866CC] focus:ring-2"
+                      className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#7866CC] focus:ring-2 focus:outline-none focus:ring-offset-0"
                     />
-                    <span className="ml-2 text-sm text-gray-700">I'll try solo first</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">I'll try solo first</span>
                   </label>
                 </div>
 
                 {/* Solo first additional text */}
                 {selectedOnboarding === 'solo-first' && (
                   <div className="ml-6 mt-2">
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-gray-400 dark:text-gray-500">
                       We'll give you a free Claude account as part of early access. We may still reach out to help get things set up.
                     </p>
                   </div>
@@ -394,10 +415,10 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="firstTool"
-                  className="block w-full text-sm h-[50px] px-4 text-slate-900 bg-white rounded-[8px] border border-violet-200 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
+                  className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
                   placeholder="What's the first tool you'd want to build?"
                 />
-                <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
+                <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
                   What's the first tool you'd want to build? (optional)
                 </label>
               </div>
@@ -408,16 +429,16 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                   type="checkbox"
                   id="joinCommunity"
                   name="joinCommunity"
-                  className="w-4 h-4 text-[#7866CC] bg-gray-100 border-gray-300 rounded focus:ring-[#7866CC] focus:ring-2"
+                  className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 rounded focus:ring-[#7866CC] focus:ring-2"
                 />
-                <label htmlFor="joinCommunity" className="text-sm text-gray-700">
+                <label htmlFor="joinCommunity" className="text-sm text-gray-700 dark:text-gray-300">
                   Want to join our builder community on Discord?
                 </label>
               </div>
 
               {/* 5. Expectations (keep it light) */}
               <div className="space-y-3">
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                   How comfortable are you with coding / no-code tools? (optional)
                 </label>
                 <div className="space-y-2">
@@ -426,27 +447,27 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                       type="radio"
                       name="codingComfort"
                       value="never-coded"
-                      className="w-4 h-4 text-[#7866CC] border-gray-300 focus:ring-[#7866CC] focus:ring-2"
+                      className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#7866CC] focus:ring-2 focus:outline-none focus:ring-offset-0"
                     />
-                    <span className="ml-2 text-sm text-gray-700">Never coded before</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Never coded before</span>
                   </label>
                   <label className="flex items-center">
                     <input
                       type="radio"
                       name="codingComfort"
                       value="tried-nocode"
-                      className="w-4 h-4 text-[#7866CC] border-gray-300 focus:ring-[#7866CC] focus:ring-2"
+                      className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#7866CC] focus:ring-2 focus:outline-none focus:ring-offset-0"
                     />
-                    <span className="ml-2 text-sm text-gray-700">Tried some no-code tools</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Tried some no-code tools</span>
                   </label>
                   <label className="flex items-center">
                     <input
                       type="radio"
                       name="codingComfort"
                       value="comfortable-coding"
-                      className="w-4 h-4 text-[#7866CC] border-gray-300 focus:ring-[#7866CC] focus:ring-2"
+                      className="w-4 h-4 text-[#7866CC] bg-gray-100 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:ring-[#7866CC] focus:ring-2 focus:outline-none focus:ring-offset-0"
                     />
-                    <span className="ml-2 text-sm text-gray-700">Comfortable coding</span>
+                    <span className="ml-2 text-sm text-gray-700 dark:text-gray-300">Comfortable coding</span>
                   </label>
                 </div>
               </div>
@@ -455,7 +476,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
             {/* Form buttons */}
             <div className="sm:flex sm:flex-row-reverse flex gap-4">
               <button
-                className="w-fit rounded-lg text-sm px-5 py-2 focus:outline-none h-[50px] border bg-[#7866CC] hover:bg-[#5E50A0] focus:bg-[#5E50A0] border-[#7866CC] text-white focus:ring-4 focus:ring-violet-200 hover:ring-4 hover:ring-violet-100 transition-all duration-300"
+                className="w-fit rounded-lg text-sm px-5 py-2 focus:outline-none h-[50px] border bg-[#7866CC] hover:bg-[#5E50A0] focus:bg-[#5E50A0] border-[#7866CC] text-white focus:ring-4 focus:ring-violet-200 hover:ring-4 hover:ring-violet-100 dark:hover:ring-[#362B6B] transition-all duration-300"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -488,7 +509,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                 <a
                   href="#"
                   onClick={handleClose}
-                  className="text-sm text-gray-600 hover:text-gray-800"
+                  className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
                 >
                   Close
                 </a>
@@ -505,7 +526,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
 
           {/* Fine print - only show when not submitted */}
           {!isSubmitted && (
-            <div className="text-xs text-gray-400 text-center mt-4 border-t border-gray-100 pt-4">
+            <div className="text-xs text-gray-400 dark:text-gray-500 text-center mt-4 border-t border-gray-100 dark:border-gray-700 pt-4">
               Currently Mac-only. Other platforms will be added to the waitlist.
             </div>
           )}

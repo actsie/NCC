@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CheckIcon, ArrowRightIcon, CalendarIcon, UserIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BlogButton from './BlogButton';
 import { getBlogPostBySlug } from './data/blogPosts';
+import EarlyAccessModal from './components/EarlyAccessModal';
 
 const BlogPostClaudeNoCode = () => {
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const post = getBlogPostBySlug('build-custom-ai-workflows-without-code');
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
@@ -291,13 +293,8 @@ const BlogPostClaudeNoCode = () => {
                   </p>
                   <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                     <BlogButton
-                      navigateToChat={true}
-                      navigateToChatInterface={() => {
-                        if (window.location.pathname !== '/') {
-                          sessionStorage.setItem('triggerChatInterface', 'true');
-                          window.location.href = '/';
-                        }
-                      }}
+                      navigateToChat={false}
+                      onClick={() => setIsEarlyAccessModalOpen(true)}
                     >
                       Get early access
                     </BlogButton>
@@ -370,6 +367,12 @@ const BlogPostClaudeNoCode = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Early Access Modal */}
+      <EarlyAccessModal
+        isOpen={isEarlyAccessModalOpen}
+        onClose={() => setIsEarlyAccessModalOpen(false)}
+      />
     </div>
   );
 };

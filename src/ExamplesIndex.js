@@ -15,6 +15,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import EnhancedButton from './EnhancedButton';
 import FeaturedTool from './components/FeaturedTool';
+import EarlyAccessModal from './components/EarlyAccessModal';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -80,6 +81,7 @@ const ExamplesIndex = ({ navigateToChatInterface }) => {
   const [videoModalOpen, setVideoModalOpen] = useState(false);
   const [currentVideoId, setCurrentVideoId] = useState(null);
   const [selectedFromDropdown, setSelectedFromDropdown] = useState(false);
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const activeExample = examples[activeSlide];
 
   // Function to handle slide clicks
@@ -847,12 +849,8 @@ const ExamplesIndex = ({ navigateToChatInterface }) => {
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
                 <EnhancedButton
-                  navigateToChat={true}
-                  navigateToChatInterface={() => {
-                    // Navigate to home page and trigger chat interface
-                    sessionStorage.setItem('triggerChatInterface', 'true');
-                    window.location.href = '/';
-                  }}
+                  navigateToChat={false}
+                  onClick={() => setIsEarlyAccessModalOpen(true)}
                 >
                   Get early access
                 </EnhancedButton>
@@ -944,6 +942,12 @@ const ExamplesIndex = ({ navigateToChatInterface }) => {
       <div className="mt-20">
         <Footer />
       </div>
+
+      {/* Early Access Modal */}
+      <EarlyAccessModal
+        isOpen={isEarlyAccessModalOpen}
+        onClose={() => setIsEarlyAccessModalOpen(false)}
+      />
     </div>
   );
 };

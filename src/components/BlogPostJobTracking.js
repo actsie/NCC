@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './Header';
 import Footer from './Footer';
 import BlogButton from '../BlogButton';
+import EarlyAccessModal from './EarlyAccessModal';
 import { getBlogPostBySlug } from '../data/blogPosts';
 
 const BlogPostJobTracking = () => {
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const post = getBlogPostBySlug('how-job-seekers-track-applications');
 
   React.useEffect(() => {
@@ -294,13 +296,8 @@ const BlogPostJobTracking = () => {
             
             <div className="mt-8 flex justify-end">
               <BlogButton
-                navigateToChat={true}
-                navigateToChatInterface={() => {
-                  if (window.location.pathname !== '/') {
-                    sessionStorage.setItem('triggerChatInterface', 'true');
-                    window.location.href = '/';
-                  }
-                }}
+                navigateToChat={false}
+                onClick={() => setIsEarlyAccessModalOpen(true)}
               >
                 Build your own
               </BlogButton>
@@ -358,6 +355,12 @@ const BlogPostJobTracking = () => {
 
       {/* Footer */}
       <Footer />
+
+      {/* Early Access Modal */}
+      <EarlyAccessModal
+        isOpen={isEarlyAccessModalOpen}
+        onClose={() => setIsEarlyAccessModalOpen(false)}
+      />
     </div>
   );
 };

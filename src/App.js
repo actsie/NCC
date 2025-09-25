@@ -16,6 +16,7 @@ import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ShineText from './components/ShineText';
+import EarlyAccessModal from './components/EarlyAccessModal';
 
 // Simple tab styles
 const tabStyles = `
@@ -256,6 +257,7 @@ const setupChallenges = [
 
 const App = () => {
   const [isSignedUp, setIsSignedUp] = useState(false);
+  const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [showShareButton, setShowShareButton] = useState(false);
@@ -530,7 +532,7 @@ const App = () => {
           />
         </div>
         
-        <section className="mx-auto max-w-2xl py-20 sm:py-28 lg:py-32">
+        <section className="mx-auto max-w-2xl py-16 sm:py-20 lg:py-24">
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] dark:text-gray-300">
@@ -1481,8 +1483,8 @@ const App = () => {
                   )}
                   <EnhancedButton
                     showSuccess={isSignedUp && !showShareButton}
-                    navigateToChat={!showShareButton && !isSignedUp}
-                    navigateToChatInterface={navigateToChatInterface}
+                    navigateToChat={false}
+                    onClick={() => setIsEarlyAccessModalOpen(true)}
                   >
                     {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
                   </EnhancedButton>
@@ -1625,8 +1627,8 @@ const App = () => {
               <div className="mt-8 flex items-center justify-center">
                 <EnhancedButton
                   showSuccess={isSignedUp && !showShareButton}
-                  navigateToChat={!showShareButton && !isSignedUp}
-                  navigateToChatInterface={navigateToChatInterface}
+                  navigateToChat={false}
+                  onClick={() => setIsEarlyAccessModalOpen(true)}
                 >
                   {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Build my first tool'}
                 </EnhancedButton>
@@ -1813,7 +1815,7 @@ const App = () => {
                     </div>
                   </div>
                 </div>
-                <h1 className="cta-text text-4xl md:text-[46px] md:leading-[60px] font-semibold bg-gradient-to-r from-[#4C0083] to-[#7866CC] dark:from-purple-400 dark:to-purple-300 text-transparent bg-clip-text">
+                <h1 className="cta-text text-4xl md:text-[46px] md:leading-[60px] font-semibold bg-gradient-to-r from-[#4C0083] to-[#7866CC] dark:from-[#EBE5FD] dark:to-[#EBE5FD] text-transparent bg-clip-text">
                   Bring an idea. Leave with a tool.
                 </h1>
                 <div className="cta-text mt-8">
@@ -1860,6 +1862,12 @@ const App = () => {
 
       {/* Footer */}
       <Footer id="footer-section" />
+
+      {/* Early Access Modal */}
+      <EarlyAccessModal
+        isOpen={isEarlyAccessModalOpen}
+        onClose={() => setIsEarlyAccessModalOpen(false)}
+      />
     </div>
   );
 };
