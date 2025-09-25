@@ -97,9 +97,14 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (rafRef.current) return;
-      rafRef.current = requestAnimationFrame(() => {
+    rafRef.current = requestAnimationFrame(() => {
         const y = window.scrollY || 0;
-        setIsScrolled(y > 30);
+        setIsScrolled((prev) => {
+          if (prev) {
+            return y > 10;
+          }
+          return y > 60;
+        });
         rafRef.current = null;
       });
     };
