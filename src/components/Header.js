@@ -11,6 +11,7 @@ import {
   ClipboardDocumentListIcon,
 } from '@heroicons/react/24/outline';
 import DarkModeToggle from '../DarkModeToggle';
+import EarlyAccessButton from './EarlyAccessButton';
 
 const navigation = [
   { name: 'Features', href: '/#features' },
@@ -273,6 +274,13 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
           </div>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
+          <a
+            href="/#community"
+            className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]"
+          >
+            Join a builder community
+          </a>
+          <EarlyAccessButton />
           <DarkModeToggle />
         </div>
       </nav>
