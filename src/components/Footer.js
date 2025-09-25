@@ -68,7 +68,7 @@ const Footer = ({ id = "footer-section" }) => {
               />
             </a>
           </div>
-          <div className="grid grid-cols-1 gap-8 sm:gap-6 sm:grid-cols-2">
+          <div className="grid grid-cols-2 gap-6 sm:gap-6">
             <div>
               <h2 className="mb-6 text-sm font-semibold text-[#1F2937] dark:text-white uppercase">Product</h2>
               <ul className="text-[#6B7280] dark:text-gray-300 font-medium">
@@ -119,8 +119,8 @@ const Footer = ({ id = "footer-section" }) => {
             <strong>Important:</strong> We are not affiliated with Claude Code or Anthropic. This service provides setup and configuration assistance.
           </p>
         </div>
-        <div className="sm:flex sm:items-center sm:justify-between">
-          <span className="text-sm text-[#6B7280] dark:text-gray-300 text-center sm:text-left">
+        <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
+          <span className="text-sm text-[#6B7280] dark:text-gray-300 text-center">
             © 2025 <a href="/" className="hover:underline">Pawgrammer</a>. All Rights Reserved.
           </span>
           <div className="flex justify-center mt-6 sm:justify-center sm:mt-0 sm:ml-6">

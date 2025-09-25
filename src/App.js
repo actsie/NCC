@@ -649,7 +649,7 @@ const App = () => {
         
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {/* Tab Navigation */}
-          <div className="mx-auto max-w-4xl lg:text-center mb-16">
+          <div className="mx-auto max-w-4xl text-center mb-16">
             <h2 className="text-base font-semibold leading-7 text-[#7866CC] dark:text-purple-300">Understanding the Challenge</h2>
             <p className="mt-2 text-4xl font-semibold tracking-tight text-pretty text-[#1F2937] dark:text-white sm:text-5xl lg:text-balance flex items-center justify-center flex-wrap" style={{gap: '1.15rem'}}>
               Why 
