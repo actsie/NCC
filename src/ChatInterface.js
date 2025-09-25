@@ -769,10 +769,6 @@ const StyledWrapper = styled.div`
     .chat-container {
       padding: 20px 12px;
     }
-
-    .button-container > div {
-      min-width: 100%;
-    }
   }
 `;
 
