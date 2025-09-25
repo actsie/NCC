@@ -17,7 +17,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
     setTimeout(() => {
       setIsClosing(false);
       onClose();
-    }, 120);
+    }, 150); // Give animation time to complete (120ms + buffer)
   };
 
   // Focus on "other platform" input when "Other" is selected
