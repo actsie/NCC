@@ -17,384 +17,48 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ShineText from './components/ShineText';
 
-// Tab styles with neumorphic animations
+// Simple tab styles
 const tabStyles = `
   <style>
-    /* Base tab styles with neumorphic design - only for inactive tabs (excluding solution tab) */
-    [id^="tab-"]:not(.tab-active):not(.tab-solution-shine) {
-      position: relative;
-      background: linear-gradient(145deg, #ffffff, #e6e6e6);
-      box-shadow:
-        3px 3px 6px rgba(0, 0, 0, 0.1),
-        -3px -3px 6px rgba(255, 255, 255, 0.7);
-      transition: all 0.2s ease;
-      overflow: visible;
-      border: none !important;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Dark mode styles for inactive tabs (excluding solution tab) */
-    .dark [id^="tab-"]:not(.tab-active):not(.tab-solution-shine) {
-      background: linear-gradient(145deg, #374151, #4b5563);
-      box-shadow:
-        3px 3px 6px rgba(0, 0, 0, 0.5),
-        -3px -3px 6px rgba(30, 35, 42, 0.8);
-      color: #e5e7eb !important;
-    }
-
-    /* Hover effect for inactive tabs only (excluding solution tab) */
-    [id^="tab-"]:hover:not(.tab-active):not(.tab-solution-shine) {
-      background: linear-gradient(145deg, #f0f0f0, #ffffff) !important;
-      transform: translateY(-1px);
-      box-shadow:
-        4px 4px 8px rgba(0, 0, 0, 0.1),
-        -4px -4px 8px rgba(255, 255, 255, 0.8);
-      height: 48px;
-    }
-
-    /* Dark mode hover effect for inactive tabs only (excluding solution tab) */
-    .dark [id^="tab-"]:hover:not(.tab-active):not(.tab-solution-shine) {
-      background: linear-gradient(145deg, #1f2937, #374151) !important;
-      box-shadow:
-        4px 4px 8px rgba(0, 0, 0, 0.6),
-        -4px -4px 8px rgba(17, 24, 39, 0.9);
-      color: #f3f4f6 !important;
-      height: 48px;
-    }
-
-    /* Active tab styles with orange gradient */
-    .tab-active {
-      background: linear-gradient(145deg, #7866CC, #AF97F8) !important;
-      color: white !important;
-      font-weight: 600;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      box-shadow:
-        inset 2px 2px 5px rgba(0, 0, 0, 0.2),
-        inset -2px -2px 5px rgba(255, 255, 255, 0.1),
-        3px 3px 8px rgba(120, 102, 204, 0.3);
-      transform: translateY(2px);
-      border: none !important;
-      animation: select 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Active tab hover effect */
-    [id^="tab-"]:hover.tab-active {
-      transform: translateY(1px);
-      height: 48px;
-    }
-
-    /* CSS custom properties for conic gradient animation */
-    @property --shimmer-angle {
-      syntax: "<angle>";
-      initial-value: 0deg;
-      inherits: false;
-    }
-
-    /* Special shimmery border for solution tab when not active */
-    .tab-solution-shine:not(.tab-active) {
-      position: relative;
-      --shimmer-angle: 0deg;
-      border: 1px solid transparent;
-      background-image:
-        linear-gradient(#f9fafb, #f9fafb),
-        conic-gradient(
-          from var(--shimmer-angle),
-          #7866CC 0deg,
-          #AF97F8 90deg,
-          #9B7EF7 180deg,
-          #AF97F8 270deg,
-          #7866CC 360deg
-        );
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      animation: shimmerRotate 4s linear infinite;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
-      overflow: visible;
-    }
-
-    /* Dark mode special border for solution tab */
-    .dark .tab-solution-shine:not(.tab-active) {
-      background-image:
-        linear-gradient(#1f2937, #1f2937),
-        conic-gradient(
-          from var(--shimmer-angle),
-          #7866CC 0deg,
-          #AF97F8 90deg,
-          #9B7EF7 180deg,
-          #AF97F8 270deg,
-          #7866CC 360deg
-        ) !important;
-      background-origin: border-box;
-      background-clip: padding-box, border-box;
-      animation: shimmerRotate 4s linear infinite;
-    }
-
-    /* Rotation animation for conic gradient */
-    @keyframes shimmerRotate {
-      to {
-        --shimmer-angle: 360deg;
-      }
-    }
-    
-    /* Hover effect for solution tab */
-    .tab-solution-shine:not(.tab-active):hover {
-      transform: translateY(-1px);
-    }
-
-    /* Particle animation for active tabs */
-    .tab-active::before,
-    .tab-active::after {
-      content: "";
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .tab-active::before {
-      background: #AF97F8;
-      box-shadow: 
-        0 0 6px #AF97F8,
-        10px -10px 0 #AF97F8,
-        -10px -10px 0 #AF97F8;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: multi-particles-top 0.8s ease-out forwards;
-    }
-
-    .tab-active::after {
-      background: #7866CC;
-      box-shadow: 
-        0 0 8px #7866CC,
-        10px 10px 0 #7866CC,
-        -10px 10px 0 #7866CC;
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: multi-particles-bottom 0.8s ease-out forwards;
-    }
-
-    /* Ripple effect */
-    .tab-active {
-      position: relative;
-    }
-
-    .tab-active:before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: radial-gradient(
-        circle at 50% 50%,
-        rgba(255, 255, 255, 0.5) 0%,
-        transparent 50%
-      );
-      opacity: 0;
-      animation: ripple 0.8s ease-out;
-      z-index: 1;
-    }
-
-    /* Glowing border for active tabs */
-    .tab-active:after {
-      content: "";
-      position: absolute;
-      inset: -2px;
-      border-radius: inherit;
-      background: linear-gradient(
-        45deg,
-        rgba(241, 39, 17, 0.5),
-        rgba(245, 175, 25, 0.5)
-      );
-      -webkit-mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
-      -webkit-mask-composite: xor;
-      mask-composite: exclude;
-      animation: border-glow 1.5s ease-in-out infinite alternate;
-      z-index: -1;
-    }
-
-    /* Solution tab particles when active */
-    .tab-solution-shine.tab-active .tab-solution-particles {
-      display: block;
-    }
-    .tab-solution-shine.tab-active span {
-      background: none !important;
-      -webkit-background-clip: unset !important;
-      -webkit-text-fill-color: white !important;
-      color: white !important;
-      position: relative;
-      z-index: 2;
-    }
-    .tab-solution-particles {
-      display: none;
-      overflow: hidden;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left: 0;
-    }
-    .tab-solution-particles .particle {
-      bottom: -10px;
-      position: absolute;
-      animation: floating-particles infinite ease-in-out;
-      pointer-events: none;
-      width: 2px;
-      height: 2px;
-      background-color: #fff;
-      border-radius: 9999px;
-    }
-
     /* Tab content fade in */
     .tab-content {
       animation: fadeIn 0.3s ease-in-out;
-    }
-
-    /* Keyframe animations */
-    @keyframes select {
-      0% {
-        transform: scale(0.95) translateY(2px);
-      }
-      50% {
-        transform: scale(1.05) translateY(-1px);
-      }
-      100% {
-        transform: scale(1) translateY(2px);
-      }
-    }
-
-    @keyframes multi-particles-top {
-      0% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
-      40% {
-        opacity: 0.8;
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-20px) scale(0);
-        box-shadow:
-          0 0 6px transparent,
-          20px -20px 0 transparent,
-          -20px -20px 0 transparent;
-      }
-    }
-
-    @keyframes multi-particles-bottom {
-      0% {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0) scale(1);
-      }
-      40% {
-        opacity: 0.8;
-      }
-      100% {
-        opacity: 0;
-        transform: translateX(-50%) translateY(20px) scale(0);
-        box-shadow:
-          0 0 8px transparent,
-          20px 20px 0 transparent,
-          -20px 20px 0 transparent;
-      }
-    }
-
-    @keyframes ripple {
-      0% {
-        opacity: 1;
-        transform: scale(0.2);
-      }
-      50% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 0;
-        transform: scale(2.5);
-      }
-    }
-
-    @keyframes border-glow {
-      0% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes floating-particles {
-      0% {
-        transform: translateY(0);
-      }
-      85% {
-        opacity: 0;
-      }
-      100% {
-        transform: translateY(-40px);
-        opacity: 0;
-      }
-    }
-
-    .tab-solution-particles .particle:nth-child(1) {
-      left: 15%;
-      opacity: 1;
-      animation-duration: 2.35s;
-      animation-delay: 0.2s;
-    }
-    .tab-solution-particles .particle:nth-child(2) {
-      left: 35%;
-      opacity: 0.7;
-      animation-duration: 2.5s;
-      animation-delay: 0.5s;
-    }
-    .tab-solution-particles .particle:nth-child(3) {
-      left: 25%;
-      opacity: 0.8;
-      animation-duration: 2.2s;
-      animation-delay: 0.1s;
-    }
-    .tab-solution-particles .particle:nth-child(4) {
-      left: 55%;
-      opacity: 0.6;
-      animation-duration: 2.05s;
-    }
-    .tab-solution-particles .particle:nth-child(5) {
-      left: 70%;
-      opacity: 1;
-      animation-duration: 1.9s;
-    }
-    .tab-solution-particles .particle:nth-child(6) {
-      left: 85%;
-      opacity: 0.5;
-      animation-duration: 1.5s;
-      animation-delay: 1.5s;
     }
 
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    @keyframes shimmer {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+
+    /* Tab button focus and active states */
+    [id^="tab-"]:focus {
+      outline: none;
+    }
+
+    /* Light mode active states */
+    [id^="tab-"].tab-active:focus,
+    [id^="tab-"].tab-active:active {
+      color: #7866CC !important;
+      border-bottom-color: #7866CC !important;
+    }
+
+    [id^="tab-"]:focus:not(.tab-active),
+    [id^="tab-"]:active:not(.tab-active) {
+      color: #7866CC !important;
+      border-bottom-color: transparent !important;
+    }
+
+    /* Dark mode active states */
+    .dark [id^="tab-"].tab-active:focus,
+    .dark [id^="tab-"].tab-active:active {
+      color: #EBE5FD !important;
+      border-bottom-color: #EBE5FD !important;
+    }
+
+    .dark [id^="tab-"]:focus:not(.tab-active),
+    .dark [id^="tab-"]:active:not(.tab-active) {
+      color: #EBE5FD !important;
+      border-bottom-color: transparent !important;
     }
 
     /* Fix placeholder links */
@@ -730,23 +394,15 @@ const App = () => {
       // Remove active class from all tabs and reset styles
       document.querySelectorAll('[id^="tab-"]').forEach(tab => {
         tab.classList.remove('tab-active');
-        if (tab.id === 'tab-solution') {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
-        } else {
-          tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
-        }
+        tab.className = 'px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200';
       });
       document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
-      
+
       // Add active class to target tab
       const activeTab = document.getElementById(tabId);
       if (activeTab) {
         activeTab.classList.add('tab-active');
-        if (tabId === 'tab-solution') {
-          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active tab-solution-shine';
-        } else {
-          activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active';
-        }
+        activeTab.className = 'px-4 py-2 text-sm font-medium text-[#7866CC] dark:text-[#EBE5FD] border-b-2 border-[#7866CC] dark:border-[#EBE5FD] hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200 tab-active';
         const contentId = 'content-' + tabId.replace('tab-', '');
         const contentElement = document.getElementById(contentId);
         if (contentElement) {
@@ -1008,87 +664,65 @@ const App = () => {
           <div className="mx-auto max-w-6xl">
             {/* Tab Buttons */}
             <div className="flex flex-col sm:flex-row justify-center mb-12 gap-2">
-              <button 
+              <button
                 id="tab-problems"
-                className="px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-[#7866CC] to-[#AF97F8] rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active"
+                className="px-4 py-2 text-sm font-medium text-[#7866CC] dark:text-[#EBE5FD] border-b-2 border-[#7866CC] dark:border-[#EBE5FD] hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200 tab-active"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
-                    if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
-                    } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
-                    }
+                    tab.className = 'px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200';
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
-                  
+
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-problems');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active';
+                  activeTab.className = 'px-4 py-2 text-sm font-medium text-[#7866CC] dark:text-[#EBE5FD] border-b-2 border-[#7866CC] dark:border-[#EBE5FD] hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200 tab-active';
                   document.getElementById('content-problems').classList.remove('hidden');
                 }}
               >
                 Why Claude Code is better than other tools
               </button>
-              <button 
+              <button
                 id="tab-setup"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100"
+                className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
-                    if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
-                    } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
-                    }
+                    tab.className = 'px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200';
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
-                  
+
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-setup');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active';
+                  activeTab.className = 'px-4 py-2 text-sm font-medium text-[#7866CC] dark:text-[#EBE5FD] border-b-2 border-[#7866CC] dark:border-[#EBE5FD] hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200 tab-active';
                   document.getElementById('content-setup').classList.remove('hidden');
                 }}
               >
                 Why it's hard to use Claude Code
               </button>
-              <button 
+              <button
                 id="tab-solution"
-                className="px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine"
+                className="px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200"
                 onClick={() => {
                   // Remove active class from all tabs and reset styles
                   document.querySelectorAll('[id^="tab-"]').forEach(tab => {
                     tab.classList.remove('tab-active');
-                    if (tab.id === 'tab-solution') {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 rounded-lg transition-all duration-100 tab-solution-shine';
-                    } else {
-                      tab.className = 'px-6 py-3 text-sm font-semibold text-[#6B7280] dark:text-gray-300 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition-all duration-100';
-                    }
+                    tab.className = 'px-4 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200';
                   });
                   document.querySelectorAll('[id^="content-"]').forEach(content => content.classList.add('hidden'));
-                  
+
                   // Add active class to clicked tab
                   const activeTab = document.getElementById('tab-solution');
                   activeTab.classList.add('tab-active');
-                  activeTab.className = 'px-6 py-3 text-sm font-semibold text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-100 tab-active tab-solution-shine';
+                  activeTab.className = 'px-4 py-2 text-sm font-medium text-[#7866CC] dark:text-[#EBE5FD] border-b-2 border-[#7866CC] dark:border-[#EBE5FD] hover:text-[#7866CC] dark:hover:text-[#EBE5FD] transition-colors duration-200 tab-active';
                   document.getElementById('content-solution').classList.remove('hidden');
                 }}
               >
-                <div className="tab-solution-particles">
-                  <i className="particle"></i>
-                  <i className="particle"></i>
-                  <i className="particle"></i>
-                  <i className="particle"></i>
-                  <i className="particle"></i>
-                  <i className="particle"></i>
-                </div>
-                <span style={{ position: 'relative', zIndex: 2 }}>
-                  <ShineText>How We Solve This</ShineText>
-                </span>
+                How We Solve This
               </button>
             </div>
 
