@@ -17,7 +17,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
     setTimeout(() => {
       setIsClosing(false);
       onClose();
-    }, 150);
+    }, 120);
   };
 
   // Focus on "other platform" input when "Other" is selected
@@ -125,7 +125,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
           animation: modalPop 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .modal-pop-out {
-          animation: modalPopOut 0.15s cubic-bezier(0.55, 0.085, 0.68, 0.53);
+          animation: modalPopOut 0.12s cubic-bezier(0.4, 0, 1, 1);
         }
         @keyframes slideIn {
           0% {
