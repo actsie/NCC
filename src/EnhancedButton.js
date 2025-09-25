@@ -9,6 +9,7 @@ const EnhancedButton = ({
   isSubmitting = false,
   navigateToChat = false,
   navigateToChatInterface = null,
+  alignment = 'center', // 'left', 'center', 'right'
   ...props
 }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -22,7 +23,7 @@ const EnhancedButton = ({
   };
 
   return (
-    <StyledWrapper>
+    <StyledWrapper alignment={alignment}>
       <div
         className="btn-container"
         onMouseEnter={() => setIsHovered(true)}
@@ -73,7 +74,11 @@ const StyledWrapper = styled.div`
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: ${props => {
+      if (props.alignment === 'left') return 'flex-start';
+      if (props.alignment === 'right') return 'flex-end';
+      return 'center';
+    }};
   }
 
   .btn {
@@ -132,12 +137,14 @@ const StyledWrapper = styled.div`
   .transition-top {
     top: 0;
     left: 0;
+    right: 0;
     border-radius: 12px 12px 0 0;
     align-items: start;
   }
 
   .transition-bottom {
     bottom: 0;
+    left: 0;
     right: 0;
     border-radius: 0 0 12px 12px;
     align-items: end;

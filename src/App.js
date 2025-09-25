@@ -1624,8 +1624,8 @@ const App = () => {
               </div>
 
               {/* Call-to-Action Row */}
-              <div className="mt-8">
-                <div className="ml-auto sm:mx-auto w-fit">
+              <div className="mt-8 text-right sm:text-center">
+                <div className="relative inline-block">
                   <EnhancedButton
                     showSuccess={isSignedUp && !showShareButton}
                     navigateToChat={false}
