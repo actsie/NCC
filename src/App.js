@@ -1624,14 +1624,16 @@ const App = () => {
               </div>
 
               {/* Call-to-Action Row */}
-              <div className="mt-8 flex justify-end sm:justify-center">
-                <EnhancedButton
-                  showSuccess={isSignedUp && !showShareButton}
-                  navigateToChat={false}
-                  onClick={() => setIsEarlyAccessModalOpen(true)}
-                >
-                  {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Build my first tool'}
-                </EnhancedButton>
+              <div className="mt-8">
+                <div className="ml-auto sm:mx-auto w-fit">
+                  <EnhancedButton
+                    showSuccess={isSignedUp && !showShareButton}
+                    navigateToChat={false}
+                    onClick={() => setIsEarlyAccessModalOpen(true)}
+                  >
+                    {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Build my first tool'}
+                  </EnhancedButton>
+                </div>
               </div>
             </div>
           </div>
