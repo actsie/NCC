@@ -121,7 +121,7 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
   return (
     <header className={`${className} backdrop-blur-xl bg-white/30 dark:bg-gray-900/30 border-b border-white/10 dark:border-gray-700/10`}>
       <nav className="flex items-center justify-between py-4 px-6 lg:px-8" aria-label="Global">
-        <div className="flex lg:flex-1">
+        <div className="flex xl:flex-1">
           <a href="/" className="-m-1.5 p-1.5 flex items-center h-8">
             <span className="sr-only">Pawgrammer</span>
             <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
@@ -140,17 +140,7 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
             />
           </a>
         </div>
-        <div className="flex lg:hidden">
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-[#1F2937] dark:text-white"
-          >
-            <span className="sr-only">Open main menu</span>
-            <Bars3Icon aria-hidden="true" className="size-6" />
-          </button>
-        </div>
-        <div className="hidden lg:flex lg:gap-x-12 lg:items-center">
+        <div className="hidden xl:flex xl:gap-x-12 xl:items-center">
           {navigation.map((item) => (
             <a 
               key={item.name} 
@@ -242,18 +232,32 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
             )}
           </div>
         </div>
-        <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:items-center lg:gap-4">
+        <div className={`flex flex-1 justify-end items-center gap-4 xl:gap-4 transition-transform duration-300 ease-out ${
+          mobileMenuOpen ? '-translate-x-80' : 'translate-x-0'
+        }`}>
           <a
             href="/#community"
-            className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]"
+            className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2] whitespace-nowrap hidden sm:block"
           >
             Join a builder community
           </a>
           <EarlyAccessButton onClick={() => setEarlyAccessModalOpen(true)} />
-          <DarkModeToggle />
+          <div className={`transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
+            <DarkModeToggle />
+          </div>
+          <div className="xl:hidden">
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen(true)}
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-[#1F2937] dark:text-white"
+            >
+              <span className="sr-only">Open main menu</span>
+              <Bars3Icon aria-hidden="true" className="size-6" />
+            </button>
+          </div>
         </div>
       </nav>
-      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+      <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="xl:hidden">
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:ring-gray-100/10">
           <div className="flex items-center justify-between">
