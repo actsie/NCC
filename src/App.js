@@ -970,13 +970,8 @@ const App = () => {
 
             <img
               alt="Pawgrammer interface"
-              src="/Pawgrammer-light.png"
-              className="w-full max-w-full sm:w-[57rem] sm:max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0 dark:hidden"
-            />
-            <img
-              alt="Pawgrammer interface"
-              src="/Pawgrammer-light.png"
-              className="w-full max-w-full sm:w-[57rem] sm:max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0 hidden dark:block"
+              src="/step1.gif"
+              className="w-full max-w-full sm:w-[57rem] sm:max-w-none rounded-xl shadow-xl ring-1 ring-gray-400/10 md:-ml-4 lg:-ml-0"
             />
           </div>
         </div>
