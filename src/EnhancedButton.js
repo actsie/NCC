@@ -137,14 +137,12 @@ const StyledWrapper = styled.div`
   .transition-top {
     top: 0;
     left: 0;
-    right: 0;
     border-radius: 12px 12px 0 0;
     align-items: start;
   }
 
   .transition-bottom {
     bottom: 0;
-    left: 0;
     right: 0;
     border-radius: 0 0 12px 12px;
     align-items: end;
