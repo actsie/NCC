@@ -268,7 +268,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
       `}</style>
       <Dialog open={isOpen} onClose={handleClose} className="relative z-50">
         {/* Backdrop with blur */}
-        <div className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-all duration-150 ease-out ${isClosing ? 'opacity-0 backdrop-blur-none' : 'opacity-100'}`} aria-hidden="true" />
+        <div className={`fixed inset-0 bg-black/20 backdrop-blur-sm transition-opacity duration-150 ease-out ${isClosing ? 'opacity-0' : 'opacity-100'}`} aria-hidden="true" />
 
       {/* Full-screen container to center the panel */}
       <div className="fixed inset-0 flex w-screen items-center justify-center p-4">
