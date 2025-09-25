@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { CheckIcon, ArrowRightIcon, CalendarIcon, UserIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import AnimatedButton from './AnimatedButton';
+import BlogButton from './BlogButton';
 import { getBlogPostBySlug } from './data/blogPosts';
 
 const BlogPostClaudeNoCode = () => {
@@ -290,9 +290,17 @@ const BlogPostClaudeNoCode = () => {
                     For when existing apps almost work, but not quite.
                   </p>
                   <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-                    <AnimatedButton>
+                    <BlogButton
+                      navigateToChat={true}
+                      navigateToChatInterface={() => {
+                        if (window.location.pathname !== '/') {
+                          sessionStorage.setItem('triggerChatInterface', 'true');
+                          window.location.href = '/';
+                        }
+                      }}
+                    >
                       Get early access
-                    </AnimatedButton>
+                    </BlogButton>
                     <a href="/#features" className="text-sm/6 font-semibold text-white hover:text-gray-100">
                       Learn more <span aria-hidden="true">→</span>
                     </a>

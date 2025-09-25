@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, CloudArrowUpIcon, LockClosedIcon, ServerIcon, ShoppingCartIcon, UserGroupIcon, ChartBarIcon, GiftIcon, SparklesIcon, ArchiveBoxIcon, BookOpenIcon, PhotoIcon, LightBulbIcon, ComputerDesktopIcon, WrenchScrewdriverIcon, BoltIcon } from '@heroicons/react/20/solid';
 import { ExclamationTriangleIcon, XMarkIcon as XMarkSolidIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import AnimatedButton from './AnimatedButton';
+import EnhancedButton from './EnhancedButton';
+import ChatInterface from './ChatInterface';
 import DarkModeToggle from './DarkModeToggle';
 import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
 import BlogPostJobTracking from './components/BlogPostJobTracking';
@@ -596,15 +597,34 @@ const App = () => {
   const [showShareButton, setShowShareButton] = useState(false);
   const [isExpanding, setIsExpanding] = useState(false);
   const [footerButtonBounce, setFooterButtonBounce] = useState(false);
+  const chatInterfaceRef = useRef(null);
+
+  // Function to navigate to chat interface with wiggle
+  const navigateToChatInterface = () => {
+    if (chatInterfaceRef.current) {
+      chatInterfaceRef.current.scrollToAndWiggle();
+    }
+  };
 
   // Ensure page loads at the top on mobile
   React.useEffect(() => {
     // Force scroll to top on component mount
     window.scrollTo(0, 0);
-    
+
     // Prevent browser scroll restoration
     if ('scrollRestoration' in window.history) {
       window.history.scrollRestoration = 'manual';
+    }
+
+    // Check if we need to trigger chat interface navigation
+    if (sessionStorage.getItem('triggerChatInterface') === 'true') {
+      sessionStorage.removeItem('triggerChatInterface');
+      // Delay to ensure page is fully loaded
+      setTimeout(() => {
+        if (chatInterfaceRef.current) {
+          chatInterfaceRef.current.scrollToAndWiggle();
+        }
+      }, 1000);
     }
   }, []);
 
@@ -772,7 +792,7 @@ const App = () => {
   
   // If it's the examples route, render the examples index
   if (currentPath === '/examples' || currentPath === '/examples/') {
-    return <ExamplesIndex />;
+    return <ExamplesIndex navigateToChatInterface={navigateToChatInterface} />;
   }
 
   return (
@@ -859,7 +879,7 @@ const App = () => {
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] dark:text-gray-300">
               <div className="hero-announcement-content">
-                Claude Code infrastructure, no complexity. <a href="#features" className="font-semibold text-[#7866CC]"><span aria-hidden="true" className="absolute inset-0"></span>Learn more <span aria-hidden="true">→</span></a>
+                Claude Code infrastructure, no complexity. <a href="#community" className="font-semibold text-[#7866CC]"><span aria-hidden="true" className="absolute inset-0"></span>Join a builder community <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
@@ -879,35 +899,14 @@ const App = () => {
                 style={{transform: 'translateY(-0.25rem)'}}
               /> makes Claude Code simple. Non-technical users get pro-grade setup — the kind even developers find painful to do on their own.
             </p>
-            <div className="mt-10 flex items-center justify-center gap-x-6">
-              <div className="relative inline-block">
-                {isSignedUp && showShareButton && (
-                  <div className={`signup-tooltip ${showTooltip ? 'show' : ''}`}>
-                    <div className="flex items-center">
-                      <span className="heart-icon">
-                        <svg className="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                        </svg>
-                      </span>
-                      <span className="heart-text">You're all set!</span>
-                    </div>
-                  </div>
-                )}
-                <AnimatedButton 
-                  onSignup={() => setIsSignedUp(true)}
-                  showSuccess={isSignedUp && !showShareButton}
-                  isShareMode={showShareButton}
-                  isExpanding={isExpanding}
-                >
-                  {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
-                </AnimatedButton>
-              </div>
-              <a href="#community" className="text-sm font-semibold leading-6 text-[#1F2937] dark:text-gray-300">
-                Join a builder community <span aria-hidden="true">→</span>
-              </a>
+
+            {/* Chat Interface */}
+            <div className="mt-16 mb-8">
+              <ChatInterface ref={chatInterfaceRef} />
             </div>
+
             <p className="mt-6 text-xs text-[#6B7280] dark:text-gray-400 text-center">
-              ✨ Build your personal app for free, no Claude account or API keys required. First month's on us (limited tester spots).
+              ✨ Build your personal app for free, no Claude account or API keys required. First month's on us<br/>(limited tester spots - Mac-only for now).
             </p>
           </div>
         </section>
@@ -1398,7 +1397,7 @@ const App = () => {
 
 
       {/* How It Works - Expandable Cards */}
-      <section className="relative bg-gradient-to-br from-white/60 via-gray-50/80 to-white/40 dark:from-gray-900/60 dark:via-gray-800/80 dark:to-gray-900/40 backdrop-blur-xl backdrop-saturate-150 py-24 sm:py-32">
+      <section id="how-it-works" className="relative bg-gradient-to-br from-white/60 via-gray-50/80 to-white/40 dark:from-gray-900/60 dark:via-gray-800/80 dark:to-gray-900/40 backdrop-blur-xl backdrop-saturate-150 py-24 sm:py-32">
         <style>{`
           @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
@@ -1851,15 +1850,13 @@ const App = () => {
                       </div>
                     </div>
                   )}
-                  <AnimatedButton 
-                    isShareMode={showShareButton} 
+                  <EnhancedButton
                     showSuccess={isSignedUp && !showShareButton}
-                    onSignup={() => setIsSignedUp(true)}
-                    isExpanding={isExpanding}
-                    forceBounce={footerButtonBounce}
+                    navigateToChat={!showShareButton && !isSignedUp}
+                    navigateToChatInterface={navigateToChatInterface}
                   >
                     {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Get early access'}
-                  </AnimatedButton>
+                  </EnhancedButton>
                 </div>
               </div>
             </div>
@@ -1997,14 +1994,13 @@ const App = () => {
 
               {/* Call-to-Action Row */}
               <div className="mt-8 flex items-center justify-center">
-                <AnimatedButton 
-                  onSignup={() => setIsSignedUp(true)}
+                <EnhancedButton
                   showSuccess={isSignedUp && !showShareButton}
-                  isShareMode={showShareButton}
-                  isExpanding={isExpanding}
+                  navigateToChat={!showShareButton && !isSignedUp}
+                  navigateToChatInterface={navigateToChatInterface}
                 >
                   {showShareButton ? 'Share with friends' : isSignedUp ? "You're all set!" : 'Build my first tool'}
-                </AnimatedButton>
+                </EnhancedButton>
               </div>
             </div>
           </div>

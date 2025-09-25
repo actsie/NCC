@@ -13,7 +13,7 @@ import {
 } from '@heroicons/react/24/outline';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import AnimatedButton from './AnimatedButton';
+import EnhancedButton from './EnhancedButton';
 import FeaturedTool from './components/FeaturedTool';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -73,7 +73,7 @@ const examples = [
   },
 ];
 
-const ExamplesIndex = () => {
+const ExamplesIndex = ({ navigateToChatInterface }) => {
   // State to track the active slide and swiper instance
   const [activeSlide, setActiveSlide] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState(null);
@@ -846,9 +846,16 @@ const ExamplesIndex = () => {
                 For when existing apps almost work, but not quite.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6 lg:justify-start">
-                <AnimatedButton>
+                <EnhancedButton
+                  navigateToChat={true}
+                  navigateToChatInterface={() => {
+                    // Navigate to home page and trigger chat interface
+                    sessionStorage.setItem('triggerChatInterface', 'true');
+                    window.location.href = '/';
+                  }}
+                >
                   Get early access
-                </AnimatedButton>
+                </EnhancedButton>
                 <a href="/#features" className="text-sm/6 font-semibold text-white hover:text-gray-100">
                   Learn more <span aria-hidden="true">→</span>
                 </a>

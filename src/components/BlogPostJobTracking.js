@@ -2,7 +2,7 @@ import React from 'react';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './Header';
 import Footer from './Footer';
-import AnimatedButton from '../AnimatedButton';
+import BlogButton from '../BlogButton';
 import { getBlogPostBySlug } from '../data/blogPosts';
 
 const BlogPostJobTracking = () => {
@@ -292,10 +292,18 @@ const BlogPostJobTracking = () => {
               `}</style>
             </div>
             
-            <div className="mt-8">
-              <AnimatedButton href="/examples">
+            <div className="mt-8 flex justify-end">
+              <BlogButton
+                navigateToChat={true}
+                navigateToChatInterface={() => {
+                  if (window.location.pathname !== '/') {
+                    sessionStorage.setItem('triggerChatInterface', 'true');
+                    window.location.href = '/';
+                  }
+                }}
+              >
                 Build your own
-              </AnimatedButton>
+              </BlogButton>
             </div>
 
             <h2 className="mt-16 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Conclusion</h2>

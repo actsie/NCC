@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
-const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess: externalShowSuccess, isExpanding, forceBounce, ...props }) => {
+const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess: externalShowSuccess, isExpanding, forceBounce, idea, minimal = false, onIdeaMissing, navigateToChat = false, href, ...props }) => {
   const [isInputMode, setIsInputMode] = useState(false);
   const [email, setEmail] = useState('');
   const [isError, setIsError] = useState(false);
@@ -19,6 +19,37 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
   }, [isShareMode]);
 
   const handleButtonClick = () => {
+    if (navigateToChat && href) {
+      // Navigate to home page and trigger chat interface
+      if (window.location.pathname !== '/') {
+        // Store flag in sessionStorage to trigger chat interface after navigation
+        sessionStorage.setItem('triggerChatInterface', 'true');
+        window.location.href = href;
+        return;
+      } else {
+        // Already on home page, scroll to chat interface directly
+        const chatInterface = document.querySelector('.chat-container');
+        if (chatInterface) {
+          chatInterface.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+          // Trigger wiggle after scroll
+          setTimeout(() => {
+            const inputElement = chatInterface.querySelector('input[name="idea"]');
+            if (inputElement) {
+              inputElement.classList.add('wiggle');
+              inputElement.focus();
+              setTimeout(() => {
+                inputElement.classList.remove('wiggle');
+              }, 600);
+            }
+          }, 500);
+        }
+      }
+      return;
+    }
+
     if (isShareMode) {
       // Handle share functionality
       if (navigator.share) {
@@ -43,6 +74,13 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
         }, 2000);
       }
     } else {
+      // Check if idea is missing before showing email input
+      if (!idea || !idea.trim()) {
+        if (onIdeaMissing) {
+          onIdeaMissing(); // Trigger wiggle on ChatInterface input
+        }
+        return; // Don't show email input if idea is missing
+      }
       setIsInputMode(true);
     }
     if (onClick) onClick();
@@ -64,6 +102,18 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
     const sanitizedEmail = sanitizeEmail(email);
+
+    // Check if idea is missing
+    if (!idea || !idea.trim()) {
+      if (onIdeaMissing) {
+        onIdeaMissing(); // Trigger wiggle on ChatInterface input
+      }
+      // Also show error on email input
+      setIsError(true);
+      setTimeout(() => setIsError(false), 600);
+      return;
+    }
+
     if (sanitizedEmail && validateEmail(sanitizedEmail)) {
       try {
         // Submit to Formspree
@@ -72,7 +122,13 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email: sanitizedEmail }),
+          body: JSON.stringify({
+            email: sanitizedEmail,
+            idea: idea || '',
+            source: 'landing_chat',
+            path: window.location.pathname,
+            ts: new Date().toISOString()
+          }),
         });
 
         if (response.ok) {
@@ -113,7 +169,18 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
   const handleSparkleButtonClick = (e) => {
     e.preventDefault(); // Prevent any default behavior
     e.stopPropagation(); // Stop event bubbling
-    
+
+    // Check if idea is missing first
+    if (!idea || !idea.trim()) {
+      if (onIdeaMissing) {
+        onIdeaMissing(); // Trigger wiggle on ChatInterface input
+      }
+      // Also show error on email input
+      setIsError(true);
+      setTimeout(() => setIsError(false), 600);
+      return;
+    }
+
     const sanitizedEmail = sanitizeEmail(email);
     if (sanitizedEmail && validateEmail(sanitizedEmail)) {
       handleEmailSubmit({ preventDefault: () => {} });
@@ -125,10 +192,14 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
   };
 
   const handleInputBlur = () => {
-    // Always reset to button mode when clicking outside, regardless of content
-    setIsInputMode(false);
-    setIsError(false);
-    setEmail(''); // Clear any partial input
+    // If email input is empty, animate back to button mode
+    if (!email || !email.trim()) {
+      setIsError(false);
+      setEmail(''); // Clear any partial input
+    } else {
+      // Keep expanded if user has started typing an email
+      setIsError(false);
+    }
   };
 
   // Success state with heart
@@ -161,9 +232,9 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
 
   if (isInputMode) {
     return (
-      <StyledWrapper>
+      <StyledWrapper minimal={minimal}>
         <form onSubmit={handleEmailSubmit} className="email-form" noValidate>
-          <div className={`input-container ${isError ? 'error' : ''} ${isContracting ? 'contracting' : ''}`}>
+          <div className={`input-container ${isError ? 'error' : ''} ${isContracting ? 'contracting' : ''} ${minimal ? 'minimal' : ''}`}>
             <input
               type="email"
               className={`email-input ${isError ? 'shake' : ''}`}
@@ -171,12 +242,11 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onBlur={handleInputBlur}
-              autoFocus
               noValidate
             />
-            <button 
-              type="button" 
-              className="icon-button" 
+            <button
+              type="button"
+              className="icon-button"
               onClick={handleSparkleButtonClick}
               onMouseDown={(e) => e.preventDefault()} // Prevent blur when clicking button
             >
@@ -195,8 +265,8 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
   }
 
   return (
-    <StyledWrapper>
-      <button type="button" className={`button ${isShareMode ? 'share-mode' : ''} ${isExpanding ? 'expanding' : ''} ${shouldBounce || forceBounce ? 'bounce' : ''}`} onClick={handleButtonClick} {...props}>
+    <StyledWrapper minimal={minimal}>
+      <div className={`morphing-button ${isExpanding ? 'expanding' : ''} ${shouldBounce || forceBounce ? 'bounce' : ''}`}>
         <div className="points_wrapper">
           <i className="point" />
           <i className="point" />
@@ -209,7 +279,9 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
           <i className="point" />
           <i className="point" />
         </div>
-        <span className="inner">
+
+        {/* Button content - fades out during expansion */}
+        <span className={`button-content ${isInputMode ? 'hidden' : ''}`} onClick={handleButtonClick} {...props}>
           {isShareMode ? (
             <svg className="icon heart" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
               <path d="m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
@@ -225,12 +297,144 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
           )}
           {children}
         </span>
-      </button>
+
+        {/* Email input content - fades in during expansion */}
+        <form onSubmit={handleEmailSubmit} className={`email-content ${isInputMode ? 'visible' : 'hidden'}`} noValidate>
+          <input
+            type="email"
+            className={`email-input ${isError ? 'shake' : ''}`}
+            placeholder="Enter your email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onBlur={handleInputBlur}
+            noValidate
+          />
+          <button
+            type="button"
+            className="icon-button"
+            onClick={handleSparkleButtonClick}
+            onMouseDown={(e) => e.preventDefault()}
+          >
+            <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5">
+              <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+              <path d="M5 3v4" />
+              <path d="M19 17v4" />
+              <path d="M3 5h4" />
+              <path d="M17 19h4" />
+            </svg>
+          </button>
+        </form>
+      </div>
     </StyledWrapper>
   );
 }
 
 const StyledWrapper = styled.div`
+  /* Morphing button container - like your CSS example */
+  .morphing-button {
+    border: none;
+    color: #fff;
+    background-image: linear-gradient(30deg, #7866CC, #AF97F8);
+    border-radius: 20px;
+    background-size: 100% auto;
+    font-family: inherit;
+    font-size: 17px;
+    padding: 0.6em 1.5em;
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    outline: none;
+    white-space: nowrap;
+    width: 180px; /* Start with button width */
+    height: 48px;
+    transition: width 0.7s ease-in-out; /* Like your CSS example */
+  }
+
+  .morphing-button.expanding {
+    width: 300px; /* Expand to input width */
+    transition: width 0.7s ease-in-out;
+  }
+
+  /* Button content - fades out like your CSS .cta i */
+  .morphing-button .button-content {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .morphing-button .button-content.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Email content - fades in like your CSS .cta .button-text */
+  .morphing-button .email-content {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .morphing-button .email-content.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .morphing-button .email-content.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .morphing-button .email-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-radius: 18px;
+    padding: 12px 48px 12px 16px;
+    font-size: 16px;
+    background: white;
+    color: #333;
+    margin: 2px;
+  }
+
+  .morphing-button .email-input::placeholder {
+    color: rgba(51, 51, 51, 0.6);
+  }
+
+  .morphing-button .icon-button {
+    position: absolute;
+    right: 6px;
+    background: linear-gradient(30deg, #7866CC, #AF97F8);
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 36px;
+    min-height: 36px;
+  }
+
+  .morphing-button .icon-button .icon {
+    width: 18px;
+    height: 18px;
+    color: white;
+  }
+
   .button {
     border: none;
     color: #fff;
@@ -260,13 +464,13 @@ const StyledWrapper = styled.div`
 
   /* Expanding animation for text change - like email input expansion */
   .button.expanding {
-    width: 220px !important; /* Target width for "Share with friends" */
-    transition: width 0.3s ease-in-out;
+    width: 300px !important; /* Target width for email input */
+    transition: width 0.7s ease-in-out;
   }
 
   .button.expanding .inner {
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
   }
   
   .button:hover {
@@ -496,7 +700,7 @@ const StyledWrapper = styled.div`
 
   .input-container {
     position: relative;
-    max-width: 48px;
+    max-width: 300px;
     transition: max-width 0.3s ease-in-out;
     display: flex;
     align-items: center;
@@ -504,6 +708,33 @@ const StyledWrapper = styled.div`
     border-radius: 20px;
     padding: 2px; /* Border thickness */
   }
+
+  /* Minimal variant - clean styling for chat interface */
+  ${props => props.minimal && `
+    .input-container {
+      background: none;
+      padding: 0;
+      border: none;
+      border-radius: 24px;
+    }
+
+    .input-container:focus-within {
+      box-shadow: 0 0 0 3px rgba(120, 102, 204, 0.1);
+    }
+
+    .email-input {
+      border: 1px solid rgba(120, 102, 204, 0.2);
+      border-radius: 22px;
+      padding: 12px 48px 12px 16px;
+      height: 48px;
+      box-sizing: border-box;
+    }
+
+    .email-input:focus {
+      border-color: #7866CC;
+      outline: none;
+    }
+  `}
 
   .input-container:focus-within {
     max-width: 300px;
@@ -605,6 +836,7 @@ const StyledWrapper = styled.div`
   .icon-button:hover {
     animation: quake 0.3s ease-in-out infinite;
   }
+
 `;
 
 export default AnimatedButton;
