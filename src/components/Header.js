@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ChevronDownIcon, PlayCircleIcon } from '@heroicons/react/20/solid';
@@ -33,10 +33,14 @@ const callsToAction = [
   { name: 'GitHub', href: 'https://github.com', icon: CodeBracketIcon },
 ];
 
-const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
+const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [examplesHoverOpen, setExamplesHoverOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState('down');
+  const lastScrollY = useRef(0);
+  const rafRef = useRef(null);
 
   // Detect current path for active state highlighting
   const currentPath = typeof window !== 'undefined' ? window.location.pathname : '';
@@ -88,6 +92,24 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
     }
   };
 
+  // Handle scroll to show/hide logo with direction tracking
+  useEffect(() => {
+    const handleScroll = () => {
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        const y = window.scrollY || 0;
+        setScrollDirection(y > lastScrollY.current ? 'down' : 'up');
+        lastScrollY.current = y;
+        setIsScrolled(y > 30);
+        rafRef.current = null;
+      });
+    };
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
@@ -98,17 +120,53 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
   }, [hoverTimeout]);
 
   return (
-    <header className={className}>
-      <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+    <header className={`${className} backdrop-blur-xl bg-white/30 dark:bg-gray-900/30 border-b border-white/10 dark:border-gray-700/10`}>
+      <nav className="flex items-center justify-between py-4 px-6 lg:px-8" aria-label="Global">
         <div className="flex lg:flex-1">
-          <a href="/" className="-m-1.5 p-1.5">
+          <a href="/" className="-m-1.5 p-1.5 relative inline-block h-8 select-none">
             <span className="sr-only">Pawgrammer</span>
-            <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
-              <img 
-                src="/pawgrammer.png" 
-                alt="Pawgrammer" 
-                className="h-full w-full object-contain"
+
+            {/* Wordmark Layer - full logo */}
+            <div className={`flex items-center h-8 will-change-transform will-change-opacity transition-transform ease-out duration-200 transition-opacity ease-out ${
+              isScrolled ? '-translate-x-8' : 'translate-x-0'
+            } ${
+              isScrolled ? 'opacity-0' : 'opacity-100'
+            } ${
+              isScrolled ? 'duration-100' : 'duration-200'
+            } ${
+              isScrolled && scrollDirection === 'down' ? 'delay-200' : 'delay-0'
+            }`} style={{ zIndex: 1 }}>
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img
+                  src="/pawgrammer.png"
+                  alt="Pawgrammer"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <img
+                src="/pawgrammer-logo-purple.svg"
+                alt="Pawgrammer"
+                className="h-6 w-auto block ml-3"
               />
+            </div>
+
+            {/* Icon Layer - positioned to align exactly with wordmark layer icon */}
+            <div className={`absolute inset-0 flex items-center will-change-transform will-change-opacity transition-transform ease-out duration-200 transition-opacity ease-out ${
+              isScrolled ? 'translate-x-0' : scrollDirection === 'up' ? 'translate-x-8' : 'translate-x-0'
+            } ${
+              isScrolled ? 'opacity-100' : 'opacity-0'
+            } ${
+              isScrolled ? 'duration-200' : 'duration-150'
+            } ${
+              isScrolled && scrollDirection === 'down' ? 'delay-120' : !isScrolled && scrollDirection === 'up' ? 'delay-120' : 'delay-0'
+            }`} style={{ zIndex: 2 }}>
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img
+                  src="/pawgrammer.png"
+                  alt="Pawgrammer"
+                  className="h-full w-full object-contain"
+                />
+              </div>
             </div>
           </a>
         </div>
@@ -222,15 +280,20 @@ const Header = ({ className = "absolute inset-x-0 top-0 z-50" }) => {
         <div className="fixed inset-0 z-50" />
         <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white dark:bg-gray-900 p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:ring-gray-100/10">
           <div className="flex items-center justify-between">
-            <a href="/" className="-m-1.5 p-1.5">
+            <a href="/" className="-m-1.5 p-1.5 flex items-center gap-3">
               <span className="sr-only">Pawgrammer</span>
-              <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden">
-                <img 
-                  src="/pawgrammer.png" 
-                  alt="Pawgrammer" 
+              <div className="h-8 w-8 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0">
+                <img
+                  src="/pawgrammer.png"
+                  alt="Pawgrammer"
                   className="h-full w-full object-contain"
                 />
               </div>
+              <img
+                src="/pawgrammer-logo-purple.svg"
+                alt="Pawgrammer"
+                className="h-6"
+              />
             </a>
             <button
               type="button"

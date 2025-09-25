@@ -863,7 +863,7 @@ const App = () => {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 pt-20 lg:px-8">
         {/* Background gradient blobs */}
         <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
           <div 
@@ -874,7 +874,7 @@ const App = () => {
           />
         </div>
         
-        <section className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+        <section className="mx-auto max-w-2xl py-20 sm:py-28 lg:py-32">
           {/* Announcement Banner */}
           <div className="hidden sm:mb-8 sm:flex sm:justify-center">
             <div className="hero-announcement relative rounded-full px-3 py-1 text-sm leading-6 text-[#6B7280] dark:text-gray-300">
