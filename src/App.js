@@ -1455,7 +1455,7 @@ const App = () => {
               <div className="relative w-full h-0" style={{paddingBottom: '56.25%'}}>
                 <iframe 
                   className="absolute top-0 left-0 w-full h-full"
-                  src="https://www.youtube.com/embed/DadTiwSlrC4?autoplay=1&mute=1&loop=1&playlist=DadTiwSlrC4&controls=0&showinfo=0&rel=0&modestbranding=1"
+                  src="https://www.youtube.com/embed/DadTiwSlrC4?autoplay=1&mute=1&loop=1&playlist=DadTiwSlrC4&controls=0&showinfo=0&rel=0&modestbranding=1&vq=hd1080"
                   title="Pawgrammer Demo Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
