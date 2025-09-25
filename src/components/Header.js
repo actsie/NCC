@@ -134,7 +134,7 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
             <img
               src="/pawgrammer-logo-purple.svg"
               alt="Pawgrammer"
-              className={`h-6 w-auto ml-3 transition-all duration-300 ease-out ${
+              className={`h-6 w-auto ml-3 transition-all duration-300 ease-out sm:block hidden ${
                 isScrolled ? 'opacity-0 w-0 ml-0' : 'opacity-100'
               }`}
             />
@@ -232,8 +232,8 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
             )}
           </div>
         </div>
-        <div className={`flex flex-1 justify-end items-center gap-4 xl:gap-4 transition-transform duration-300 ease-out ${
-          mobileMenuOpen ? '-translate-x-80' : 'translate-x-0'
+        <div className={`flex flex-1 justify-end items-center gap-4 xl:gap-4 transition-transform duration-200 ease-out will-change-transform ${
+          mobileMenuOpen ? '-translate-x-64' : 'translate-x-0'
         }`}>
           <a
             href="/#community"
@@ -242,7 +242,7 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
             Join a builder community
           </a>
           <EarlyAccessButton onClick={() => setEarlyAccessModalOpen(true)} />
-          <div className={`transition-opacity duration-300 ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
+          <div className={`transition-opacity duration-200 ease-out will-change-opacity hidden sm:block ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
             <DarkModeToggle />
           </div>
           <div className="xl:hidden">
