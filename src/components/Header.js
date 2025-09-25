@@ -230,7 +230,7 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
                 role="menu"
                 aria-labelledby="examples-menu"
               >
-                <div className="relative w-96 overflow-hidden rounded-3xl bg-white/95 dark:bg-gray-800/95 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
+                <div className="relative w-96 overflow-hidden rounded-3xl bg-white dark:bg-gray-800 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
                 {/* New ✨ Top Banner */}
                 <div className="bg-[#7866CC] px-4 py-2 rounded-t-3xl">
                   <div className="text-center text-white text-sm font-medium">
