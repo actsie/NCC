@@ -424,7 +424,7 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                 <input
                   type="text"
                   name="firstTool"
-                  className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px] text-right"
+                  className="block w-full text-sm h-[50px] px-4 text-slate-900 dark:text-gray-100 bg-white dark:bg-gray-900 rounded-[8px] border border-violet-200 dark:border-gray-600 appearance-none focus:border-transparent focus:outline focus:outline-2 focus:outline-[#7866CC] focus:ring-0 hover:border-[#7866CC] dark:hover:border-[#7866CC] peer overflow-ellipsis overflow-hidden text-nowrap pr-[48px]"
                   placeholder="What's the first tool you'd want to build?"
                 />
                 <label className="peer-placeholder-shown:-z-10 peer-focus:z-10 absolute text-[14px] leading-[150%] text-[#7866CC] peer-focus:text-[#7866CC] duration-300 transform -translate-y-[1.2rem] scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2 peer-focus:px-2 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-[1.2rem] rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">
