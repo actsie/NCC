@@ -2,6 +2,13 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Styling Guidelines
+
+- Use Tailwind utility classes for layout, spacing, and common typography so new sections inherit the design system quickly.
+- Reach for `styled-components` when a widget has bespoke interactions/animations (e.g. `EnhancedButton`) or needs local stateful styling.
+- Add shared colors, spacing, or typography tokens to `tailwind.config.js` instead of scattering literal values across components.
+- Keep one-off global adjustments in `src/index.css` under the appropriate `@layer` block to avoid in-component `<style>` tags.
+
 ## Available Scripts
 
 In the project directory, you can run:
