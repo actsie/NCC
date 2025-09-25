@@ -1624,7 +1624,7 @@ const App = () => {
               </div>
 
               {/* Call-to-Action Row */}
-              <div className="mt-8 justify-self-end sm:justify-self-center">
+              <div className="mt-8 flex justify-end sm:justify-center">
                 <EnhancedButton
                   showSuccess={isSignedUp && !showShareButton}
                   navigateToChat={false}
