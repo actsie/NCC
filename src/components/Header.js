@@ -15,10 +15,13 @@ import EarlyAccessButton from './EarlyAccessButton';
 import EarlyAccessModal from './EarlyAccessModal';
 
 const navigation = [
-  { name: 'Features', href: '/#features' },
-  { name: 'How it works', href: '/#how-it-works' },
   { name: 'Docs', href: '/docs' },
   { name: 'Blog', href: '/blog' },
+];
+
+const productItems = [
+  { title: 'Features', href: '/#features', icon: ChartBarIcon },
+  { title: 'How it works', href: '/#how-it-works', icon: DocumentTextIcon },
 ];
 
 const automationExamples = [
@@ -39,7 +42,9 @@ const callsToAction = [
 const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [examplesHoverOpen, setExamplesHoverOpen] = useState(false);
+  const [productHoverOpen, setProductHoverOpen] = useState(false);
   const [hoverTimeout, setHoverTimeout] = useState(null);
+  const [productHoverTimeout, setProductHoverTimeout] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [earlyAccessModalOpen, setEarlyAccessModalOpen] = useState(false);
   const rafRef = useRef(null);
@@ -63,11 +68,17 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
     return currentPath === href;
   };
 
-  // Handle hover with delay for better UX
+  // Handle hover with delay for better UX - Examples
   const handleMouseEnter = () => {
     if (hoverTimeout) {
       clearTimeout(hoverTimeout);
       setHoverTimeout(null);
+    }
+    // Close Product menu if open
+    setProductHoverOpen(false);
+    if (productHoverTimeout) {
+      clearTimeout(productHoverTimeout);
+      setProductHoverTimeout(null);
     }
     setExamplesHoverOpen(true);
   };
@@ -80,7 +91,35 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
     setHoverTimeout(timeout);
   };
 
-  // Handle keyboard navigation
+  // Handle hover with delay for better UX - Product
+  const handleProductMouseEnter = () => {
+    if (productHoverTimeout) {
+      clearTimeout(productHoverTimeout);
+      setProductHoverTimeout(null);
+    }
+    // Close Examples menu if open
+    setExamplesHoverOpen(false);
+    if (hoverTimeout) {
+      clearTimeout(hoverTimeout);
+      setHoverTimeout(null);
+    }
+    // Open Product menu immediately (snappy like Examples)
+    setProductHoverOpen(true);
+  };
+
+  const handleProductMouseLeave = () => {
+    if (productHoverTimeout) {
+      clearTimeout(productHoverTimeout);
+      setProductHoverTimeout(null);
+    }
+    const timeout = setTimeout(() => {
+      setProductHoverOpen(false);
+      setProductHoverTimeout(null);
+    }, 150); // Small delay before closing
+    setProductHoverTimeout(timeout);
+  };
+
+  // Handle keyboard navigation - Examples
   const handleKeyDown = (event) => {
     if (event.key === 'Escape' && examplesHoverOpen) {
       setExamplesHoverOpen(false);
@@ -94,6 +133,21 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
         event.preventDefault();
         setExamplesHoverOpen(true);
       }
+    }
+  };
+
+  // Handle keyboard navigation - Product
+  const handleProductKeyDown = (event) => {
+    if (event.key === 'Escape' && productHoverOpen) {
+      setProductHoverOpen(false);
+      if (productHoverTimeout) {
+        clearTimeout(productHoverTimeout);
+        setProductHoverTimeout(null);
+      }
+    }
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      setProductHoverOpen(!productHoverOpen);
     }
   };
 
@@ -118,14 +172,17 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Cleanup timeout on unmount
+  // Cleanup timeouts on unmount
   useEffect(() => {
     return () => {
       if (hoverTimeout) {
         clearTimeout(hoverTimeout);
       }
+      if (productHoverTimeout) {
+        clearTimeout(productHoverTimeout);
+      }
     };
-  }, [hoverTimeout]);
+  }, [hoverTimeout, productHoverTimeout]);
 
   return (
     <header className={`${className} backdrop-blur-xl bg-white/30 dark:bg-gray-900/30 border-b border-white/10 dark:border-gray-700/10`}>
@@ -150,20 +207,68 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
           </a>
         </div>
         <div className="hidden xl:flex xl:gap-x-12 xl:items-center">
+          {/* Product Hover Menu */}
+          <div
+            className="relative"
+            onMouseEnter={handleProductMouseEnter}
+            onMouseLeave={handleProductMouseLeave}
+          >
+            <button
+              id="product-menu"
+              className={`inline-flex items-center gap-x-1 text-sm font-semibold leading-6 text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2] focus:outline-none focus:ring-2 focus:ring-[#7866CC] focus:ring-offset-2 rounded-md`}
+              onClick={() => setProductHoverOpen(!productHoverOpen)}
+              onKeyDown={handleProductKeyDown}
+              aria-expanded={productHoverOpen}
+              aria-haspopup="menu"
+              aria-controls="product-dropdown"
+              aria-label="Product navigation with dropdown menu"
+            >
+              <span>Product</span>
+              <ChevronDownIcon
+                aria-hidden="true"
+                className={`size-5 transition-transform duration-200 ${productHoverOpen ? 'rotate-180' : 'rotate-0'}`}
+              />
+            </button>
+
+            {productHoverOpen && (
+              <div
+                id="product-dropdown"
+                className="absolute left-1/2 z-50 mt-5 flex -translate-x-1/2 px-4 transition-all duration-200 ease-out opacity-100 scale-100 animate-in fade-in slide-in-from-top-2"
+                role="menu"
+                aria-labelledby="product-menu"
+              >
+                <div className="relative w-48 overflow-hidden rounded-2xl bg-white dark:bg-gray-800 backdrop-blur-xl text-sm leading-6 shadow-xl ring-1 ring-gray-900/10 dark:ring-gray-100/10">
+                  <div className="py-2">
+                    {productItems.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        className="block px-4 py-3 text-sm font-medium text-[#1F2937] dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700/50 hover:text-[#7866CC] dark:hover:text-[#BEAEE2] transition-none"
+                        role="menuitem"
+                      >
+                        {item.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
           {navigation.map((item) => (
-            <a 
-              key={item.name} 
-              href={item.href} 
+            <a
+              key={item.name}
+              href={item.href}
               className={`text-sm font-semibold leading-6 ${
-                isActive(item.href) 
-                  ? 'text-[#7866CC]' 
+                isActive(item.href)
+                  ? 'text-[#7866CC]'
                   : 'text-[#1F2937] dark:text-white hover:text-[#7866CC] dark:hover:text-[#BEAEE2]'
               }`}
             >
               {item.name}
             </a>
           ))}
-          
+
           {/* Examples Hover Menu */}
           <div
             className="relative"
@@ -297,6 +402,26 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
           <div className="mt-6 flow-root">
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
+                {/* Mobile Product Section */}
+                <div className="-mx-3 px-3 py-2">
+                  <div className="text-base font-semibold leading-7 text-[#1F2937] dark:text-white mb-3">
+                    Product
+                  </div>
+                  <div className="space-y-2 ml-3">
+                    {productItems.map((item) => (
+                      <a
+                        key={item.title}
+                        href={item.href}
+                        onClick={() => setMobileMenuOpen(false)}
+                        className="flex items-center gap-x-3 rounded-lg px-3 py-2 text-sm leading-6 text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800"
+                      >
+                        <item.icon className="size-5 flex-none text-gray-500 dark:text-gray-400" />
+                        <span>{item.title}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+
                 {navigation.map((item) => (
                   <a
                     key={item.name}
@@ -311,7 +436,6 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
                     {item.name}
                   </a>
                 ))}
-                
                 {/* Mobile Examples Section */}
                 <div className="-mx-3 px-3 py-2">
                   <div className="text-base font-semibold leading-7 text-[#1F2937] dark:text-white mb-3">
