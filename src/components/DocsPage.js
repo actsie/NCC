@@ -1244,18 +1244,20 @@ const DocsPage = () => {
           </button>
         </div>
 
-        {/* Sidebar */}
+        {/* Sidebar - Three-layer architecture */}
+        {/* Outer: Column + Mobile Drawer */}
         <div className={`
-          fixed lg:static inset-y-0 left-0 z-30
-          w-64 lg:w-64
-          transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
+          fixed inset-y-0 left-0 z-30 w-64
+          transform ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          lg:transform-none lg:static lg:self-start
           transition-transform duration-300 ease-in-out
           border-r border-gray-200 dark:border-gray-700
-          pt-16 lg:pt-20
-          overflow-y-auto
-          flex-shrink-0
+          bg-white dark:bg-gray-900
         `}>
-          <div className="px-4 py-6">
+          {/* Middle: Sticky Wrapper (Desktop Only) */}
+          <div className="lg:sticky lg:top-28">
+            {/* Inner: Scroller */}
+            <div className="pt-20 lg:pt-6 lg:max-h-[calc(100dvh-7rem)] lg:overflow-y-auto px-4 py-6">
             <div className="mb-8">
               <h1 className="text-lg font-bold text-gray-800 dark:text-white">
                 Documentation
@@ -1347,6 +1349,7 @@ const DocsPage = () => {
                 </div>
               )}
             </nav>
+            </div>
           </div>
         </div>
 
