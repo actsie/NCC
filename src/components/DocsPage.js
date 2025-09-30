@@ -180,8 +180,15 @@ const DocsPage = () => {
           <section id="what-we-install" className="nextra-section">
             <h2 className="nextra-heading-2">What We’ll Install</h2>
             <p className="nextra-paragraph">
-              We’ll scan your Mac and set up any missing components.
+              We'll scan your Mac and set up any missing components.
             </p>
+            <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+              <img
+                src="/Docs/installation.png"
+                alt="MCP Servers installation interface"
+                className="w-full h-auto"
+              />
+            </div>
             <div className="space-y-6">
               <div>
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Required (needed for Pawgrammer to run)</h3>
@@ -197,21 +204,21 @@ const DocsPage = () => {
                 <ul className="nextra-list">
                   <li><span className="font-semibold">MCP Servers</span> → browser automation + extra capabilities for Claude</li>
                 </ul>
-                <div className="mt-4 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
-                  <img
-                    src="/Docs/installation.png"
-                    alt="MCP Servers installation interface"
-                    className="w-full h-auto"
-                  />
-                </div>
               </div>
             </div>
           </section>
 
           <section id="authentication" className="nextra-section">
             <h2 className="nextra-heading-2">Authentication</h2>
+            <div className="mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+              <img
+                src="/Docs/auth.png"
+                alt="Pawgrammer authentication completion screen"
+                className="w-full h-auto"
+              />
+            </div>
             <p className="nextra-paragraph">
-              After installation, you’ll authenticate Claude Code:
+              After installation, you'll authenticate Claude Code:
             </p>
             <ul className="nextra-list space-y-6">
               <li>Click <span className="font-semibold">Open Terminal</span> in the wizard.</li>
@@ -235,16 +242,7 @@ const DocsPage = () => {
                   />
                 </div>
               </li>
-              <li>
-                <div className="mb-3">Return to Pawgrammer and click <span className="font-semibold">I'm done with authentication</span> to finish.</div>
-                <div className="relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
-                  <img
-                    src="/Docs/auth.png"
-                    alt="Pawgrammer authentication completion screen"
-                    className="w-full h-auto"
-                  />
-                </div>
-              </li>
+              <li>Return to Pawgrammer and click <span className="font-semibold">I'm done with authentication</span> to finish.</li>
             </ul>
           </section>
 
