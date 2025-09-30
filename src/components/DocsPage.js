@@ -719,8 +719,26 @@ const DocsPage = () => {
               <li>Open Pawgrammer.</li>
               <li>Go to the <span className="font-semibold">Projects</span> tab.</li>
               <li>Hover over the project you want to export.</li>
-              <li>Click the kebab menu (<span className="font-semibold">⋮</span>) in the top-right corner of the project card.</li>
-              <li>Select <span className="font-semibold">Export</span>.</li>
+              <li>
+                Click the kebab menu (<span className="font-semibold">⋮</span>) in the top-right corner of the project card.
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/export.png"
+                    alt="Kebab menu on project card showing export option"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
+              <li>
+                Select <span className="font-semibold">Export</span>.
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/exportmenu.png"
+                    alt="Export menu selection in Pawgrammer"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
               <li>Choose where to save the file.</li>
             </ol>
           </section>
