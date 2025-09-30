@@ -486,19 +486,15 @@ const DocsPage = () => {
       lastUpdated: 'September 30, 2025',
       readingTime: '3 min read',
       toc: [
-        { id: 'manual-overview', title: 'How to open your project manually' },
         { id: 'step-1', title: '1. Open Terminal and navigate' },
         { id: 'step-2', title: '2. Run the development command' },
         { id: 'step-3', title: '3. Open in browser' }
       ],
       content: (
         <div className="nextra-content space-y-12">
-          <section id="manual-overview" className="nextra-section">
-            <h2 className="nextra-heading-2">How to open your project manually</h2>
-            <p className="nextra-paragraph">
-              If the preview window doesn't open automatically, you can start it yourself:
-            </p>
-          </section>
+          <div className="nextra-paragraph">
+            If the server doesn't start after clicking Start Server, here's how to open your project manually using Terminal:
+          </div>
 
           <section id="step-1" className="nextra-section nextra-steps">
             <div className="nextra-step">
@@ -508,10 +504,10 @@ const DocsPage = () => {
                   Open Terminal and navigate
                 </h2>
                 <p className="nextra-paragraph">
-                  Open Terminal (press cmd + space, type "Terminal", then hit Enter).
+                  Open Terminal (press <kbd className="px-1.5 py-0.5 text-xs font-mono bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded">cmd + space</kbd>, type "Terminal", then hit Enter).
                 </p>
                 <p className="nextra-paragraph">
-                  Type cd (just the letters cd and a space), then drag your project folder into the Terminal window. Press Enter.
+                  Type <code className="px-1.5 py-0.5 text-sm font-mono bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded">cd</code> (just the letters cd and a space), then drag your project folder into the Terminal window. Press Enter.
                 </p>
                 <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
                   <img
@@ -534,10 +530,19 @@ const DocsPage = () => {
                 <p className="nextra-paragraph">
                   In Terminal, type the command shown under Server Management. For example, it may be:
                 </p>
-                <div className="nextra-code-block">
-                  <div className="nextra-code-block-header">Example</div>
-                  <div className="nextra-code-block-content">
-                    npm run dev
+                <div className="my-4 p-4 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg">
+                  <div className="text-sm text-gray-600 dark:text-gray-400 mb-2">Example command:</div>
+                  <div className="relative group">
+                    <code className="block text-sm font-mono text-gray-800 dark:text-gray-200 bg-gray-100 dark:bg-gray-900 px-3 py-2 pr-12 rounded border">npm run dev</code>
+                    <button
+                      onClick={() => navigator.clipboard.writeText('npm run dev')}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                      title="Copy command"
+                    >
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                      </svg>
+                    </button>
                   </div>
                 </div>
                 <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
@@ -635,7 +640,16 @@ const DocsPage = () => {
             <ol className="nextra-list list-decimal">
               <li>Open Pawgrammer.</li>
               <li>Go to the <span className="font-semibold">Projects</span> tab.</li>
-              <li>Click <span className="font-semibold">Import</span>.</li>
+              <li>
+                Click <span className="font-semibold">Import</span>.
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/import.png"
+                    alt="Import button in Pawgrammer Projects tab"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
               <li>
                 Choose either:
                 <ul className="ml-6 list-disc">
