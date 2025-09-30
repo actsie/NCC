@@ -72,13 +72,13 @@ const DocsPage = () => {
   const pageContent = useMemo(() => ({
     'getting-started': {
       title: 'Getting Started',
-      description: 'Everything you need to know before you create your first build inside Pawgrammer.',
+      description: 'Everything you need before creating your first build in Pawgrammer.',
       lastUpdated: 'September 28, 2025',
       readingTime: '2 min read',
       toc: [
         { id: 'welcome', title: 'Welcome' },
-        { id: 'quickstart-video', title: 'Watch a quickstart' },
-        { id: 'docs-status', title: 'Documentation status' }
+        { id: 'quickstart-video', title: 'Watch the quickstart' },
+        { id: 'docs-status', title: 'You\'re early!' }
       ],
       content: (
         <div className="nextra-content space-y-12">
@@ -90,19 +90,22 @@ const DocsPage = () => {
               <div>
                 <h2 className="nextra-heading-2 mb-2">Welcome aboard</h2>
                 <p className="nextra-paragraph">
-                  Pawgrammer turns plain-language prompts into working web apps. These docs outline how to onboard, build, and iterate without leaving your Mac.
+                  Pawgrammer turns plain-language prompts into working web apps. These docs show you how to get started, build, and improve — all from your Mac, no coding required.
                 </p>
               </div>
             </div>
             <p className="nextra-paragraph">
-              You are early! We are still documenting the full product surface, but the quickstart below highlights the areas that unlock the fastest wins.
+              You're early!
+            </p>
+            <p className="nextra-paragraph">
+              We're still expanding our documentation, but the quickstart below walks you through your first build step by step.
             </p>
           </section>
 
           <section id="quickstart-video" className="nextra-section">
-            <h2 className="nextra-heading-2">Watch a quickstart</h2>
+            <h2 className="nextra-heading-2">Watch the quickstart</h2>
             <p className="nextra-paragraph">
-              Prefer to see the flow? This short video walks through building a project from prompt to launch.
+              Prefer to see it in action? This short video walks you through going from prompt to working project.
             </p>
             <div className="relative w-full overflow-hidden rounded-2xl border border-gray-200 bg-black shadow-xl dark:border-gray-700">
               <div className="relative pt-[56.25%]">
