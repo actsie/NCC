@@ -333,8 +333,15 @@ const DocsPage = () => {
                 <div className="nextra-code-block">
                   <div className="nextra-code-block-header">Example</div>
                   <div className="nextra-code-block-content">
-                    "I want a budget tracker that logs income and expenses, with quick-add buttons."
+                    "Create a budget tracker that logs income and expenses, with quick-add buttons."
                   </div>
+                </div>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/startproject.png"
+                    alt="Starting a new project in Pawgrammer"
+                    className="w-full h-auto"
+                  />
                 </div>
                 <p className="nextra-paragraph">
                   Pawgrammer will generate a few clarifying questions to tailor your build.
@@ -353,12 +360,26 @@ const DocsPage = () => {
                 <p className="nextra-paragraph">
                   You'll see multiple-choice or checkbox questions.
                 </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/quickquestions.png"
+                    alt="Multiple-choice questions in Pawgrammer project setup"
+                    className="w-full h-auto"
+                  />
+                </div>
                 <p className="nextra-paragraph">
                   These help refine your app's features (e.g., do you want reminders, categories, or just essentials?).
                 </p>
                 <p className="nextra-paragraph">
                   When finished, Pawgrammer generates your build spec.
                 </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/spec.png"
+                    alt="Generated build specification in Pawgrammer"
+                    className="w-full h-auto"
+                  />
+                </div>
                 <p className="nextra-paragraph">
                   You can save it as-is or tweak before moving forward.
                 </p>
@@ -376,6 +397,13 @@ const DocsPage = () => {
                 <p className="nextra-paragraph">
                   Choose a folder on your Mac.
                 </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/saveproject.png"
+                    alt="Choosing a folder to save project in Pawgrammer"
+                    className="w-full h-auto"
+                  />
+                </div>
                 <p className="nextra-paragraph">
                   All files and builds run locally → your data stays with you.
                 </p>
@@ -393,6 +421,13 @@ const DocsPage = () => {
                 <p className="nextra-paragraph">
                   Pawgrammer breaks your build into clear tasks.
                 </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/executetasks.png"
+                    alt="Task execution interface in Pawgrammer"
+                    className="w-full h-auto"
+                  />
+                </div>
                 <p className="nextra-paragraph">
                   Click Execute to run each one.
                 </p>
@@ -419,8 +454,15 @@ const DocsPage = () => {
                 <div className="nextra-code-block">
                   <div className="nextra-code-block-header">Example</div>
                   <div className="nextra-code-block-content">
-                    "Add a notes field to each entry" → Pawgrammer updates your build.
+                    "Can we add a light/dark mode toggle"
                   </div>
+                </div>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/chatwithAI.png"
+                    alt="Chat with AI interface for making project changes"
+                    className="w-full h-auto"
+                  />
                 </div>
                 <p className="nextra-paragraph">
                   Keep iterating until it feels right.
