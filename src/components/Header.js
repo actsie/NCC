@@ -17,6 +17,7 @@ import EarlyAccessModal from './EarlyAccessModal';
 const navigation = [
   { name: 'Features', href: '/#features' },
   { name: 'How it works', href: '/#how-it-works' },
+  { name: 'Docs', href: '/docs' },
   { name: 'Blog', href: '/blog' },
 ];
 
@@ -49,6 +50,9 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
   const isActive = (href) => {
     if (href === '/blog') {
       return currentPath === '/blog' || currentPath.startsWith('/blog/');
+    }
+    if (href === '/docs') {
+      return currentPath === '/docs' || currentPath.startsWith('/docs/');
     }
     if (href === '/examples') {
       return currentPath === '/examples' || currentPath.startsWith('/examples');

@@ -17,6 +17,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import EarlyAccessModal from './components/EarlyAccessModal';
 import ProblemSolutionTabs from './components/ProblemSolutionTabs';
+import DocsPage from './components/DocsPage';
 
 const TYPEWRITER_TEXTS = [
   'Create a website for my bakery',
@@ -229,17 +230,17 @@ const App = () => {
   // Simple routing logic
   const currentPath = window.location.pathname;
   console.log('Current path:', currentPath);
-  
+
   // If it's the blog index route, render the blog index
   if (currentPath === '/blog') {
     return <BlogIndex />;
   }
-  
+
   // If it's the blog post route, render the blog component
   if (currentPath === '/blog/build-custom-ai-workflows-without-code') {
     return <BlogPostClaudeNoCode />;
   }
-  
+
   if (currentPath === '/blog/how-job-seekers-track-applications') {
     return <BlogPostJobTracking />;
   }
@@ -247,7 +248,12 @@ const App = () => {
   if (currentPath === '/blog/how-travelers-really-pack') {
     return <BlogPostTravelPacking />;
   }
-  
+
+  // If it's the docs route, render the docs page
+  if (currentPath === '/docs' || currentPath.startsWith('/docs/')) {
+    return <DocsPage />;
+  }
+
   // If it's the examples route, render the examples index
   if (currentPath === '/examples' || currentPath === '/examples/') {
     return <ExamplesIndex navigateToChatInterface={navigateToChatInterface} />;
