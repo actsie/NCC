@@ -197,6 +197,13 @@ const DocsPage = () => {
                 <ul className="nextra-list">
                   <li><span className="font-semibold">MCP Servers</span> → browser automation + extra capabilities for Claude</li>
                 </ul>
+                <div className="mt-4 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/installation.png"
+                    alt="MCP Servers installation interface"
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -206,11 +213,38 @@ const DocsPage = () => {
             <p className="nextra-paragraph">
               After installation, you’ll authenticate Claude Code:
             </p>
-            <ul className="nextra-list">
+            <ul className="nextra-list space-y-6">
               <li>Click <span className="font-semibold">Open Terminal</span> in the wizard.</li>
-              <li>Copy and paste the provided command, then press Enter.</li>
-              <li>A browser window will open—log in with your Anthropic account and approve access.</li>
-              <li>Return to Pawgrammer and click <span className="font-semibold">I’m done with authentication</span> to finish.</li>
+              <li>
+                <div className="mb-3">Copy and paste the provided command, then press Enter.</div>
+                <div className="relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/terminal.png"
+                    alt="Terminal command for Claude Code authentication"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
+              <li>
+                <div className="mb-3">A browser window will open—log in with your Anthropic account and approve access.</div>
+                <div className="relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/claude-auth.png"
+                    alt="Claude Code browser authentication screen"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
+              <li>
+                <div className="mb-3">Return to Pawgrammer and click <span className="font-semibold">I'm done with authentication</span> to finish.</div>
+                <div className="relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/auth.png"
+                    alt="Pawgrammer authentication completion screen"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
             </ul>
           </section>
 
@@ -220,7 +254,16 @@ const DocsPage = () => {
               <li>Setup runs only once (on first launch).</li>
               <li>Already installed components will be skipped.</li>
               <li>Setup may take a few minutes depending on your system.</li>
-              <li>You can re-run the wizard anytime via <span className="font-semibold">Settings → Setup</span>.</li>
+              <li>
+                <div className="mb-3">You can re-run the wizard anytime via <span className="font-semibold">Settings → Setup</span>.</div>
+                <div className="relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/setup.png"
+                    alt="Pawgrammer Settings menu showing Setup option"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </li>
             </ul>
             <div className="nextra-callout nextra-callout-highlight mt-6">
               <div className="nextra-callout-icon">✅</div>
