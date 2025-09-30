@@ -13,7 +13,8 @@ import {
   ClockIcon,
   SparklesIcon,
   ArrowRightIcon,
-  ArrowLeftIcon
+  ArrowLeftIcon,
+  CommandLineIcon
 } from '@heroicons/react/24/outline';
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import Header from './Header';
@@ -60,6 +61,7 @@ const DocsPage = () => {
       children: [
         { id: 'installation-wizard', name: 'Installation Wizard', icon: PlayIcon, type: 'page' },
         { id: 'build-project', name: 'Build your project', icon: CloudArrowUpIcon, type: 'page' },
+        { id: 'open-project-manually', name: 'Open Project Manually', icon: CommandLineIcon, type: 'page' },
         { id: 'import-project', name: 'Import a project', icon: FolderOpenIcon, type: 'page' },
         { id: 'export-project', name: 'Export a project', icon: ArrowDownTrayIcon, type: 'page' }
       ]
@@ -472,6 +474,113 @@ const DocsPage = () => {
                 <p className="nextra-paragraph">
                   Keep iterating until it feels right.
                 </p>
+              </div>
+            </div>
+          </section>
+        </div>
+      )
+    },
+    'open-project-manually': {
+      title: 'Open Project Manually',
+      description: 'How to manually start your project when the preview window doesn\'t open automatically.',
+      lastUpdated: 'September 30, 2025',
+      readingTime: '3 min read',
+      toc: [
+        { id: 'manual-overview', title: 'How to open your project manually' },
+        { id: 'step-1', title: '1. Open Terminal and navigate' },
+        { id: 'step-2', title: '2. Run the development command' },
+        { id: 'step-3', title: '3. Open in browser' }
+      ],
+      content: (
+        <div className="nextra-content space-y-12">
+          <section id="manual-overview" className="nextra-section">
+            <h2 className="nextra-heading-2">How to open your project manually</h2>
+            <p className="nextra-paragraph">
+              If the preview window doesn't open automatically, you can start it yourself:
+            </p>
+          </section>
+
+          <section id="step-1" className="nextra-section nextra-steps">
+            <div className="nextra-step">
+              <span className="nextra-step-circle">1</span>
+              <div className="nextra-step-content">
+                <h2 className="nextra-heading-2">
+                  Open Terminal and navigate
+                </h2>
+                <p className="nextra-paragraph">
+                  Open Terminal (press cmd + space, type "Terminal", then hit Enter).
+                </p>
+                <p className="nextra-paragraph">
+                  Type cd (just the letters cd and a space), then drag your project folder into the Terminal window. Press Enter.
+                </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/cd-project.png"
+                    alt="Using cd command to navigate to project folder"
+                    className="w-full h-auto"
+                  />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id="step-2" className="nextra-section nextra-steps">
+            <div className="nextra-step">
+              <span className="nextra-step-circle">2</span>
+              <div className="nextra-step-content">
+                <h2 className="nextra-heading-2">
+                  Run the development command
+                </h2>
+                <p className="nextra-paragraph">
+                  In Terminal, type the command shown under Server Management. For example, it may be:
+                </p>
+                <div className="nextra-code-block">
+                  <div className="nextra-code-block-header">Example</div>
+                  <div className="nextra-code-block-content">
+                    npm run dev
+                  </div>
+                </div>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/npmrundev.png"
+                    alt="Running npm run dev command in terminal"
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="nextra-paragraph">
+                  Then press Enter.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <section id="step-3" className="nextra-section nextra-steps">
+            <div className="nextra-step">
+              <span className="nextra-step-circle">3</span>
+              <div className="nextra-step-content">
+                <h2 className="nextra-heading-2">
+                  Open in browser
+                </h2>
+                <p className="nextra-paragraph">
+                  After a moment, you'll see a web address like http://localhost:3000/ (sometimes it may be 3001, 5173, etc.).
+                </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/localhost.png"
+                    alt="Terminal showing localhost URL"
+                    className="w-full h-auto"
+                  />
+                </div>
+                <p className="nextra-paragraph">
+                  Right-click that link and choose Open Link, and your app will appear in the browser.
+                </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/openlink.png"
+                    alt="Right-clicking localhost link to open in browser"
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
           </section>
