@@ -432,8 +432,15 @@ const DocsPage = () => {
                   Click Execute to run each one.
                 </p>
                 <p className="nextra-paragraph">
-                  You'll see progress bars as it builds and tests components.
+                  As Pawgrammer completes each task, a browser window will open so you can see your app live. The web address may look something like http://localhost:3000/ (sometimes 3001, 5173, etc.). That's just Pawgrammer starting a test window to make sure your app was built correctly. If you want to check it again later, the simplest way is to click Start Server on the Task Completed screen — your app will reopen in the browser.
                 </p>
+                <div className="mt-4 mb-6 relative max-w-2xl overflow-hidden rounded-2xl border border-gray-200 shadow-xl dark:border-gray-700">
+                  <img
+                    src="/Docs/startserver.png"
+                    alt="Start Server button on Task Completed screen"
+                    className="w-full h-auto"
+                  />
+                </div>
               </div>
             </div>
           </section>
@@ -446,7 +453,7 @@ const DocsPage = () => {
                   Run & improve your app
                 </h2>
                 <p className="nextra-paragraph">
-                  Once all tasks finish, Pawgrammer opens your working app.
+                  Once all tasks finish, click Start Server to begin testing your app. This will launch it in your browser at an address like http://localhost:3000/ (sometimes 3001, 5173, etc.).
                 </p>
                 <p className="nextra-paragraph">
                   Use the built-in Chat with AI to request changes:
