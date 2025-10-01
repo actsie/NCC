@@ -7,7 +7,7 @@ const InstallPage = () => {
     <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-white dark:from-[#1a1625] dark:to-[#0f0a1a] transition-colors duration-300">
       <Header />
 
-      <main className="flex-1 px-5 py-20 md:py-24">
+      <main className="flex-1 px-5 py-28 md:py-32">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-50 mb-4 transition-colors duration-300">
             Welcome to Pawgrammer Beta
