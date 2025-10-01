@@ -19,6 +19,15 @@ module.exports = {
           800: '#191046',
           900: '#1B0A38',
         }
+      },
+      keyframes: {
+        'slide-up-peek': {
+          '0%': { transform: 'translateY(60%)' },
+          '100%': { transform: 'translateY(0)' }
+        }
+      },
+      animation: {
+        'slide-up-peek': 'slide-up-peek 1s ease-out'
       }
     },
   },

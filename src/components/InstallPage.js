@@ -54,6 +54,14 @@ const InstallPage = () => {
               Documentation
             </a>
           </p>
+
+          <div className="mt-16 relative overflow-hidden">
+            <img
+              src="/step1.gif"
+              alt="Installation preview"
+              className="mx-auto rounded-t-xl shadow-2xl max-w-2xl w-full animate-slide-up-peek"
+            />
+          </div>
         </div>
       </main>
 
