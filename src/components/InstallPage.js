@@ -54,11 +54,17 @@ const PageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  transition: background 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    background: linear-gradient(180deg, #1a1625 0%, #0f0a1a 100%);
+  }
 `;
 
 const MainContent = styled.main`
   flex: 1;
   padding: 80px 20px 60px;
+  transition: color 0.3s ease;
 `;
 
 const Container = styled.div`
@@ -72,6 +78,11 @@ const Title = styled.h1`
   font-weight: 700;
   color: #1F2937;
   margin-bottom: 16px;
+  transition: color 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    color: #F9FAFB;
+  }
 
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -82,6 +93,11 @@ const Subtitle = styled.p`
   font-size: 1.25rem;
   color: #6B7280;
   margin-bottom: 60px;
+  transition: color 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    color: #9CA3AF;
+  }
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -133,6 +149,11 @@ const Version = styled.p`
   margin-top: 12px;
   font-size: 0.875rem;
   color: #9CA3AF;
+  transition: color 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    color: #6B7280;
+  }
 `;
 
 const InfoSection = styled.div`
@@ -148,6 +169,13 @@ const InfoCard = styled.div`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   text-align: left;
   max-width: 500px;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    background: rgba(31, 22, 37, 0.6);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(120, 102, 204, 0.2);
+  }
 
   ul, ol {
     margin: 16px 0 0 0;
@@ -158,6 +186,11 @@ const InfoCard = styled.div`
     margin-bottom: 8px;
     color: #4B5563;
     line-height: 1.6;
+    transition: color 0.3s ease;
+
+    @media (prefers-color-scheme: dark) {
+      color: #D1D5DB;
+    }
   }
 `;
 
@@ -166,16 +199,31 @@ const CardTitle = styled.h3`
   font-weight: 600;
   color: #1F2937;
   margin-bottom: 8px;
+  transition: color 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    color: #F9FAFB;
+  }
 `;
 
 const DocsLink = styled.p`
   font-size: 1rem;
   color: #6B7280;
+  transition: color 0.3s ease;
+
+  @media (prefers-color-scheme: dark) {
+    color: #9CA3AF;
+  }
 
   a {
     color: #7866CC;
     text-decoration: none;
     font-weight: 600;
+    transition: color 0.3s ease;
+
+    @media (prefers-color-scheme: dark) {
+      color: #AF97F8;
+    }
 
     &:hover {
       text-decoration: underline;
