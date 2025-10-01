@@ -68,6 +68,12 @@ const DocsPage = () => {
         { id: 'import-project', name: 'Import a project', icon: FolderOpenIcon, type: 'page' },
         { id: 'export-project', name: 'Export a project', icon: ArrowDownTrayIcon, type: 'page' }
       ]
+    },
+    {
+      id: 'report-bug',
+      name: 'Report a bug',
+      icon: ExclamationCircleIcon,
+      type: 'action'
     }
   ]), []);
 
@@ -763,19 +769,6 @@ const DocsPage = () => {
               <li>Keep your <code>.json</code> file safe — it's your full project spec.</li>
             </ul>
           </section>
-
-          <section className="nextra-section mt-12">
-            <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
-              <button
-                onClick={() => setBugModalOpen(true)}
-                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
-                title="Spotted an issue? Send it to the team"
-              >
-                <ExclamationCircleIcon className="h-5 w-5" />
-                Report a Bug
-              </button>
-            </div>
-          </section>
         </div>
       )
     }
@@ -793,6 +786,11 @@ const DocsPage = () => {
           const matches = !searchQuery ||
             item.name.toLowerCase().includes(searchQuery) ||
             page?.description?.toLowerCase().includes(searchQuery);
+          return matches ? item : null;
+        }
+
+        if (item.type === 'action') {
+          const matches = !searchQuery || item.name.toLowerCase().includes(searchQuery);
           return matches ? item : null;
         }
 
@@ -821,7 +819,7 @@ const DocsPage = () => {
 
         return null;
       })
-      .filter((item) => item && (item.type === 'page' || (item.children && item.children.length > 0)));
+      .filter((item) => item && (item.type === 'page' || item.type === 'action' || (item.children && item.children.length > 0)));
   }, [navigation, searchQuery, pageContent]);
 
   const flatPages = useMemo(() => {
@@ -1544,6 +1542,14 @@ const DocsPage = () => {
                             ? 'bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300'
                             : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-100'
                         }`}
+                      >
+                        <item.icon className="h-4 w-4 mr-2 flex-shrink-0" />
+                        {item.name}
+                      </button>
+                    ) : item.type === 'action' ? (
+                      <button
+                        onClick={() => setBugModalOpen(true)}
+                        className="w-full text-left flex items-center px-2 py-2 rounded text-sm font-medium transition text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-gray-700 dark:hover:text-gray-100"
                       >
                         <item.icon className="h-4 w-4 mr-2 flex-shrink-0" />
                         {item.name}
