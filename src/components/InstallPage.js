@@ -18,7 +18,7 @@ const InstallPage = () => {
 
           <div className="mb-16">
             <a
-              href="https://github.com/actsie/NCC/releases/download/v1.1.0/Pawgrammer-1.1.0-arm64.dmg"
+              href="https://github.com/actsie/NCC/releases/download/v1.1.0-beta/Pawgrammer-1.1.0-arm64.dmg"
               download="Pawgrammer-1.1.0-arm64.dmg"
               className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-700 hover:to-purple-500 text-white hover:text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 no-underline"
             >
@@ -27,7 +27,7 @@ const InstallPage = () => {
             </a>
 
             <p className="mt-3 text-sm text-gray-500 dark:text-gray-600 transition-colors duration-300">
-              Version 1.1.0 (ARM64)
+              Version 1.1.0-beta (ARM64)
             </p>
           </div>
 

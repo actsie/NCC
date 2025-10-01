@@ -1577,7 +1577,7 @@ const DocsPage = () => {
                         </button>
 
                         {shouldShowChildren && (
-                          <div className="ml-6 mt-1 space-y-1">
+                          <div className="ml-6 mt-1 mb-4 space-y-1">
                             {item.children.map((child) => (
                               <button
                                 key={child.id}
