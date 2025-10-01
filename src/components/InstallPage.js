@@ -1,234 +1,65 @@
 import React from 'react';
-import styled from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
-import { ArrowDownCircleIcon } from '@heroicons/react/24/outline';
 
 const InstallPage = () => {
   return (
-    <PageWrapper>
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-purple-50 to-white dark:from-[#1a1625] dark:to-[#0f0a1a] transition-colors duration-300">
       <Header />
 
-      <MainContent>
-        <Container>
-          <Title>Welcome to Pawgrammer Beta</Title>
-          <Subtitle>Thank you for being one of our early testers! ✨</Subtitle>
+      <main className="flex-1 px-5 py-20 md:py-24">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-50 mb-4 transition-colors duration-300">
+            Welcome to Pawgrammer Beta
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 mb-16 transition-colors duration-300">
+            Thank you for being one of our early testers! ✨
+          </p>
 
-          <DownloadSection>
-            <DownloadButton
+          <div className="mb-16">
+            <a
               href="https://github.com/actsie/NCC/releases/download/v1.1.0/Pawgrammer-1.1.0-arm64.dmg"
               download="Pawgrammer-1.1.0-arm64.dmg"
+              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-purple-600 to-purple-400 hover:from-purple-700 hover:to-purple-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-150 no-underline"
             >
-              <img src="/apple-logo.png" alt="Apple" className="apple-icon" />
+              <img src="/apple-logo.png" alt="Apple" className="h-5 w-auto" />
               <span>Download MAC version</span>
-            </DownloadButton>
+            </a>
 
-            <Version>Version 1.1.0 (ARM64)</Version>
-          </DownloadSection>
+            <p className="mt-3 text-sm text-gray-500 dark:text-gray-600 transition-colors duration-300">
+              Version 1.1.0 (ARM64)
+            </p>
+          </div>
 
-          <InfoSection>
-            <InfoCard>
-              <CardTitle>Installation Steps</CardTitle>
-              <ol>
+          <div className="flex justify-center mb-10">
+            <div className="bg-white dark:bg-[#1f1625]/60 dark:border dark:border-purple-500/20 rounded-2xl p-8 shadow-md dark:shadow-black/30 text-left max-w-lg transition-all duration-300">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-50 mb-4 transition-colors duration-300">
+                Installation Steps
+              </h3>
+              <ol className="space-y-2 list-decimal list-inside text-gray-700 dark:text-gray-300 transition-colors duration-300">
                 <li>Download the .dmg file above</li>
                 <li>Open the downloaded file</li>
                 <li>Drag Pawgrammer to Applications</li>
                 <li>Launch from Applications folder</li>
               </ol>
-            </InfoCard>
-          </InfoSection>
+            </div>
+          </div>
 
-          <DocsLink>
-            Need help? Check out the <a href="/docs">Documentation</a>
-          </DocsLink>
-        </Container>
-      </MainContent>
+          <p className="text-base text-gray-600 dark:text-gray-400 transition-colors duration-300">
+            Need help? Check out the{' '}
+            <a
+              href="/docs"
+              className="text-purple-600 dark:text-purple-400 font-semibold hover:underline transition-colors duration-300"
+            >
+              Documentation
+            </a>
+          </p>
+        </div>
+      </main>
 
       <Footer />
-    </PageWrapper>
+    </div>
   );
 };
-
-const PageWrapper = styled.div`
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
-  transition: background 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    background: linear-gradient(180deg, #1a1625 0%, #0f0a1a 100%);
-  }
-`;
-
-const MainContent = styled.main`
-  flex: 1;
-  padding: 80px 20px 60px;
-  transition: color 0.3s ease;
-`;
-
-const Container = styled.div`
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-`;
-
-const Title = styled.h1`
-  font-size: 3rem;
-  font-weight: 700;
-  color: #1F2937;
-  margin-bottom: 16px;
-  transition: color 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    color: #F9FAFB;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 2rem;
-  }
-`;
-
-const Subtitle = styled.p`
-  font-size: 1.25rem;
-  color: #6B7280;
-  margin-bottom: 60px;
-  transition: color 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    color: #9CA3AF;
-  }
-
-  @media (max-width: 768px) {
-    font-size: 1rem;
-  }
-`;
-
-const DownloadSection = styled.div`
-  margin-bottom: 60px;
-`;
-
-const DownloadButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px 32px;
-  background: linear-gradient(135deg, #7866CC, #AF97F8);
-  border: none;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 600;
-  color: white !important;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  box-shadow: 0 4px 12px rgba(120, 102, 204, 0.3);
-  text-decoration: none;
-
-  .apple-icon {
-    height: 1.2em;
-    width: auto;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(120, 102, 204, 0.4);
-    color: white !important;
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-    padding: 14px 28px;
-  }
-`;
-
-const Version = styled.p`
-  margin-top: 12px;
-  font-size: 0.875rem;
-  color: #9CA3AF;
-  transition: color 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    color: #6B7280;
-  }
-`;
-
-const InfoSection = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: 40px;
-`;
-
-const InfoCard = styled.div`
-  background: white;
-  border-radius: 16px;
-  padding: 32px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  text-align: left;
-  max-width: 500px;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    background: rgba(31, 22, 37, 0.6);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(120, 102, 204, 0.2);
-  }
-
-  ul, ol {
-    margin: 16px 0 0 0;
-    padding-left: 20px;
-  }
-
-  li {
-    margin-bottom: 8px;
-    color: #4B5563;
-    line-height: 1.6;
-    transition: color 0.3s ease;
-
-    @media (prefers-color-scheme: dark) {
-      color: #D1D5DB;
-    }
-  }
-`;
-
-const CardTitle = styled.h3`
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #1F2937;
-  margin-bottom: 8px;
-  transition: color 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    color: #F9FAFB;
-  }
-`;
-
-const DocsLink = styled.p`
-  font-size: 1rem;
-  color: #6B7280;
-  transition: color 0.3s ease;
-
-  @media (prefers-color-scheme: dark) {
-    color: #9CA3AF;
-  }
-
-  a {
-    color: #7866CC;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-
-    @media (prefers-color-scheme: dark) {
-      color: #AF97F8;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
 
 export default InstallPage;
