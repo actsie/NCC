@@ -15,7 +15,8 @@ import {
   ArrowRightIcon,
   ArrowLeftIcon,
   CommandLineIcon,
-  ExclamationCircleIcon
+  ExclamationCircleIcon,
+  BugAntIcon
 } from '@heroicons/react/24/outline';
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import Header from './Header';
@@ -72,7 +73,7 @@ const DocsPage = () => {
     {
       id: 'report-bug',
       name: 'Report a bug',
-      icon: ExclamationCircleIcon,
+      icon: BugAntIcon,
       type: 'action'
     }
   ]), []);
@@ -1533,7 +1534,7 @@ const DocsPage = () => {
                 const shouldShowChildren = (searchQuery ? true : expandedSections[item.id]) && item.children && item.children.length > 0;
 
                 return (
-                  <div key={item.id}>
+                  <div key={item.id} className={item.type === 'action' ? 'mt-4 pt-4 border-t border-gray-200 dark:border-gray-700' : ''}>
                     {item.type === 'page' ? (
                       <button
                         onClick={() => handlePageSelect(item.id)}
