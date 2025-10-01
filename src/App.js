@@ -18,6 +18,7 @@ import Footer from './components/Footer';
 import EarlyAccessModal from './components/EarlyAccessModal';
 import ProblemSolutionTabs from './components/ProblemSolutionTabs';
 import DocsPage from './components/DocsPage';
+import InstallPage from './components/InstallPage';
 
 const TYPEWRITER_TEXTS = [
   'Create a website for my bakery',
@@ -252,6 +253,11 @@ const App = () => {
   // If it's the docs route, render the docs page
   if (currentPath === '/docs' || currentPath.startsWith('/docs/')) {
     return <DocsPage />;
+  }
+
+  // If it's the install route, render the install page
+  if (currentPath === '/install') {
+    return <InstallPage />;
   }
 
   // If it's the examples route, render the examples index

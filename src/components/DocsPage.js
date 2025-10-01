@@ -14,11 +14,13 @@ import {
   SparklesIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
-  CommandLineIcon
+  CommandLineIcon,
+  ExclamationCircleIcon
 } from '@heroicons/react/24/outline';
 import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/20/solid';
 import Header from './Header';
 import Footer from './Footer';
+import ReportBugModal from './ReportBugModal';
 
 const HEADER_OFFSET = 88;
 
@@ -30,6 +32,7 @@ const DocsPage = () => {
   });
   const [searchTerm, setSearchTerm] = useState('');
   const [activeHeading, setActiveHeading] = useState('');
+  const [bugModalOpen, setBugModalOpen] = useState(false);
 
   // Close sidebar when selecting a page on mobile
   const handlePageSelect = (pageId) => {
@@ -757,8 +760,21 @@ const DocsPage = () => {
             <h2 className="nextra-heading-2">Notes</h2>
             <ul className="nextra-list">
               <li>Exported projects can be imported back into Pawgrammer anytime.</li>
-              <li>Keep your <code>.json</code> file safe — it’s your full project spec.</li>
+              <li>Keep your <code>.json</code> file safe — it's your full project spec.</li>
             </ul>
+          </section>
+
+          <section className="nextra-section mt-12">
+            <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
+              <button
+                onClick={() => setBugModalOpen(true)}
+                className="inline-flex items-center gap-2 px-4 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 font-semibold rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+                title="Spotted an issue? Send it to the team"
+              >
+                <ExclamationCircleIcon className="h-5 w-5" />
+                Report a Bug
+              </button>
+            </div>
           </section>
         </div>
       )
@@ -1676,6 +1692,16 @@ const DocsPage = () => {
                         </a>
                       ))}
                     </div>
+
+                    <div className="mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <button
+                        onClick={() => setBugModalOpen(true)}
+                        className="flex items-center gap-2 w-full px-2 py-1 text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition"
+                      >
+                        <ExclamationCircleIcon className="h-4 w-4" />
+                        Report a bug
+                      </button>
+                    </div>
                   </div>
                 </aside>
               )}
@@ -1693,6 +1719,15 @@ const DocsPage = () => {
       </div>
 
       <Footer />
+
+      {/* Report Bug Modal */}
+      <ReportBugModal
+        isOpen={bugModalOpen}
+        onClose={() => setBugModalOpen(false)}
+        prefillData={{
+          pageUrl: `${window.location.origin}${window.location.pathname}#${selectedPage}`,
+        }}
+      />
     </div>
   );
 };
