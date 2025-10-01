@@ -16,7 +16,7 @@ const InstallPage = () => {
 
           <DownloadSection>
             <DownloadButton
-              href="/Pawgrammer-1.1.0-arm64.dmg"
+              href="https://github.com/actsie/NCC/releases/download/v1.1.0/Pawgrammer-1.1.0-arm64.dmg"
               download="Pawgrammer-1.1.0-arm64.dmg"
             >
               <img src="/apple-logo.png" alt="Apple" className="apple-icon" />
