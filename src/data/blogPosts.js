@@ -1,6 +1,28 @@
 // Blog post data - single source of truth for all blog content
 export const blogPosts = [
   {
+    id: 4,
+    slug: 'why-great-marketers-build',
+    title: 'Prototypes speak louder than decks.',
+    description: 'Every marketer has felt this moment: You\'ve got the spark. The campaign idea is clear. But then comes the drag: waiting for engineering time. Today\'s best marketers don\'t wait — they build.',
+    date: 'Oct 3, 2025',
+    datetime: '2025-10-03',
+    category: { title: 'Marketing', href: '#' },
+    imageUrl: '/mktrs.png',
+    author: {
+      name: 'Pawgrammer Team',
+      role: 'Product Team',
+      href: '#',
+      imageUrl: '/pawgrammer.png',
+    },
+    // Meta data for SEO
+    metaTitle: 'Why great marketers don\'t wait — they build.',
+    metaDescription: 'Today\'s best marketers aren\'t just storytellers — they\'re builders. Learn how no-code tools like Pawgrammer empower marketers to prototype campaigns, build interactive experiences, and get ideas greenlit faster.',
+    keywords: 'marketing prototypes, no-code marketing tools, campaign tools, interactive marketing, marketer empowerment, no-code prototyping',
+    readingTime: '4 min',
+    tags: ['marketing', 'no-code', 'prototyping', 'campaign tools'],
+  },
+  {
     id: 3,
     slug: 'how-travelers-really-pack',
     title: 'How travelers really pack (and what they leave behind)',

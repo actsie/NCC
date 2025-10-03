@@ -11,6 +11,7 @@ import DarkModeToggle from './DarkModeToggle';
 import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
 import BlogPostJobTracking from './components/BlogPostJobTracking';
 import BlogPostTravelPacking from './components/BlogPostTravelPacking';
+import BlogPostMarketers from './components/BlogPostMarketers';
 import BlogIndex from './BlogIndex';
 import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
@@ -248,6 +249,10 @@ const App = () => {
 
   if (currentPath === '/blog/how-travelers-really-pack') {
     return <BlogPostTravelPacking />;
+  }
+
+  if (currentPath === '/blog/why-great-marketers-build') {
+    return <BlogPostMarketers />;
   }
 
   // If it's the docs route, render the docs page
