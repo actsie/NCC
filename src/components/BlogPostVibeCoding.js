@@ -65,7 +65,7 @@ const BlogPostVibeCoding = () => {
               But eventually, the flow starts to break down. Progress slows. Dependencies multiply. And what once felt like creative freedom turns into a maze of hard-to-maintain logic and unclear connections.
             </p>
             <p className="mt-6 font-medium text-gray-900 dark:text-white">
-              So what happens between those early wins and the moment things stop working?
+              So what happens between the excitement of getting it working — and the frustration of it breaking down?
             </p>
             <p className="mt-4">
               Let's break down the critical vibe coding breakpoints — the common pitfalls that trip up even experienced builders — and how to avoid them with smarter strategies.
