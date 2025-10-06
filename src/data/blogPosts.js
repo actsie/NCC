@@ -1,6 +1,27 @@
 // Blog post data - single source of truth for all blog content
 export const blogPosts = [
   {
+    id: 5,
+    slug: 'vibe-coding-breakpoints',
+    title: 'Vibe Coding Breakpoints: Where No-Code Projects Break — and How to Build Smarter',
+    description: 'Vibe coding feels magical — until it doesn\'t. Learn why no-code/AI projects break down and how to avoid common pitfalls with smart strategies and tools like Pawgrammer.',
+    date: 'Oct 6, 2025',
+    datetime: '2025-10-06',
+    category: { title: 'Product', href: '#' },
+    imageUrl: '/breakblog.png',
+    author: {
+      name: 'Pawgrammer Team',
+      role: 'Product Team',
+      href: '#',
+      imageUrl: '/pawgrammer.png',
+    },
+    metaTitle: 'Vibe Coding Breakpoints: Why Projects Stall — and How to Build Smarter',
+    metaDescription: 'Vibe coding feels magical — until it doesn\'t. Learn why no-code/AI projects break down and how to avoid common pitfalls with smart strategies and tools like Pawgrammer.',
+    keywords: 'vibe coding, no-code development, AI coding, project management, software development, no-code tools, AI tools',
+    readingTime: '8 min',
+    tags: ['vibe coding', 'no-code', 'AI development', 'project management'],
+  },
+  {
     id: 4,
     slug: 'why-great-marketers-build',
     title: 'Prototypes speak louder than decks.',

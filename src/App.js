@@ -12,6 +12,7 @@ import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
 import BlogPostJobTracking from './components/BlogPostJobTracking';
 import BlogPostTravelPacking from './components/BlogPostTravelPacking';
 import BlogPostMarketers from './components/BlogPostMarketers';
+import BlogPostVibeCoding from './components/BlogPostVibeCoding';
 import BlogIndex from './BlogIndex';
 import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
@@ -253,6 +254,10 @@ const App = () => {
 
   if (currentPath === '/blog/why-great-marketers-build') {
     return <BlogPostMarketers />;
+  }
+
+  if (currentPath === '/blog/vibe-coding-breakpoints') {
+    return <BlogPostVibeCoding />;
   }
 
   // If it's the docs route, render the docs page
