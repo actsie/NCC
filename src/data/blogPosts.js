@@ -8,7 +8,7 @@ export const blogPosts = [
     date: 'Oct 6, 2025',
     datetime: '2025-10-06',
     category: { title: 'Product', href: '#' },
-    imageUrl: '/breakblog.png',
+    imageUrl: '/breakpoints.png',
     author: {
       name: 'Pawgrammer Team',
       role: 'Product Team',
@@ -29,7 +29,7 @@ export const blogPosts = [
     date: 'Oct 3, 2025',
     datetime: '2025-10-03',
     category: { title: 'Marketing', href: '#' },
-    imageUrl: '/mktrs.png',
+    imageUrl: '/prototypes.png',
     author: {
       name: 'Pawgrammer Team',
       role: 'Product Team',
