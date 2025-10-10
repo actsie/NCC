@@ -13,6 +13,7 @@ import BlogPostJobTracking from './components/BlogPostJobTracking';
 import BlogPostTravelPacking from './components/BlogPostTravelPacking';
 import BlogPostMarketers from './components/BlogPostMarketers';
 import BlogPostVibeCoding from './components/BlogPostVibeCoding';
+import BlogPostNoCodeWebsite from './components/BlogPostNoCodeWebsite';
 import BlogIndex from './BlogIndex';
 import ExamplesIndex from './ExamplesIndex';
 import Header from './components/Header';
@@ -258,6 +259,10 @@ const App = () => {
 
   if (currentPath === '/blog/vibe-coding-breakpoints') {
     return <BlogPostVibeCoding />;
+  }
+
+  if (currentPath === '/blog/build-your-first-no-code-website') {
+    return <BlogPostNoCodeWebsite />;
   }
 
   // If it's the docs route, render the docs page

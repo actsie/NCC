@@ -1,6 +1,28 @@
 // Blog post data - single source of truth for all blog content
 export const blogPosts = [
   {
+    id: 6,
+    slug: 'build-your-first-no-code-website',
+    title: 'Build Your First No-Code Website (Together) - A Friendly Beginner\'s Guide',
+    description: 'A full, beginner-friendly walkthrough to help you build your own website using no-code tools. Learn by doing, even if you\'re not "techy".',
+    date: 'Oct 10, 2025',
+    datetime: '2025-10-10',
+    category: { title: 'Tutorial', href: '#' },
+    imageUrl: '/website.png',
+    author: {
+      name: 'Pawgrammer Team',
+      role: 'Product Team',
+      href: '#',
+      imageUrl: '/pawgrammer.png',
+    },
+    metaTitle: 'Build Your First No-Code Website (Together) - A Friendly Beginner\'s Guide',
+    metaDescription: 'A full, beginner-friendly walkthrough to help you build your own website using no-code tools. Learn by doing, even if you\'re not "techy".',
+    keywords: 'no-code website, beginner tutorial, build website, no-code tools, web development, Pawgrammer, website builder',
+    readingTime: '10 min',
+    tags: ['no-code', 'tutorial', 'beginner-friendly', 'web development'],
+    isTutorial: true,
+  },
+  {
     id: 5,
     slug: 'vibe-coding-breakpoints',
     title: 'Vibe Coding Breakpoints: Where No-Code Projects Break — and How to Build Smarter',
