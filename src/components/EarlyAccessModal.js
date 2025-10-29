@@ -76,6 +76,27 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
     })
     .then(response => {
       if (response.ok) {
+        // Send to Discord (don't await, run in background)
+        fetch('/api/discord-notify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: formData.get('email'),
+            source: 'early_access',
+            path: window.location.pathname,
+            formData: {
+              firstName: formData.get('firstName'),
+              platform: formData.get('platform'),
+              codingComfort: formData.get('codingComfort'),
+              firstTool: formData.get('firstTool'),
+              onboardingSupport: formData.get('onboardingSupport'),
+              joinCommunity: formData.get('joinCommunity')
+            }
+          }),
+        }).catch(err => console.log('Discord notification failed:', err));
+
         setIsSubmitted(true);
       } else {
         throw new Error('Form submission failed');

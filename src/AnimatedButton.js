@@ -133,9 +133,24 @@ const AnimatedButton = ({ children, onClick, onSignup, isShareMode, showSuccess:
 
         if (response.ok) {
           console.log('Email submitted successfully:', email);
+
+          // Send to Discord (don't await, run in background)
+          fetch('/api/discord-notify', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: sanitizedEmail,
+              idea: idea || '',
+              source: 'animated_button',
+              path: window.location.pathname
+            }),
+          }).catch(err => console.log('Discord notification failed:', err));
+
           setEmail('');
           setIsError(false);
-          
+
           // Start contraction animation
           setIsContracting(true);
           

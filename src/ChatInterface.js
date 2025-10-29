@@ -185,6 +185,20 @@ const ChatInterface = forwardRef((props, ref) => {
       });
 
       if (response.ok) {
+        // Send to Discord (don't await, run in background)
+        fetch('/api/discord-notify', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            idea: idea,
+            source: 'landing_chat',
+            path: window.location.pathname
+          }),
+        }).catch(err => console.log('Discord notification failed:', err));
+
         setShowSuccess(true);
         setTimeout(() => {
           setShowSuccess(false);

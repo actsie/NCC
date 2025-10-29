@@ -216,10 +216,10 @@ module.exports = async (req, res) => {
       timestamp: new Date().toISOString(),
     };
 
-    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    const webhookUrl = process.env.DISCORD_BUG_WEBHOOK_URL;
 
     if (!webhookUrl) {
-      console.error('DISCORD_WEBHOOK_URL not configured');
+      console.error('DISCORD_BUG_WEBHOOK_URL not configured');
       res.statusCode = 500;
       res.setHeader('Content-Type', 'application/json');
       return res.end(JSON.stringify({
