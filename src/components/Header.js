@@ -12,7 +12,6 @@ import {
 } from '@heroicons/react/24/outline';
 import DarkModeToggle from '../DarkModeToggle';
 import EarlyAccessButton from './EarlyAccessButton';
-import EarlyAccessModal from './EarlyAccessModal';
 
 const navigation = [
   { name: 'Docs', href: '/docs' },
@@ -46,7 +45,6 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
   const [hoverTimeout, setHoverTimeout] = useState(null);
   const [productHoverTimeout, setProductHoverTimeout] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [earlyAccessModalOpen, setEarlyAccessModalOpen] = useState(false);
   const rafRef = useRef(null);
 
   // Detect current path for active state highlighting
@@ -355,7 +353,7 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
           >
             Join a builder community
           </a>
-          <EarlyAccessButton onClick={() => setEarlyAccessModalOpen(true)} />
+          <EarlyAccessButton />
           <div className={`transition-opacity duration-200 ease-out will-change-opacity hidden sm:block ${mobileMenuOpen ? 'opacity-0' : 'opacity-100'}`}>
             <DarkModeToggle />
           </div>
@@ -478,12 +476,6 @@ const Header = ({ className = "fixed inset-x-0 top-0 z-50" }) => {
           </div>
         </DialogPanel>
       </Dialog>
-
-      {/* Early Access Modal */}
-      <EarlyAccessModal
-        isOpen={earlyAccessModalOpen}
-        onClose={() => setEarlyAccessModalOpen(false)}
-      />
     </header>
   );
 };
