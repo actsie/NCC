@@ -63,7 +63,7 @@ export default async function handler(req, res) {
     try {
       console.log('[DEBUG] Attempting to fetch from channel:', DISCORD_CHANNEL_ID);
       const messagesResponse = await fetch(
-        `https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages?limit=1`,
+        `https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages?limit=5`,
         {
           headers: {
             'Authorization': `Bot ${DISCORD_BOT_TOKEN}`,
@@ -78,6 +78,12 @@ export default async function handler(req, res) {
       if (messagesResponse.ok) {
         const messages = await messagesResponse.json();
         debugInfo.messagesFound = messages.length;
+        debugInfo.allMessages = messages.map(m => ({
+          author: m.author?.username || 'unknown',
+          hasContent: !!m.content,
+          contentLength: m.content?.length || 0,
+          type: m.type
+        }));
         console.log('[DEBUG] Fetched messages count:', messages.length);
 
         if (messages.length > 0) {
@@ -88,10 +94,19 @@ export default async function handler(req, res) {
           debugInfo.author = lastMessage.author?.username || 'unknown';
           console.log('[DEBUG] Last message content preview:', lastMessage.content?.substring(0, 100));
 
-          // Parse email list from the last message
-          if (lastMessage.content) {
+          // Parse email list from the last message WITH content
+          // Try to find the most recent message that has content
+          let messageWithContent = null;
+          for (const msg of messages) {
+            if (msg.content && msg.content.includes('@')) {
+              messageWithContent = msg;
+              break;
+            }
+          }
+
+          if (messageWithContent) {
             const emailRegex = /\d+\.\s+([^\n]+@[^\n]+)/g;
-            const matches = [...lastMessage.content.matchAll(emailRegex)];
+            const matches = [...messageWithContent.content.matchAll(emailRegex)];
             debugInfo.emailsParsed = matches.length;
             console.log('[DEBUG] Email matches found:', matches.length);
 
@@ -104,8 +119,8 @@ export default async function handler(req, res) {
               console.log('[DEBUG] No email matches in message content');
             }
           } else {
-            debugInfo.error = 'Last message has no content';
-            console.log('[DEBUG] Last message has no content');
+            debugInfo.error = 'No messages with content found in last 5 messages';
+            console.log('[DEBUG] No messages with content found');
           }
         } else {
           debugInfo.error = 'No messages found in channel';
