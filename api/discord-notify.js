@@ -1,28 +1,5 @@
-// Vercel Serverless Function for Discord Notifications with Email List Tracking
-// This keeps the bot token secure on the server side
-
-const INITIAL_EMAILS = [
-  'sora@apasport.xyz',
-  'nonfungiblemomo@gmail.com',
-  'ok2spam@sarsorito.com',
-  'yusuke.tanaka@restup.co',
-  'shun@remotehour.com',
-  'kwabena.a92@gmail.com',
-  'anitagagarina@gmail.com',
-  'espangenberg@gmail.com',
-  'ash.kind@labskilo.com',
-  '1patfrancis@gmail.com',
-  'kldeepak745@gmail.com',
-  'matthewjwheeler@yahoo.com',
-  'matthewwheeler25@gmail.com',
-  'ferdinand@alura.no',
-  'dominik@adamec.pro',
-  'mayunekominegoro@gmail.com',
-  'emaildonovin@gmail.com',
-  'flor@alchemy.com',
-  'benjackson990@gmail.com',
-  'ruinawayo@gmail.com'
-];
+// Vercel Serverless Function for Discord Notifications with Google Sheets Email Tracking
+const { google } = require('googleapis');
 
 export default async function handler(req, res) {
   // Only allow POST requests
@@ -37,103 +14,52 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Email is required' });
   }
 
-  const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
-  const DISCORD_CHANNEL_ID = process.env.DISCORD_CHANNEL_ID;
   const DISCORD_SIGNUP_WEBHOOK_URL = process.env.DISCORD_SIGNUP_WEBHOOK_URL;
+  const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID;
+  const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
+  const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY;
 
   // Validate environment variables
-  if (!DISCORD_BOT_TOKEN || !DISCORD_CHANNEL_ID || !DISCORD_SIGNUP_WEBHOOK_URL) {
-    console.error('Missing Discord environment variables');
+  if (!DISCORD_SIGNUP_WEBHOOK_URL || !GOOGLE_SHEET_ID || !GOOGLE_SERVICE_ACCOUNT_EMAIL || !GOOGLE_PRIVATE_KEY) {
+    console.error('Missing environment variables');
     return res.status(500).json({ error: 'Server configuration error' });
   }
 
   try {
-    // Step 1: Fetch the last message from the Discord channel
-    let existingEmails = [...INITIAL_EMAILS];
+    // Step 1: Read existing emails from Google Sheets
+    let existingEmails = [];
     let debugInfo = {
-      channelId: DISCORD_CHANNEL_ID,
-      fetchAttempted: true,
-      fetchSuccess: false,
-      status: null,
-      error: null,
-      messagesFound: 0,
-      emailsParsed: 0
+      sheetsAttempted: true,
+      sheetsSuccess: false,
+      emailsFetched: 0,
+      error: null
     };
 
     try {
-      console.log('[DEBUG] Attempting to fetch from channel:', DISCORD_CHANNEL_ID);
-      const messagesResponse = await fetch(
-        `https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages?limit=5`,
-        {
-          headers: {
-            'Authorization': `Bot ${DISCORD_BOT_TOKEN}`,
-            'Content-Type': 'application/json'
-          }
-        }
+      // Initialize Google Sheets API
+      const auth = new google.auth.JWT(
+        GOOGLE_SERVICE_ACCOUNT_EMAIL,
+        null,
+        GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        ['https://www.googleapis.com/auth/spreadsheets']
       );
 
-      debugInfo.status = messagesResponse.status;
-      console.log('[DEBUG] Discord API response status:', messagesResponse.status);
+      const sheets = google.sheets({ version: 'v4', auth });
 
-      if (messagesResponse.ok) {
-        const messages = await messagesResponse.json();
-        debugInfo.messagesFound = messages.length;
-        debugInfo.allMessages = messages.map(m => ({
-          author: m.author?.username || 'unknown',
-          hasContent: !!m.content,
-          contentLength: m.content?.length || 0,
-          type: m.type
-        }));
-        console.log('[DEBUG] Fetched messages count:', messages.length);
+      // Read emails from column A (starting from row 2, skipping header)
+      const response = await sheets.spreadsheets.values.get({
+        spreadsheetId: GOOGLE_SHEET_ID,
+        range: 'A2:A', // Column A, starting from row 2
+      });
 
-        if (messages.length > 0) {
-          const lastMessage = messages[0];
-          debugInfo.messageType = lastMessage.type;
-          debugInfo.hasContent = !!lastMessage.content;
-          debugInfo.hasEmbeds = lastMessage.embeds?.length > 0;
-          debugInfo.author = lastMessage.author?.username || 'unknown';
-          console.log('[DEBUG] Last message content preview:', lastMessage.content?.substring(0, 100));
-
-          // Parse email list from the last message WITH content
-          // Try to find the most recent message that has content
-          let messageWithContent = null;
-          for (const msg of messages) {
-            if (msg.content && msg.content.includes('@')) {
-              messageWithContent = msg;
-              break;
-            }
-          }
-
-          if (messageWithContent) {
-            const emailRegex = /\d+\.\s+([^\n]+@[^\n]+)/g;
-            const matches = [...messageWithContent.content.matchAll(emailRegex)];
-            debugInfo.emailsParsed = matches.length;
-            console.log('[DEBUG] Email matches found:', matches.length);
-
-            if (matches.length > 0) {
-              existingEmails = matches.map(match => match[1].trim());
-              debugInfo.fetchSuccess = true;
-              console.log('[DEBUG] Successfully parsed', existingEmails.length, 'emails from Discord');
-            } else {
-              debugInfo.error = 'No email matches in message content';
-              console.log('[DEBUG] No email matches in message content');
-            }
-          } else {
-            debugInfo.error = 'No messages with content found in last 5 messages';
-            console.log('[DEBUG] No messages with content found');
-          }
-        } else {
-          debugInfo.error = 'No messages found in channel';
-          console.log('[DEBUG] No messages found in channel');
-        }
-      } else {
-        const errorBody = await messagesResponse.text();
-        debugInfo.error = `API error: ${errorBody}`;
-        console.error('[DEBUG] Discord API error:', messagesResponse.status, errorBody);
-      }
-    } catch (fetchError) {
-      debugInfo.error = `Exception: ${fetchError.message}`;
-      console.error('[DEBUG] Fetch exception:', fetchError.message);
+      const rows = response.data.values || [];
+      existingEmails = rows.map(row => row[0]).filter(e => e && e.includes('@'));
+      debugInfo.emailsFetched = existingEmails.length;
+      debugInfo.sheetsSuccess = true;
+      console.log('[DEBUG] Successfully fetched', existingEmails.length, 'emails from Google Sheets');
+    } catch (sheetsError) {
+      debugInfo.error = `Sheets error: ${sheetsError.message}`;
+      console.error('[DEBUG] Google Sheets fetch error:', sheetsError.message);
     }
 
     // Step 2: Add new email to the list (avoid duplicates)
@@ -142,9 +68,48 @@ export default async function handler(req, res) {
 
     if (!isDuplicate) {
       existingEmails.push(email);
+
+      // Step 3: Write the new email to Google Sheets
+      try {
+        const auth = new google.auth.JWT(
+          GOOGLE_SERVICE_ACCOUNT_EMAIL,
+          null,
+          GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+          ['https://www.googleapis.com/auth/spreadsheets']
+        );
+
+        const sheets = google.sheets({ version: 'v4', auth });
+
+        // Append new row with email, timestamp, source, and optional form data
+        const newRow = [
+          email,
+          new Date().toISOString(),
+          source || 'unknown',
+          formData?.firstName || '',
+          formData?.platform || '',
+          formData?.codingComfort || '',
+          formData?.firstTool || '',
+          idea || '',
+          path || ''
+        ];
+
+        await sheets.spreadsheets.values.append({
+          spreadsheetId: GOOGLE_SHEET_ID,
+          range: 'A:I',
+          valueInputOption: 'RAW',
+          resource: {
+            values: [newRow]
+          }
+        });
+
+        console.log('[DEBUG] Successfully wrote new email to Google Sheets');
+      } catch (writeError) {
+        console.error('[DEBUG] Failed to write to Google Sheets:', writeError.message);
+        debugInfo.error = `Write error: ${writeError.message}`;
+      }
     }
 
-    // Step 3: Format the Discord message
+    // Step 4: Format the Discord message
     const totalCount = existingEmails.length;
     const emailList = existingEmails
       .map((e, index) => `${index + 1}. ${e}`)
@@ -187,7 +152,7 @@ ${details}
 **Email List:**
 ${emailList}`;
 
-    // Step 4: Send to Discord webhook
+    // Step 5: Send to Discord webhook
     const webhookResponse = await fetch(DISCORD_SIGNUP_WEBHOOK_URL, {
       method: 'POST',
       headers: {
