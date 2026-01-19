@@ -15,7 +15,13 @@ const INITIAL_EMAILS = [
   'kldeepak745@gmail.com',
   'matthewjwheeler@yahoo.com',
   'matthewwheeler25@gmail.com',
-  'ferdinand@alura.no'
+  'ferdinand@alura.no',
+  'dominik@adamec.pro',
+  'mayunekominegoro@gmail.com',
+  'emaildonovin@gmail.com',
+  'flor@alchemy.com',
+  'benjackson990@gmail.com',
+  'ruinawayo@gmail.com'
 ];
 
 export default async function handler(req, res) {
