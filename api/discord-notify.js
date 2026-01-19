@@ -37,10 +37,17 @@ export default async function handler(req, res) {
 
     try {
       // Initialize Google Sheets API
+      // Remove outer quotes if present and replace escaped newlines
+      let privateKey = GOOGLE_PRIVATE_KEY.trim();
+      if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+        privateKey = privateKey.slice(1, -1);
+      }
+      privateKey = privateKey.replace(/\\n/g, '\n');
+
       const auth = new google.auth.JWT(
         GOOGLE_SERVICE_ACCOUNT_EMAIL,
         null,
-        GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        privateKey,
         ['https://www.googleapis.com/auth/spreadsheets']
       );
 
@@ -71,10 +78,17 @@ export default async function handler(req, res) {
 
       // Step 3: Write the new email to Google Sheets
       try {
+        // Remove outer quotes if present and replace escaped newlines
+        let privateKey = GOOGLE_PRIVATE_KEY.trim();
+        if (privateKey.startsWith('"') && privateKey.endsWith('"')) {
+          privateKey = privateKey.slice(1, -1);
+        }
+        privateKey = privateKey.replace(/\\n/g, '\n');
+
         const auth = new google.auth.JWT(
           GOOGLE_SERVICE_ACCOUNT_EMAIL,
           null,
-          GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+          privateKey,
           ['https://www.googleapis.com/auth/spreadsheets']
         );
 
