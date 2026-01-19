@@ -94,6 +94,9 @@ export default async function handler(req, res) {
 
         const sheets = google.sheets({ version: 'v4', auth });
 
+        // Get the next empty row number (current count + 2 for header row)
+        const nextRow = existingEmails.length + 2;
+
         // Append new row with email, timestamp, source, and optional form data
         const newRow = [
           email,
@@ -107,17 +110,17 @@ export default async function handler(req, res) {
           path || ''
         ];
 
-        await sheets.spreadsheets.values.append({
+        // Write to specific row to avoid append confusion
+        await sheets.spreadsheets.values.update({
           spreadsheetId: GOOGLE_SHEET_ID,
-          range: 'A:I',
+          range: `A${nextRow}:I${nextRow}`,
           valueInputOption: 'RAW',
-          insertDataOption: 'INSERT_ROWS',
           resource: {
             values: [newRow]
           }
         });
 
-        console.log('[DEBUG] Successfully wrote new email to Google Sheets');
+        console.log('[DEBUG] Successfully wrote new email to Google Sheets at row', nextRow);
       } catch (writeError) {
         console.error('[DEBUG] Failed to write to Google Sheets:', writeError.message);
         debugInfo.error = `Write error: ${writeError.message}`;
