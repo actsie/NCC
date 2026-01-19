@@ -50,6 +50,15 @@ export default async function handler(req, res) {
   try {
     // Step 1: Fetch the last message from the Discord channel
     let existingEmails = [...INITIAL_EMAILS];
+    let debugInfo = {
+      channelId: DISCORD_CHANNEL_ID,
+      fetchAttempted: true,
+      fetchSuccess: false,
+      status: null,
+      error: null,
+      messagesFound: 0,
+      emailsParsed: 0
+    };
 
     try {
       console.log('[DEBUG] Attempting to fetch from channel:', DISCORD_CHANNEL_ID);
@@ -63,10 +72,12 @@ export default async function handler(req, res) {
         }
       );
 
+      debugInfo.status = messagesResponse.status;
       console.log('[DEBUG] Discord API response status:', messagesResponse.status);
 
       if (messagesResponse.ok) {
         const messages = await messagesResponse.json();
+        debugInfo.messagesFound = messages.length;
         console.log('[DEBUG] Fetched messages count:', messages.length);
 
         if (messages.length > 0) {
@@ -77,25 +88,32 @@ export default async function handler(req, res) {
           if (lastMessage.content) {
             const emailRegex = /\d+\.\s+([^\n]+@[^\n]+)/g;
             const matches = [...lastMessage.content.matchAll(emailRegex)];
+            debugInfo.emailsParsed = matches.length;
             console.log('[DEBUG] Email matches found:', matches.length);
 
             if (matches.length > 0) {
               existingEmails = matches.map(match => match[1].trim());
+              debugInfo.fetchSuccess = true;
               console.log('[DEBUG] Successfully parsed', existingEmails.length, 'emails from Discord');
             } else {
+              debugInfo.error = 'No email matches in message content';
               console.log('[DEBUG] No email matches in message content');
             }
           } else {
+            debugInfo.error = 'Last message has no content';
             console.log('[DEBUG] Last message has no content');
           }
         } else {
+          debugInfo.error = 'No messages found in channel';
           console.log('[DEBUG] No messages found in channel');
         }
       } else {
         const errorBody = await messagesResponse.text();
+        debugInfo.error = `API error: ${errorBody}`;
         console.error('[DEBUG] Discord API error:', messagesResponse.status, errorBody);
       }
     } catch (fetchError) {
+      debugInfo.error = `Exception: ${fetchError.message}`;
       console.error('[DEBUG] Fetch exception:', fetchError.message);
     }
 
@@ -169,7 +187,8 @@ ${emailList}`;
     return res.status(200).json({
       success: true,
       totalCount,
-      isDuplicate
+      isDuplicate,
+      debug: debugInfo
     });
 
   } catch (error) {
