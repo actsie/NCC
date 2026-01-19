@@ -52,6 +52,7 @@ export default async function handler(req, res) {
     let existingEmails = [...INITIAL_EMAILS];
 
     try {
+      console.log('[DEBUG] Attempting to fetch from channel:', DISCORD_CHANNEL_ID);
       const messagesResponse = await fetch(
         `https://discord.com/api/v10/channels/${DISCORD_CHANNEL_ID}/messages?limit=1`,
         {
@@ -62,25 +63,40 @@ export default async function handler(req, res) {
         }
       );
 
+      console.log('[DEBUG] Discord API response status:', messagesResponse.status);
+
       if (messagesResponse.ok) {
         const messages = await messagesResponse.json();
+        console.log('[DEBUG] Fetched messages count:', messages.length);
 
         if (messages.length > 0) {
           const lastMessage = messages[0];
+          console.log('[DEBUG] Last message content preview:', lastMessage.content?.substring(0, 100));
 
           // Parse email list from the last message
           if (lastMessage.content) {
             const emailRegex = /\d+\.\s+([^\n]+@[^\n]+)/g;
             const matches = [...lastMessage.content.matchAll(emailRegex)];
+            console.log('[DEBUG] Email matches found:', matches.length);
 
             if (matches.length > 0) {
               existingEmails = matches.map(match => match[1].trim());
+              console.log('[DEBUG] Successfully parsed', existingEmails.length, 'emails from Discord');
+            } else {
+              console.log('[DEBUG] No email matches in message content');
             }
+          } else {
+            console.log('[DEBUG] Last message has no content');
           }
+        } else {
+          console.log('[DEBUG] No messages found in channel');
         }
+      } else {
+        const errorBody = await messagesResponse.text();
+        console.error('[DEBUG] Discord API error:', messagesResponse.status, errorBody);
       }
     } catch (fetchError) {
-      console.log('Could not fetch previous messages, using initial list:', fetchError.message);
+      console.error('[DEBUG] Fetch exception:', fetchError.message);
     }
 
     // Step 2: Add new email to the list (avoid duplicates)
