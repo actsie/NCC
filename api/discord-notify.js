@@ -82,6 +82,10 @@ export default async function handler(req, res) {
 
         if (messages.length > 0) {
           const lastMessage = messages[0];
+          debugInfo.messageType = lastMessage.type;
+          debugInfo.hasContent = !!lastMessage.content;
+          debugInfo.hasEmbeds = lastMessage.embeds?.length > 0;
+          debugInfo.author = lastMessage.author?.username || 'unknown';
           console.log('[DEBUG] Last message content preview:', lastMessage.content?.substring(0, 100));
 
           // Parse email list from the last message
