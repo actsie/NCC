@@ -111,6 +111,7 @@ export default async function handler(req, res) {
           spreadsheetId: GOOGLE_SHEET_ID,
           range: 'A:I',
           valueInputOption: 'RAW',
+          insertDataOption: 'INSERT_ROWS',
           resource: {
             values: [newRow]
           }
