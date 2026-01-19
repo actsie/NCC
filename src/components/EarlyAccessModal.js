@@ -536,13 +536,13 @@ const EarlyAccessModal = ({ isOpen, onClose }) => {
                 </div>
               </div>
               <div className="close-button-container flex gap-8 items-center justify-end w-full">
-                <a
-                  href="#"
+                <button
+                  type="button"
                   onClick={handleClose}
-                  className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+                  className="text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 bg-transparent border-none cursor-pointer"
                 >
                   Close
-                </a>
+                </button>
                 <button
                   className="w-fit rounded-lg text-sm px-5 py-2 focus:outline-none h-[50px] border bg-[#7866CC] hover:bg-[#5E50A0] focus:bg-[#5E50A0] border-[#7866CC] text-white focus:ring-4 focus:ring-violet-200 hover:ring-4 hover:ring-violet-100 transition-all duration-300"
                   type="button"

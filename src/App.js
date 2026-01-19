@@ -1,13 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Dialog, DialogPanel } from '@headlessui/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, CloudArrowUpIcon, LockClosedIcon, ServerIcon, ShoppingCartIcon, UserGroupIcon, ChartBarIcon, GiftIcon, SparklesIcon, ArchiveBoxIcon, BookOpenIcon, PhotoIcon, LightBulbIcon, ComputerDesktopIcon, WrenchScrewdriverIcon, BoltIcon } from '@heroicons/react/20/solid';
-import { ExclamationTriangleIcon, XMarkIcon as XMarkSolidIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline';
+import { CommandLineIcon, BuildingOffice2Icon, RocketLaunchIcon, ChartBarIcon, GiftIcon, SparklesIcon, ArchiveBoxIcon, BookOpenIcon, PhotoIcon } from '@heroicons/react/20/solid';
 import { motion } from 'framer-motion';
-import styled from 'styled-components';
 import EnhancedButton from './EnhancedButton';
 import ChatInterface from './ChatInterface';
-import DarkModeToggle from './DarkModeToggle';
 import BlogPostClaudeNoCode from './BlogPostClaudeNoCode';
 import BlogPostJobTracking from './components/BlogPostJobTracking';
 import BlogPostTravelPacking from './components/BlogPostTravelPacking';
@@ -22,63 +17,6 @@ import EarlyAccessModal from './components/EarlyAccessModal';
 import ProblemSolutionTabs from './components/ProblemSolutionTabs';
 import DocsPage from './components/DocsPage';
 import InstallPage from './components/InstallPage';
-
-const TYPEWRITER_TEXTS = [
-  'Create a website for my bakery',
-  'Help me organize my photos by date',
-  'Build a simple game for my kids',
-  'Make a todo list app',
-  'Create a budget tracker',
-  'Build a recipe organizer',
-];
-
-// Typewriter effect component
-const TypewriterText = () => {
-  const [currentText, setCurrentText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  React.useEffect(() => {
-    const currentFullText = TYPEWRITER_TEXTS[currentIndex];
-
-    if (!currentFullText) {
-      return undefined;
-    }
-
-    if (isDeleting) {
-      const timeoutId = setTimeout(() => {
-        if (currentText === '') {
-          setIsDeleting(false);
-          setCurrentIndex((prevIndex) => (prevIndex + 1) % TYPEWRITER_TEXTS.length);
-        } else {
-          setCurrentText(currentFullText.substring(0, currentText.length - 1));
-        }
-      }, 50);
-
-      return () => clearTimeout(timeoutId);
-    }
-
-    if (currentText === currentFullText) {
-      const pauseId = setTimeout(() => setIsDeleting(true), 2000);
-      return () => clearTimeout(pauseId);
-    }
-
-    const timeoutId = setTimeout(() => {
-      setCurrentText(currentFullText.substring(0, currentText.length + 1));
-    }, 100);
-
-    return () => clearTimeout(timeoutId);
-  }, [currentText, currentIndex, isDeleting]);
-
-  return (
-    <span>
-      {currentText}
-      <span className="animate-pulse">|</span>
-    </span>
-  );
-};
-
-
 
 const claudeFeatures = [
   {
@@ -99,13 +37,11 @@ const claudeFeatures = [
 ];
 
 const App = () => {
-  const [isSignedUp, setIsSignedUp] = useState(false);
+  const [isSignedUp] = useState(false);
   const [isEarlyAccessModalOpen, setIsEarlyAccessModalOpen] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
   const [isFooterVisible, setIsFooterVisible] = useState(false);
   const [showShareButton, setShowShareButton] = useState(false);
-  const [isExpanding, setIsExpanding] = useState(false);
-  const [footerButtonBounce, setFooterButtonBounce] = useState(false);
   const chatInterfaceRef = useRef(null);
 
   // Function to navigate to chat interface with wiggle
@@ -182,15 +118,13 @@ const App = () => {
     if (isSignedUp) {
       // After 2 seconds, start expanding and changing to "Share with friends"
       setTimeout(() => {
-        setIsExpanding(true);
         // Show tooltip and change text after expansion starts
         setTimeout(() => {
           setShowShareButton(true);
           setShowTooltip(true);
-          setIsExpanding(false);
         }, 300); // Match CSS transition duration
       }, 2000);
-      
+
       // Hide tooltip after 2.5 more seconds (4.5 seconds total from signup)
       setTimeout(() => {
         setShowTooltip(false);
@@ -207,20 +141,14 @@ const App = () => {
         const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
         if (isVisible && isSignedUp && !isFooterVisible) {
           setIsFooterVisible(true);
-          
-          // Show tooltip and bounce animation for footer button if user signed up
+
+          // Show tooltip for footer button if user signed up
           setShowTooltip(true);
-          setFooterButtonBounce(true);
-          
+
           // Hide tooltip after 2.5 seconds
           setTimeout(() => {
             setShowTooltip(false);
           }, 2500);
-          
-          // Stop bouncing after 2 bounces (1.2 seconds)
-          setTimeout(() => {
-            setFooterButtonBounce(false);
-          }, 1200);
         } else if (!isVisible) {
           setIsFooterVisible(false);
         }

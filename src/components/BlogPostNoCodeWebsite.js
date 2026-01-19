@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './Header';
 import Footer from './Footer';
-import BlogButton from '../BlogButton';
 import EarlyAccessModal from './EarlyAccessModal';
 import { getBlogPostBySlug } from '../data/blogPosts';
 

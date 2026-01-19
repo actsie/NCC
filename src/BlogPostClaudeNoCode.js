@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { CheckIcon, ArrowRightIcon, CalendarIcon, UserIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import { CheckIcon, CalendarIcon, UserIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BlogButton from './BlogButton';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const EnhancedButton = ({
@@ -12,8 +12,6 @@ const EnhancedButton = ({
   alignment = 'center', // 'left', 'center', 'right'
   ...props
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   const handleClick = () => {
     if (navigateToChat && navigateToChatInterface) {
       navigateToChatInterface();
@@ -26,8 +24,6 @@ const EnhancedButton = ({
     <StyledWrapper alignment={alignment}>
       <div
         className="btn-container"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
       >
         <div className="btn-drawer transition-top">
           {showSuccess ? "You're in!" : "First month"}

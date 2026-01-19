@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import ShineText from './ShineText';
 
 // Styled component for shining separator line
 const ShineLine = styled.hr`
