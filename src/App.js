@@ -319,7 +319,7 @@ const App = () => {
             </div>
 
             <p className="mt-6 text-xs text-[#6B7280] dark:text-gray-400 text-center">
-              ✨ Build your personal app for free, no Claude account or API keys required. First month's on us<br/>(limited tester spots - Mac-only for now).
+              ✨ Build your personal app for free, no Claude account or API keys required. Early access for testers<br/>(limited spots - Mac-only for now).
             </p>
           </div>
         </section>

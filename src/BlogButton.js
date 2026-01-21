@@ -20,8 +20,8 @@ const BlogButton = ({
   return (
     <StyledWrapper>
       <div className="btn-container">
-        <div className="btn-drawer transition-top">First month</div>
-        <div className="btn-drawer transition-bottom">on us ✨</div>
+        <div className="btn-drawer transition-top">Early</div>
+        <div className="btn-drawer transition-bottom">access ✨</div>
         <button className="btn" onClick={handleClick} disabled={disabled} {...props}>
           <span className="btn-text">{children}</span>
         </button>

@@ -15,7 +15,7 @@ const NoCodeClaudeLanding = () => {
           Request early access
         </button>
         <p className="mt-6 text-xs text-[#7A7A7A] dark:text-gray-400 text-center">
-          ✨ Build your personal app for free, no Claude account or API keys required. First month's on us (limited tester spots).
+          ✨ Build your personal app for free, no Claude account or API keys required. Early access for testers (limited spots).
         </p>
       </section>
 

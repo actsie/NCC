@@ -274,10 +274,10 @@ const ChatInterface = forwardRef((props, ref) => {
           <div className="button-container">
             <div className="btn-container">
               <div className="btn-drawer transition-top">
-                {showSuccess ? "You're in!" : "First month"}
+                {showSuccess ? "You're in!" : "Early"}
               </div>
               <div className="btn-drawer transition-bottom">
-                {showSuccess ? "🎉" : "on us ✨"}
+                {showSuccess ? "🎉" : "access ✨"}
               </div>
               <button
                 className={`btn ${isSubmitting ? 'submitting' : ''} ${showSuccess ? 'success' : ''}`}
